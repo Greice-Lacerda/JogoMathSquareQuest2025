@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruções do Jogo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #instrucoes {
+            display: flex; /* Usando Flexbox para layout */
+            align-items: center; /* Alinhando verticalmente ao centro */
+            justify-content: space-between; /* Espaçamento entre os elementos */
+            padding: 20px; /* Espaçamento interno */
+        }
+        #imagem-jogo {
+            max-width: 200px; /* Limita a largura da imagem */
+            margin-right: 20px; /* Espaço entre a imagem e o texto */
+        }
+        ul {
+            list-style-type: square; /* Remove marcadores da lista */
+            padding: 0; /* Remove padding padrão */
+        }
+        h1 {
+            margin-bottom: 10px; /* Espaço abaixo do título */
+        }
+    </style>
+</head>
+<body>
+    <div id="instrucoes">
+        <img src="imagens/Rainha.jpeg" alt="Imagem do Jogo" id="imagem-jogo"> <!-- Insira sua imagem aqui -->
+        <div>
+            <h1>Instruções do Jogo</h1>
+            <ul>
+                <li>Escolha o tamanho do tabuleiro na tela inicial.</li>
+                <li>Arraste e solte as imagens no tabuleiro.</li>
+                <li>Cada imagem só pode aparecer uma vez por linha e coluna.</li>
+                <li>Use os botões para limpar, reiniciar ou fechar o jogo.</li>
+            </ul>
+            <button id="jogar" onclick="window.location.href='Nivel1.html'">Jogar</button>
+            <button id="fechar">Fechar</button>
+            <button id="Imprimir" onclick="window.location.href='imprimir.html'">Imprimir jogo</button>"
+        </div>
+    </div>
+
+    <script>        
+        // Botão de fechar que redireciona para o Google na mesma aba
+        document.getElementById('fechar').addEventListener('click', function() {
+            window.location.href = 'https://www.google.com.br/#spf=1603558156590'; // Redireciona na mesma aba
+        });
+    </script>
+    
+</body>
+</html>

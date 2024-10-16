@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>    
+       <div id="jogo">
+                                               
+                <fieldset>
+                <legend>Menu</legend>
+                <button id="voltar" onclick="window.location.href='index.html'">Voltar</button> 
+                <button id="limpar">Limpar</button>                
+                <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>          
+                <div >
+                <h1 id="titulo-nivel"><br><br><br><br>Nível 1</h1>
+                </div>
+                </fieldset>                 
+
+                <fieldset>
+                <legend>Tabuleiro do jogo</legend>
+                    <div id="tabuleiro">
+                    <canvas id="tela" width="400" height="400"></canvas>
+                </fieldset>
+
+                <fieldset>
+                <legend>imagens</legend>
+                <div id="lista-imagens"></div>
+                </fieldset>                          
+
+                <fieldset style="grid-column: span 4;">           
+                <legend>Mensagens do jogo</legend>
+                    <div id="mensagens">
+                        <div id="mensagem"> </div>   
+                        
+                    </fieldset> 
+                    <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Nivel2.html'">Próximo Nível</button>
+               </div>           
+        </div>   
+           
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const listaImagens = document.getElementById('lista-imagens');
+            const mensagem = document.getElementById('mensagem');
+            const proximoNivel = document.getElementById('proximo-nivel');
+            const errorSound = new Audio('Erro.mp3');  // Caminho para o som de erro
+            const clapSound = new Audio('aplausos.mp3');  // Caminho para o som 
+            const imagens = ['abelha.jpeg', 'bispo.jpeg', 'bola.jpeg', 'carro.jpeg', 'cavalo.jpeg', 'circulo.jpeg', 'coração.png','estrela.jpeg', 'flor.jpeg', 'peao.jpeg', 'quadrado.jpeg', 'Rainha.jpeg', 'Rei.jpeg', 'torre.jpeg', 'triangulo.jpeg'];
+
+            function embaralhar(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            embaralhar(imagens);
+
+            const tamanho = 2; // Define o tamanho do tabuleiro como 2x2.
+            listaImagens.innerHTML = ''; // Limpa as imagens anteriores
+            for (let i = 0; i < tamanho; i++) {
+                const imgElement = document.createElement('img');
+                imgElement.src = `imagens/${imagens[i]}`;
+                imgElement.alt = imagens[i];
+                imgElement.className = 'imagem-lista';
+                imgElement.draggable = true;
+                listaImagens.appendChild(imgElement);
+                imgElement.addEventListener('dragstart', function(event) {
+                    event.dataTransfer.setData('text/plain', event.target.src);
+                });
+            }
+
+            const canvas = document.getElementById('tela');
+            const ctx = canvas.getContext('2d');
+            const cellSize = canvas.width / tamanho;
+            function desenharTabuleiro() {
+                for (let row = 0; row < tamanho; row++) {
+                    for (let col = 0; col < tamanho; col++) {
+                        ctx.clearRect(col * cellSize, row * cellSize, cellSize, cellSize);
+                        ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize); // Adiciona bordas às células
+                    }
+                }
+            }
+            desenharTabuleiro();
+
+            function drawImageInCell(imgSrc, col, row) {
+                const img = new Image();
+                img.onload = function() {
+                    const imgWidth = cellSize / 2;
+                    const imgHeight = cellSize / 2;
+                    const x = col * cellSize + (cellSize - imgWidth) / 2;
+                    const y = row * cellSize + (cellSize - imgHeight) / 2;
+                    ctx.drawImage(img, x, y, imgWidth, imgHeight);
+                };
+                img.src = imgSrc;
+            }
+
+            const usedImages = Array.from({ length: tamanho }, () => Array(tamanho).fill(null));
+            canvas.addEventListener('drop', function(event) {
+                event.preventDefault();
+                const src = event.dataTransfer.getData('text/plain');
+                const rect = canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                const col = Math.floor(x / cellSize);
+                const row = Math.floor(y / cellSize);
+                if (usedImages[row].includes(src) || usedImages.map(row => row[col]).includes(src)) {
+                    errorSound.play();
+                    mensagem.textContent = "Imagem já utilizada nesta linha ou coluna.";                   
+                } else {
+                    usedImages[row][col] = src;
+                    drawImageInCell(src, col, row);
+                    mensagem.textContent = ""; // Limpa a mensagem de erro
+                    if (usedImages.flat().every(cell => cell !== null)) {
+                        mensagem.textContent = "Parabéns! Você conseguiu completar o tabuleiro.";
+                        proximoNivel.style.display = 'block'; // Exibe o botão Próximo Nível
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                      clapSound.play();  
+                    }
+                }
+            });
+
+            canvas.addEventListener('dragover', function(event) {
+                event.preventDefault();
+            });
+
+            document.getElementById('limpar').addEventListener('click', function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                desenharTabuleiro();
+                for (let row = 0; row < tamanho; row++) {
+                    for (let col = 0; col < tamanho; col++) {
+                        usedImages[row][col] = null;
+                    }
+                }
+                mensagem.textContent = ""; // Limpa a mensagem
+            });
+
+            document.getElementById('reiniciar').addEventListener('click', function() {
+                embaralhar(imagens); // Embaralha as imagens ao reiniciar
+                window.location.href = 'index.html'; // Redireciona para a página inicial
+            });
+            
+        });
+    </script>
+</body>
+</html>

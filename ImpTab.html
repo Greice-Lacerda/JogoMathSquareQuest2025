@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruções do Jogo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #instrucoes {
+            display: flex; /* Usando Flexbox para layout */
+            align-items: center; /* Alinhando verticalmente ao centro */
+            justify-content: space-between; /* Espaçamento entre os elementos */
+            padding: 20px; /* Espaçamento interno */
+        }
+        #imagem-jogo {
+            max-width: 200px; /* Limita a largura da imagem */
+            margin-right: 20px; /* Espaço entre a imagem e o texto */
+        }
+        ul {
+            list-style-type: square; /* Remove marcadores da lista */
+            padding: 0; /* Remove padding padrão */
+        }
+        h1 {
+            margin-bottom: 10px; /* Espaço abaixo do título */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <fieldset>
+        <legend>Menu</legend>
+            <button id="imprimir" onclick="window.print();">Imprimir</button>
+            <button id="voltar" onclick="window.location.href='index.html'">Voltar</button>
+            <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
+        </fieldset>
+        </div>
+        <br>
+        <legend>Tabuleiro</legend>
+        <div id="jogo">
+             
+            <div id="tabuleiro">
+                <canvas id="tela" width="400" height="400"></canvas>
+            </div>
+        
+            <fieldset>
+                <legend>Imagens</legend>
+                <div id="lista-imagens"></div>
+            </fieldset>  
+        
+    </div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const listaImagens = document.getElementById('lista-imagens');
+            const mensagem = document.getElementById('mensagem');
+            const imagens = ['abelha.jpeg', 'bispo.jpeg', 'bola.jpeg', 'carro.jpeg', 'cavalo.jpeg',
+            'circulo.jpeg', 'coração.png','estrela.jpeg', 'flor.jpeg', 'peao.jpeg', 'quadrado.jpeg',
+            'Rainha.jpeg', 'Rei.jpeg', 'torre.jpeg', 'triangulo.jpeg'];
+
+            // Função para embaralhar as imagens
+            function embaralhar(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            // Embaralhar as imagens antes do jogo começar
+            embaralhar(imagens);
+            const tamanho = parseInt(prompt("Digite o tamanho do tabuleiro (2-9):"));
+            if (tamanho >= 2 && tamanho <= 9) {
+                listaImagens.innerHTML = ''; // Limpa as imagens anteriores
+                for (let i = 0; i < tamanho; i++) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `imagens/${imagens[i]}`;
+                    imgElement.alt = imagens[i];
+                    imgElement.className = 'imagem-lista';
+                    imgElement.draggable = true;
+                    listaImagens.appendChild(imgElement);
+                    imgElement.addEventListener('dragstart', function(event) {
+                        event.dataTransfer.setData('text/plain', event.target.src);
+                    });
+                }
+                // Desenha o tabuleiro com células transparentes
+                const canvas = document.getElementById('tela');
+                const ctx = canvas.getContext('2d');
+                const cellSize = canvas.width / tamanho;
+                function desenharTabuleiro() {
+                    for (let row = 0; row < tamanho; row++) {
+                        for (let col = 0; col < tamanho; col++) {
+                            ctx.clearRect(col * cellSize, row * cellSize, cellSize, cellSize);
+                            ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize); // Adiciona bordas às células
+                        }
+                    }
+                }
+                desenharTabuleiro();
+                // Função para desenhar a imagem no canvas
+                function drawImageInCell(imgSrc, col, row) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const imgWidth = cellSize / 2;
+                        const imgHeight = cellSize / 2;
+                        const x = col * cellSize + (cellSize - imgWidth) / 2;
+                        const y = row * cellSize + (cellSize - imgHeight) / 2;
+                        ctx.drawImage(img, x, y, imgWidth, imgHeight);
+                    };
+                    img.src = imgSrc;
+                }
+               
+                // Função para reiniciar o jogo e embaralhar as imagens
+                document.getElementById('reiniciar').addEventListener('click', function() {
+                    embaralhar(imagens); // Embaralha as imagens ao reiniciar
+                    window.location.href = 'index.html'; // Redireciona para a página incial
+                });
+            } else {
+                alert("Por favor, escolha um tamanho entre 2 e 9.");
+                window.location.href = 'instrucoes.html';
+            }
+            
+        });
+
+        // Função para imprimir tabuleiros
+        document.getElementById('imprimir-tabuleiros').addEventListener('click', function() {
+            window.print(); // Imprime a página atual
+        });
+
+        // Função para imprimir imagens
+        document.getElementById('imprimir-imagens').addEventListener('click', function() {
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write('<html><head><title>Imagens</title></head><body>');
+            const imagens = ['abelha.jpeg', 'bispo.jpeg', 'bola.jpeg', 'carro.jpeg', 'cavalo.jpeg', 'circulo.jpeg', 'coração.png', 'estrela.jpeg', 'flor.jpeg', 'peao.jpeg', 'quadrado.jpeg', 'Rainha.jpeg', 'Rei.jpeg', 'torre.jpeg', 'triangulo.jpeg'];
+            imagens.forEach(img => {
+                newWindow.document.write(`<img src="imagens/${img}" alt="${img}" style="margin: 10px;">`);
+            });
+            newWindow.document.write('</body></html>');
+            newWindow.document.close();
+            newWindow.print();
+        });
+    </script>
+</body>
+</html>
