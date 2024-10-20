@@ -6,42 +6,73 @@
     <title>Jogo</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+    const tamanhoTabuleiro = 3; // Define o tamanho do tabuleiro como 3x3.
+    </script>
     <script src="logica.js" defer></script>
+    <style>
+        #lista-imagens img {
+            width: 80px;
+            height: 80px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        canvas {
+            border: 2px solid black;
+        }
+
+        .tabuleiro-container {
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente se houver altura definida */
+            height: 300px; /* Altura do contêiner, ajuste conforme necessário */
+        }
+
+        #tela {
+            border: 1px solid #fff; /* Opcional: adicionar uma borda ao canvas */
+            
+        }
+
+        #fieldset-combinacao {
+        display: none; /* Oculta o fieldset de combinações inicialmente */
+        }
+
+    </style>
 </head>
-<body>    
-       <div id="jogo">
-                                               
-                <fieldset>
-                <legend>Menu</legend>
-                <button id="voltar" onclick="window.location.href='Nivel8.html'">Voltar</button> 
-                <button id="limpar">Limpar</button>
-                <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
-                <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>          
-                <div >
-                <h1 id="titulo-nivel"><br><br>Nível D1 <br><br>3x3</h1>
-                </div>
-                </fieldset>                 
-
-                <fieldset>
-                <legend>Tabuleiro do jogo</legend>
-                    <div id="tabuleiro">
-                    <canvas id="tela" width="400" height="400"></canvas>
-                </fieldset>
-
-                <fieldset>
-                <legend>imagens</legend>
-                <div id="lista-imagens"></div>
-                </fieldset>                          
-
-                <fieldset style="grid-column: span 4;">           
-                <legend>Mensagens do jogo</legend>
-                    <div id="mensagens">
-                        <div id="mensagem"> </div>   
-                        
-                    </fieldset> 
-                    <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelD2.html'">Próximo Nível</button>
-               </div>           
-        </div> 
+<body>
+    <div id="jogo">
+        <fieldset>
+            <legend>Menu</legend>
+            <button id="voltar" onclick="window.location.href='Nivel8.html'">Voltar</button>
+            <button id="limpar">Limpar</button>
+            <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
+            <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
+            <div>
+                <h1 id="titulo-nivel"><br><br>Nível D1<br><br>3x3</h1>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Tabuleiro do jogo</legend>
+            <div id="tabuleiro">
+                <canvas id="tela" width="400" height="400"></canvas>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>imagens</legend>
+            <div id="lista-imagens"></div>
+        </fieldset>
+        <fieldset id='fieldset-combinacao'>
+            <legend>Combinações</legend>
+            <div id="lista-combinacoes"></div>
+        </fieldset>
+        <fieldset style="grid-column: span 4;">
+            <legend>Mensagens do jogo</legend>
+            <div id="mensagens">
+                <div id="mensagem"> </div>
+            </div>
+        </fieldset>
+        <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelD2.html'">Próximo Nível</button>
+    </div>
 </body>
 </html>
-
