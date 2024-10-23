@@ -184,3 +184,9 @@ h1 {
     flex-direction: line;
 }
 
+#final{
+    text-align: center;
+    color: red;
+    font-size: 70px;
+}
+
