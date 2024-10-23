@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function main() {
         let canvas = document.getElementById('tela');
         let ctx = canvas.getContext('2d');
-        let tamanhoTabuleiro = 3;
+        let tamanhoTabuleiro = getUrlParameter('tamanhoTabuleiro');
         tamanhoTabuleiro = parseInt(tamanhoTabuleiro, 10);
 
         if (isNaN(tamanhoTabuleiro) || tamanhoTabuleiro <= 0 || tamanhoTabuleiro > todasImagens.length) {
