@@ -129,13 +129,19 @@ document.addEventListener('DOMContentLoaded', function () {
     function main() {
         let canvas = document.getElementById('tela');
         let ctx = canvas.getContext('2d');
-        let tamanhoTabuleiro = getUrlParameter('tamanhoTabuleiro');
+        let tamanhoTabuleiro = 2; //getUrlParameter('tamanhoTabuleiro');
         tamanhoTabuleiro = parseInt(tamanhoTabuleiro, 10);
 
         if (isNaN(tamanhoTabuleiro) || tamanhoTabuleiro <= 0 || tamanhoTabuleiro > todasImagens.length) {
             mensagem.textContent = 'Erro: Tamanho do tabuleiro inválido.';
             return;
         }
+
+        // Selecione o contêiner da lista de combinações
+        const listaCombinacoes = document.getElementById('lista-combinacoes');
+
+        // Defina o estilo para o número de colunas com base no tamanho do tabuleiro
+        listaCombinacoes.style.gridTemplateColumns = `repeat(${tamanhoTabuleiro}, 1fr)`;
 
         // Responsividade: ajustar o tamanho das células conforme o tamanho da tela
         let larguraDisponivel = window.innerWidth * 0.8;

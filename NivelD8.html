@@ -3,62 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo</title>
+    <title>Jogo Nivel Médio - Fase 8</title>
     <link rel="stylesheet" href="styles2.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>    
     <script>
     const tamanhoTabuleiro = 9; // Define o tamanho do tabuleiro como 9x9.
     </script>
     <script src="logica.js" defer></script>
-    <style>
-        /* Estilos adicionais para alinhar os elementos */
-        #mensagens {
-            display: flex; /* Usa flexbox para alinhar os itens horizontalmente */
-            justify-content: space-between; /* Espaça os itens para os lados */
-            align-items: center; /* Alinha verticalmente os itens ao centro */
-        }
-        
-        #Exibir-combinacoes {
-            margin-left: 10px; /* Adiciona um espaço à esquerda do botão */
-        }
 
-        /* Esconder o fieldset de combinações inicialmente */
-        #fieldset-combinacao {
-            display: none; /* Inicia oculto */
-        }
-    </style>
 </head>
 <body>
+<div id="inicial">Quebra-cabeça</div><br>
     <div id="jogo">
         <fieldset>
             <legend>Menu</legend>
             <button id="voltar" onclick="window.location.href='NivelD7.html'">Voltar</button>
             <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
             <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
+            <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button> <!-- Move o botão aqui -->
             <div>
-                <h1 id="titulo-nivel"><br><br>Nível D8<br>9x9</h1>
+                <h1 id="titulo-nivel"><br>Nível M8<br>9x9</h1><br>
+                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Finalizou.html'">Próximo página</button>
             </div>
         </fieldset>
         <fieldset>
             <legend>Tabuleiro do jogo</legend>
             <div id="tabuleiro">
-                <canvas id="tela" width="600" height="400"></canvas>
+                <canvas id="tela" width="1100" height="750"></canvas>
             </div>
         </fieldset>
         <fieldset>
             <legend>Imagens</legend>
             <div id="lista-imagens"></div>
         </fieldset>
-        <fieldset id='fieldset-combinacao'>
-            <legend>Combinações</legend>
-            <div id="lista-combinacoes"></div>            
+        <fieldset id='fieldset-combinacao'>            
+                <legend>Combinações</legend>
+                <div id="lista-combinacoes">
+                    <div>Combinação 1</div>
+                    <div>Combinação 2</div>
+                    <div>Combinação 3</div>
+                    <div>Combinação 4</div>
+                    <div>Combinação 5</div>
+                    <div>Combinação 6</div>
+                    <!-- Adicione mais combinações conforme necessário -->
+                </div>                      
         </fieldset>
         <fieldset style="grid-column: span 4;">
             <legend>Mensagens do jogo</legend>
             <div id="mensagens">
                 <div id="mensagem"> </div>
-                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Finalizou.html'">Próximo página</button>
-                <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button> <!-- Move o botão aqui -->
             </div>
         </fieldset>
     </div>

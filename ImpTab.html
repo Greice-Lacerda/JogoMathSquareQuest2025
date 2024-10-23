@@ -5,42 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instruções do Jogo</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        #instrucoes {
-            display: flex; /* Usando Flexbox para layout */
-            align-items: center; /* Alinhando verticalmente ao centro */
-            justify-content: space-between; /* Espaçamento entre os elementos */
-            padding: 20px; /* Espaçamento interno */
-        }
-        #imagem-jogo {
-            max-width: 200px; /* Limita a largura da imagem */
-            margin-right: 20px; /* Espaço entre a imagem e o texto */
-        }
-        ul {
-            list-style-type: square; /* Remove marcadores da lista */
-            padding: 0; /* Remove padding padrão */
-        }
-        h1 {
-            margin-bottom: 10px; /* Espaço abaixo do título */
-        }
-    </style>
+    
 </head>
 <body>
-    <div>
+<div id="inicial">Quebra-cabeça</div><br><br>
+    <div id="jogo">
         <fieldset>
         <legend>Menu</legend>
             <button id="imprimir" onclick="window.print();">Imprimir</button>
             <button id="voltar" onclick="window.location.href='index.html'">Voltar</button>
             <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
         </fieldset>
-        </div>
-        <br>
-        <legend>Tabuleiro</legend>
-        <div id="jogo">
-             
+
+        <fieldset>
+        <legend>Tabuleiro</legend>             
             <div id="tabuleiro">
                 <canvas id="tela" width="400" height="400"></canvas>
             </div>
+        </fieldset>
         
             <fieldset>
                 <legend>Imagens</legend>

@@ -7,17 +7,18 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
-<body>    
-       <div id="jogo">
-                                               
+<body>  
+<div id="inicial">Quebra-cabeça</div><br>   
+       <div id="jogo">                                           
                 <fieldset>
                 <legend>Menu</legend>
                 <button id="voltar" onclick="window.location.href='index.html'">Voltar</button> 
                 <button id="limpar">Limpar</button>                
                 <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>          
                 <div >
-                <h1 id="titulo-nivel"><br><br>Nível 1<br><br>2x2</h1>
+                <h1 id="titulo-nivel"><br><br>Nível 1<br>2x2</h1><br><br>
                 </div>
+                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Nivel2.html'">Próximo Nível</button>
                 </fieldset>                 
 
                 <fieldset>
@@ -34,10 +35,8 @@
                 <fieldset style="grid-column: span 4;">           
                 <legend>Mensagens do jogo</legend>
                     <div id="mensagens">
-                        <div id="mensagem"> </div>   
-                        
-                    </fieldset> 
-                    <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Nivel2.html'">Próximo Nível</button>
+                        <div id="mensagem"> </div>                       
+                    </fieldset>                     
                </div>           
         </div>   
            
