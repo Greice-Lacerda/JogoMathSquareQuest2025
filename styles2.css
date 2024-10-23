@@ -71,21 +71,18 @@ h1 {
 }
 
 #lista-imagens {
-    flex: 1; /* A lista de imagens ocupa 20% do espaço */
-    display: flex;
-    width: 300%; /*Tamanho das imagens na lista vertical*/
-    flex-direction: column; /* Lista de imagens na vertical */
-    margin-left: 20px; /* Espaço à esquerda da lista de imagens */
-    max-height: 70vh; /* Limita a altura da lista de imagens */
-    overflow: hidden; /* Evita rolagem */
-}
+    display: flex; /* Usar flexbox para alinhar as imagens em linha */
+    flex-wrap: wrap; /* Permite que as imagens quebrem para a próxima linha se não houver espaço */
+    justify-content: center; /* Centraliza as imagens horizontalmente */
+    max-width: 100%; /* Garante que o contêiner não exceda a largura do fieldset */
+    }
 
-.imagem-lista {
-    width: 20%; /* Imagens na lista ocupam 20% da largura */
-    height: auto; /* Mantém a proporção */
-    margin-bottom: 20; /* Espaço entre as imagens da lista */
-    max-height: 50px;/* Altura máxima das imagens na lista para evitar rolagem */
-}
+#lista-imagens img {
+    width: 50px; /* Altere para o tamanho desejado */
+    height: auto; /* Mantém a proporção das imagens */
+    margin: 3px; /* Espaço entre as imagens */
+    cursor: pointer; /* Altera o cursor para indicar que as imagens são interativas */
+    }
 
 .imagem-tabuleiro {
     width: 10; /* Ajusta a imagem para a largura da célula */
@@ -144,7 +141,7 @@ h1 {
     display: flex;
     padding: 10px;    
     color: red;
-    font-size: 23px;
+    font-size: 22px;
     font-weight: bold;
     }
 
@@ -159,20 +156,10 @@ h1 {
     width:50px
 }
 
-#lista-imagens {
-    display: flex; /* Usar flexbox para alinhar as imagens */
-    flex-wrap: wrap; /* Permite que as imagens quebrem para a linha seguinte se não houver espaço */
-    justify-content: center; /* Centraliza as imagens */
-    max-width: 100%; /* Garante que não exceda a largura do contêiner */
+.imagem-lista {
+    margin: 0.1cm;
+    flex-direction: column;
 }
-
-#lista-imagens img {
-    width: 30px; /* Define a largura das imagens */
-    height: auto; /* A altura é ajustada automaticamente para manter a proporção */
-    margin: 5px; /* Espaço entre as imagens */
-    cursor: pointer; /* Altera o cursor para indicar que as imagens são interativas */
-}
-
 
 #titulo-nivel {
     color: red;
@@ -184,3 +171,38 @@ h1 {
     flex-direction: line;
 }
 
+canvas {
+    border: 2px solid black;
+}
+
+.tabuleiro-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente se houver altura definida */
+    height: 300px; /* Altura do contêiner, ajuste conforme necessário */
+}
+
+#tela {
+    border: 1px solid #fff; /* Opcional: adicionar uma borda ao canvas */
+}
+
+#fieldset-combinacao {
+    display: block; /* Permite o ajuste automático ao conteúdo */
+    border: 2px solid black;
+}
+
+#lista-combinacoes {
+    margin-bottom: 10px; /* Espaço entre a lista e o botão */
+}
+
+/* Novo estilo para posicionar cada item em uma linha */
+#lista-combinacoes div {
+    display: block; /* Garante que cada combinação fique em uma linha */
+    margin: 5px 0; /* Adiciona espaço entre os itens */
+}
+
+#fieldset-combinacao div {
+    display: flex;
+    flex-direction: column; /* Alinha o botão abaixo das combinações */
+    align-items: center; /* Centraliza o botão horizontalmente */
+}

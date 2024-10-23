@@ -5,11 +5,37 @@ document.addEventListener('DOMContentLoaded', function () {
     const proximoNivel = document.getElementById('proximo-nivel');
     const errorSound = new Audio('Erro.mp3'); 
     const clapSound = new Audio('aplausos.mp3'); 
+    const fieldsetCombinacoes = document.getElementById('fieldset-combinacao'); // Captura o fieldset de combinações
+    const botaoExibirCombinacoes = document.getElementById('Exibir-combinacoes'); // Captura o botão de exibir/ocultar combinações
     const todasImagens = [
         'abelha.jpeg', 'bispo.jpeg', 'bola.jpeg', 'carro.jpeg', 'cavalo.jpeg',
         'circulo.jpeg', 'coração.png', 'estrela.jpeg', 'flor.jpeg', 'peao.jpeg',
         'quadrado.jpeg', 'Rainha.jpeg', 'Rei.jpeg', 'torre.jpeg', 'triangulo.jpeg'
     ];
+
+    // Função para embaralhar as imagens (algoritmo Fisher-Yates)
+    function embaralharImagens(imagens) {
+        for (let i = imagens.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [imagens[i], imagens[j]] = [imagens[j], imagens[i]]; // Troca as posições
+        }
+        return imagens;
+    }
+
+    // Função para obter o valor do parâmetro na URL
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    const results = regex.exec(window.location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+    // A função principal onde você vai buscar o tamanho do tabuleiro
+    function main() {
+        let tamanhoTabuleiro = getUrlParameter('tamanhoTabuleiro') 
+        tamanhoTabuleiro = parseInt(tamanhoTabuleiro, 10); // Converte para número inteiro
+        let cellWidth = 120; 
+        let cellHeight = 80;
+    }
 
     // Função para selecionar a quantidade de imagens com base no tamanho do tabuleiro
     function selecionarImagensPorTamanho(tamanhoTabuleiro) {
@@ -94,13 +120,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function main() {
         let canvas = document.getElementById('tela');
         let ctx = canvas.getContext('2d');
-        let tamanhoTabuleiro = 3; 
+        let tamanhoTabuleiro = getUrlParameter('tamanhoTabuleiro') //Busca o valor do tabuleiro na página
+        tamanhoTabuleiro = parseInt(tamanhoTabuleiro, 10); // Converte para número inteiro
         let cellWidth = 120; 
         let cellHeight = 80; 
 
+        // Embaralha as imagens antes de selecionar por tamanho
+        embaralharImagens(todasImagens);
+
+        // Seleciona as imagens embaralhadas com base no tamanho do tabuleiro
         let imagensSelecionadas = selecionarImagensPorTamanho(tamanhoTabuleiro);
         let tabuleiro = {}; 
-        let combinacoesGeradas = []; 
+        let combinacoesGeradas = [];  
 
         carregarImagens(imagensSelecionadas, (imagensCarregadas) => {
             combinacoesGeradas = gerarCombinacoes(imagensSelecionadas); 
@@ -128,6 +159,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (row < tamanhoTabuleiro && col < tamanhoTabuleiro) {
                     if (!tabuleiro[`${row},${col}`]) tabuleiro[`${row},${col}`] = [];
+                    
+                    // Limpar mensagem de erro ao iniciar nova combinação
+                    mensagem.textContent = '';
+
                     if (tabuleiro[`${row},${col}`].length < 2) {
                         tabuleiro[`${row},${col}`].push(imgNome);
 
@@ -139,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             // Verifica se a combinação existe na lista
                             if (!verificarCombinacao(combinacao, combinacoesGeradas)) {
-                                errorSound.play(); // Toca som de erro se a combinação já foi removida
+                                errorSound.play(); // Toca som de erro se a combinação não for permitida
                                 mensagem.textContent = "Essa combinação já foi utilizada.";
                                 // Limpa as imagens da célula
                                 tabuleiro[`${row},${col}`] = []; // Limpa as imagens
@@ -155,6 +190,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                     origin: { y: 0.6 }
                                 });
                                 clapSound.play(); // Toca som de aplauso
+
+                            // Exibe o botão de próximo nível
+                            proximoNivel.style.display = 'inline'; // Exibe o botão
+                            
+                            // Reescreve todas as combinações
+                            combinacoesGeradas = gerarCombinacoes(imagensSelecionadas); // Gera novas combinações
+                            exibirCombinacoes(combinacoesGeradas); // Exibe as combinações novamente
                             }
                         }
                     } else {
@@ -165,22 +207,32 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Função para verificar e remover a combinação da lista
+    // Função para verificar e remover a combinação da lista, com correspondência exata de posições
     function verificarCombinacao(combinacao, combinacoesGeradas) {
         for (let i = 0; i < combinacoesGeradas.length; i++) {
             let comb = combinacoesGeradas[i].combinacao;
 
-            // Verifica se as imagens da combinação são iguais, independentemente da ordem
-            if ((comb[0] === combinacao[0] && comb[1] === combinacao[1]) || 
-                (comb[0] === combinacao[1] && comb[1] === combinacao[0])) {
+            // Verifica se as imagens da combinação são exatamente iguais na mesma ordem
+            if (comb[0] === combinacao[0] && comb[1] === combinacao[1]) {
                 // Remove a combinação da lista
                 combinacoesGeradas.splice(i, 1);
                 exibirCombinacoes(combinacoesGeradas); 
-                return true; 
+                return true; // Combinação encontrada e removida
             }
         }
-        return false; 
+        return false; // Combinação não encontrada
     }
+
+    // Adiciona evento de clique para alternar visibilidade do fieldset de combinações
+    botaoExibirCombinacoes.addEventListener('click', function () {
+        if (fieldsetCombinacoes.style.display === 'none' || fieldsetCombinacoes.style.display === '') {
+            fieldsetCombinacoes.style.display = 'block'; // Exibe o fieldset de combinações
+                    botaoExibirCombinacoes.textContent = 'Ocultar Combinações'; // Muda o texto do botão
+                } else {
+                    fieldsetCombinacoes.style.display = 'none'; // Oculta o fieldset de combinações
+                    botaoExibirCombinacoes.textContent = 'Exibir Combinações'; // Muda o texto do botão
+                }
+            });
 
     window.onload = main; 
 });
