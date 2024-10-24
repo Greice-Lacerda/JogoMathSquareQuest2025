@@ -15,7 +15,7 @@
 <body>
 <div id="inicial">Quebra-cabeça</div><br>
     <div id="jogo">
-        <fieldset>
+        <fieldset id="campos">
             <legend>Menu</legend>
             <button id="voltar" onclick="window.location.href='NivelD6.html'">Voltar</button>
             <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
@@ -23,16 +23,16 @@
             <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button> <!-- Move o botão aqui -->
             <div>
                 <h1 id="titulo-nivel"><br>Nível M7<br>8x8</h1><br>
-                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelD8.html'">Próximo página</button>
+                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelD8.html?tamanhoTabuleiro=9'">Próximo página</button>
                 </div>
         </fieldset>
-        <fieldset>
+        <fieldset id="campos">
             <legend>Tabuleiro do jogo</legend>
             <div id="tabuleiro">
                 <canvas id="tela" width="960" height="650"></canvas>
             </div>
         </fieldset>
-        <fieldset>
+        <fieldset id="campos">
             <legend>Imagens</legend>
             <div id="lista-imagens"></div>
         </fieldset>
@@ -48,7 +48,7 @@
                     <!-- Adicione mais combinações conforme necessário -->
                 </div>                      
         </fieldset>
-        <fieldset style="grid-column: span 4;">
+        <fieldset id="campos" style="grid-column: span 4;">
             <legend>Mensagens do jogo</legend>
             <div id="mensagens">
                 <div id="mensagem"> </div>

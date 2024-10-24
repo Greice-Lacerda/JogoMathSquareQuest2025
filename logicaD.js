@@ -7,6 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const clapSound = new Audio('aplausos.mp3');
     const fieldsetCombinacoes = document.getElementById('fieldset-combinacao');
     const botaoExibirCombinacoes = document.getElementById('Exibir-combinacoes');
+    const botaoLimparTabuleiro = document.getElementById('limpar-tabuleiro');
+
+    let tabuleiro = {}; // Inicializa o tabuleiro
+    let combinacoesGeradas = []; // Inicializa as combinações geradas
+    let canvas, ctx, tamanhoTabuleiro, cellWidth, cellHeight;
+
+    // Função que limpa as imagens do tabuleiro e reinicia a lista de combinações
+    botaoLimparTabuleiro.addEventListener('click', function () {
+        for (let key in tabuleiro) {
+            tabuleiro[key] = []; // Limpa as imagens do tabuleiro
+        }
+        combinacoesGeradas = gerarCombinacoes(imagensSelecionadas); // Reinicia a lista de combinações
+        exibirCombinacoes(combinacoesGeradas); // Exibe as combinações atualizadas
+        mensagem.textContent = 'Imagens do tabuleiro limpas!';
+    });
 
     const todasImagens = [
         'abelha.jpeg', 'bispo.jpeg', 'bola.jpeg', 'carro.jpeg', 'cavalo.jpeg',
@@ -14,19 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
         'quadrado.jpeg', 'Rainha.jpeg', 'Rei.jpeg', 'torre.jpeg', 'triangulo.jpeg'
     ];
 
+    // Função para obter o parâmetro da URL
+    function getUrlParameter(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
     function embaralharImagens(imagens) {
         for (let i = imagens.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [imagens[i], imagens[j]] = [imagens[j], imagens[i]];
         }
         return imagens;
-    }
-
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        const results = regex.exec(window.location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
     function selecionarImagensPorTamanho(tamanhoTabuleiro) {
@@ -53,13 +67,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 imagensRestantes--;
                 if (imagensRestantes === 0) {
                     callback(imagensCarregadas);
-                    gerarCombinacoes(imagens);
+                    combinacoesGeradas = gerarCombinacoes(imagens); // Armazena combinações geradas
                 }
             };
         });
     }
 
     function gerarCombinacoes(imagens) {
+        const combinacoes = [];
+        let contador = 1;
+
+        for (let i = 0; i < imagens.length; i++) {
+            for (let j = 0; j < imagens.length; j++) {
+                combinacoes.push({ id: contador++, combinacao: [imagens[i], imagens[j]] });
+            }
+        }
+
+        exibirCombinacoes(combinacoes);
+        return combinacoes;
+    }
+
+    function reinciaGerarCombinacoes(imagens) {
         const combinacoes = [];
         let contador = 1;
 
@@ -116,6 +144,55 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
+    // Função para verificar restrições de inserção de imagens
+    function verificarRestricoes(col, tabuleiro, imgNome, posicao) {
+        for (let row = 0; row < Object.keys(tabuleiro).length / 2; row++) {
+            const celula = tabuleiro[`${row},${col}`];
+            if (!celula) continue;
+
+            // Restrição 2: Não permitir repetição de imagens na primeira posição na mesma coluna
+            if (posicao === 0 && celula[0] === imgNome) {
+                return false;
+            }
+
+            // Restrição 3: Não permitir repetição de imagens na segunda posição na mesma coluna
+            if (posicao === 1 && celula[1] === imgNome) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function redesenharTabuleiro(ctx, imagensCarregadas, tabuleiro, tamanhoTabuleiro, cellWidth, cellHeight) {
+        for (let row = 0; row < tamanhoTabuleiro; row++) {
+            for (let col = 0; col < tamanhoTabuleiro; col++) {
+                ctx.strokeRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
+            }
+        }
+    }
+    
+    botaoLimparTabuleiro.addEventListener('click', function () {
+        // Limpa as imagens do tabuleiro
+        for (let key in tabuleiro) {
+            tabuleiro[key] = []; 
+        }
+    
+        // Limpa o canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+        // Redesenha o tabuleiro vazio
+        redesenharTabuleiro(ctx, {}, {}, tamanhoTabuleiro, cellWidth, cellHeight); // Passa um tabuleiro vazio para desenhar
+        
+        // Reembaralhar as imagens e regenerar combinações
+        let imagensSelecionadas = selecionarImagensPorTamanho(tamanhoTabuleiro); // Reobter imagens selecionadas
+        combinacoesGeradas = gerarCombinacoes(imagensSelecionadas); // Gerar novas combinações
+        exibirCombinacoes(combinacoesGeradas); // Exibir combinações atualizadas
+        
+        mensagem.textContent = 'Tabuleiro limpo e combinações reiniciadas!';
+    });
+    
+    
+
     botaoExibirCombinacoes.addEventListener('click', function () {
         if (fieldsetCombinacoes.style.display === 'none' || fieldsetCombinacoes.style.display === '') {
             fieldsetCombinacoes.style.display = 'block';
@@ -127,10 +204,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function main() {
-        let canvas = document.getElementById('tela');
-        let ctx = canvas.getContext('2d');
-        let tamanhoTabuleiro = getUrlParameter('tamanhoTabuleiro');
-        tamanhoTabuleiro = parseInt(tamanhoTabuleiro, 10);
+        canvas = document.getElementById('tela');
+        ctx = canvas.getContext('2d');
+        let tamanhoTabuleiroParam = 6; //getUrlParameter('tamanhoTabuleiro');
+        tamanhoTabuleiro = parseInt(tamanhoTabuleiroParam, 10);
 
         if (isNaN(tamanhoTabuleiro) || tamanhoTabuleiro <= 0 || tamanhoTabuleiro > todasImagens.length) {
             mensagem.textContent = 'Erro: Tamanho do tabuleiro inválido.';
@@ -138,22 +215,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Selecione o contêiner da lista de combinações
-        const listaCombinacoes = document.getElementById('lista-combinacoes');
-
-        // Defina o estilo para o número de colunas com base no tamanho do tabuleiro
         listaCombinacoes.style.gridTemplateColumns = `repeat(${tamanhoTabuleiro}, 1fr)`;
 
         // Responsividade: ajustar o tamanho das células conforme o tamanho da tela
         let larguraDisponivel = window.innerWidth * 0.8;
         let alturaDisponivel = window.innerHeight * 0.8;
-        let cellWidth = Math.min(larguraDisponivel / tamanhoTabuleiro, 120);
-        let cellHeight = Math.min(alturaDisponivel / tamanhoTabuleiro, 80);
+        cellWidth = Math.min(larguraDisponivel / tamanhoTabuleiro, 120);
+        cellHeight = Math.min(alturaDisponivel / tamanhoTabuleiro, 80);
 
         embaralharImagens(todasImagens);
 
         let imagensSelecionadas = selecionarImagensPorTamanho(tamanhoTabuleiro);
-        let tabuleiro = {};
-        let combinacoesGeradas = [];
 
         carregarImagens(imagensSelecionadas, (imagensCarregadas) => {
             combinacoesGeradas = gerarCombinacoes(imagensSelecionadas);
@@ -184,15 +256,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     mensagem.textContent = '';
 
-                    if (tabuleiro[`${row},${col}`].length < 2) {
-                        tabuleiro[`${row},${col}`].push(imgNome);
+                    // Verifica qual posição da combinação está sendo inserida (primeira ou segunda)
+                    let posicao = tabuleiro[`${row},${col}`].length;
 
+                    // Verificar se as restrições são atendidas
+                    if (verificarRestricoes(col, tabuleiro, imgNome, posicao)) {
+                        tabuleiro[`${row},${col}`].push(imgNome);
                         desenhar();
 
+                        // Verificar se a célula já contém duas imagens (uma combinação completa)
                         if (tabuleiro[`${row},${col}`].length === 2) {
                             let combinacao = tabuleiro[`${row},${col}`];
-                            console.log(`Combinação na célula (${row}, ${col}): ${combinacao}`);
-
                             if (!verificarCombinacao(combinacao, combinacoesGeradas)) {
                                 errorSound.play();
                                 mensagem.textContent = "Essa combinação já foi utilizada.";
@@ -200,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 desenhar();
                             }
 
+                            // Verificar se todas as combinações foram usadas
                             if (combinacoesGeradas.length === 0) {
                                 mensagem.textContent = "Parabéns! Você conseguiu completar o tabuleiro.";
                                 confetti({
@@ -215,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         }
                     } else {
+                        mensagem.textContent = "Essa imagem já foi inserida nessa coluna.";
                         errorSound.play();
                     }
                 }
@@ -222,5 +298,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    window.onload = main;
+    main();
 });

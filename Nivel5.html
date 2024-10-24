@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo</title>
+    <title>Jogo Nivel Fácil - Fase 5</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
@@ -11,30 +11,30 @@
 <div id="inicial">Quebra-cabeça</div><br>     
        <div id="jogo">
                                                
-                <fieldset>
+                <fieldset id="campos">
                 <legend>Menu</legend>
                 <button id="voltar" onclick="window.location.href='Nivel4.html'">Voltar</button> 
                 <button id="limpar">Limpar</button>
                 <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
                 <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>          
                 <div >
-                <h1 id="titulo-nivel"><br>Nível 5<br>6x6</h1><br><br>
+                <h1 id="titulo-nivel"><br>Nível F5<br>6x6</h1><br><br>
                 </div>
                 <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Nivel2.html'">Próximo Nível</button>
                 </fieldset>                 
 
-                <fieldset>
+                <fieldset id="campos">
                 <legend>Tabuleiro do jogo</legend>
                     <div id="tabuleiro">
                     <canvas id="tela" width="400" height="400"></canvas>
                 </fieldset>
 
-                <fieldset>
+                <fieldset id="campos">
                 <legend>imagens</legend>
                 <div id="lista-imagens"></div>
                 </fieldset>                          
 
-                <fieldset style="grid-column: span 4;">           
+                <fieldset id="campos" style="grid-column: span 4;">           
                 <legend>Mensagens do jogo</legend>
                     <div id="mensagens">
                         <div id="mensagem"> </div>                        

@@ -209,3 +209,9 @@ h1 {
     font-size: 40px;
     font-weight: bold;
 }
+
+#campos{
+    display: block; /* Permite o ajuste automático ao conteúdo */
+    border: 2px solid #00ff00;
+    border-radius: 15px;
+    }
