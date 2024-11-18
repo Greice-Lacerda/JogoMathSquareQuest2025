@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function selecionarImagensPorTamanho(tamanhoTabuleiro) {
-        let totalCelulas = tamanhoTabuleiro;
+        let totalCelulas = tamanhoTabuleiro*tamanhoTabuleiro;
         return todasImagens.slice(0, totalCelulas);
     }
 
@@ -76,16 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
     function gerarCombinacoes(imagens) {
         const combinacoes = [];
         let contador = 1;
-
+    
         for (let i = 0; i < imagens.length; i++) {
             for (let j = 0; j < imagens.length; j++) {
-                combinacoes.push({ id: contador++, combinacao: [imagens[i], imagens[j]] });
+                if (imagens[i] !== imagens[j]) {  // Verifica se as imagens são diferentes
+                    combinacoes.push({ id: contador++, combinacao: [imagens[i], imagens[j]] });
+                }
             }
         }
-
+    
         exibirCombinacoes(combinacoes);
         return combinacoes;
     }
+    
 
     function reinciaGerarCombinacoes(imagens) {
         const combinacoes = [];

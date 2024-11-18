@@ -6,9 +6,6 @@
     <title>Jogo Nivel Difícil - Fase 5</title>
     <link rel="stylesheet" href="styles2.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>    
-    <script>
-    const tamanhoTabuleiro = 6; // Define o tamanho do tabuleiro como 6x6.
-    </script>
     <script src="logicaD.js" defer></script>
 
 </head>
@@ -24,19 +21,19 @@
             <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button> 
             <div>
                 <h1 id="titulo-nivel"><br>Nível D5<br>6x6</h1><br>
-                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelH1.html?tamanhoTabuleiro=2'">Próximo página</button>
+                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Finalizou.html'">Próximo página</button>
                 </div>
-        </fieldset id="campos">
+        </fieldset>
         <fieldset id="campos">
             <legend>Tabuleiro do jogo</legend>
             <div id="tabuleiro">
-                <canvas id="tela" width="750" height="500"></canvas>
+                <canvas id="tela" width="720" height="500"></canvas>
             </div>
         </fieldset>
         <fieldset id="campos">
             <legend>Imagens</legend>
             <div id="lista-imagens"></div>
-        </fieldset id="campos">
+        </fieldset>
         <fieldset id='fieldset-combinacao'>            
                 <legend>Combinações</legend>
                 <div id="lista-combinacoes">

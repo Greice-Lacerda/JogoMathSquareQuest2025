@@ -1,7 +1,7 @@
 html, body {
     height: 100%; /* Define a altura como 100% da viewport */
     width: 100%; /* Define a largura como 100% da viewport */
-    margin: 0; /* Remove margens padrão */
+    margin-left: 30px; /* Insere um espaço entre a tela e o jogo no lado esquerdo*/
     padding: 0; /* Remove padding padrão */
 }
 
