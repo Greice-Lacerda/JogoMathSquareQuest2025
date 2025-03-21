@@ -1,0 +1,153 @@
+body{
+    display: flex;
+    overflow: hidden; /* Remove a barra de rolagem */
+    min-height: 100vh;
+    margin-top: 2px;
+    padding: 2px;
+    align-items: center;
+    text-align: center;
+    background-image: url('../imagens/MathQuest.png'); /* Caminho para a imagem */
+    background-size: cover;
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+}
+
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+body{ 
+        background-size: 156% 158%;
+    }    
+}
+  
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) {    
+body{
+        background-size: 140% 180%;
+    }
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+}
+
+#titulo1 {    
+    position: absolute;
+    top: 5px;
+    z-index: 1; /* Esta div ficará atrás */
+}
+
+#sobT1 {
+    font-family: "Lobster Two", sans-serif;
+    margin-top: 5px;
+    font-size: 90px;
+    color: red;
+    text-shadow: 15px 8px 4px rgba(0, 0, 0, 0.5); /* Adiciona sombra ao texto */
+}
+
+/*Ajuste para zoom de 50%*/
+@media (min-width: 1200px) { 
+    #corpo1 {
+        width: 20%;
+    }
+}
+
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) { 
+    #corpo1 {
+        width: 80%;
+    }
+}
+
+#titulo2 {
+    top: 10px;
+    position: relative;
+    color: transparent;
+    width: 550px;
+    height: 100px;
+    z-index: 2; /* Esta div ficará na frente */
+}
+
+#sobT2 {
+    font-size: 50px;
+    font-family: "Parisienne", cursive;
+    color: yellow;
+    text-shadow: 2px 5px 3px rgba(250, 250, 250, 0.2); /* Adiciona sombra ao texto */
+}
+
+@media (min-width: 1200px) { 
+    #corpo2 { 
+        width: 20%;
+    }
+}
+
+@media (min-width: 1201px) { 
+    #corpo2 {
+        width: 94%;
+    }
+}
+
+#tbem {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 35px;
+    text-align: center;
+    color: transparent;
+    background-clip: text;
+    background-color: hsl(34, 53%, 82%);
+    background-image: repeating-linear-gradient(
+        45deg,
+        #d7dd60 0%,
+        #e4f52a 20%,
+        #f3a322 30%,
+        #f5511b 40%,
+        #230f07 50%,
+        #37094a 60%,
+        #83096e 70%,
+        #840b2a 80%,
+        #623c59 90%,
+        #ef0a0a 100%
+    );
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#tbem:hover {
+    transform: scale(1.1);
+    text-shadow: 0 5px 5px rgba(255, 255, 255, 0.6);
+    animation: spin 5s linear infinite;
+}
+
+ul, li {
+    text-align: justify;
+    font-style: bold;
+    font-size: 22px;
+    color: #000;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding: 5px; /* Ajuste do padding */
+}
+
+fieldset {
+    border-color: #dfa27c;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+legend {
+    color: red;
+    font-style: bold;
+    font-size: 20px;
+}
+
+footer {
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: bold;
+    width: 700px;
+}
