@@ -1,0 +1,214 @@
+/* Images */
+#lista-imagens img {
+    display: block;
+    width: 60px;
+    padding: 3px;
+    margin: 2px auto;
+    cursor: pointer;
+    filter: drop-shadow(5px 5px 2px rgb(7, 7, 7));
+}
+
+/* Game Layout */
+#jogo {
+    top: 40px;
+    display: grid;
+    grid-template-areas: 
+        "imagens tabuleiro botoes mensagem"
+        "mensagem mensagem mensagem mensagem";
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    max-width: 1100px;
+}
+
+#tabuleiro {
+    grid-area: tabuleiro;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    background-color: #f0f0f0;
+    height: 400px;
+    width: 400px;
+}
+
+#mensagens {
+    grid-area: mensagem;
+    display: flex;
+    padding: 10px auto;
+    align-items: center;
+    color: rgb(241, 239, 239);
+    font-size: 40px;
+    font-weight: bold;
+    width: 300px;
+    height: 400px;
+    text-align: center;
+    justify-content: center;    
+    background-color: rgba(0, 0, 0, 0.4);
+    line-height: 1.6;
+}
+
+#campos {
+    position: relative;
+    border: 2px solid #00ff00;
+    border-radius: 15px;    
+    background-color: rgba(23, 16, 41, 0.5);
+    height: 430px;
+    text-align: center;
+    margin: 15px 6px;
+}
+
+#fase11{
+    top: 50px;
+}
+
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+    #fase11{ 
+        transform: scale(0.6); /* Reduz o tamanho do elemento */
+        transform-origin: center; /* Mantém a escala centralizada */
+    } 
+}
+
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) {
+    #fase11{
+        transform: scale(1); /* Mantém o tamanho original */
+        transform-origin: top; /* Mantém a escala centralizada */
+    }   
+}
+
+.corpo-i{
+    display: flex;
+    overflow: hidden; /* Remove a barra de rolagem */
+    flex-direction: column;
+    min-height: 100vh;
+    margin-top: 5px;
+    padding: 2px;
+    align-items: center;
+    text-align: center;
+    background-image: url('../imagens/MathQuest.png'); /* Caminho para a imagem */
+    background-size: cover;
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+}
+
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+    .corpo-i { 
+        background-size: 165% 170%;
+    }    
+}
+  
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) {    
+    .corpo-i{
+        background-size: 140% 180%;
+    }
+}
+
+.controles1 {
+    display: flex;
+    flex-direction: column; /* Correção da direção */
+    align-items: flex-start;
+    width: 80px;
+    margin: 8px auto;
+    border: solid outset 3px #ccc;
+    background-color: transparent;
+}
+
+.controles1 button {
+    padding: 10px 10px;
+    width: 140px;
+    height: 40px;
+    margin: 5px auto;
+    border-radius: 8%;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold; /* Ajuste para negrito */
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+}
+
+.controles1 button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
+}
+
+.proximo-nivel {
+    display: flex;
+    flex-direction: column; /* Correção da direção */
+    align-items: flex-start;
+    width: 80px;
+    height: 80px;
+    margin: 8px auto;
+    border: solid outset 3px #ccc;
+    background-color: transparent;
+}
+
+.proximo-nivel button {
+    padding: 10px auto;
+    text-align: center;
+    width: 100px;
+    height: 80px;
+    border-radius: 8%;
+    font-size: 20px;
+    font-weight: bold; /* Ajuste para negrito */
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+}
+
+.proximo-nivel button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
+}
+
+.proximo-nivel button:active {
+    transform: scale(0.95);
+}
+
+#titulo-nivel {
+    color: #c9f054;
+    filter: drop-shadow(2px 2px 1px rgb(228, 90, 26));
+}
+
+#titulo11 {    
+    margin: 10px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    z-index: 1; /* Esta div ficará atrás */
+}
+
+#sobT11 {
+    font-family: "Lobster Two", sans-serif;
+    margin: 10px;
+    margin-bottom: 10px;
+    font-size: 80px;
+    color: red;
+    text-shadow: 15px 8px 4px rgba(0, 0, 0, 0.5); /* Adiciona sombra ao texto */
+}
+
+#titulo21 {
+    top: 10px;
+    margin: 30px;
+    position: relative;
+    color: transparent;
+    width: 550px;
+    height: 10px;
+    z-index: 2; /* Esta div ficará na frente */
+}
+
+#sobT21 {
+    margin: 50px;
+    font-size: 47px;
+    font-family: "Parisienne", cursive;
+    color: yellow;
+    text-shadow: 2px 5px 3px rgba(250, 250, 250, 0.2); /* Adiciona sombra ao texto */
+}
+
+#fasem{
+    text-align: center;
+    margin: 5px auto;
+}

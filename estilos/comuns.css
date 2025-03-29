@@ -1,114 +1,83 @@
-body {
+body{
     display: flex;
     overflow: hidden; /* Remove a barra de rolagem */
-    flex-direction: column;
     min-height: 100vh;
-    margin-top: 5px;
-    padding: 2px;
     align-items: center;
     text-align: center;
     background-image: url('../imagens/MathQuest.png'); /* Caminho para a imagem */
     background-size: cover;
     background-position: center; /* Centraliza a imagem */
     background-repeat: no-repeat; /* Evita que a imagem se repita */
-}
+   }
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) {
-    body { 
-        background-size: 156% 158%;
+body{ 
+        background-size: 160% 160%;
     }    
 }
   
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) {    
-    body {
+body{
         background-size: 140% 180%;
     }
 }
 
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+    main{
+    transform: scale(0.6); /* Aumenta o tamanho do elemento em 20% */
+    }   
+}
+
+/*Ajuste para zoom de 50%*/
+@media (min-width: 1201px) {
+    main{
+    transform: scale(1); /* Aumenta o tamanho do elemento em 20% */
+    }   
+}
+
 #titulo1 {    
+    margin: 1px;
     position: absolute;
-    top: 25px;
+    top: 0px;
     z-index: 1; /* Esta div ficará atrás */
 }
 
 #sobT1 {
     font-family: "Lobster Two", sans-serif;
-    margin-top: 5px;
-    font-size: 90px;
+    margin: 1px;
+    margin-bottom: 0px;
+    font-size: 80px;
     color: red;
     text-shadow: 15px 8px 4px rgba(0, 0, 0, 0.5); /* Adiciona sombra ao texto */
 }
 
-/*Ajuste para zoom de 50%*/
-@media (min-width: 1200px) { 
-    #corpo1 {
-        width: 20%;
-    }
-}
-
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-    #corpo1 {
-        width: 80%;
-    }
-}
-
 #titulo2 {
-    top: 40px;
+    top: 10px;
+    margin: 1px;
+    margin-bottom: 0px;
     position: relative;
     color: transparent;
     width: 550px;
-    height: 100px;
+    height: 60px;
     z-index: 2; /* Esta div ficará na frente */
 }
 
 #sobT2 {
-    font-size: 50px;
+    margin: 40px;
+    font-size: 47px;
     font-family: "Parisienne", cursive;
     color: yellow;
     text-shadow: 2px 5px 3px rgba(250, 250, 250, 0.2); /* Adiciona sombra ao texto */
 }
 
-@media (min-width: 1200px) { 
-    #corpo2 { 
-        width: 20%;
-    }
-}
-
-@media (min-width: 1201px) { 
-    #corpo2 {
-        width: 94%;
-    }
-}
-
-main {
-    flex: 1;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-}
-
-#corpo3 {
-    max-width: 900px;
-    max-height: 350px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(211, 208, 208, 0.4);
-    padding: 10px;
-    border: 2px solid red;
-    border-radius: 10px;
-    box-shadow: outset 1px 1px 10px rgba(0, 0, 0, 0.9);
-}
-
 #tbem {
-    margin-top: 10px;
+    margin-top: 8px;
+    margin-bottom: 5px;
     padding: 5px;
-    font-size: 30px;
+    font-size: 35px;
     text-align: center;
     color: transparent;
     background-clip: text;
@@ -137,30 +106,54 @@ main {
 
 ul, li {
     text-align: justify;
-    font-size: 20px;
+    font-style: bold;
+    font-size: 22px;
     color: #000;
     margin-top: 2px;
     margin-bottom: 5px;
+    margin-left: 15px;
     padding: 5px; /* Ajuste do padding */
+}
+
+fieldset {
+    border-color: #dfa27c;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+legend {
+    color: rgb(160, 116, 241);    
+    font-size: 20px;
+    font-style: bold;
+    filter: drop-shadow(-1px -2px 0.1px rgb(245, 28, 28));
+}
+
+footer {
+    position: absolute;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: bold;
+    width: 700px;
+    top: 575px;
 }
 
 .controles {
     display: flex;
     flex-direction: row; /* Correção da direção */
     align-items: flex-start;
-    margin-left: 8px;
-    margin-right: 15px;
-    margin-top: 5px;
-    padding: 5px;
+    width: 450px;
     border: solid outset 3px #ccc;
     background-color: transparent;
 }
 
 .controles button {
-    margin-left: 25px;
-    padding: 10px 20px;
-    width: 150px;
-    height: 35px;
+    padding: 10px 10px;
+    width: 130px;
+    height: 40px;
+    margin: 5px auto;
     border-radius: 8%;
     margin-bottom: 5px;
     font-size: 16px;
@@ -179,24 +172,7 @@ ul, li {
     transform: scale(0.95);
 }
 
-fieldset {
-    border-color: #dfa27c;
-    margin-top: 10px;
-    margin-bottom: 5px;
+section{
+    margin: 10px auto;
 }
 
-legend {
-    color: red;
-    font-style: bold;
-    font-size: 20px;
-}
-
-footer {
-    font-size: 20px;
-    padding: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-    color: aliceblue;
-    font-weight: bold;
-    width: 700px;
-}

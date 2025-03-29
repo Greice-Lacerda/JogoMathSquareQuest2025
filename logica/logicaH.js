@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const listaCombinacoes = document.getElementById('lista-combinacoes');
     const mensagem = document.getElementById('mensagem');
     const proximoNivel = document.getElementById('proximo-nivel');
-    const errorSound = new Audio('Erro.mp3');
-    const clapSound = new Audio('aplausos.mp3');
+    const errorSound = new Audio('../sons/Erro.mp3');
+    const clapSound = new Audio('../sons/Aplausos.mp3');
     const fieldsetCombinacoes = document.getElementById('fieldset-combinacao');
     const botaoExibirCombinacoes = document.getElementById('Exibir-combinacoes');
     const botaoLimparTabuleiro = document.getElementById('limpar-tabuleiro');
@@ -24,10 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const todasImagens = [
-        'abelha.jpeg', 'bispo.jpeg', 'bola.jpeg', 'carro.jpeg', 'cavalo.jpeg',
-        'circulo.jpeg', 'coração.png', 'estrela.jpeg', 'flor.jpeg', 'peao.jpeg',
-        'quadrado.jpeg', 'Rainha.jpeg', 'Rei.jpeg', 'torre.jpeg', 'triangulo.jpeg'
-    ];
+        '../imagens/abelha.jpeg', '../imagens/bispo.jpeg', '../imagens/bola.jpeg', '../imagens/carro.jpeg', '../imagens/cavalo.jpeg',
+        '../imagens/circulo.jpeg', '../imagens/coração.png', '../imagens/estrela.jpeg', '../imagens/flor.jpeg', '../imagens/peao.jpeg',
+        '../imagens/quadrado.jpeg', '../imagens/Rainha.jpeg', '../imagens/Rei.jpeg', '../imagens/torre.jpeg', '../imagens/triangulo.jpeg'];
 
     // Função para obter o parâmetro da URL
     function getUrlParameter(param) {
@@ -56,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         imagens.forEach((imgNome) => {
             let img = new Image();
-            img.src = 'imagens/' + imgNome;
+            img.src = '../imagens/' + imgNome;
             img.classList.add('draggable');
             img.draggable = true;
             img.id = imgNome;
@@ -210,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas = document.getElementById('tela');
         ctx = canvas.getContext('2d');
         let tamanhoTabuleiroParam = getUrlParameter('tamanhoTabuleiro');
-        tamanhoTabuleiro = parseInt(tamanhoTabuleiroParam, 10);
+        tamanhoTabuleiro = 2; //parseInt(tamanhoTabuleiroParam, 10);
 
         if (isNaN(tamanhoTabuleiro) || tamanhoTabuleiro <= 0 || tamanhoTabuleiro > todasImagens.length) {
             mensagem.textContent = 'Erro: Tamanho do tabuleiro inválido.';

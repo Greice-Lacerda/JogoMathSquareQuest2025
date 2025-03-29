@@ -1,0 +1,148 @@
+#Exibir-combinacoes {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 150px;
+    height: 65px;
+    border: solid outset 3px #ccc;
+    background-color: transparent;
+}
+
+.Exibircombinacoes button {
+    padding: 10px 10px;
+    width: 150px;
+    height: 40px;
+    margin: 5px auto;
+    border-radius: 8%;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+}
+
+.controles button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
+}
+
+.controles button:active {
+    transform: scale(0.95);
+}
+
+#mensagensD {
+    grid-area: mensagem;
+    display: flex;
+    padding: 0px;
+    margin: 5px 0px 5px;
+    align-items: center;
+    color: rgb(241, 239, 239);
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.camposD {
+    position: relative;
+    border: 2px solid #00ff00;
+    border-radius: 15px;
+    background-color: rgba(23, 16, 41, 0.5);
+    height: 430px;
+    text-align: center;
+    margin: 30px 6px 2px;
+}
+
+#camposD1 {
+    position: relative;
+    border: 2px solid #00ff00;
+    border-radius: 15px;
+    background-color: rgba(23, 16, 41, 0.6);
+    height: 120px;
+    text-align: center;
+    margin: 0px 6px 20px;
+}
+
+#faseD {
+    top: 4px;
+}
+
+#camposD11 {
+    position: relative;
+    border: 2px solid #00ff00;
+    border-radius: 15px;
+    background-color: rgba(23, 16, 41, 0.5);
+    height: 430px;
+    text-align: center;
+    margin: 30px 6px 2px;
+}
+
+/* Images */
+#lista-imagens img {
+    display: block;
+    width: 80px;
+    padding: 3px;
+    margin: 2px auto;
+    cursor: pointer;
+    filter: drop-shadow(5px 5px 2px rgb(7, 7, 7));
+}
+
+/* Game Layout */
+#jogoD {
+    top: 10px;
+    display: grid;
+    grid-template-areas:
+        "imagens tabuleiro botoes mensagem"
+        "mensagem mensagem mensagem mensagem";
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    max-width: 1100px;
+}
+
+#tabuleiroD {
+    grid-area: tabuleiro;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    background-color: #f0f0f0;
+    height: 400px;
+    width: 400px;
+}
+
+/* Ajuste para zoom de 50% */
+@media (max-width: 1200px) {
+    #faseD {
+        transform: scale(0.7); /* Reduz o tamanho do elemento */
+        transform-origin: top; /* Mantém a escala centralizada */
+    }
+}
+
+/* Ajuste para zoom de 100% */
+@media (min-width: 1201px) {
+    #faseD {
+        transform: scale(0.8); /* Mantém o tamanho original */
+        transform-origin: top; /* Mantém a escala centralizada */
+    }
+}
+
+#sobTD11 {
+    font-family: "Lobster Two", sans-serif;
+    margin: 1px;
+    margin-bottom: 6px;
+    font-size: 70px;
+    color: red;
+    text-shadow: 15px 8px 4px rgba(0, 0, 0, 0.5); /* Adiciona sombra ao texto */
+}
+
+#sobTD21 {
+    margin: 35px;
+    font-size: 40px;
+    font-family: "Parisienne", cursive;
+    color: yellow;
+    text-shadow: 2px 5px 3px rgba(250, 250, 250, 0.2); /* Adiciona sombra ao texto */
+}
