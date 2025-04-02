@@ -140,6 +140,7 @@ legend {
     color: red;
     font-style: bold;
     font-size: 20px;
+    text-shadow: 1px 2px 0.1px rgba(133, 8, 85, 1); /* Adiciona sombra ao texto */
 }
 
 footer {
@@ -150,4 +151,5 @@ footer {
     color: aliceblue;
     font-weight: bold;
     width: 700px;
+    text-shadow: 3px 4px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
 }
