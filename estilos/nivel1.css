@@ -1,0 +1,223 @@
+/* Global Styles */
+.bodyF1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Remove a barra de rolagem */
+    align-items: center;
+    text-align: center;
+    background-image: url('../imagens/MathQuest.gif'); /* Caminho para a imagem */
+    background-size: cover;
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+}
+
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+    .bodyF1{ 
+        background-size: 190% 100%;
+    }
+}    
+          
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) {    
+    .bodyF1{
+        background-size: 200% 120%;
+     }
+}
+
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+    .mainF1, #jogo, #tabuleiro{ 
+        transform: scale(0.85);
+        transform-origin: center;
+        }    
+    }
+      
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) {    
+    .mainF1, #jogo, #tabuleiro{
+        transform: scale(1);
+        transform-origin: center;
+     }
+}
+ 
+.mainF1{
+    top: 0px;
+    flex: 1;
+    display: flex;
+    margin: 2px auto;
+    position: absolute;
+}
+
+#lista-imagens img {
+    object-fit: contain; 
+    width: 80px; /* Defina a largura desejada */
+    height: 60px; /* Defina a altura desejada */
+    cursor: pointer;
+    filter: drop-shadow(4px 4px 1.6px rgba(0, 0, 0, 1));
+}
+
+#tabuleiro {
+    grid-area: tabuleiro;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    background-color: #f0f0f0;
+    box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.9);
+}
+
+#titulo-nivel {
+    color: darkblue;
+    font-size: 30px;
+    margin: 0px 20px 0px;
+    filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 1));
+}
+
+#final {
+    text-align: center;
+    color: red;
+    font-size: 70px;
+}
+
+#inicial {
+    text-align: center;
+    color: red;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* Instructions */
+#instrucoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+}
+
+#instrucoes-jogo > div {
+    margin-bottom: 20px;
+}
+
+#lista-imagens img {
+    width: 80px;
+    margin: 1px;    
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+/* Game Layout */
+#jogo {    
+    top: 120px;
+    position: absolute;
+    justify-content: center;
+    display: grid;
+    grid-template-areas: 
+        "imagens tabuleiro botoes mensagem";
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    gap: 5px;
+    max-width: 200%;
+    height: 80vh;
+    margin: 0px;
+}
+
+#tabuleiro {
+    grid-area: tabuleiro;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    background-color: #f0f0f0;
+}
+
+#mensagens {
+    grid-area: mensagem;
+    display: flex;
+    align-items: center;
+    padding: 5px;    
+    color: darkblue;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.controles1 {
+    display: flex;
+    flex-direction: column; /* Correção da direção */
+    align-items: flex-start;
+    margin: 0px 10px 0px;
+    padding: 0px 10px 0px;
+    max-height: max-content;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(231, 226, 229, 0.2);
+    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.9);
+}
+
+.controles1 button {
+    margin: 5px auto;
+    padding: 10px auto;
+    width: 150px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold; /* Ajuste para negrito */
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+}
+
+.controles1 button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
+}
+
+.controles1 button:active {
+    transform: scale(0.95);
+}
+
+#footerF1 {
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 560px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: bold;
+    width: 700px;
+    text-shadow: 3px 4px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+}
+
+#tituloF1 {    
+    position: absolute;    
+    width: 850px;
+    height: 40px;
+    top: 1px;
+    z-index: 1; /* Esta div ficará atrás */
+}
+
+#sobTF1 {
+    font-family: "Lobster Two", sans-serif;
+    margin: 1px;
+    font-size: 90px;
+    color: red;
+    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.6); /* Adiciona sombra ao texto */
+}
+
+#tituloF2 {
+    top: 30px;
+    position: relative;
+    color: transparent;
+    width: 750px;
+    height: 50px;
+    z-index: 2; /* Esta div ficará na frente */
+}
+
+#sobTF2 {
+    font-size: 50px;    
+    margin: 40px 0px 20px 150px;
+    font-family: "Parisienne", cursive;
+    color: yellow;
+    text-shadow: 1px 4px 1px rgba(252, 247, 247, 0.8); /* Adiciona sombra ao texto */
+}

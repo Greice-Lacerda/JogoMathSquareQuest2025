@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     embaralhar(imagens);
 
-    const tamanho = 8; // Define o tamanho do tabuleiro como 2x2.
+    const tamanho = 5; // Define o tamanho do tabuleiro como 2x2.
     listaImagens.innerHTML = ''; // Limpa as imagens anteriores
     for (let i = 0; i < tamanho; i++) {
         const imgElement = document.createElement('img');

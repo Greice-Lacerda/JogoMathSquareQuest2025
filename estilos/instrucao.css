@@ -8,7 +8,7 @@
     padding: 2px;
     align-items: center;
     text-align: center;
-    background-image: url('../imagens/MathQuest.png'); /* Caminho para a imagem */
+    background-image: url('../imagens/MathQuest.gif'); /* Caminho para a imagem */
     background-size: cover;
     background-position: center; /* Centraliza a imagem */
     background-repeat: no-repeat; /* Evita que a imagem se repita */
@@ -17,14 +17,14 @@
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) {
 .corpo-i { 
-        background-size: 170% 170%;
+        background-size: 190% 100%;
     }    
 }
   
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) {    
 .corpo-i{
-        background-size: 175% 210%;
+        background-size: 190% 100%;
     }
 }
 
