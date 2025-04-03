@@ -1,3 +1,9 @@
+header{
+    padding: 1px auto 1px;
+    margin: 1px 150px 1px;
+    width: 100%;
+    height: 40vh;
+}
 
 .corpInd{
     display: flex;
@@ -24,20 +30,17 @@
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) {    
 .corpInd{
-        background-size: 185% 100%;
+    background-size: 185% 100%;
     }
 }
 
 .controlesInd {
-    border-radius: 10px;
-    width: 550px;
-    height: 100px;
-    position: absolute;
-    margin: 5px auto;
     display: flex;
-    flex-direction: row; /* Correção da direção */
-    align-items: flex-start;
-    top: 380px;
+    position: relative;
+    border-radius: 10px;
+    width: 650px;
+    height: 100px;
+    margin: 90px auto;
     padding: 5px auto;
     border: outset 3px #dfa27c;
     background-color: transparent;
@@ -54,7 +57,7 @@
 }
 
 .controlesInd button {
-    margin: 15px auto;
+    margin: 15px auto 15px;
     padding: 30px auto;
     width: 250px;
     height: 45px;
@@ -76,85 +79,97 @@
     transform: scale(0.95);
 }
 
-#titulo1Ind {     
-    top: 0px;   
-    position: absolute;
-    margin: center;
-    z-index: 1; /* Esta div ficará atrás */
-}
-
-#sobT1Ind {
+#titulo1Ind { 
+    margin-left: 10px;
     font-family: "Lobster Two", sans-serif;
-    font-size: 125px;
+    font-size: 80px; 
     color: red;
     text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
 }
 
 #titulo1Ind:hover {
-    transform: scale(1.5);
+    transform: scale(1.1);
     text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
     animation: spin 5s linear infinite;
 }
 
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) { 
-    #corpInd {
-        margin: 5px auto;
-        transform: scale(0.4);
-        transform-origin: center;
-    }
-
-    .controlesInd {
-        top: 350px;
-    }
-
-    #titulo1Ind, #titulo2Ind {
-    transform: scale(0.8);
-    transform-origin: center;
-    }
-
-    #sobT1Ind{
-        margin: 100px auto;
-        transform: scale(1.1);
-        transform-origin: center;
-    }
-
-    #sobT2Ind{
-        margin: 25px auto;
-        transform: scale(1.1);
-        transform-origin: center;
-    }
+#titulo1Ind:active {
+    transform: scale(0.95);
 }
 
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
-        transform: scale(1.2);
-        transform-origin: center;
-    }    
+#sobT1Ind {
+    margin-top: 2px;;
+    margin-left: 300px;
+    max-width: 800px;
+    max-height: 30vh;
+    position: absolute;
+    z-index: 1;
 }
 
 #titulo2Ind {
-    top: 160px;
-    position: relative;
-    color: transparent;
-    width: 650px;
-    height: 100px;
-    z-index: 2; /* Esta div ficará na frente */
+    text-shadow: 1px 8px 1px rgba(245, 240, 240, 0.918); /* Adiciona sombra ao texto */
+    margin-left: 10px;
+    font-size: 60px;
+    font-family: "Parisienne", cursive;
+    color: yellow;
+    font-style: bold;
+}
+    
+#titulo2Ind:hover {
+    transform: scale(1);
+    text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
+    animation: spin 5s linear infinite;
 }
 
 #titulo2Ind:hover {
-    transform: scale(1.5);
+    transform: scale(1.1);
     text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
     animation: spin 5s linear infinite;
 }
 
 #sobT2Ind {
-    font-size: 70px;
-    font-family: "Parisienne", cursive;
-    color: yellow;
-    font-style: bold;
-    text-shadow: 1px 8px 1px rgba(245, 240, 240, 0.918); /* Adiciona sombra ao texto */
+    top: 70px;
+    margin: 55px 200px 10px;
+    padding: 2px auto;
+    position: relative;   
+    width: 900px;
+    max-height: 40vh;
+    z-index: 2;
+   
 }
 
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) { 
+    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
+        transform: scale(0.8);
+        margin-left: 0px;
+        }
+
+        header{
+        transform: scale(1);
+        width: 120%;
+        margin: 15px 0px auto;    
+        }
+
+        #titulo1Ind{
+        margin-left: 0px;
+        font-size: 100px;
+        }
+
+        #titulo2Ind{            
+        margin-left: 0px;
+        font-size: 60px;
+        }
+}
+
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) { 
+    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
+    transform: scale(1.2);
+    }
+
+    #sobT2Ind{
+    margin-top: 80px;
+    }    
+}
 
