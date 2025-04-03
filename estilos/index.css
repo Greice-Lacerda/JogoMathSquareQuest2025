@@ -40,7 +40,7 @@ header{
     border-radius: 10px;
     width: 650px;
     height: 100px;
-    margin: 90px auto;
+    margin: 60px auto;
     padding: 5px auto;
     border: outset 3px #dfa27c;
     background-color: transparent;
@@ -82,24 +82,24 @@ header{
 #titulo1Ind { 
     margin-left: 10px;
     font-family: "Lobster Two", sans-serif;
-    font-size: 80px; 
+    font-size: 65px; 
     color: red;
     text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
 }
 
 #titulo1Ind:hover {
     transform: scale(1.1);
-    text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
+    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
     animation: spin 5s linear infinite;
 }
 
 #titulo1Ind:active {
-    transform: scale(0.95);
+    transform: scale(1);
 }
 
 #sobT1Ind {
-    margin-top: 2px;;
-    margin-left: 300px;
+    margin-top: 0px;
+    margin-left: 350px;
     max-width: 800px;
     max-height: 30vh;
     position: absolute;
@@ -107,9 +107,9 @@ header{
 }
 
 #titulo2Ind {
-    text-shadow: 1px 8px 1px rgba(245, 240, 240, 0.918); /* Adiciona sombra ao texto */
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
     margin-left: 10px;
-    font-size: 60px;
+    font-size: 40px;
     font-family: "Parisienne", cursive;
     color: yellow;
     font-style: bold;
@@ -117,19 +117,18 @@ header{
     
 #titulo2Ind:hover {
     transform: scale(1);
-    text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
     animation: spin 5s linear infinite;
 }
 
 #titulo2Ind:hover {
     transform: scale(1.1);
-    text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
-    animation: spin 5s linear infinite;
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
 }
 
 #sobT2Ind {
-    top: 70px;
-    margin: 55px 200px 10px;
+    top: 50px;
+    margin: 55px 250px 10px;
     padding: 2px auto;
     position: relative;   
     width: 900px;
@@ -140,7 +139,7 @@ header{
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) { 
-    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
+    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpInd, .controles3Ind {
         transform: scale(0.8);
         margin-left: 0px;
         }
@@ -160,12 +159,16 @@ header{
         margin-left: 0px;
         font-size: 60px;
         }
+
+        #titulo3Ind{ 
+            margin-top: 25px;
+        }
 }
 
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) { 
-    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
-    transform: scale(1.2);
+    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpInd {
+    transform: scale(1.13);
     }
 
     #sobT2Ind{

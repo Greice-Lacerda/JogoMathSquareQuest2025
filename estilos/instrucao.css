@@ -1,179 +1,68 @@
+/*Consfiguração da página Instruções*/
 
-.corpo-i{
+#titulo3Ind{ 
+    margin-top: 55px;
+    font-family: "Lobster Two", sans-serif;
+    font-size: 65px; 
+    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+}
+
+.controles3Ind{
+    top: 20px;
     display: flex;
-    overflow: hidden; /* Remove a barra de rolagem */
-    flex-direction: column;
-    min-height: 100vh;
-    margin-top: 5px;
-    padding: 2px;
-    align-items: center;
-    text-align: center;
-    background-image: url('../imagens/MathQuest.gif'); /* Caminho para a imagem */
-    background-size: cover;
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
-}
-
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-.corpo-i { 
-        background-size: 190% 100%;
-    }    
-}
-  
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) {    
-.corpo-i{
-        background-size: 190% 100%;
-    }
-}
-
-#corpo3 {
-    max-width: 900px;
-    max-height: 400px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(211, 208, 208, 0.4);
-    padding: 2px;
-    border: 2px solid red;
+    position: relative;
     border-radius: 10px;
-    box-shadow: outset 1px 1px 10px rgba(0, 0, 0, 0.9);
-}
-
-.controles {
-    display: flex;
-    flex-direction: row; /* Correção da direção */
-    align-items: flex-start;
-    margin-left: 8px;
-    margin-right: 15px;
-    margin-top: 5px;
-    padding: 5px;
-    border: solid outset 3px #ccc;
+    width: 750px;
+    height: 270px;
+    margin: 5px 20px 5px 20px;
+    padding: 15px 20px 15px 20px;
+    border: outset 3px #dfa27c;
     background-color: transparent;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    line-height: 1.1;
 }
 
-.controles button {
-    margin: 15px;
-    padding: 10px auto;
-    width: 150px;
-    height: 35px;
-    border-radius: 8%;
-    font-size: 16px;
-    font-weight: bold; /* Ajuste para negrito */
-    border: outset yellow;
-    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
-    color: white;
+.controlesInst {
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 450px;
+    height: 70px;
+    margin: 2px auto;
+    padding: 2px auto;
+    border: outset 3px #dfa27c;
+    background-color: transparent;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
 }
 
-.controles button:hover {
+.controlesInst:hover {
     background-color: lightgoldenrodyellow;
     transform: scale(1.1);
 }
 
-.controles button:active {
+.controlesInst:active {
     transform: scale(0.95);
 }
 
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-    #corpo3 { 
-            transform: scale(0.75, 0.9);
-            transform-origin: center;
-        }    
-    }
-      
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) {    
-        #corpo3{ 
-            margin-top: 35px;;       
-            transform: scale(1);
-            transform-origin: center;
-        }
+.controlesInst button {
+    margin: 5px 15px 5px;
+    padding: 10px;
+    width: 150px;
+    height: 45px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold; /* Ajuste para negrito */
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
 }
 
-#titulo1inst {     
-    top: 0px;   
-    position: absolute;
-    margin: auto 30px;
-    z-index: 1; /* Esta div ficará atrás */
+.controlesInst button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
 }
 
-#sobT1inst {
-    font-family: "Lobster Two", sans-serif;
-    font-size: 135px;
-    color: red;
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+.controlesInst button:active {
+    transform: scale(0.95);
 }
-
-#titulo1inst:hover {
-    transform: scale(1.5);
-    text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
-    animation: spin 5s linear infinite;
-}
-
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) { 
-    #titulo1inst, #titulo2inst{
-    transform: scale(0.7);
-    transform-origin: center;
-    }
-
-    #sobT1inst{
-        margin-top: 10px;
-        transform: scale(1.1);
-        transform-origin: center;
-    }
-
-    #sobT2inst{        
-        margin-top: 55px;
-        margin-left: 70px;
-    }
-}
-
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-    #titulo1inst, #titulo2inst, #sobT1inst, #sobT2inst{
-        transform: scale(1.1);
-        transform-origin: center;
-    }  
-        
-    #sobT1inst{
-        margin: 0px;
-        transform: scale(1.1);
-        transform-origin: center;
-    }
-
-    #sobT2inst{
-        margin-left: 70px;
-        transform: scale(1);
-        transform-origin: center;
-    }
-}
-
-#titulo2inst {
-    top: 50px;
-    position: relative;
-    color: transparent;
-    width: 750px;
-    height: 100px;
-    z-index: 2; /* Esta div ficará na frente */
-}
-
-#titulo2inst:hover {
-    transform: scale(1.5);
-    text-shadow: 1px 5px 5px rgba(255, 255, 255, 0.6);
-    animation: spin 5s linear infinite;
-}
-
-#sobT2inst {
-    font-size: 70px;
-    font-family: "Parisienne", cursive;
-    color: yellow;
-    font-style: bold;
-    text-shadow: 1px 8px 1px rgba(245, 240, 240, 0.918); /* Adiciona sombra ao texto */
-}
-
