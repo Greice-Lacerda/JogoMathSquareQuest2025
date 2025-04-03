@@ -163,16 +163,36 @@ header{
         #titulo3Ind{ 
             margin-top: 25px;
         }
+
+        #footerInst{
+            position: absolute;
+            top: 575px;
+        }
 }
 
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) { 
-    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpInd {
-    transform: scale(1.13);
+    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
+    transform: scale(1.16);
     }
 
     #sobT2Ind{
     margin-top: 80px;
-    }    
+    } 
+    
+    .controles3Ind{
+    margin-top: 2px;
+    transform: scale(1);    
+    }
+
+    #footerInst{
+        position: absolute;
+        top: 586px;
+    }
 }
 
+ul {
+    list-style-type: square;
+    padding: 0;
+    margin: 0 70px 0;
+}
