@@ -7,7 +7,7 @@ header{
     height: 40vh;
 }
 
-.corpInd{
+.corpoInd{
     display: flex;
     overflow: hidden; /* Remove a barra de rolagem */
     flex-direction: column;
@@ -25,14 +25,14 @@ header{
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) {
-.corpInd { 
+.corpoInd { 
         background-size: 185% 100%;
     }    
 }
   
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) {    
-.corpInd{
+.corpoInd{
     background-size: 185% 100%;
     }
 }
@@ -148,7 +148,7 @@ header{
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) { 
-    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpInd, .controlesInd, .controles3Ind {
+    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpoInd, .controlesInd, .controles3Ind {
         transform: scale(0.8);
         align-items: center;
         justify-content: center; 
@@ -185,13 +185,13 @@ header{
         align-items: center;
         justify-content: center; 
         position: absolute;
-        top: 575px;
+        top: 540px;
         }
 }
 
 /*Ajuste para zoom de 100%*/
 @media (min-width: 1201px) { 
-    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpInd {
+    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpoInd {
     transform: scale(1.16);
     }
 
@@ -202,11 +202,6 @@ header{
     .controles3Ind{
     margin-top: 2px;
     transform: scale(1);    
-    }
-
-    #footerInst{
-        position: absolute;
-        top: 586px;
     }
 }
 

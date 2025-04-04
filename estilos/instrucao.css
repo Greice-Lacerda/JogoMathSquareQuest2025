@@ -3,7 +3,7 @@
 #titulo3Ind{ 
     align-items: center;
     justify-content: center; 
-    margin-top: 55px;
+    margin-top: 50px;
     font-family: "Lobster Two", sans-serif;
     font-size: 65px; 
     text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
@@ -20,7 +20,7 @@
 }
  
 .controles3Ind{
-    top: 2px;
+    top: 15px;
     display: flex;
     position: relative;
     align-items: center;
@@ -32,7 +32,7 @@
     padding: 15px 20px 15px 20px;
     border: outset 3px #dfa27c;
     background-color: rgba(247, 243, 243, 0.4);
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
     line-height: 1.1;
 }
 
@@ -48,7 +48,7 @@
     padding: 2px auto;
     border: outset 3px #dfa27c;
     background-color: transparent;
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
 }
 
 .controlesInst:hover {
@@ -85,12 +85,13 @@
 
 @media (max-width: 1200px) {
     .controles3Ind {
-        transform: scale(0.8); /* Reduz o tamanho do elemento em 20% */
+        transform: scale(0.75); /* Reduz o tamanho do elemento em 20% */
+        top: -20px;
         width: 70vh; /* Ajuste a largura para telas menores */
         height: 50vh; /* Ajuste a altura para telas menores */
     }
     .controlesInst {
-        margin-top: 30px;
-        transform: scale(0.8); 
+        top: 25px;
+        transform: scale(0.85); 
     }
 }

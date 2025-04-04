@@ -44,9 +44,10 @@ section {
 
 #titulo-nivel {
   color: darkblue;
+
   font-size: 30px;
-  margin: 0px 10px 0px;
-  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 1));
+  margin: -2px 15px;
+  filter: drop-shadow(4px 4px 1px rgb(65, 156, 183));
 }
 
 #titulo-nivel:hover {
@@ -73,43 +74,34 @@ section {
     margin-top: 100px;
     width: 100%;
     height: 70vh;
-    transform: scale(0.7);
+    transform: scale(0.68);
   }
 
-  #footerN1{
-    top: 565px;
-    position: absolute;
-    justify-content: center;
-    text-align: center;
+  .controles1 button{
+    transform: scale(1);
+    font-size: 14px;
   }
 
   #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind{
     transform: scale(0.9);
     margin-top: -40px;
-    }  
+  }  
 }
 
 /* Ajuste de zoom para 100% */
 @media (min-width: 1201px) {
   #jogo {
-    top: 105px;
+    top: 90px;
     margin-top: 0px;
-    transform: scale(0.93);
+    transform: scale(0.85);
   }
 
   header{
     top: -38px;
     transform: scale(0.75);
     position: absolute;
-    z-index: 3;
+    z-index:3;
   }
-
-#footerN1{
-      top: 580px;
-      position: absolute;
-      justify-content: center;
-      text-align: center;
-    }
 }
 
 #tabuleiro {
@@ -130,18 +122,18 @@ section {
   grid-area: mensagem;
   display: flex;
   align-items: center;
-  margin: 90px 0px 75px;
+  margin: 45px 0px 75px;
   color: yellow;
   font-size: 40px;
   font-weight: bold;
   width: 200px;
   height: auto;
-  filter: drop-shadow(3px 3px rgb(241, 7, 7));
+  filter: drop-shadow(3px 3px rgb(6, 6, 6));
 }
     
 #mensagem:hover {
   transform: scale(1.1);
-  text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+  text-shadow: 1px 4px 3px rgba(9, 9, 9, 0.9); /* Adiciona sombra ao texto */
   animation: spin 5s linear infinite;
 }
 
@@ -162,12 +154,12 @@ section {
   margin: 8px auto;
   padding: 10px auto;
   width: 150px;
-  height: 35px;
+  height: 40px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
   border: outset yellow;
-  background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+  background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
   color: white;
   box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
 }
@@ -179,6 +171,10 @@ section {
 
 .controles1 button:active {
   transform: scale(0.95);
+}
+
+#proximo-nivel{
+  margin-top: -20px;
 }
 
 img {
@@ -225,20 +221,6 @@ img:active {
   transform: scale(0.95);
 }
 
-#footerN1{
-  text-align: center;
-}
-    
-#footerN1:hover {
-  transform: scale(1.2);
-  text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-  animation: spin 5s linear infinite;
-}
-
-#footerN1:active {
-  transform: scale(0.95);
-}
-
 .imagem-fade-out {
   animation: fadeOut 0.5s forwards;
 }
@@ -250,5 +232,25 @@ img:active {
   to {
       opacity: 0;
   }
+}
+
+#rodape{
+  display: flex;
+  position: absolute;
+  bottom: -10px;
+  justify-content: center;
+  height: 25px;  
+  color: white;
+  text-align: center;
+  padding: 2px;
+}
+
+#Imprimir{
+  margin: 15px auto;
+  width: 170px;
+  height: 70px;
+  padding: 5px;
+  font-size: 22px;
+  font-style: bold;
 }
 

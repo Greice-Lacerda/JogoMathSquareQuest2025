@@ -52,7 +52,7 @@ main {
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 5px;
-    font-size: 35px;
+    font-size: 30px;
     text-align: center;
     color: transparent;
     background-clip: text;
@@ -125,4 +125,3 @@ footer:hover {
 footer:active {
     transform: scale(0.95);
 }
-  

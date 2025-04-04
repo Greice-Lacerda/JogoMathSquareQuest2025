@@ -3,28 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imprimir o Jogo</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MathQuest: Aventura dos Padrões - Imptimir jogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/index.css">
+    <link rel="stylesheet" href="../estilos/instrucao.css">
 </head>
-<body>
-<div id="inicial">Quebra-cabeça</div><br> 
-    <div id="instrucoes">
-        <img src="imagens/Rei.jpeg" alt="Imagem do Jogo" id="imagem-jogo">
-        <div> 
-            <h1>Escolha o tabuleiro que deseja imprimir:</h1><br>           
-            <ul>                
-                <li>Digite 2 para um tabuleiro 2x2.</li>
-                <li>Digite 3 para um tabuleiro 3x3.</li>
-                <li>Digite 4 para um tabuleiro 4x4.</li>
-                <li>Digite 5 para um tabuleiro 5x5.</li>
-                <li>Digite 6 para um tabuleiro 6x6.</li>
-                <li>Digite 7 para um tabuleiro 7x7.</li>
-                <li>Digite 8 para um tabuleiro 8x8.</li>
-                <li>Digite 9 para um tabuleiro 9x9.</li>
-            </ul>
-            <h5>Clique em imprimir jogo para fazer sua escolha</h5>
-            <button id="jogar" onclick="window.location.href='ImpTab.html'">Imprimir</button>
-        </div>
+<header>
+    <div id="titulo1Ind">
+        <h1 id="sobT1Ind">MathQuest</h1>
     </div>
+    <div id="titulo2Ind">
+        <h2 id="sobT2Ind">Aventura dos Padrões</h2>
+    </div>    
+</header>
+<body class="corpoN1">
+    <main>
+        <section>
+            <fieldset class="controlesN1">   
+                <h1>Escolha o tabuleiro que deseja imprimir:</h1><br>           
+                    <ul> 
+                        <b>               
+                        <li>Digite 2 para um tabuleiro 2x2.</li>
+                        <li>Digite 3 para um tabuleiro 3x3.</li>
+                        <li>Digite 4 para um tabuleiro 4x4.</li>
+                        <li>Digite 5 para um tabuleiro 5x5.</li>
+                        <li>Digite 6 para um tabuleiro 6x6.</li>
+                        <li>Digite 7 para um tabuleiro 7x7.</li>
+                        <li>Digite 8 para um tabuleiro 8x8.</li>
+                        <li>Digite 9 para um tabuleiro 9x9.</li>
+                        </b>
+                    </ul>
+            </fieldset>
+            <fieldset class="controles1">
+                <h5>Clique em imprimir jogo para fazer sua escolha</h5>
+                <button id="jogar" onclick="window.location.href='ImpTab.html'">Imprimir</button>
+            </fieldset>    
+        </section>
+    </main>
+    <footer id="footerInst">
+        Criado por Adriana, Greice, Pablo e Paulo em 2025.
+    </footer>
+    <script src="../logica/logica.js"></script>
 </body>
 </html>
