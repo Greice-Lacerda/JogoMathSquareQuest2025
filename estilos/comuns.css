@@ -115,3 +115,14 @@ footer {
     width: 700px;
     text-shadow: 3px 4px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
 }
+   
+footer:hover {
+    transform: scale(1.2);
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+    animation: spin 5s linear infinite;
+}
+  
+footer:active {
+    transform: scale(0.95);
+}
+  

@@ -1,6 +1,4 @@
 
-/* Configurações gerais - USAR A CONFIGURAÇAO INDEX.CSS ABAIXO*/
-
 .corpoN1 {
   display: flex;
   overflow: hidden;
@@ -10,12 +8,9 @@
   margin-top: 5px;
   padding: 2px;
   background-image: url('../imagens/MathQuest.gif');
-  /* Caminho para a imagem */
   background-size: cover;
   background-position: center;
-  /* Centraliza a imagem */
   background-repeat: no-repeat;
-  /* Evita que a imagem se repita */
 }
 
 /*Ajuste para zoom de 50%*/
@@ -54,6 +49,12 @@ section {
   filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 1));
 }
 
+#titulo-nivel:hover {
+  transform: scale(1.1);
+  text-shadow: 2px 2px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+  animation: spin 5s linear infinite;
+}
+
 /* Game Layout */
 #jogo {
   position: relative;
@@ -69,34 +70,46 @@ section {
 /* Ajuste de zoom para 50% */
 @media (max-width: 1200px) {
   #jogo {
-    margin-top: 120px;
+    margin-top: 100px;
+    width: 100%;
+    height: 70vh;
     transform: scale(0.7);
   }
+
+  #footerN1{
+    top: 565px;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind{
+    transform: scale(0.9);
+    margin-top: -40px;
+    }  
 }
 
 /* Ajuste de zoom para 100% */
 @media (min-width: 1201px) {
   #jogo {
-    top: 140px;
+    top: 105px;
     margin-top: 0px;
-    transform: scale(0.9);
+    transform: scale(0.93);
   }
 
   header{
-    top: 1px;
-    transform: scale(0.65);
+    top: -38px;
+    transform: scale(0.75);
     position: absolute;
-    top: 1px;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    z-index: 3;
   }
 
-  footer{
-    top: 600px;
-    position: absolute;
-    justify-content: center;
-    text-align: center;
-  }
+#footerN1{
+      top: 580px;
+      position: absolute;
+      justify-content: center;
+      text-align: center;
+    }
 }
 
 #tabuleiro {
@@ -125,6 +138,12 @@ section {
   height: auto;
   filter: drop-shadow(3px 3px rgb(241, 7, 7));
 }
+    
+#mensagem:hover {
+  transform: scale(1.1);
+  text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+  animation: spin 5s linear infinite;
+}
 
 .controles1 {
   display: flex;
@@ -136,7 +155,7 @@ section {
   border-radius: 10px;
   background: rgba(231, 226, 229, 0.2);
   box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.9);
-  height: 450px;
+  height: 460px;
 }
 
 .controles1 button {
@@ -155,7 +174,7 @@ section {
 
 .controles1 button:hover {
   background-color: lightgoldenrodyellow;
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .controles1 button:active {
@@ -163,12 +182,10 @@ section {
 }
 
 img {
-  width: 20vh; /* Defina a largura desejada */
-  height: 10vh; /* Defina a altura desejada */
+  width: 200px; /* Defina a largura desejada */
+  height: 150px; /* Defina a altura desejada */
   object-fit: contain; /* Ajusta a imagem para cobrir a área definida */
   filter: drop-shadow(4px 4px 1.6px rgba(0, 0, 0, 1));
-  padding: 2px;
-  margin: 3px;
   border-radius: 40px;
 }
 
@@ -177,19 +194,61 @@ transform: scale(1.5);
 animation: spin 5s linear infinite;
 }
 
+img:active {
+  transform: scale(0.95);
+}
+
 #lista-imagens img {
   object-fit: contain;
-  margin: 10px auto;
-  padding: 10px;
+  margin: 10px 0px;
+  padding: 10px 0px 0px;
   cursor: pointer;
-  filter: drop-shadow(4px 4px 1px rgba(0, 0, 0, 2));
+  filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5));
 }
 
 .legendas {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   margin: 5px auto;
   border-radius: 10px;
   filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
 }
+    
+.legendas:hover {
+  transform: scale(1.2);
+  text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+  animation: spin 5s linear infinite;
+}
+
+.legendas:active {
+  transform: scale(0.95);
+}
+
+#footerN1{
+  text-align: center;
+}
+    
+#footerN1:hover {
+  transform: scale(1.2);
+  text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+  animation: spin 5s linear infinite;
+}
+
+#footerN1:active {
+  transform: scale(0.95);
+}
+
+.imagem-fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+

@@ -18,7 +18,7 @@
     </div>
     <div id="titulo2Ind">
         <h2 id="sobT2Ind">Aventura dos Padrões</h2>
-    </div>    
+    </div>
 </header>
 <body class="corpoN1">
     <main id="principal">
@@ -26,16 +26,16 @@
             <div id="jogo">                                           
                 <fieldset class="controles1">
                     <legend class="legendas">Menu</legend>
-                        <button id="voltar" onclick="window.location.href='../paginas/instrucao.html'">Voltar</button> 
-                        <button id="limpar">Limpar</button>                
-                        <button id="reiniciar">Reiniciar</button>                
+                        <button id="voltar" onclick="window.location.href='./paginas/instrucao.html'">Voltar</button> 
+                        <button onclick="limpar()">Limpar</button>                
+                        <button onclick="reiniciar()">Reiniciar</button>                
                         <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br'">Sair do jogo</button>          
                     <div>
                         <h1 id="titulo-nivel"><br><br>Nível F1<br>2x2</h1><br><br>
                     </div>
-                        <button id="proximo-nivel" style="display:none;" onclick="window.location.href='./Nivel2.html?tamanhoTabuleiro=3'">Próximo Nível</button>
-                </fieldset>                 
-
+                    <button id="proximo-nivel" style="display:none;" onclick="window.location.href='./Nivel2.html?tamanhoTabuleiro=3'">Próximo Nível</button>
+                </fieldset>
+              
                 <fieldset class="controles1">
                     <legend class="legendas">Tabuleiro do jogo</legend>
                         <div id="tabuleiro">
@@ -56,7 +56,7 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer id="footerN1">
         Criado por Adriana, Greice, Pablo e Paulo em 2025.
     </footer>
     <script src="../logica/logicaF1.js"></script>

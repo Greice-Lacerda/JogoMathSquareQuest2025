@@ -8,7 +8,17 @@
     font-size: 65px; 
     text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
 }
-
+   
+#titulo3Ind:hover {
+    transform: scale(1.2);
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+    animation: spin 5s linear infinite;
+}
+  
+#titulo3Ind:active {
+    transform: scale(0.95);
+}
+ 
 .controles3Ind{
     top: 2px;
     display: flex;

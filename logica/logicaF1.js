@@ -65,13 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
         img.onload = function() {
-            const imgWidth = 0.9*cellSize;
+            const imgWidth = 0.8*cellSize;
             const imgHeight = 0.9*cellSize;
             const x = col * cellSize + (cellSize - imgWidth)/2;
             const y = row * cellSize + (cellSize - imgHeight)/2;
 
             // Adiciona sombra usando filter drop-shadow
-            ctx.filter = 'drop-shadow(5px 5px 5px rgba(0, 0, 0, 1))';
+            ctx.filter = 'drop-shadow(5px 5px 2px rgba(0, 0, 0, 1))';
 
             ctx.drawImage(img, x, y, imgWidth, imgHeight);
 
@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 mensagem.textContent = "Parabéns! Você conseguiu completar o tabuleiro.";
                 proximoNivel.style.display = 'block'; // Exibe o botão Próximo Nível
                 confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
+                    particleCount: 700,
+                    spread: 200,
+                    origin: { y: 0.8 }
                 });
                 clapSound.play();  
             }
@@ -148,3 +148,47 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
     });
 });
+
+// Função para limpar o tabuleiro
+function limpar() {
+    if (imageHistory.length > 0) {
+        const lastImage = imageHistory.pop();
+        const imgElement = document.querySelector(`img[src="${lastImage.src}"]`);
+        if (imgElement) {
+            imgElement.classList.add('imagem-fade-out');
+            imgElement.addEventListener('animationend', function() {
+                usedImages[lastImage.row][lastImage.col] = null;
+                desenharTabuleiro();
+                usedImages.flat().forEach((src, index) => {
+                    if (src !== null) {
+                        const col = index % tamanho;
+                        const row = Math.floor(index / tamanho);
+                        drawImageInCell(src, col, row);
+                    }
+                });
+                mensagem.textContent = "";
+                imgElement.remove();
+                if (imageHistory.length === 0) {
+                    document.querySelector('button[onclick="limpar()"]').disabled = true;
+                    mensagem.textContent = "Tabuleiro vazio";
+                }
+            });
+        }
+    } else {
+        mensagem.textContent = "Tabuleiro vazio";
+    }
+}
+
+function resetar() {
+    if (confirm("Tem certeza que deseja reiniciar o tabuleiro?")) {
+        usedImages.forEach(row => row.fill(null));
+        imageHistory.length = 0;
+        desenharTabuleiro();
+        mensagem.textContent = "Tabuleiro vazio";
+        document.querySelector('button[onclick="limpar()"]').disabled = true;
+        document.querySelector('button[onclick="reiniciar()"]').disabled = true;
+    }
+}
+
+document.getElementById('limpar').addEventListener('click', limparTabuleiro);
+document.getElementById('reiniciar').addEventListener('click', resetarTabuleiro);

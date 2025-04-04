@@ -129,7 +129,7 @@ header{
     animation: spin 5s linear infinite;
 }
 
-#titulo2Ind:hover {
+#titulo2Ind:active {
     transform: scale(1.1);
     text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
 }
