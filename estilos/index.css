@@ -1,4 +1,6 @@
 header{
+    align-items: center;
+    justify-content: center; 
     padding: 1px auto 1px;
     margin: 1px 150px 1px;
     width: 100%;
@@ -12,6 +14,7 @@ header{
     min-height: 100vh;
     margin-top: 5px;
     padding: 2px;
+    justify-content: center; 
     align-items: center;
     text-align: center;
     background-image: url('../imagens/MathQuest.gif'); /* Caminho para a imagem */
@@ -80,7 +83,8 @@ header{
 }
 
 #titulo1Ind { 
-    margin-left: 10px;
+    align-items: center;
+    justify-content: center; 
     font-family: "Lobster Two", sans-serif;
     font-size: 65px; 
     color: red;
@@ -103,6 +107,8 @@ header{
     max-width: 800px;
     max-height: 30vh;
     position: absolute;
+    align-items: center;
+    justify-content: center; 
     z-index: 1;
 }
 
@@ -113,6 +119,8 @@ header{
     font-family: "Parisienne", cursive;
     color: yellow;
     font-style: bold;
+    align-items: center;
+    justify-content: center; 
 }
     
 #titulo2Ind:hover {
@@ -134,17 +142,22 @@ header{
     width: 900px;
     max-height: 40vh;
     z-index: 2;
-   
+    align-items: center;
+    justify-content: center; 
 }
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) { 
-    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpInd, .controles3Ind {
+    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpInd, .controlesInd, .controles3Ind {
         transform: scale(0.8);
+        align-items: center;
+        justify-content: center; 
         margin-left: 0px;
         }
 
         header{
+        align-items: center;
+        justify-content: center; 
         transform: scale(1);
         width: 120%;
         margin: 15px 0px auto;    
@@ -152,21 +165,27 @@ header{
 
         #titulo1Ind{
         margin-left: 0px;
-        font-size: 100px;
+        font-size: 15vh;
         }
 
-        #titulo2Ind{            
+        #titulo2Ind{ 
+        align-items: center;
+        justify-content: center;            
         margin-left: 0px;
-        font-size: 60px;
+        font-size: 10vh;
         }
 
         #titulo3Ind{ 
-            margin-top: 25px;
+        align-items: center;
+        justify-content: center; 
+        margin-top: 25px;
         }
 
         #footerInst{
-            position: absolute;
-            top: 575px;
+        align-items: center;
+        justify-content: center; 
+        position: absolute;
+        top: 575px;
         }
 }
 
@@ -194,5 +213,10 @@ header{
 ul {
     list-style-type: square;
     padding: 0;
-    margin: 0 70px 0;
+    margin: 0 50px 0;
+}
+
+div{
+    align-items: center;
+    justify-content: center; 
 }
