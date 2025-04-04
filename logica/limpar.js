@@ -1,3 +1,34 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const listaImagens = document.getElementById('lista-imagens');
+    const mensagem = document.getElementById('mensagem');
+    const proximoNivel = document.getElementById('proximo-nivel');
+    const botaoLimparTabuleiro = document.getElementById('limpar-tabuleiro');
+
+    let tabuleiro = {}; // Inicializa o tabuleiro
+    let canvas, ctx, tamanhoTabuleiro, cellWidth, cellHeight;
+
+    // Função que limpa as imagens do tabuleiro e reinicia a lista de combinações
+    botaoLimparTabuleiro.addEventListener('click', function () {
+        for (let key in tabuleiro) {
+            if (tabuleiro[key].length > 0) {
+                tabuleiro[key].forEach(img => {
+                    const imgElement = document.querySelector(`img[src="${img.src}"]`);
+                    if (imgElement) {
+                        imgElement.classList.add('imagem-fade-out');
+                    imgElement.addEventListener('animationend', function () {
+                        imgElement.remove();
+                    });
+                }
+                }
+                // Limpa a lista de imagens do tabuleiro
+                tabuleiro[key] = []; // Limpa as imagens do tabuleiro
+            }
+        }
+        imageHistory = []; // Reinicia o historico
+        mensagem.textContent = 'Imagens do tabuleiro limpas!';
+    });
+}
+
 // Função para limpar o tabuleiro
 function limpar() {
     if (imageHistory.length > 0) {
@@ -26,4 +57,6 @@ function limpar() {
     } else {
         mensagem.textContent = "Tabuleiro vazio";
     }
-}
+});
+
+

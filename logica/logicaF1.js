@@ -5,25 +5,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorSound = new Audio('../sons/Erro.mp3');  // Caminho para o som de erro
     const clapSound = new Audio('../sons/Aplausos.mp3');  // Caminho para o som 
     const imagens = [
-    "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png",
-    "../imagens/aguia.png", "../imagens/antena.png", "../imagens/aranha.jpeg",
-    "../imagens/atomo.png", "../imagens/BALA.png", "../imagens/balao.jpeg",
-    "../imagens/bispo1.jpeg", "../imagens/bola.jpeg", "../imagens/boliche.png",
-    "../imagens/bolo.png", "../imagens/boneca.png", "../imagens/borboleta.png",
-    "../imagens/carro.jpeg", "../imagens/carro.png", "../imagens/carro0.png",
-    "../imagens/casa.png", "../imagens/cavalo.jpeg", "../imagens/cavalo1.jpeg",
-    "../imagens/chapeu1.png", "../imagens/chapeu2.png", "../imagens/chapeu3.png",
-    "../imagens/chinelo.png", "../imagens/circulo.jpeg", "../imagens/coração.png",
-    "../imagens/coroa.png", "../imagens/dado.png", "../imagens/esfera.png",
-    "../imagens/estrela.jpeg", "../imagens/estrela1.jpeg", "../imagens/fantasma.png",
-    "../imagens/flor.jpeg", "../imagens/flor1.PNG", "../imagens/florLis.png",
-    "../imagens/florLis3.png", "../imagens/nuvem.png", "../imagens/PEAO.png",
-    "../imagens/pentagono.png", "../imagens/pinguim.png", "../imagens/piramide.jpg",
-    "../imagens/piramide2.jpg", "../imagens/prisma.png", "../imagens/quadrado.jpeg",
-    "../imagens/Rainha5.jpeg", "../imagens/rainha6.png", "../imagens/Rei.png",
-    "../imagens/rosa.png", "../imagens/saco.png", "../imagens/solido.jpg",
-    "../imagens/terra.png", "../imagens/torre.jpeg", "../imagens/triangulo.jpeg",
-    "../imagens/tv.png", "../imagens/varrer.png"
+        "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
+        "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
+        "../imagens/balao.png", "../imagens/bispo1.png", "../imagens/bola.jpeg", "../imagens/boliche.png",
+        "../imagens/bolo.png", "../imagens/boneca.png", "../imagens/borboleta.png", "../imagens/carro.jpeg",
+        "../imagens/carro.png", "../imagens/carro0.png", "../imagens/casa.png", "../imagens/cavalo.jpeg",
+        "../imagens/cavalo1.jpeg", "../imagens/chapeu1.png", "../imagens/chapeu2.png", "../imagens/chapeu3.png",
+        "../imagens/chinelo.png", "../imagens/circulo.png", "../imagens/coração.png", "../imagens/coroa.png",
+        "../imagens/dado.png", "../imagens/esfera.png", "../imagens/estrela.jpeg", "../imagens/estrela1.jpeg",
+        "../imagens/fantasma.png", "../imagens/flor.jpeg", "../imagens/flor1.PNG", "../imagens/florLis.png",
+        "../imagens/florLis3.png", "../imagens/mais.png", "../imagens/nuvem.png", "../imagens/PEAO.png",
+        "../imagens/pentagono.png", "../imagens/pentagono1.png", "../imagens/pinguim.png", "../imagens/piramide.jpg",
+        "../imagens/piramide2.png", "../imagens/prisma.png", "../imagens/quadrado.png", "../imagens/Rainha5.png",
+        "../imagens/rainha6.png", "../imagens/Rei.jpg", "../imagens/rosa.png", "../imagens/saco.png",
+        "../imagens/solido.png", "../imagens/solido1.png", "../imagens/terra.png", "../imagens/torre.jpeg",
+        "../imagens/triangulo.png", "../imagens/tv.png", "../imagens/varrer.png"
     ];
 
     function embaralhar(array) {
@@ -33,9 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Função para obter o parâmetro da URL
+    function getUrlParameter(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    function selecionarImagensPorTamanho(tamanhoTabuleiro) {
+        let totalCelulas = tamanhoTabuleiro;
+        return todasImagens.slice(0, totalCelulas);
+    }
+
     embaralhar(imagens);
 
-    const tamanho = 2; // Define o tamanho do tabuleiro como 2x2.
+    const tamanho = 2; //getUrlParameter(tamanho); // Define o tamanho do tabuleiro como 2x2.
     listaImagens.innerHTML = ''; // Limpa as imagens anteriores
     for (let i = 0; i < tamanho; i++) {
         const imgElement = document.createElement('img');
@@ -65,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
         img.onload = function() {
-            const imgWidth = 0.8*cellSize;
+            const imgWidth = 0.9*cellSize;
             const imgHeight = 0.9*cellSize;
             const x = col * cellSize + (cellSize - imgWidth)/2;
             const y = row * cellSize + (cellSize - imgHeight)/2;
