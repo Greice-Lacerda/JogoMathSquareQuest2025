@@ -1,5 +1,8 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('tela');
+    const listaImagens = document.getElementById('lista-imagens');
+    const cellSize = canvas.width / 2; // Para tabuleiro 2x2
 
-    // Adiciona suporte a eventos de toque
     canvas.addEventListener('touchstart', function(event) {
         event.preventDefault();
         const touch = event.touches[0];
@@ -22,4 +25,5 @@
 
     canvas.addEventListener('touchmove', function(event) {
         event.preventDefault();
+    });
 });
