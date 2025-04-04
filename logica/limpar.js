@@ -1,62 +1,65 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const listaImagens = document.getElementById('lista-imagens');
     const mensagem = document.getElementById('mensagem');
-    const proximoNivel = document.getElementById('proximo-nivel');
     const botaoLimparTabuleiro = document.getElementById('limpar-tabuleiro');
-
-    let tabuleiro = {}; // Inicializa o tabuleiro
-    let canvas, ctx, tamanhoTabuleiro, cellWidth, cellHeight;
-
-    // Função que limpa as imagens do tabuleiro e reinicia a lista de combinações
+  
+    // Limpa todo o tabuleiro quando o botão for clicado
     botaoLimparTabuleiro.addEventListener('click', function () {
-        for (let key in tabuleiro) {
-            if (tabuleiro[key].length > 0) {
-                tabuleiro[key].forEach(img => {
-                    const imgElement = document.querySelector(`img[src="${img.src}"]`);
-                    if (imgElement) {
-                        imgElement.classList.add('imagem-fade-out');
-                    imgElement.addEventListener('animationend', function () {
-                        imgElement.remove();
-                    });
-                }
-                }
-                // Limpa a lista de imagens do tabuleiro
-                tabuleiro[key] = []; // Limpa as imagens do tabuleiro
-            }
+      if (typeof usedImages !== 'undefined' && Array.isArray(usedImages)) {
+        for (let row = 0; row < usedImages.length; row++) {
+          for (let col = 0; col < usedImages[row].length; col++) {
+            usedImages[row][col] = null;
+          }
         }
-        imageHistory = []; // Reinicia o historico
-        mensagem.textContent = 'Imagens do tabuleiro limpas!';
+      }
+      if (typeof desenharTabuleiro === 'function') {
+        desenharTabuleiro();
+      }
+      if (typeof imageHistory !== 'undefined' && Array.isArray(imageHistory)) {
+        imageHistory.length = 0;
+      }
+      mensagem.textContent = 'Imagens do tabuleiro limpas!';
     });
-}
-
-// Função para limpar o tabuleiro
-function limpar() {
-    if (imageHistory.length > 0) {
-        const lastImage = imageHistory.pop();
-        const imgElement = document.querySelector(`img[src="${lastImage.src}"]`);
-        if (imgElement) {
-            imgElement.classList.add('imagem-fade-out');
-            imgElement.addEventListener('animationend', function() {
-                usedImages[lastImage.row][lastImage.col] = null;
-                desenharTabuleiro();
-                usedImages.flat().forEach((src, index) => {
-                    if (src !== null) {
-                        const col = index % tamanho;
-                        const row = Math.floor(index / tamanho);
-                        drawImageInCell(src, col, row);
-                    }
-                });
-                mensagem.textContent = "";
-                imgElement.remove();
-                if (imageHistory.length === 0) {
-                    document.querySelector('button[onclick="limpar()"]').disabled = true;
-                    mensagem.textContent = "Tabuleiro vazio";
+  });
+  
+  // Função para limpar a última imagem inserida no tabuleiro
+  function limpar() {
+    const mensagem = document.getElementById('mensagem');
+    if (typeof imageHistory !== 'undefined' && imageHistory.length > 0) {
+      const lastImage = imageHistory.pop();
+      const imgElement = document.querySelector(`img[src="${lastImage.src}"]`);
+      if (imgElement) {
+        imgElement.classList.add('imagem-fade-out');
+        imgElement.addEventListener('animationend', function() {
+          if (typeof usedImages !== 'undefined' && Array.isArray(usedImages)) {
+            usedImages[lastImage.row][lastImage.col] = null;
+          }
+          if (typeof desenharTabuleiro === 'function') {
+            desenharTabuleiro();
+          }
+          if (typeof usedImages !== 'undefined' && Array.isArray(usedImages)) {
+            usedImages.flat().forEach((src, index) => {
+              if (src !== null) {
+                const col = index % tamanho;
+                const row = Math.floor(index / tamanho);
+                if (typeof drawImageInCell === 'function') {
+                  drawImageInCell(src, col, row);
                 }
+              }
             });
-        }
+          }
+          mensagem.textContent = "";
+          imgElement.remove();
+          if (imageHistory.length === 0) {
+            const btnLimpar = document.querySelector('button[onclick="limpar()"]');
+            if (btnLimpar) {
+              btnLimpar.disabled = true;
+            }
+            mensagem.textContent = "Tabuleiro vazio";
+          }
+        });
+      }
     } else {
-        mensagem.textContent = "Tabuleiro vazio";
+      mensagem.textContent = "Tabuleiro vazio";
     }
-});
-
-
+  }
+  
