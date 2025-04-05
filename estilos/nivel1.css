@@ -1,8 +1,7 @@
-
+/* Estilos do nivel 1 do jogo */
 .corpoN1 {
   display: flex;
   overflow: hidden;
-  /* Remove a barra de rolagem */
   flex-direction: column;
   min-height: 100vh;
   margin-top: 5px;
@@ -29,12 +28,10 @@
 
 #principal {
   flex: 1;
-  position: absolute;
-  top: 20px;
 }
 
 section {
-  top: 10px;
+  top: 70px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -44,28 +41,29 @@ section {
 
 #titulo-nivel {
   color: darkblue;
-
-  font-size: 30px;
-  margin: -2px 15px;
-  filter: drop-shadow(4px 4px 1px rgb(65, 156, 183));
+  font-size: 35px;
+  margin: -15px 25px;
+  filter: drop-shadow(4px 4px 1px rgb(0, 6, 8));
 }
 
 #titulo-nivel:hover {
-  transform: scale(1.1);
-  text-shadow: 2px 2px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+  transform: scale(1.3);
+  text-shadow: 3px 3px 1px rgba(7, 7, 7, 0.9); /* Adiciona sombra ao texto */
   animation: spin 5s linear infinite;
 }
 
 /* Game Layout */
 #jogo {
-  position: relative;
+  top: -46px;
+  position: absolute;
+  display: flex;
   display: grid;
   grid-template-areas:
     "imagens tabuleiro botoes mensagem";
   grid-template-columns: 1fr 2fr 1fr 1fr;
-  gap: 5px;
-  max-width: 100%;
-  height: auto;
+  gap: 40px;
+  width: 80%;
+  height: 70vh;
 }
 
 /* Ajuste de zoom para 50% */
@@ -74,71 +72,92 @@ section {
     margin-top: 100px;
     width: 100%;
     height: 70vh;
-    transform: scale(0.68);
+    transform: scale(0.6);
   }
 
   .controles1 button{
     transform: scale(1);
-    font-size: 14px;
+    font-size: 18px;
   }
 
-  #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind{
-    transform: scale(0.9);
+  #titulo1Ind{ 
+    font-size: 180px;
+    transform: scale(1.2);
     margin-top: -40px;
-  }  
+  } 
+  
+  #titulo2Ind{ 
+    font-size: 180px;
+    transform: scale(1.2);
+    margin-top: -40px;
+  }
 }
 
 /* Ajuste de zoom para 100% */
 @media (min-width: 1201px) {
   #jogo {
-    top: 90px;
-    margin-top: 0px;
-    transform: scale(0.85);
+    transform: scale(0.7);
+    gap: 40px;
+    margin-top: 5px;
+    top: 50px;
   }
 
-  header{
-    top: -38px;
-    transform: scale(0.75);
+  .controles1 button{
+    transform: scale(1);
+    font-size: 16px;
+    margin: 10px;
+  }
+
+  #titulo1Ind, #sobT1Ind{
     position: absolute;
-    z-index:3;
+    transform: scale(0.5);
+    font-size: 18vh;
+    top: -5px;
+    z-index: 1;
+  }
+
+  #titulo2Ind, #sobT2Ind{
+    position: relative;
+    justify-content: center;
+    top: -35px;
+    z-index: 2;
   }
 }
 
 #tabuleiro {
   grid-area: tabuleiro;
-  padding: 1px;
-  margin: 5px;
-  align-items: center;  
-  justify-content: center;
+  padding: 5px;
+  margin: 8px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(2.5px, 1fr);
+  grid-template-rows: repeat(2.5px, 1fr);
   background-color: #f0f0f0;
-  width: 415px;
-  height: 415px;
+
 }
 
 #mensagem {
   grid-area: mensagem;
   display: flex;
   align-items: center;
-  margin: 45px 0px 75px;
+  margin: 35px 0px 15px;
   color: yellow;
   font-size: 40px;
+  line-height: 1.6;
   font-weight: bold;
-  width: 200px;
+  width: 40vh;
   height: auto;
   filter: drop-shadow(3px 3px rgb(6, 6, 6));
 }
     
 #mensagem:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
   text-shadow: 1px 4px 3px rgba(9, 9, 9, 0.9); /* Adiciona sombra ao texto */
   animation: spin 5s linear infinite;
 }
 
 .controles1 {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   margin: 0px 5px 0px;
@@ -147,16 +166,16 @@ section {
   border-radius: 10px;
   background: rgba(231, 226, 229, 0.2);
   box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.9);
-  height: 460px;
+  height: 560px;
 }
 
 .controles1 button {
   margin: 8px auto;
-  padding: 10px auto;
-  width: 150px;
-  height: 40px;
+  padding: 8px auto;
+  width: 160px;
+  height: 50px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   border: outset yellow;
   background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
@@ -166,7 +185,7 @@ section {
 
 .controles1 button:hover {
   background-color: lightgoldenrodyellow;
-  transform: scale(1.15);
+  transform: scale(1.3);
 }
 
 .controles1 button:active {
@@ -174,24 +193,24 @@ section {
 }
 
 #proximo-nivel{
-  margin-top: -20px;
+  margin: 20px;
 }
 
 img {
-  width: 200px; /* Defina a largura desejada */
+  width: 150px; /* Defina a largura desejada */
   height: 150px; /* Defina a altura desejada */
-  object-fit: contain; /* Ajusta a imagem para cobrir a área definida */
+  object-fit: cover; /* Ajusta a imagem para cobrir a área definida */
   filter: drop-shadow(4px 4px 1.6px rgba(0, 0, 0, 1));
   border-radius: 40px;
 }
 
 img:hover {
-transform: scale(1.5);
+transform: scale(1.3);
 animation: spin 5s linear infinite;
 }
 
 img:active {
-  transform: scale(0.95);
+  transform: scale(0.9);
 }
 
 #lista-imagens img {
@@ -204,9 +223,11 @@ img:active {
 
 .legendas {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 22px;
+  font-size:25px;
   font-weight: bold;
-  margin: 5px auto;
+  text-align: center;
+  margin: auto;
+  padding: auto;
   border-radius: 10px;
   filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
 }
@@ -218,37 +239,24 @@ img:active {
 }
 
 .legendas:active {
-  transform: scale(0.95);
-}
-
-.imagem-fade-out {
-  animation: fadeOut 0.5s forwards;
-}
-
-@keyframes fadeOut {
-  from {
-      opacity: 1;
-  }
-  to {
-      opacity: 0;
-  }
+  transform: scale(1);
 }
 
 #rodape{
   display: flex;
   position: absolute;
-  bottom: -10px;
+  bottom: -12px;
   justify-content: center;
-  height: 25px;  
+  height: 24px;  
   color: white;
   text-align: center;
   padding: 2px;
 }
 
 #Imprimir{
-  margin: 15px auto;
-  width: 170px;
-  height: 70px;
+  margin: 25px auto;
+  width: 180px;
+  height: 50px;
   padding: 5px;
   font-size: 22px;
   font-style: bold;

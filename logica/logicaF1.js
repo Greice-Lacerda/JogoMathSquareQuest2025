@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const listaImagens = document.getElementById('lista-imagens');
     const mensagem = document.getElementById('mensagem');
     const proximoNivel = document.getElementById('proximo-nivel');
+    const parabens = document.getElementById('mensagemParabens');
+    const BtnImprimir = document.getElementById('BtnImprimir');
     const errorSound = new Audio('../sons/Erro.mp3');  // Caminho para o som de erro
     const clapSound = new Audio('../sons/Aplausos.mp3');  // Caminho para o som 
     const imagens = [
@@ -28,21 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
-
-    // Função para obter o parâmetro da URL
-    function getUrlParameter(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    function selecionarImagensPorTamanho(tamanhoTabuleiro) {
-        let totalCelulas = tamanhoTabuleiro;
-        return todasImagens.slice(0, totalCelulas);
-    }
-
+    
+    // Embaralha as imagens antes de exibi-las
     embaralhar(imagens);
 
-    const tamanho = 2; //getUrlParameter(tamanho); // Define o tamanho do tabuleiro como 2x2.
+    const tamanho = 2; // Define o tamanho do tabuleiro como 2x2.
     listaImagens.innerHTML = ''; // Limpa as imagens anteriores
     for (let i = 0; i < tamanho; i++) {
         const imgElement = document.createElement('img');
@@ -72,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
         img.onload = function() {
-            const imgWidth = 0.9*cellSize;
-            const imgHeight = 0.9*cellSize;
+            const imgWidth = 0.8*cellSize;
+            const imgHeight = 0.8*cellSize;
             const x = col * cellSize + (cellSize - imgWidth)/2;
             const y = row * cellSize + (cellSize - imgHeight)/2;
 
@@ -113,8 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
             drawImageInCell(src, col, row);
             mensagem.textContent = ""; // Limpa a mensagem de erro
             if (usedImages.flat().every(cell => cell !== null)) {
-                mensagem.textContent = "Parabéns! Você conseguiu completar o tabuleiro.";
+                mensagemParabens.textContent = "Parabéns! Você conseguiu completar o tabuleiro.";
                 proximoNivel.style.display = 'block'; // Exibe o botão Próximo Nível
+                BtnImprimir.style.display = 'block'; // Exibe o botão Próximo Nível
                 confetti({
                     particleCount: 700,
                     spread: 200,

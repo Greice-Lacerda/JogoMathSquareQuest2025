@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const proximoNivel = document.getElementById('proximo-nivel');
     const errorSound = new Audio('../sons/Erro.mp3');  // Caminho para o som de erro
     const clapSound = new Audio('../sons/Aplausos.mp3');  // Caminho para o som 
+    
     const imagens = [
         "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
         "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     embaralhar(imagens);
 
-    const tamanho = 4; //getUrlParameter(tamanho); // Define o tamanho do tabuleiro como 2x2.
+    const tamanho = 4; //getUrlParameter(tamanho); // Define o tamanho do tabuleiro como 3x3
     listaImagens.innerHTML = ''; // Limpa as imagens anteriores
     for (let i = 0; i < tamanho; i++) {
         const imgElement = document.createElement('img');
@@ -72,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
         img.onload = function() {
-            const imgWidth = 0.9*cellSize;
-            const imgHeight = 0.9*cellSize;
+            const imgWidth = 0.8*cellSize;
+            const imgHeight = 0.8*cellSize;
             const x = col * cellSize + (cellSize - imgWidth)/2;
             const y = row * cellSize + (cellSize - imgHeight)/2;
 

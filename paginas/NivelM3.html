@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo Nivel Médio - Fase 8</title>
+    <title>Jogo Nivel Médio - Fase 3</title>
     <link rel="stylesheet" href="styles2.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>    
     <script src="logica.js" defer></script>
@@ -14,28 +14,25 @@
     <div id="jogo">
         <fieldset id="campos">
             <legend>Menu</legend>
-            <button id="voltar" onclick="window.location.href='NivelD7.html'">Voltar</button>
+            <button id="voltar" onclick="window.location.href='NivelD2.html'">Voltar</button>
             <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
             <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
-            <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button> <!-- Move o botão aqui -->
+            <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button>
             <div>
-                <h1 id="titulo-nivel"><br>Nível M8<br>9x9</h1><br>
-                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelDD1.html?tamanhoTabuleiro=2'">Próximo página</button>
+                <h1 id="titulo-nivel"><br>Nível M3<br>4x4</h1><br>
+                  <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelD4.html?tamanhoTabuleiro=5'">Próximo página</button>
             </div>
         </fieldset>
-        
         <fieldset id="campos">
             <legend>Tabuleiro do jogo</legend>
             <div id="tabuleiro">
-                <canvas id="tela" width="1100" height="750"></canvas>
+                <canvas id="tela" width="480" height="350"></canvas>
             </div>
         </fieldset>
-
         <fieldset id="campos">
             <legend>Imagens</legend>
             <div id="lista-imagens"></div>
         </fieldset>
-
         <fieldset id='fieldset-combinacao'>            
                 <legend>Combinações</legend>
                 <div id="lista-combinacoes">
@@ -48,7 +45,6 @@
                     <!-- Adicione mais combinações conforme necessário -->
                 </div>                      
         </fieldset>
-
         <fieldset id="campos" style="grid-column: span 4;">
             <legend>Mensagens do jogo</legend>
             <div id="mensagens">

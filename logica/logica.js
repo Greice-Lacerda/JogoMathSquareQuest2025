@@ -12,20 +12,17 @@ document.addEventListener('DOMContentLoaded', function () {
         '../imagens/abelha.jpeg', '../imagens/bispo.jpeg', '../imagens/bola.jpeg', '../imagens/carro.jpeg', '../imagens/cavalo.jpeg',
         '../imagens/circulo.jpeg', '../imagens/coração.png', '../imagens/estrela.jpeg', '../imagens/flor.jpeg', '../imagens/peao.jpeg',
         '../imagens/quadrado.jpeg', '../imagens/Rainha.jpeg', '../imagens/Rei.jpeg', '../imagens/torre.jpeg', '../imagens/triangulo.jpeg',
-        '../imagens/abelha.jpeg', '../imagens/abelha.png', '../imagens/abelha0.png', '../imagens/abelha1.png', '../imagens/aguia.png',
-        '../imagens/antena.jpg', '../imagens/aranha.jpeg', '../imagens/atomo.png', '../imagens/BALA.png', '../imagens/balao.jpeg',
-        '../imagens/bispo.jpeg', '../imagens/bispo1.jpeg', '../imagens/bola.jpeg', '../imagens/boliche.png', '../imagens/bolo.png',
-        '../imagens/boneca.png', '../imagens/borboleta.png', '../imagens/CAP.png', '../imagens/carro.jpeg', '../imagens/carro.png',
-        '../imagens/carro0.png', '../imagens/casa.png', '../imagens/cavalo.jpeg', '../imagens/cavalo1.jpeg', '../imagens/chapeu1.png',
-        '../imagens/chapeu2.png', '../imagens/chapeu3.png', '../imagens/chinelo.png', '../imagens/circulo.jpeg', '../imagens/cone.jpg',
-        '../imagens/coração.png', '../imagens/dado.png', '../imagens/esfera.png', '../imagens/estrela.jpeg', '../imagens/estrela1.jpeg',
-        '../imagens/fantasma.png', '../imagens/flor.jpeg', '../imagens/flor1.jpeg', '../imagens/florLis.png', '../imagens/florLis2.png',
-        '../imagens/florLis3.png', '../imagens/laço.png', '../imagens/nuvem.png', '../imagens/peao.jpeg', '../imagens/PEAO.png', '../imagens/peao1.jpeg', '../imagens/pentagono.png',
-        '../imagens/pinguim.png', '../imagens/piramide.jpg', '../imagens/piramide2.jpg', '../imagens/prisma.png', '../imagens/quadrado.jpeg',
-        '../imagens/Rainha.jpeg', '../imagens/Rainha1.jpeg', '../imagens/Rainha3.jpeg', '../imagens/Rainha5.jpeg', '../imagens/Rei.jpeg',
-        '../imagens/Rei.png', '../imagens/Rei1.jpeg', '../imagens/rosa.png', '../imagens/saco.png', '../imagens/solido.jpg',
-        '../imagens/terra.png', '../imagens/torre.jpeg', '../imagens/triangulo.jpeg', '../imagens/triangulo.png', '../imagens/tv.png',
-        '../imagens/varrer.png'
+        '../imagens/abelha.png', '../imagens/abelha0.png', '../imagens/abelha1.png', '../imagens/aguia.png', '../imagens/antena.jpg',
+        '../imagens/aranha.jpeg', '../imagens/atomo.png', '../imagens/BALA.png', '../imagens/balao.jpeg', '../imagens/bispo1.jpeg',
+        '../imagens/boliche.png', '../imagens/bolo.png', '../imagens/boneca.png', '../imagens/borboleta.png', '../imagens/CAP.png',
+        '../imagens/carro0.png', '../imagens/casa.png', '../imagens/cavalo1.jpeg', '../imagens/chapeu1.png', '../imagens/chapeu2.png',
+        '../imagens/chapeu3.png', '../imagens/chinelo.png', '../imagens/cone.jpg', '../imagens/dado.png', '../imagens/esfera.png',
+        '../imagens/estrela1.jpeg', '../imagens/fantasma.png', '../imagens/flor1.jpeg', '../imagens/florLis.png', '../imagens/florLis2.png',
+        '../imagens/florLis3.png', '../imagens/laço.png', '../imagens/nuvem.png', '../imagens/PEAO.png', '../imagens/peao1.jpeg',
+        '../imagens/pentagono.png', '../imagens/pinguim.png', '../imagens/piramide.jpg', '../imagens/piramide2.jpg', '../imagens/prisma.png',
+        '../imagens/Rainha1.jpeg', '../imagens/Rainha3.jpeg', '../imagens/Rainha5.jpeg', '../imagens/Rei.png', '../imagens/Rei1.jpeg',
+        '../imagens/rosa.png', '../imagens/saco.png', '../imagens/solido.jpg', '../imagens/terra.png', '../imagens/triangulo.png',
+        '../imagens/tv.png', '../imagens/varrer.png'
     ];
 
     function embaralharImagens(imagens) {

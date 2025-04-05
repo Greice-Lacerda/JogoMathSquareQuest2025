@@ -125,3 +125,28 @@ footer:hover {
 footer:active {
     transform: scale(0.95);
 }
+
+#tela {
+    width: 80vw; /* 80% da largura da janela */
+    height: auto; /* Mantém a proporção */
+    max-width: 80vh; /* Limita a largura ao tamanho da altura da janela */
+    border: 1px solid black;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes msnP {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+.msnP {
+    font-size: 40px;
+    color: green;
+    text-align: center;
+    animation: msnP 2s infinite;
+}

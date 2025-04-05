@@ -26,10 +26,10 @@
             <div id="jogo">                                           
                 <fieldset class="controles1">
                     <legend class="legendas">Menu</legend>
-                        <button id="voltar" onclick="window.location.href='instrucao.html'">Voltar</button> 
-                        <button id="limpar" onclick="limpar()">Limpar</button>                
-                        <button id="limpar-tabuleiro">Reiniciar</button>                
-                        <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br'">Sair do jogo</button>          
+                        <button id="PaginaInicial" onclick="window.location.href='../index.html'">Página Inicial</button> 
+                        <button id="limparImagem">Limpar</button>                
+                        <button id="resetarTabuleiro">Reiniciar</button>                
+                        <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br'">Sair</button>          
                     <div>
                         <h1 id="titulo-nivel"><br><br>Nível F1<br>2x2</h1><br><br>
                     </div>
@@ -50,9 +50,9 @@
 
                 <fieldset class="controles1">           
                     <legend class="legendas">Mensagens do jogo</legend>
-                      <div id="mensagens"></div> 
-                      <button id="Imprimir" onclick="window.location.href='imprimir.html'">Imprimir jogo</button>
-                        <div id="mensagem"></div>
+                    <div id="mensagens"></div> 
+                        <br><button id="BtnImprimir" style="display:none;" onclick="window.location.href='imprimir.html'">Imprimir jogo</button><b>
+                    <div id="mensagem"></div><b><div class="msnP"></div>
                 </fieldset>
             </div>
         </section>
@@ -63,7 +63,6 @@
     <script src="../logica/logicaF1.js"></script>
     <script src="../logica/limpar.js"></script>
     <script src="../logica/reiniciar.js"></script>
-    <script src="../logica/EventoToque.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>

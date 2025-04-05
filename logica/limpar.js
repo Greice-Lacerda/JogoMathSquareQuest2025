@@ -1,65 +1,49 @@
 document.addEventListener('DOMContentLoaded', function () {
     const mensagem = document.getElementById('mensagem');
     const botaoLimparTabuleiro = document.getElementById('limpar-tabuleiro');
-  
-    // Limpa todo o tabuleiro quando o botão for clicado
-    botaoLimparTabuleiro.addEventListener('click', function () {
-      if (typeof usedImages !== 'undefined' && Array.isArray(usedImages)) {
-        for (let row = 0; row < usedImages.length; row++) {
-          for (let col = 0; col < usedImages[row].length; col++) {
-            usedImages[row][col] = null;
-          }
-        }
-      }
-      if (typeof desenharTabuleiro === 'function') {
-        desenharTabuleiro();
-      }
-      if (typeof imageHistory !== 'undefined' && Array.isArray(imageHistory)) {
-        imageHistory.length = 0;
-      }
-      mensagem.textContent = 'Imagens do tabuleiro limpas!';
-    });
-  });
-  
-  // Função para limpar a última imagem inserida no tabuleiro
-  function limpar() {
-    const mensagem = document.getElementById('mensagem');
-    if (typeof imageHistory !== 'undefined' && imageHistory.length > 0) {
-      const lastImage = imageHistory.pop();
-      const imgElement = document.querySelector(`img[src="${lastImage.src}"]`);
-      if (imgElement) {
-        imgElement.classList.add('imagem-fade-out');
-        imgElement.addEventListener('animationend', function() {
-          if (typeof usedImages !== 'undefined' && Array.isArray(usedImages)) {
-            usedImages[lastImage.row][lastImage.col] = null;
-          }
-          if (typeof desenharTabuleiro === 'function') {
-            desenharTabuleiro();
-          }
-          if (typeof usedImages !== 'undefined' && Array.isArray(usedImages)) {
-            usedImages.flat().forEach((src, index) => {
-              if (src !== null) {
-                const col = index % tamanho;
-                const row = Math.floor(index / tamanho);
-                if (typeof drawImageInCell === 'function') {
-                  drawImageInCell(src, col, row);
-                }
-              }
-            });
-          }
-          mensagem.textContent = "";
-          imgElement.remove();
-          if (imageHistory.length === 0) {
-            const btnLimpar = document.querySelector('button[onclick="limpar()"]');
-            if (btnLimpar) {
-              btnLimpar.disabled = true;
+    const usedImages = Array.from({ length: tamanho }, () => Array(tamanho).fill(null));
+    const imageHistory = [];
+
+    // Função para limpar a última imagem inserida no tabuleiro
+    function limpar() {
+        if (imageHistory.length > 0) {
+            const lastImage = imageHistory.pop();
+            const { row, col, src } = lastImage;
+            const imgElement = document.querySelector(`img[src="${src}"]`);
+            if (imgElement) {
+                imgElement.remove();
+                usedImages[row][col] = null;
+                mensagem.textContent = "";
             }
-            mensagem.textContent = "Tabuleiro vazio";
-          }
-        });
-      }
-    } else {
-      mensagem.textContent = "Tabuleiro vazio";
+            if (imageHistory.length === 0) {
+                mensagem.textContent = "Tabuleiro vazio, insira novas imagens.";
+            }
+        }
     }
-  }
-  
+
+    // Adiciona o evento de clique ao botão para limpar o tabuleiro
+    botaoLimparTabuleiro.addEventListener('click', limpar);
+
+    // Função para lidar com o evento de soltar
+    function handleDrop(event) {
+        event.preventDefault();
+        const src = event.dataTransfer.getData('text/plain');
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const col = Math.floor(x / cellSize);
+        const row = Math.floor(y / cellSize);
+
+        if (row >= 0 && row < tamanho && col >= 0 && col < tamanho) {
+            usedImages[row][col] = src;
+            imageHistory.push({ row, col, src });
+            // Aqui você pode adicionar o código para desenhar a imagem no canvas
+        }
+    }
+
+    // Adiciona o evento de arrastar e soltar ao canvas
+    canvas.addEventListener('drop', handleDrop);
+    canvas.addEventListener('dragover', function (event) {
+        event.preventDefault();
+    });
+});
