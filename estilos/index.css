@@ -149,8 +149,8 @@ header{
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) { 
-    #titulo1Ind, #titulo2Ind, #titulo3Ind, #sobT1Ind, #sobT2Ind, #corpoInd, .controlesInd, .controles3Ind {
-        transform: scale(0.85);
+    #sobT1Ind, #sobT2Ind, #corpoInd, .controlesInd, .controles3Ind {
+        transform: scale(0.6);
         align-items: center;
         justify-content: center; 
         margin-left: 0px;
