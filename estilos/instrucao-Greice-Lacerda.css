@@ -1,21 +1,20 @@
 /*Consfiguração da página Instruções*/
 
 #titulo3{ 
-    margin-top: -190px;
+    margin-top: -210px;
     font-family: "Lobster Two", sans-serif;
     font-size: 65px; 
     text-shadow: 15px 8px 1px rgba(244, 243, 243, 0.8); /* Adiciona sombra ao texto */
-    z-index: 3;
 }
    
 #titulo3:hover {
-    transform: scale(1.5);
+    transform: scale(1.2);
     text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
     animation: spin 5s linear infinite;
 }
   
 #titulo3:active {
-    transform: scale(1.3);
+    transform: scale(0.95);
 }
  
 #controlesInst1{
@@ -25,10 +24,10 @@
     align-items: center;
     justify-content: center; 
     border-radius: 10px;
-    width: 650px;
-    height: 50vh;
-    margin: 2px 20px 2px 20px;
-    padding: 2px 20px 2px 20px;
+    width: 550px;
+    height: 55vh;
+    margin: 5px 20px 5px 20px;
+    padding: 5px 20px 5px 20px;
     border: outset 3px #dfa27c;
     background-color: rgba(247, 243, 243, 0.4);
     box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
@@ -52,11 +51,11 @@
 
 .controlesInst:hover {
     background-color: lightgoldenrodyellow;
-    transform: scale(1.05);
+    transform: scale(0.9);
 }
 
 .controlesInst:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
 .controlesInst button {
@@ -75,7 +74,7 @@
 
 .controlesInst button:hover {
     background-color: lightgoldenrodyellow;
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 
 .controlesInst button:active {
@@ -84,35 +83,8 @@
 
 @media (max-width: 1200px) {
     
-    #controlesInst1 {
-        top: -10px;
-        height: 355px;
-        transform: scale(0.77); 
-    }
-
-    header{
-        top: 80px;
-    }
-
-    footer{
-        margin-top: -60px;
-    }
-}
-
-@media (min-width: 1201px) {
-    
-    #controlesInst1 {
-        top: 15px;
-        transform: scale(0.85); 
-    }
-
-    #titulo1{
-        top: -25px;
-        transform: scale(0.95);
-    }
-
-    #titulo3{
-        margin-top: -190px;
-        transform: scale(0.85);
+    #controlesInst {
+        top: 10px;
+        transform: scale(0.86); 
     }
 }

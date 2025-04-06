@@ -1,0 +1,112 @@
+/*Configuração da página de imprimir*/
+
+/*Ajuste para zoom de 50%*/
+@media (max-width: 1200px) {
+
+    body, #titulo1, #titulo2{
+        transform: scale(1);
+        }
+
+        header{
+        transform: scale(0.7);
+        }
+
+        #titulo2{ 
+        top: -108px;
+        }
+
+        .controlesImp{
+        transform: scale(0.82);
+        }
+}
+
+/*Ajuste para zoom de 100%*/
+@media (min-width: 1201px) { 
+
+    #titulo1, #titulo2{
+    transform: scale(0.85);
+    top: -5px;
+    }
+
+    #titulo2{
+        top: -120px;
+        }
+
+    .controlesImp{
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    transform: scale(0.9);
+    }
+    
+    #ImpP{
+    margin: 0px 20px 20px;
+    padding: 2px 30px;
+    } 
+}
+
+.controlesImp{
+    top: -80px; /* Ajuste a posição vertical conforme necessário */
+    display: flex;
+    position: relative;    
+    flex-direction: column;
+    border-radius: 10px;
+    line-height: 1.2;
+    width: 750px;
+    height: 400px;  
+    justify-content: center;   
+    text-align: center;
+    padding: 5px;
+    border: outset 3px #dfa27c;
+    background-color: rgba(239, 221, 221, 0.4);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
+}
+
+#controlesImp2{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 10px;
+    line-height: 1.2;
+    width: 500px;
+    height: 152px;
+    margin: 0px 5px 5px;
+    text-align: center;
+    padding: 0px 5px 5px;
+    border: outset 3px #dfa27c;
+    background-color: rgba(239, 221, 221, 0.7);
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
+}
+
+.BtnJogar button{
+    margin: 5px;
+    padding: 3px;
+    width: 150px;
+    height: 25px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: bold; /* Ajuste para negrito */
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
+}
+
+.BtnJogar button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
+}
+
+.BtnJogar button:active {
+    transform: scale(0.9);
+}
+
+#ImpP{
+    padding: 2px 120px;
+}
+
+#FooterImp{
+    position: absolute;
+    margin-top: 550px;
+}
+

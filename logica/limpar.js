@@ -47,3 +47,10 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
     });
 });
+
+// Função para limpar o tabuleiro
+function limparTabuleiro() {
+    tabuleiro = Array.from({ length: n }, () => Array(n).fill(null));
+    mensagem = "";
+    desenharTabuleiro();
+}
