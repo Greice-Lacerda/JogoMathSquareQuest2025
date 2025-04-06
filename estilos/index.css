@@ -1,218 +1,28 @@
-/*Estilos da página inicial do jogo MathQuest*/
-header{
-    align-items: center;
-    justify-content: center; 
-    padding: 1px auto 1px;
-    margin: 1px 150px 1px;
-    width: 100%;
-    height: 40vh;
-}
+/* Estilos da página index.html */
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-.corpoInd{
-    display: flex;
-    overflow: hidden; /* Remove a barra de rolagem */
-    flex-direction: column;
-    min-height: 100vh;
-    margin-top: 5px;
-    padding: 2px;
-    justify-content: center; 
-    align-items: center;
-    text-align: center;
-    background-image: url('../imagens/MathQuest.gif'); /* Caminho para a imagem */
-    background-size: cover;
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
-}
-
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-.corpoInd { 
-        background-size: 185% 100%;
-    }    
-}
-  
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) {    
-.corpoInd{
-    background-size: 185% 100%;
-    }
-}
-
-.controlesInd {
-    display: flex;
-    position: relative;
-    border-radius: 10px;
-    width: 650px;
-    height: 100px;
-    margin: 60px auto;
-    padding: 5px auto;
-    border: outset 3px #dfa27c;
-    background-color: transparent;
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
-}
-
-.controlesInd:hover {
-    background-color: lightgoldenrodyellow;
-    transform: scale(1.1);
-}
-
-.controlesInd:active {
-    transform: scale(0.95);
-}
-
-.controlesInd button {
-    margin: 15px auto 15px;
-    padding: 30px auto;
-    width: 250px;
-    height: 45px;
-    border-radius: 8px;
-    font-size: 20px;
-    font-weight: bold; /* Ajuste para negrito */
-    border: outset yellow;
-    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
-    color: white;
-    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
-}
-
-.controlesInd button:hover {
-    background-color: lightgoldenrodyellow;
-    transform: scale(1.1);
-}
-
-.controlesInd button:active {
-    transform: scale(0.95);
-}
-
-#titulo1Ind { 
-    align-items: center;
-    justify-content: center; 
-    font-family: "Lobster Two", sans-serif;
-    font-size: 65px; 
-    color: red;
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
-}
-
-#titulo1Ind:hover {
-    transform: scale(1.1);
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
-    animation: spin 5s linear infinite;
-}
-
-#titulo1Ind:active {
-    transform: scale(1);
-}
-
-#sobT1Ind {
-    margin-top: 0px;
-    margin-left: 350px;
-    max-width: 800px;
-    max-height: 30vh;
-    position: absolute;
-    align-items: center;
-    justify-content: center; 
-    z-index: 1;
-}
-
-#titulo2Ind {
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-    margin-left: 10px;
-    font-size: 40px;
-    font-family: "Parisienne", cursive;
-    color: yellow;
-    font-style: bold;
-    align-items: center;
-    justify-content: center; 
-}
-    
-#titulo2Ind:hover {
-    transform: scale(1);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-    animation: spin 5s linear infinite;
-}
-
-#titulo2Ind:active {
-    transform: scale(1.1);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-}
-
-#sobT2Ind {
-    top: 50px;
-    margin: 55px 250px 10px;
-    padding: 2px auto;
-    position: relative;   
-    width: 900px;
-    max-height: 40vh;
-    z-index: 2;
-    align-items: center;
-    justify-content: center; 
-}
-
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) { 
-    #sobT1Ind, #sobT2Ind, #corpoInd, .controlesInd, .controles3Ind {
-        transform: scale(0.6);
-        align-items: center;
-        justify-content: center; 
-        margin-left: 0px;
-        }
-
-        header{
-        align-items: center;
-        justify-content: center; 
-        transform: scale(1);
-        width: 120%;
-        margin: 15px 0px auto;    
-        }
-
-        #titulo1Ind{
-        margin-left: 0px;
-        font-size: 15vh;
-        }
-
-        #titulo2Ind{ 
-        align-items: center;
-        justify-content: center;            
-        margin-left: 0px;
-        font-size: 10vh;
-        }
-
-        #titulo3Ind{ 
-        align-items: center;
-        justify-content: center; 
-        margin-top: 25px;
-        }
-
-        #footerInst{
-        align-items: center;
-        justify-content: center; 
-        position: absolute;
-        top: 545px;
-        }
-}
-
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-    #titulo1Ind, #titulo2Ind, #sobT1Ind, #sobT2Ind, #corpoInd {
-    transform: scale(1.16);
-    }
-
-    #sobT2Ind{
-    margin-top: 80px;
-    } 
-    
-    .controles3Ind{
-    margin-top: 2px;
-    transform: scale(1);    
-    }
-}
-
-ul {
-    list-style-type: square;
+/* Ajuste da tela para melhor visualização */
+html, body {
+    touch-action: manipulation;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
     padding: 0;
-    margin: 0 50px 0;
 }
 
-div{
-    align-items: center;
-    justify-content: center; 
+/* Permitir zoom */
+meta[name="viewport"] {
+    content: "width=device-width, initial-scale=1.0, user-scalable=yes";
+}
+
+/* Ajuste do toque para permitir arrastar elementos com precisão */
+.draggable {
+    touch-action: none; /* Previne interferências do navegador */
+    position: absolute;
+    cursor: grab;
+}
+
+.draggable:active {
+    cursor: grabbing;
 }

@@ -47,3 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
         imagemSelecionada = null;
     });
 });
+
+document.querySelectorAll('.draggable').forEach(element => {
+    element.addEventListener('touchstart', function(event) {
+        let touch = event.touches[0];
+        element.style.position = 'absolute';
+        element.style.left = touch.pageX + 'px';
+        element.style.top = touch.pageY + 'px';
+    });
+
+    element.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+        let touch = event.touches[0];
+        element.style.left = touch.pageX + 'px';
+        element.style.top = touch.pageY + 'px';
+    });
+});
