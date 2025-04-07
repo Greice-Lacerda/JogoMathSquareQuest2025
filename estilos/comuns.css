@@ -2,15 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Mono:wght@100..900&display=swap');
 
-header{
-    align-items: center;
-    justify-content: center; 
-    padding: 1px auto 1px;
-    margin: 1px 150px 1px;
-    width: 100%;
-    height: 40vh;
-}
-
 body{
     display: flex;
     overflow: hidden; /* Remove a barra de rolagem */
@@ -87,19 +78,27 @@ body{
     transform: scale(0.9);
 }
 
+#controlesIndex {
+    top: -10px; /* Ajuste a posição vertical conforme necessário */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    border-color: transparent;
+    height: 180px;
+}
+
 #titulo1 { 
     display: flex;
     z-index: 1;
     position: relative;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    width: 750px;
-    height: 135px;
-    top: -45px;
+    width: 850px;
+    height: 200px;
+    top: -85px;
     margin: 60px auto;
-    padding: 5px auto;
-    background-color: transparent; 
+    padding: 0px auto; 
     font-family: "Lobster Two", sans-serif;
     font-size: 80px; 
     color: red;
@@ -117,22 +116,20 @@ body{
 }
 
 #titulo2 {
-    top: -145px;   
+    top: -250px;   
     display: flex;
-    z-index: 2;
+    z-index: 1;
     position: relative;
     border-radius: 10px;
-    width: 750px;
-    height: 90px;
-    margin: 60px auto;
-    padding: 5px auto;background-color: transparent; 
+    width: 1000px;
+    height: 120px;  
+    margin: 5px auto;
+    padding: 5px auto; 
     text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
     font-size: 50px;
     font-family: "Parisienne", cursive;
     color: yellow;
     font-style: bold;
-    align-items: center;
-    justify-content: center; 
 }
     
 #titulo2:hover {
@@ -142,35 +139,24 @@ body{
 }
 
 #titulo2:active {
-    transform: scale(1);
+    transform: scale(1.1);
     text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
 }
 
 /*Ajuste para zoom de 50%*/
 @media (max-width: 1200px) {
 
-    #titulo1, #titulo2, .controles {
-        transform: scale(0.85);
+    #titulo1, #titulo2, .controles{
+        transform: scale(0.65);
         }
-
-        header{
-        align-items: center;
-        justify-content: center; 
-        transform: scale(0.75);
-        width: 120%;
-        margin: 15px 0px auto;    
-        }
-
-        #titulo1{
-        font-size: 15vh;
-        }
-
-        #titulo2{ 
-        font-size: 10vh;
+        
+        .controlesIndex {
+        transform: scale(0.8);
+        width: 100%;
         }
 
         #titulo3{  
-        margin-top: 20px;
+        margin-top: 35px;
         }
 
         #footer{
@@ -186,22 +172,22 @@ body{
 @media (min-width: 1201px) { 
 
     #titulo1, #titulo2{
-    transform: scale(1.18);
+    transform: scale(1);
     }
 
     #titulo2{
-    top: -115px;
+    top: -225px;
     }
     
     .controles{
-    top: 5px;
+    top: -15px;
     transform: scale(1);    
     }
 }
 
 div{
-    align-items: center;
-    justify-content: center; 
+align-items: center;
+justify-content: center; 
 }
 
 main {
@@ -213,8 +199,6 @@ main {
 }
 
 #tbem {
-    margin-top: 5px;
-    margin-bottom: 5px;
     padding: 5px;
     font-size: 30px;
     text-align: center;
@@ -238,9 +222,14 @@ main {
 }
 
 #tbem:hover {
-    transform: scale(1.5);
+    transform: scale(1.3);
     text-shadow: 4px 2px 3px rgb(133, 114, 216);
     animation: spin 5s linear infinite;
+}
+
+#tbem:active {
+    transform: scale(1.1);
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
 }
 
 ul, li {
@@ -277,6 +266,11 @@ legend {
 legend:hover {
     transform: scale(1.4);
     animation: spin 5s linear infinite;
+}
+
+#tbem:active {
+    transform: scale(1.1);
+    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
 }
 
 footer {
