@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="../estilos/comuns.css">
     <link rel="stylesheet" href="../estilos/instrucao.css">
-    <link rel="stylesheet" href="estilos/comuns.css">
-    <link rel="stylesheet" href="estilos/index.css">
 </head>
 <fieldset id="controlesIndex">
     <div id="titulo1">
@@ -18,37 +16,42 @@
     <div id="titulo2">
         <h2>Aventura dos Padrões</h2>
     </div>
-    <div id="titulo3">
-        <h4 id="tbem">Instruções do Jogo</h4><br>
-    </div>
 </fieldset>
-<body>
-    <main>
-        <section>
-            <div>
-                <fieldset id="controlesInst1">   
+
+<body>   
+    
+<main>
+    <section>
+        <div>
+            <fieldset id="controlesInstrucao1">
                 <div>
                     <ul>
                         <b>
-                        <li>Escolha o tamanho do tabuleiro na tela inicial.</li>
-                        <li>Arraste e solte as imagens no tabuleiro.</li>
-                        <li>Cada imagem só pode aparecer uma vez por linha e coluna.</li>
-                        <li>Use os botões para limpar, reiniciar ou fechar o jogo.</li>
+                            <li>Escolha o tamanho do tabuleiro na tela inicial.</li>
+                            <li>Arraste e solte as imagens no tabuleiro.</li>
+                            <li>Cada imagem só pode aparecer uma vez por linha e coluna.</li>
+                            <li>Use os botões para limpar, reiniciar ou fechar o jogo.</li>
                         </b>
                     </ul>
+            </fieldset>
                 
-                    <fieldset class="controlesInst">
+            <fieldset id="controlesInstrucao2">
                         <legend><b>Controles:</b></legend>
+                        
                         <button id="Voltar" onclick="window.location.href='../index.html'">Voltar</button>
-                        <button id="jogar" onclick="window.location.href='Nivel1.html?tamanhoTabuleiro=3'">Jogar</button>
+                        
+                        <button id="jogar"
+                        onclick="window.location.href='Nivel1.html?tamanhoTabuleiro=3'">Jogar</button>
+                        
+                        <button id="Imprimir" onclick="window.location.href='Imprimir.html'">Imprimir jogo</button>
+                            
                         <button id="fechar" onclick="window.location.href='https:\\www.google.com.br'">Fechar</button>
-                        <button id="Imprimir" onclick="window.location.href='imprimir.html'">Imprimir jogo</button>
-                    </fieldset>
-                </div>
-                </fieldset>
-            </div>
-        </section>
-    </main>
+ 
+            </fieldset>
+        </div>
+    </section>
+</main>
+    
     <footer>
         Criado por Adriana, Greice, Pablo e Paulo em 2025.
     </footer>

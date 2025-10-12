@@ -1,0 +1,156 @@
+/*Consfiguração da página Instruções*/
+
+#mainImpTab{
+    flex-direction: row;
+}
+
+.controlesImpTab, 
+.ImpImagens {
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 350px;
+    height: 780px;
+    align-items: center;
+    margin: 10px;
+    font-size: 32px;
+    padding: 5px;
+    gap: 20px;
+    border: outset 3px #dfa27c;
+    background-color: #dfa27c59;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+}
+
+.ImpImagensTab {
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 350px;
+    height: 780px;
+    align-items: center;
+    margin: 20px;
+    font-size: 32px;
+    padding: 10px;
+    gap: 20px;    
+    background-color: #dfa27c59;
+    border: outset 3px #dfa27c;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+}
+
+
+#PaginaInicial,
+#imprimir,
+#fechar_jogo {
+    margin: 15px auto;
+    padding: 30px auto;
+    width: 250px;
+    height: 45px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: bold; /* Ajuste para negrito */
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
+    gap: 20px;
+}
+
+#PaginaInicial:hover,
+#imprimir:hover,
+#fechar_jogo:hover {
+    background: linear-gradient(45deg, #c9f054 15%, #b3b7a5 35%, #c05d20 75%, #30382b 4%);
+    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+img{
+    width: 30%;
+    height: auto;
+}
+
+/*===================== Responsividade ===========================*/
+
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (max-width: 414px) {
+    
+ /* Contêiner principal */
+#mainImpTab {
+    display: flex; /* Essencial para usar flex-direction */
+    flex-direction: column;
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    overflow-y: auto;  /* Mostra a barra de rolagem VERTICAL apenas quando necessário */
+    overflow-x: hidden; /* Esconde a rolagem horizontal */
+}
+
+/* Fieldset das Imagens */
+.ImpImagens {
+    width: 95%;
+    height: auto; /* A altura se ajusta ao conteúdo */
+    margin: 20px auto; /* Espaçamento vertical e centralização horizontal */
+    /* REMOVIDO: top, transform */
+}
+
+/* Fieldset do Tabuleiro */
+.ImpImagensTab {
+    width: 95%;
+    height: auto;
+    margin: 20px auto;
+    /* REMOVIDO: bottom, transform */
+}
+    
+/* Fieldset dos Controles */
+.controlesImpTab {
+    width: 95%;
+    height: auto;
+    margin: 20px auto;
+    /* REMOVIDO: bottom, transform */
+}
+
+/* Rodapé */
+footer {
+    text-align: center; /* Centraliza o texto */
+    padding: 15px;      /* Adiciona um espaçamento interno */
+    margin-top: auto;   /* Empurra o rodapé para o final (se houver espaço) */
+    /* REMOVIDO: bottom */
+}
+}
+
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (min-width: 415px) and (max-width: 780px) {
+    
+ #mainImpTab{flex-direction: column;}
+    
+  .ImpImagens{ top: -10px; flex-direction: row; word-wrap: auto; width: 100%; height:auto; margin: 20px 0; transform: scale(0.7);}
+    
+  .ImpImagensTab { top: -160px; margin: 20px 0; flex-direction: column; width: 100%; height:auto; transform: scale(0.6);}
+        
+  .controlesImpTab{ top: -350px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.7);}
+    
+  footer{bottom: 1px;}  
+}
+
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px a 1015px --- */
+@media (min-width: 781px) and (max-width: 1015px) {
+    
+    #mainImpTab{flex-direction: column;}
+
+    img{width: 10%; height: auto; margin:10px;}
+    
+    .ImpImagens{ top: 10px; flex-direction: row; width: 90%; height:auto; margin: 20px auto;}
+
+    .ImpImagensTab { top: -180px; margin: 40px auto; transform: scale(0.6);}
+    
+    .controlesImpTab{ top: -380px; margin: 20px auto; flex-direction: row; width: 100%; height:auto; transform: scale(0.9);}
+
+    footer{bottom: 1px;}  
+}
+
+/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+@media (min-width: 1015px) {
+#mainImpTab{flex-direction: row;} 
+img{ width: 40%; height: auto;}
+footer{bottom: 1px;}      
+   
+}

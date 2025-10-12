@@ -64,72 +64,47 @@ function EscolhaTabuleiro() {
         }
     }
     desenharTabuleiro();
+}
 
-// Função para imprimir tabuleiros
-document.getElementById('imprimirTabuleiros').addEventListener('click', function() {
-document.getElementById('imprimirTabuleiros').addEventListener('click', function () {
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write('<!DOCTYPE html><html><head><title>Tabuleiros</title></head><body>');
-    printWindow.document.write(document.getElementById('tela').outerHTML);
+// Função para imprimir o tabuleiro
+function imprimirTabuleiros() {
+    const printWindow = window.open('../paginas/ImpTab.html', '_blank');
+    const canvas = document.getElementById('tela');
+    const canvasImage = canvas.toDataURL('image/png');
+    printWindow.document.write('<!DOCTYPE html><html><head><title>Tabuleiro</title></head><body>');
+    printWindow.document.write(`<img src="${canvasImage}" alt="Tabuleiro">`);
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.print();
-    newWindow.document.open();
-    newWindow.document.write('<!DOCTYPE html><html><head><title>Imagens</title></head><body>');
+}
 
-    // Função para imprimir imagens
-document.getElementById('imprimirImagens').addEventListener('click', function() {
+// Função para imprimir as imagens
+function imprimirImagens() {
     const newWindow = window.open('', '_blank');
-    newWindow.document.write('<html><head><title>Imagens</title></head><body>');
-    const docFragment = document.createDocumentFragment();
-    const title = document.createElement('title');
-    title.textContent = 'Imagens';
-    const body = document.createElement('body');
-    docFragment.appendChild(title);
+    newWindow.document.write('<!DOCTYPE html><html><head><title>Imagens</title></head><body>');
+    
+    // Usa as imagens já carregadas na variável global 'imagens'
+    // e seleciona as 'n' primeiras para impressão, correspondentes ao tabuleiro
+    const imagensParaImprimir = imagens.slice(0, n);
 
+    imagensParaImprimir.forEach(imgPath => {
+        // O caminho já é relativo, então usamos como está
+        newWindow.document.write(`<img src="${imgPath}" alt="${imgPath.split('/').pop()}" style="margin: 10px; width: 100px; height: 100px;">`);
+    });
 
-        "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
-        "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
-        "../imagens/balao.png", "../imagens/bispo1.png", "../imagens/bola.jpeg", "../imagens/boliche.png",
-        "../imagens/bolo.png", "../imagens/boneca.png", "../imagens/borboleta.png", "../imagens/carro.jpeg",
-        "../imagens/carro.png", "../imagens/carro0.png", "../imagens/casa.png", "../imagens/cavalo.jpeg",
-        "../imagens/cavalo1.jpeg", "../imagens/chapeu1.png", "../imagens/chapeu2.png", "../imagens/chapeu3.png",
-        "../imagens/chinelo.png", "../imagens/circulo.png", "../imagens/coração.png", "../imagens/coroa.png",
-        "../imagens/dado.png", "../imagens/esfera.png", "../imagens/estrela.jpeg", "../imagens/estrela1.jpeg",
-        "../imagens/fantasma.png", "../imagens/flor.jpeg", "../imagens/flor1.PNG", "../imagens/florLis.png",
-    imagens.forEach(img => {
-        const imgElement = document.createElement('img');
-        imgElement.src = `imagens/${img}`;
-        imgElement.alt = img;
-        imgElement.style.margin = '10px';
-        body.appendChild(imgElement);
-    });
-    docFragment.appendChild(body);
-    newWindow.document.body.replaceWith(docFragment);
-        imgElement.src = `imagens/${img}`;
-    docFragment.appendChild(body);
-    newWindow.document.body.replaceWith(docFragment);
-        body.appendChild(imgElement);
-    ];
-    imagens.forEach(img => {
-        newWindow.document.write(`<img src="imagens/${img}" alt="${img}" style="margin: 10px;">`);
-    });
     newWindow.document.write('</body></html>');
     newWindow.document.close();
     newWindow.print();
-});
+}
 
-document.getElementById('imprimir-tabuleiros').addEventListener('click', function () {
-    window.open('', '_blank');
-});
-document.getElementById('imprimir-tabuleiros').addEventListener('click', function () {
-    window.open('', '_blank');
-});
-document.getElementById('imprimir-imagens').addEventListener('click', function () {
-    window.open('', '_blank');
-});
-});
+// Função para limpar o tabuleiro (definição de exemplo, pois não foi fornecida)
+function limparTabuleiro() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    tabuleiro = [];
+    document.getElementById('lista-imagens').innerHTML = '';
+}
 
+// Adiciona os event listeners fora da função EscolhaTabuleiro para que sejam registrados apenas uma vez.
+document.getElementById('imprimirTabuleiros').addEventListener('click', imprimirTabuleiros);
+document.getElementById('imprimirImagens').addEventListener('click', imprimirImagens);
 document.getElementById('limpar').addEventListener('click', limparTabuleiro);
-document.getElementById('imprimirTabuleiros').addEventListener('click', imprimirTabuleiros, '_blank');
-document.getElementById('imprimirImagens').addEventListener('click', imprimirImagens, '_blank');

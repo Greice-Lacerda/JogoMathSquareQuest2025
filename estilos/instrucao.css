@@ -1,206 +1,107 @@
 /*Consfiguração da página Instruções*/
 
-#titulo3 { 
+#controlesInstrucao1{
+    top: -20px; /* Ajuste a posição vertical conforme necessário */
     display: flex;
-    z-index: 3;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 850px;
-    height: 200px;
-    top: -428px;
-    margin: 60px auto;
-    padding: 0px auto; 
-    font-family: "Lobster Two", sans-serif;
-    font-size: 80px; 
-    color: red;
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
-}
-
-#titulo3:hover {
-    transform: scale(1.3);
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
-    animation: spin 5s linear infinite;
-}
-
-#titulo3:active {
-    transform: scale(1.1);
-}
- 
-#titulo2 {
-    top: -250px;   
-    display: flex;
-    z-index: 1;
     position: relative;
     border-radius: 10px;
-    width: 1000px;
-    height: 120px;  
-    margin: 5px auto;
-    padding: 5px auto; 
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-    font-size: 50px;
-    font-family: "Parisienne", cursive;
-    color: yellow;
-    font-style: bold;
-}
-    
-#titulo2:hover {
-    transform: scale(1.3);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-    animation: spin 5s linear infinite;
-}
-
-#titulo2:active {
-    transform: scale(1.1);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-}
-
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-
-    #titulo1{
-        transform: scale(0.65);
-        }
-
-        .controlesInst{
-        transform: scale(0.95);
-        }
-        
-        #controlesIndex {
-        transform: scale(0.86);
-        }
-
-        #titulo2 {
-        transform: scale(0.7);
-        }
-
-        #titulo3{  
-        margin-top: 95px;
-        }
-
-        footer{
-        position: absolute;
-        top: 595px;
-        font-size: 20px;
-        }
-}
-
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-
-    #titulo1{
-    transform: scale(0.86);
-    top: -100px;
-    }
-
-    #titulo2{
-    top: -245px;
-    }
-
-    #titulo3{  
-    top:-400px;      
-    transform: scale(0.8);
-    }
-    
-    #controlesInst1{
-    top: -35px;
-    transform: scale(0.85);    
-    }
-
-    .controlesInst{
-        transform: scale(0.85);
-    }
-
-    footer{
-        position: absolute;
-        margin-top: 545px;
-        font-size: 20px;
-    }
-}
-
-#controlesInst1{
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center; 
-    border-radius: 10px;
-    width: 650px;
-    height: 55%;
-    margin: 20px 20px 2px 20px;
-    padding: 2px 20px 2px 20px;
-    border: outset 3px #2c2b2a;
-    background-color: rgba(247, 243, 243, 0.4);
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
-    line-height: 1.5;
-}
-
-.controlesInst {
-    top: 2px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center; 
-    border-radius: 10px;
-    width: 445px;
-    height: 85px;
-    margin: 20px auto;
-    padding: 20px auto;
+    width: 1200px;
+    height: auto;
+    margin: 10px 60px;
+    padding: 10px 25px;
     border: outset 3px #dfa27c;
     background-color: transparent;
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    flex-direction: row;
 }
 
-#controlesInst1:hover{
-    background-color: lightgoldenrodyellow;
-    transform: scale(1);
+#controlesInstrucao2{
+    top: -160px; /* Ajuste a posição vertical conforme necessário */
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 1200px;
+    height: auto;
+    margin: 10px 60px;
+    padding: 10px 25px;
+    border: outset 3px #dfa27c;
+    background-color: transparent;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    flex-direction: row;
 }
 
-.controlesInst:hover {
-    background-color: lightgoldenrodyellow;
-    transform: scale(1.05);
+#controlesInstrucao1:hover,
+#controlesInstrucao2:hover{
+    background-color: beige;
+    ul,li{ margin: 20px auto; font-size: 26px; color: rgb(17, 0, 0); text-shadow: 3px 3px 6px rgba(80, 66, 66, 0.9);}
 }
 
-.controlesInst:active {
-    transform: scale(0.95);
-}
-
-.controlesInst button {
-    margin: 5px 15px 15px;
-    padding: 10px;
-    width: 150px;
+#Voltar, #jogar, #fechar, #Imprimir {
+    margin: 15px auto;
+    padding: 30px auto;
+    width: 250px;
     height: 45px;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold; /* Ajuste para negrito */
     border: outset yellow;
     background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
-    color: white;
     box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
+    gap: 20px;
 }
 
-.controlesInst button:hover {
-    background-color: lightgoldenrodyellow;
-    transform: scale(0.9);
-}
+/*===================== Responsividade ===========================*/
 
-.controlesInst button:active {
-    transform: scale(0.9);
-}
-
-@media (max-width: 1200px) {
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (max-width: 414px) {
     
-    #controlesInst1 {
-        top: -55px;
-        width: 50%;
-        height: 65vh;
-        transform: scale(0.6); 
-    }
+ #controlesInstrucao1 { top: 10px; margin: 40px auto; flex-direction: row; width: 100%; height:auto; transform: scale(0.5);}
+    
+ #controlesInstrucao2 { bottom: 2px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.5);}
+    
+ ul,li{ font-size: 24px; color: rgb(250, 248, 248);}
+    
+ footer{ bottom: 0px; } 
+}
 
-    ul, li{
-    transform: scale(1.1);
-    }
 
-    footer{
-        margin-top: -60px;
-    }
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (min-width: 415px) and (max-width: 780px) {
+
+    #controlesInstrucao1 { bottom: 10px; margin: 60px auto; flex-direction: row; width: 100%; height:auto; transform: scale(0.7);}
+
+    #controlesInstrucao2 { bottom: 2px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.7);}
+
+    ul,li{ font-size: 24px; color: rgb(250, 248, 248);}
+
+    footer{ bottom: 0px; }   
+}
+
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px a 1015px --- */
+@media (min-width: 781px) and (max-width: 1015px) {
+    
+    #controlesInstrucao1 { top: 50px; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
+    
+    #controlesInstrucao2 { top: -50px; margin: 20px auto; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
+
+    ul,li{ font-size: 28px; color: rgb(250, 248, 248); text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.9); line-height: 1.8;}
+    footer{ bottom: 1px; } 
+}
+
+/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+@media (min-width: 1016px) {
+    
+    #controlesInstrucao1 { top: 50px; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
+    
+    #controlesInstrucao2 { top: -50px; margin: 20px auto; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
+
+    ul,li{ font-size: 28px; color: rgb(250, 248, 248); text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.9); line-height: 1.8;}
+    footer{ bottom: 1px; } 
+}
+
+
+/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+@media (min-width: 1015px) {
+footer{bottom: 1px;}      
+   
 }

@@ -4,32 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instruções do Jogo</title>
-    <link rel="stylesheet" href="styles.css">
-    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/impTab.css">
 </head>
+
 <body>
-<div id="inicial">Quebra-cabeça</div><br><br>
-    <div id="jogo">
-        <fieldset>
-        <legend>Menu</legend>
-            <button id="imprimir" onclick="window.print();">Imprimir</button>
-            <button id="voltar" onclick="window.location.href='index.html'">Voltar</button>
-            <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
+    <main id="mainImpTab">
+        
+        <fieldset class="ImpImagens">
+            <legend>Imagens</legend>
+            <div id="mensagens"></div> 
+                <div id="lista-imagens"></div>
         </fieldset>
 
-        <fieldset>
-        <legend>Tabuleiro</legend>             
+        <fieldset class="ImpImagensTab">
+            <legend class="legendas">Tabuleiro do jogo</legend>
             <div id="tabuleiro">
-                <canvas id="tela" width="400" height="400"></canvas>
+                <canvas id="tela" width="415" height="415"></canvas>
             </div>
         </fieldset>
         
-            <fieldset>
-                <legend>Imagens</legend>
-                <div id="listaImagens"></div>
-            </fieldset>  
+        <fieldset class="controlesImpTab">
+            <legend class="legendas">Menu</legend>
+            <button id="PaginaInicial" onclick="window.location.href='../index.html'">Página Inicial</button>                      
+            <button id="imprimir" onclick="window.print();">Imprimir</button>
+            <button id="fechar_jogo"
+                onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
+        </fieldset>
         
-    </div>
-
+        </div>
+    </main>
+    <footer>
+        Criado por Adriana, Greice, Pablo e Paulo em 2025.
+    </footer>
+    <script src="../logica/imprimirTabuleiro.js"></script>
 </body>
 </html>

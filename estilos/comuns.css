@@ -143,47 +143,6 @@ body{
     text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
 }
 
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-
-    #titulo1, #titulo2, .controles{
-        transform: scale(0.65);
-        }
-        
-        .controlesIndex {
-        transform: scale(0.8);
-        width: 100%;
-        }
-
-        #titulo3{  
-        margin-top: 35px;
-        }
-
-        #footer{
-        align-items: center;
-        justify-content: center; 
-        position: absolute;
-        top: 545px;
-        font-size: 25px;
-        }
-}
-
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-
-    #titulo1, #titulo2{
-    transform: scale(1);
-    }
-
-    #titulo2{
-    top: -225px;
-    }
-    
-    .controles{
-    top: -15px;
-    transform: scale(1);    
-    }
-}
 
 div{
 align-items: center;
@@ -277,9 +236,10 @@ footer {
     align-items: center;
     position: static;
     justify-content: center; 
-    font-size: 20px;
+    position: fixed;
+    font-size: 28px;
     padding: 10px;
-    bottom: 15px;
+    bottom: 30px;
     text-align: center;
     color: aliceblue;
     font-weight: bold;
@@ -320,4 +280,39 @@ footer:active {
     color: green;
     text-align: center;
     animation: msnP 2s infinite;
+}
+
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (min-width: 415px) {
+    #titulo1 { font-size: 10vw; margin: 100px auto;}
+    #titulo2 { font-size: 7vw; }
+    .controles { flex-direction: column; width: 100%; height:auto; margin: 100px auto;}
+    .controles button { font-size: 20px; }
+    legend { font-size: 25px; }
+    ul, li { font-size: 20px; }
+    footer { font-size: 18px; }
+}
+
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px a 1015px --- */
+@media (min-width: 781px) {
+    #titulo1 { font-size: 80px; }
+    #titulo2 { font-size: 50px; }
+    .controles {
+        width: 600px;
+        height: 220px;
+        padding: 10px 25px;
+    }
+    .controles button {
+        width: 250px;
+        height: 45px;
+        font-size: 22px;
+    }
+    footer { font-size: 20px; }
+}
+
+/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+@media (min-width: 1016px) {
+    #titulo1 { margin: 120px auto; }
+    #titulo2 { margin-bottom: 20px auto; }
+    .controles { margin: 20px 0; }
 }

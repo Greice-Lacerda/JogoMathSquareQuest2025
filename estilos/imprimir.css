@@ -1,112 +1,112 @@
-/*Configuração da página de imprimir*/
+/*Consfiguração da página Instruções*/
 
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-
-    body, #titulo1, #titulo2{
-        transform: scale(1);
-        }
-
-        header{
-        transform: scale(0.7);
-        }
-
-        #titulo2{ 
-        top: -108px;
-        }
-
-        .controlesImp{
-        transform: scale(0.82);
-        }
-}
-
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) { 
-
-    #titulo1, #titulo2{
-    transform: scale(0.85);
-    top: -5px;
-    }
-
-    #titulo2{
-        top: -120px;
-        }
-
-    .controlesImp{
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    transform: scale(0.9);
-    }
-    
-    #ImpP{
-    margin: 0px 20px 20px;
-    padding: 2px 30px;
-    } 
-}
-
-.controlesImp{
-    top: -80px; /* Ajuste a posição vertical conforme necessário */
+#controlesImprimir1{
+    bottom: 5px; /* Ajuste a posição vertical conforme necessário */
     display: flex;
-    position: relative;    
-    flex-direction: column;
-    border-radius: 10px;
-    line-height: 1.2;
-    width: 750px;
-    height: 400px;  
-    justify-content: center;   
-    text-align: center;
-    padding: 5px;
-    border: outset 3px #dfa27c;
-    background-color: rgba(239, 221, 221, 0.4);
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
-}
-
-#controlesImp2{
-    display: flex;
-    flex-direction: column;
     position: relative;
     border-radius: 10px;
-    line-height: 1.2;
-    width: 500px;
-    height: 152px;
-    margin: 0px 5px 5px;
-    text-align: center;
-    padding: 0px 5px 5px;
+    width: 1200px;
+    height: auto;
+    align-items: center;
+    margin: 10px auto;
+    padding: 10px;
     border: outset 3px #dfa27c;
-    background-color: rgba(239, 221, 221, 0.7);
-    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
+    background-color: transparent;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    flex-direction: column;
 }
 
-.BtnJogar button{
-    margin: 5px;
-    padding: 3px;
-    width: 150px;
-    height: 25px;
+#controlesImprimir2{
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    width: 700px;
+    height: auto;
+    margin: 10px auto;
+    padding: 10px;
+    border: outset 3px #dfa27c;
+    background-color: transparent;
+    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    flex-direction: row;
+}
+
+#controlesImprimir1:hover,
+#controlesImprimir2:hover{
+    background-color: beige;
+    ul,li{ margin: 10px auto; font-size: 26px; color: rgb(17, 0, 0); 
+    text-shadow: 3px 3px 6px rgba(80, 66, 66, 0.9);}
+    
+}
+
+#BtnImprimir,
+#VoltarImprimir {
+    margin: 15px auto;
+    padding: 30px auto;
+    width: 250px;
+    height: 45px;
     border-radius: 8px;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold; /* Ajuste para negrito */
     border: outset yellow;
     background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
-    color: white;
     box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
+    gap: 20px;
 }
 
-.BtnJogar button:hover {
-    background-color: lightgoldenrodyellow;
+#BtnImprimir:hover,
+#VoltarImprimir:hover {
+    background: linear-gradient(45deg, #c9f054 15%, #b3b7a5 35%, #c05d20 75%, #30382b 4%);
+    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
     transform: scale(1.1);
+    cursor: pointer;
 }
 
-.BtnJogar button:active {
-    transform: scale(0.9);
+/*===================== Responsividade ===========================*/
+
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (max-width: 414px) {
+    
+ #controlesImprimir1 { bottom: 80px; margin: 60px auto; flex-direction: column; width: 100%; height:auto;}
+    
+ #controlesImprimir2 { bottom: 20px; margin: 60px auto; flex-direction: column; width: 100%; height:auto;}
+    
+ ul,li{ font-size: 28px; color: rgb(250, 248, 248);}
+    
+ footer{ bottom: 1px; }   
 }
 
-#ImpP{
-    padding: 2px 120px;
+/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+@media (min-width: 415px) and (max-width: 780px) {
+    
+    #controlesImprimir1 { bottom: 80px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; margin: 60px auto; transform: scale(0.8);}
+    
+    #controlesImprimir2 { bottom: 20px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; margin: 65px auto; transform: scale(0.8);}
+    
+    ul,li{ font-size: 24px; color: rgb(250, 248, 248);}
+    
+    footer{ bottom: 1px; }   
 }
 
-#FooterImp{
-    position: absolute;
-    margin-top: 550px;
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px a 1015px --- */
+@media (min-width: 781px) and (max-width: 1015px) {
+    
+    #controlesImprimir1 { bottom: 50px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.85);}
+    
+ #controlesImprimir2 { bottom: 10px; margin: 40px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.85);}
+    
+ ul,li{ font-size: 28px; color: rgb(250, 248, 248);}
+    
+ footer{ bottom: 1px; }    
 }
 
+/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+@media (min-width: 1015px) {
+    
+    #controlesImprimir1 { top: 20px; flex-direction: column; width: 1200px; height:auto; margin: 60px auto; transform: scale(0.9);}
+    
+    #controlesImprimir2 { margin: 20px auto; flex-direction: row; width: 100%; height:auto; margin: 20px auto; transform: scale(0.9);}
+    
+    ul,li{ align-items:center; font-size: 28px; color: rgb(250, 248, 248); text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.9); line-height: 1.8;}
+    
+    footer{ bottom: 1px; } 
+}     
