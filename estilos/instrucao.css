@@ -126,7 +126,7 @@
     border-radius: 10px;
     width: 650px;
     height: 55%;
-    margin: 8px 20px 2px 20px;
+    margin: 20px 20px 2px 20px;
     padding: 2px 20px 2px 20px;
     border: outset 3px #2c2b2a;
     background-color: rgba(247, 243, 243, 0.4);
@@ -150,9 +150,14 @@
     box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.9);
 }
 
+#controlesInst1:hover{
+    background-color: lightgoldenrodyellow;
+    transform: scale(1);
+}
+
 .controlesInst:hover {
     background-color: lightgoldenrodyellow;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .controlesInst:active {
