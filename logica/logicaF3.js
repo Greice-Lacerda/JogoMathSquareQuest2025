@@ -1,10 +1,31 @@
+// Aguarda o carregamento completo do DOM para garantir que todos os elementos HTML existam
 document.addEventListener('DOMContentLoaded', function() {
+
+    // --- 1. SELEÇÃO DOS ELEMENTOS DO JOGO ---
     const listaImagens = document.getElementById('lista-imagens');
     const mensagem = document.getElementById('mensagem');
-    const proximoNivel = document.getElementById('proximo-nivel');
-    const errorSound = new Audio('../sons/Erro.mp3');  // Caminho para o som de erro
-    const clapSound = new Audio('../sons/Aplausos.mp3');  // Caminho para o som 
+    const proximoNivelBtn = document.getElementById('proximo-nivel');
+    const imprimirBtn = document.getElementById('BtnImprimir');
+    const limparBtn = document.getElementById('limparImagem');
+    const resetarBtn = document.getElementById('resetarTabuleiro');
+    const canvas = document.getElementById('tela');
+    const ctx = canvas.getContext('2d');
+    const tabuleiroContainer = document.getElementById('tabuleiro');
+    const paginaInicialBtn = document.getElementById('paginaInicial');
+    const sairDoJogoBtn = document.getElementById('sairDoJogo');
     
+    // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
+    const tamanho = 4; // Nível 3: Tabuleiro 4x4
+    let usedImages = [];
+    let imageHistory = [];
+    let cellSize = 0; // Será calculado dinamicamente
+
+    // ALTERAÇÃO: Apenas declaramos os sons aqui, sem criar o objeto Audio ainda.
+    let errorSound;
+    let clapSound;
+    let audioInicializado = false; // Flag para garantir que o áudio seja inicializado apenas uma vez
+
+    // Lista de todas as imagens disponíveis
     const imagens = [
         "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
         "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
@@ -23,6 +44,36 @@ document.addEventListener('DOMContentLoaded', function() {
         "../imagens/triangulo.png", "../imagens/tv.png", "../imagens/varrer.png"
     ];
 
+    // --- 3. FUNÇÕES DE RENDERIZAÇÃO E LÓGICA ---
+
+    // ALTERAÇÃO: Nova função para inicializar o áudio na primeira interação do usuário
+    function inicializarAudio() {
+        if (!audioInicializado) {
+            errorSound = new Audio('../sons/Erro.mp3');
+            clapSound = new Audio('../sons/Aplausos.mp3');
+            errorSound.load(); // Pré-carrega o áudio
+            clapSound.load();
+            audioInicializado = true;
+            console.log("Áudio inicializado pelo usuário.");
+        }
+    }
+
+    // ALTERAÇÃO: Função helper para tocar sons, garantindo que reiniciem
+    function tocarSom(som) {
+        if (som) {
+            som.currentTime = 0;
+            som.play().catch(error => console.error("Erro ao tocar o som:", error));
+        }
+    }
+
+    function ajustarERedesenharCanvas() {
+        const containerSize = tabuleiroContainer.clientWidth;
+        canvas.width = containerSize;
+        canvas.height = containerSize;
+        cellSize = canvas.width / tamanho;
+        redesenharTodasImagens();
+    }
+
     function embaralhar(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -30,67 +81,65 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função para obter o parâmetro da URL
-    function getUrlParameter(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    function selecionarImagensPorTamanho(tamanhoTabuleiro) {
-        let totalCelulas = tamanhoTabuleiro;
-        return todasImagens.slice(0, totalCelulas);
-    }
-
-    embaralhar(imagens);
-
-    const tamanho = 4; //getUrlParameter(tamanho); // Define o tamanho do tabuleiro como 3x3
-    listaImagens.innerHTML = ''; // Limpa as imagens anteriores
-    for (let i = 0; i < tamanho; i++) {
-        const imgElement = document.createElement('img');
-        imgElement.src = `../imagens/${imagens[i]}`;
-        imgElement.alt = imagens[i];
-        imgElement.className = 'imagem-lista';
-        imgElement.draggable = true;
-        listaImagens.appendChild(imgElement);
-        imgElement.addEventListener('dragstart', function(event) {
-            event.dataTransfer.setData('text/plain', event.target.src);
-        });
-    }
-
-    const canvas = document.getElementById('tela');
-    const ctx = canvas.getContext('2d');
-    const cellSize = canvas.width / tamanho;
     function desenharTabuleiro() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
         for (let row = 0; row < tamanho; row++) {
             for (let col = 0; col < tamanho; col++) {
-                ctx.clearRect(col * cellSize, row * cellSize, cellSize, cellSize);
-                ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize); // Adiciona bordas às células
+                ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);
             }
         }
     }
-    desenharTabuleiro();
 
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
         img.onload = function() {
-            const imgWidth = 0.8*cellSize;
-            const imgHeight = 0.8*cellSize;
-            const x = col * cellSize + (cellSize - imgWidth)/2;
-            const y = row * cellSize + (cellSize - imgHeight)/2;
-
-            // Adiciona sombra usando filter drop-shadow
-            ctx.filter = 'drop-shadow(5px 5px 2px rgba(0, 0, 0, 1))';
-
-            ctx.drawImage(img, x, y, imgWidth, imgHeight);
-
-            // Reseta o filtro para evitar que afete outros desenhos
+            const padding = cellSize * 0.15;
+            const imgSize = cellSize - (2 * padding);
+            const x = col * cellSize + padding;
+            const y = row * cellSize + padding;
+            ctx.filter = 'drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.7))';
+            ctx.drawImage(img, x, y, imgSize, imgSize);
             ctx.filter = 'none';
         };
         img.src = imgSrc;
     }
+    
+    function redesenharTodasImagens() {
+        desenharTabuleiro();
+        for (let row = 0; row < tamanho; row++) {
+            for (let col = 0; col < tamanho; col++) {
+                if (usedImages[row][col]) {
+                    drawImageInCell(usedImages[row][col], col, row);
+                }
+            }
+        }
+    }
 
-    const usedImages = Array.from({ length: tamanho }, () => Array(tamanho).fill(null));
-    const imageHistory = [];
+    function iniciarJogo() {
+        usedImages = Array.from({ length: tamanho }, () => Array(tamanho).fill(null));
+        imageHistory = [];
+        listaImagens.innerHTML = '';
+        mensagem.innerHTML = "Arraste as imagens para o tabuleiro!<br>Não pode repetir na mesma linha ou coluna.";
+        proximoNivelBtn.style.display = 'none';
+        imprimirBtn.style.display = 'none';
+        
+        ajustarERedesenharCanvas();
+        embaralhar(imagens);
+
+        for (let i = 0; i < tamanho; i++) {
+            const imgElement = document.createElement('img');
+            imgElement.src = imagens[i];
+            imgElement.alt = imagens[i].split('/').pop();
+            imgElement.draggable = true;
+            imgElement.addEventListener('dragstart', (event) => {
+                inicializarAudio(); // ALTERAÇÃO: O áudio é desbloqueado aqui!
+            event.dataTransfer.setData('text/plain', event.target.src);
+            });
+            listaImagens.appendChild(imgElement);
+        }
+    }
 
     function handleDrop(event) {
         event.preventDefault();
@@ -101,33 +150,79 @@ document.addEventListener('DOMContentLoaded', function() {
         const col = Math.floor(x / cellSize);
         const row = Math.floor(y / cellSize);
 
-        // Verifica se a célula já contém uma imagem
         if (usedImages[row][col] !== null) {
-            errorSound.play();
-            mensagem.textContent = "Esta célula já contém uma imagem.";
-        } else if (usedImages[row].includes(src) || usedImages.map(row => row[col]).includes(src)) {
-            errorSound.play();
-            mensagem.textContent = "Imagem já utilizada nesta linha ou coluna.";                   
+            tocarSom(errorSound); // ALTERAÇÃO: Usa a nova função para tocar
+            mensagem.textContent = "Célula já ocupada. Tente outra.";
+        } else if (usedImages[row].includes(src) || usedImages.map(r => r[col]).includes(src)) {
+            tocarSom(errorSound); // ALTERAÇÃO: Usa a nova função para tocar
+            mensagem.textContent = "Imagem repetida na linha ou coluna.";
         } else {
             usedImages[row][col] = src;
             imageHistory.push({ src, col, row });
             drawImageInCell(src, col, row);
-            mensagem.textContent = ""; // Limpa a mensagem de erro
+            mensagem.textContent = "";
+
             if (usedImages.flat().every(cell => cell !== null)) {
-                mensagem.textContent = "Parabéns! Você conseguiu completar o tabuleiro.";
-                proximoNivel.style.display = 'block'; // Exibe o botão Próximo Nível
+                mensagem.innerHTML = "<h2>Parabéns! Você completou o desafio!</h2>";
+                proximoNivelBtn.style.display = 'block';
+                imprimirBtn.style.display = 'block';
+                resetarBtn.disabled = true;
+                limparBtn.disabled = true;
+
+                tocarSom(clapSound); // ALTERAÇÃO: Usa a nova função para tocar
+
+                // ✅ A MÁGICA ACONTECE AQUI
                 confetti({
-                    particleCount: 700,
-                    spread: 200,
-                    origin: { y: 0.8 }
+                    particleCount: 500,
+                    spread: 1000,
+                    origin: { y: 0.3 },
+                    zIndex: 9999 
+                // Força os confetes a aparecerem na camada mais alta
                 });
-                clapSound.play();  
             }
         }
     }
 
+    function limparUltimaJogada() {
+        if (imageHistory.length > 0) {
+            const lastMove = imageHistory.pop();
+            usedImages[lastMove.row][lastMove.col] = null;
+            redesenharTodasImagens();
+            mensagem.textContent = "Última jogada desfeita.";
+            proximoNivelBtn.style.display = 'none';
+            imprimirBtn.style.display = 'none';
+        } else {
+            mensagem.textContent = "Nenhuma jogada para limpar.";
+        }
+    }
+
+    // --- 4. REGISTRO DOS EVENT LISTENERS ---
+    
+    canvas.addEventListener('dragover', (event) => event.preventDefault());
     canvas.addEventListener('drop', handleDrop);
-    canvas.addEventListener('dragover', function(event) {
-    event.preventDefault();
+    
+    window.addEventListener('resize', ajustarERedesenharCanvas);
+
+    resetarBtn.addEventListener('click', iniciarJogo);
+    limparBtn.addEventListener('click', limparUltimaJogada);
+    
+    paginaInicialBtn.addEventListener('click', () => {
+        window.location.href = '../index.html';
     });
+    
+    sairDoJogoBtn.addEventListener('click', () => {
+        window.location.href = 'https://www.google.com.br';
+    });
+
+    proximoNivelBtn.addEventListener('click', () => {
+        window.location.href = 'Nivel4.html?tamanhoTabuleiro=5';
+    });
+
+    imprimirBtn.addEventListener('click', () => {
+    // Abre 'Imprimir.html' em uma nova guia
+    window.open('ImpTab.html', '_blank');
+    });
+
+    // --- 5. INICIALIZAÇÃO DO JOGO ---
+    iniciarJogo();
 });

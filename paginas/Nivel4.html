@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathQuest: Aventura dos Padrões - Nível 1: Fase 4</title>
+    <title>MathSquareQuest: Aventura dos Padrões - Nível F4: 5x5</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../estilos/nivel1.css">
-    <link rel="stylesheet" href="../estilos/nivel4.css">
     <link rel="stylesheet" href="../estilos/comuns.css">
-    <link rel="stylesheet" href="../estilos/index.css">
-    <link rel="stylesheet" href="../estilos/instrucao.css">
 </head>
-<header>
-    <div id="titulo1Ind">
-        <h1 id="sobT1Ind">MathQuest</h1>
-    </div>
-    <div id="titulo2Ind">
-        <h2 id="sobT2Ind">Aventura dos Padrões</h2>
-    </div>
-</header>
-<body class="corpoN1">
-    <main id="principal">
+
+<body class="jogo-fullscreen">
+
+    <header id="cabecalho-principal">
+        <div id="titulo1">
+            <h1>MathSquareQuest</h1>
+        </div>
+        <div id="titulo2">
+            <h2>Aventura dos Padrões</h2>
+        </div>
+    </header>
+
+    <main>
         <section>
-            <div id="jogo">                                           
-                <fieldset class="controles1">
-                    <legend class="legendas">Menu</legend>
-                        <button id="PaginaInicial" onclick="window.location.href='../index.html'">Página Inicial</button> 
-                        <button id="limparImagem">Limpar</button>                
-                        <button id="resetarTabuleiro">Reiniciar</button>                
-                        <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br'">Sair</button>          
-                    <div>
-                        <h1 id="titulo-nivel"><br><br>Nível F4<br>5x5</h1><br><br>
-                    </div>
-                    <button id="proximo-nivel" style="display:none;" onclick="window.location.href='Nivel5.html?tamanhoTabuleiro=6'">Próximo Nível</button>
-                </fieldset>
-              
+            <div id="jogo">
+
                 <fieldset class="controles1">
                     <legend class="legendas">Tabuleiro do jogo</legend>
-                        <div id="tabuleiro">
-                            <canvas id="tela" width="415" height="415"></canvas>
-                        </div>
+                    <div id="tabuleiro">
+                        <canvas id="tela"></canvas>
+                    </div>
+                </fieldset>
+
+                <fieldset class="controles11">
+                    <legend class="legendas">Imagens</legend>
+                    <div id="lista-imagens"></div>
                 </fieldset>
 
                 <fieldset class="controles1">
-                    <legend class="legendas">Imagens</legend>
-                        <div id="lista-imagens"></div>
-                </fieldset>                          
-
-                <fieldset class="controles1">           
                     <legend class="legendas">Mensagens do jogo</legend>
-                      <div id="mensagens"></div> 
-                      <button id="Imprimir" onclick="window.location.href='imprimir.html'">Imprimir jogo</button>
-                        <div id="mensagem"></div>
+
+                    <div id="mensagem"></div>
+
+                    <div class="botoes-mensagem">
+                        <button id="BtnImprimir" style="display:none;">Imprimir jogo</button>
+                    </div>
+
+                    <fieldset class="controles1">
+                        <legend class="legendas">Menu</legend>
+                        <button id="paginaInicial">Página Inicial</button>
+                        <button id="limparImagem">Desfazer Jogada</button>
+                        <button id="resetarTabuleiro">Reiniciar</button>
+                        <button id="sairDoJogo">Sair</button>
+
+                        <h2 id="titulo-nivel"><br>Nível F4 - 5x5<br><br></h2>
+
+                        <button id="proximo-nivel" style="display:none;">Próximo Nível</button>
+                    </fieldset>
+
                 </fieldset>
             </div>
         </section>
@@ -62,8 +70,7 @@
         Criado por Adriana, Greice, Pablo e Paulo em 2025.
     </footer>
     <script src="../logica/logicaF4.js"></script>
-    <script src="../logica/limpar.js"></script>
-    <script src="../logica/reiniciar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </body>
+
 </html>

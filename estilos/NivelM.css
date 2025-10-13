@@ -1,0 +1,88 @@
+/* ==========================================================================
+   ESTRUTURA PRINCIPAL DO JOGO
+   ========================================================================== */
+#jogo {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os painéis quebrem a linha */
+    justify-content: center;
+    align-items: flex-start; /* Alinha os painéis pelo topo */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   ESTILO BASE PARA OS PAINÉIS (Remove Redundância)
+   ========================================================================== */
+.painel-jogo, .painel-jogo-interno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.274);
+    backdrop-filter: blur(5px);
+    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
+    height: 85vmin;
+}
+
+/* Larguras específicas para cada painel principal */
+#painel-tabuleiro { flex-basis: 40%; min-width: 350px; }
+#painel-imagens { flex-basis: 20%; min-width: 280px; }
+#painel-combinacoes { flex-basis: 20%; min-width: 280px; }
+#painel-mensagens { flex-basis: 20%; min-width: 350px; }
+
+/* Estilo para o painel de Menu ANINHADO */
+.painel-jogo-interno {
+    width: 100%;
+    margin-top: 15px;
+    height: auto; /* Altura se ajusta ao conteúdo */
+    flex-grow: 1; /* Ocupa o espaço restante no painel pai */
+}
+
+/* ==========================================================================
+   Componentes Internos (Botões, Imagens, etc.)
+   ========================================================================== */
+.painel-jogo-interno button,
+.botoes-mensagem button {
+    width: 90%;
+    max-width: 200px;
+    height: 45px;
+    margin: 8px 0;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    /* Herda o resto do estilo do arquivo comuns.css ou nivel1.css */
+}
+
+#lista-imagens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    justify-content: center;
+}
+
+#lista-imagens img {
+    width: 60%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    cursor: pointer;
+    filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5));
+    border-radius: 15px;
+    transition: transform 0.2s ease;
+}
+
+#lista-imagens img:hover {
+    transform: scale(1.1);
+}
+
+#lista-combinacoes {
+    font-size: 0.9rem;
+    color: white;
+    overflow-y: auto;
+    width: 100%;
+    padding: 5px;
+}
