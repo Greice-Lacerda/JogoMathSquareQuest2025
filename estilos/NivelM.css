@@ -2,6 +2,7 @@
    ESTRUTURA PRINCIPAL DO JOGO
    ========================================================================== */
 #jogo {
+    top: 100px;
     display: flex;
     flex-wrap: wrap; /* Permite que os painéis quebrem a linha */
     justify-content: center;
