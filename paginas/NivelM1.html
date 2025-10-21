@@ -12,7 +12,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../estilos/comuns.css">
     <link rel="stylesheet" href="../estilos/NivelM.css">
-    <link rel="stylesheet" href="../estilos/nivel1.css">
 </head>
 
 <body class="jogo-fullscreen">
@@ -30,6 +29,7 @@
         <section>
             <div id="jogo">
 
+                <div id="paineis-superiores">                
                 <fieldset id="painel-tabuleiro" class="painel-jogo">
                     <legend class="legendas">Tabuleiro do jogo</legend>
                     <div id="tabuleiro">
@@ -40,12 +40,7 @@
                 <fieldset id="painel-imagens" class="painel-jogo">
                     <legend class="legendas">Imagens</legend>
                     <div id="lista-imagens"></div>
-                </fieldset>
-
-                <fieldset id="painel-combinacoes" class="painel-jogo" style="display: none;">
-                    <legend class="legendas">Combinações</legend>
-                    <div id="lista-combinacoes"></div>
-                </fieldset>
+                </fieldset>                
 
                 <fieldset id="painel-mensagens" class="painel-jogo">
                     <legend class="legendas">Mensagens do jogo</legend>
@@ -54,7 +49,6 @@
 
                     <div class="botoes-mensagem">
                         <button id="BtnImprimir" style="display:none;">Imprimir jogo</button>
-                        <button id="exibirCombinacoesBtn">Exibir Combinações</button>
                     </div>
 
                     <fieldset id="painel-menu" class="painel-jogo-interno">
@@ -69,7 +63,21 @@
                         <button id="proximo-nivel" style="display:none;">Próximo Nível</button>
                     </fieldset>
                 </fieldset>
+                </div>
+                    
+                <fieldset id="painelCombinacoes" class="painel-jogo">
+                        <legend>
+                            <h3>Combinações Possíveis</h3>
+                        </legend>
+                        <div id="lista-combinacoes" style="display: none;">
+                        </div>
+                        <button id="exibirCombinacoesBtn">Exibir Combinações</button>
+                    </fieldset>
+
+                </div>
+
             </div>
+            
         </section>
     </main>
 

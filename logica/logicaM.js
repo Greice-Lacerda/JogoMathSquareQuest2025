@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Elementos do Menu e do Nível Médio
     const reiniciarBtn = document.getElementById('resetarTabuleiro');
     const limparBtn = document.getElementById('limparImagem');
-    const painelCombinacoes = document.getElementById('painel-combinacoes'); // ID do HTML corrigido
+    const painelCombinacoes = document.getElementById('painel-combinacoes');
     const listaCombinacoes = document.getElementById('lista-combinacoes');
-    const exibirCombinacoesBtn = document.getElementById('exibirCombinacoesBtn'); // ID do HTML corrigido
+    const exibirCombinacoesBtn = document.getElementById('exibirCombinacoesBtn');
     
     // Botões adicionais do menu
     const paginaInicialBtn = document.getElementById('paginaInicial');
@@ -34,9 +34,21 @@ document.addEventListener('DOMContentLoaded', function () {
     let audioInicializado = false;
 
     const todasImagens = [
-        '../imagens/abelha.png', '../imagens/bispo1.png', '../imagens/bola.jpeg', '../imagens/carro.png', '../imagens/cavalo1.jpeg',
-        '../imagens/circulo.png', '../imagens/coração.png', '../imagens/estrela1.jpeg', '../imagens/flor.jpeg', '../imagens/PEAO.png',
-        '../imagens/quadrado.png', '../imagens/Rainha5.png', '../imagens/Rei.jpg', '../imagens/torre.jpeg', '../imagens/triangulo.png',
+        "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
+        "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
+        "../imagens/balao.png", "../imagens/bispo1.png", "../imagens/bola.jpeg", "../imagens/boliche.png",
+        "../imagens/bolo.png", "../imagens/boneca.png", "../imagens/borboleta.png", "../imagens/carro.jpeg",
+        "../imagens/carro.png", "../imagens/carro0.png", "../imagens/casa.png", "../imagens/cavalo.jpeg",
+        "../imagens/cavalo1.jpeg", "../imagens/chapeu1.png", "../imagens/chapeu2.png", "../imagens/chapeu3.png",
+        "../imagens/chinelo.png", "../imagens/circulo.png", "../imagens/coração.png", "../imagens/coroa.png",
+        "../imagens/dado.png", "../imagens/esfera.png", "../imagens/estrela.jpeg", "../imagens/estrela1.jpeg",
+        "../imagens/fantasma.png", "../imagens/flor.jpeg", "../imagens/flor1.PNG", "../imagens/florLis.png",
+        "../imagens/florLis3.png", "../imagens/mais.png", "../imagens/nuvem.png", "../imagens/PEAO.png",
+        "../imagens/pentagono.png", "../imagens/pentagono1.png", "../imagens/pinguim.png", "../imagens/piramide.jpg",
+        "../imagens/piramide2.png", "../imagens/prisma.png", "../imagens/quadrado.png", "../imagens/Rainha5.png",
+        "../imagens/rainha6.png", "../imagens/Rei.jpg", "../imagens/rosa.png", "../imagens/saco.png",
+        "../imagens/solido.png", "../imagens/solido1.png", "../imagens/terra.png", "../imagens/torre.jpeg",
+        "../imagens/triangulo.png", "../imagens/tv.png", "../imagens/varrer.png"
     ];
 
     // --- 3. FUNÇÕES PRINCIPAIS E LÓGICA DO JOGO ---
@@ -46,17 +58,19 @@ document.addEventListener('DOMContentLoaded', function () {
         imageHistory = [];
         
         mensagem.textContent = 'Arraste duas imagens para cada célula para formar uma combinação.';
-        proximoNivelBtn.style.display = 'none';
-        painelCombinacoes.style.display = 'none';
-        exibirCombinacoesBtn.textContent = 'Exibir Combinações';
-        reiniciarBtn.disabled = false;
-        limparBtn.disabled = false;
+        if (proximoNivelBtn) proximoNivelBtn.style.display = 'none';
+        if (painelCombinacoes) painelCombinacoes.style.display = 'none';
+        if (exibirCombinacoesBtn) exibirCombinacoesBtn.textContent = 'Exibir Combinações';
+        if (reiniciarBtn) reiniciarBtn.disabled = false;
+        if (limparBtn) limparBtn.disabled = false;
 
         const urlParams = new URLSearchParams(window.location.search);
         tamanhoTabuleiro = parseInt(urlParams.get('tamanhoTabuleiro'), 10) || 2;
         
-        embaralharArray(todasImagens);
-        imagensSelecionadas = todasImagens.slice(0, tamanhoTabuleiro);
+        const imagensParaEmbaralhar = [...todasImagens];
+        embaralharArray(imagensParaEmbaralhar);
+        imagensSelecionadas = imagensParaEmbaralhar.slice(0, tamanhoTabuleiro);
+        
         combinacoesGeradas = gerarCombinacoes(imagensSelecionadas);
 
         carregarImagens(imagensSelecionadas, (loadedImgs) => {
@@ -66,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function ajustarERedesenharCanvas() {
-        if (tabuleiroContainer.clientWidth === 0) {
+        if (!tabuleiroContainer || tabuleiroContainer.clientWidth === 0) {
             setTimeout(ajustarERedesenharCanvas, 100);
             return;
         }
@@ -78,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleDrop(event) {
+        inicializarAudio();
         event.preventDefault();
         const imgSrc = event.dataTransfer.getData('text/plain');
         const rect = canvas.getBoundingClientRect();
@@ -102,17 +117,17 @@ document.addEventListener('DOMContentLoaded', function () {
             if (verificarEremoverCombinacao(combinacaoAtual)) {
                 if (combinacoesGeradas.length === 0) {
                     mensagem.innerHTML = "<h2>Parabéns!</h2>Você completou o desafio!";
-                    proximoNivelBtn.style.display = 'block';
-                    reiniciarBtn.disabled = true;
-                    limparBtn.disabled = true;
+                    if (proximoNivelBtn) proximoNivelBtn.style.display = 'block';
+                    if (reiniciarBtn) reiniciarBtn.disabled = true;
+                    if (limparBtn) limparBtn.disabled = true;
                     tocarSom(clapSound);
-                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, zIndex: 9999 });
+                    if (typeof confetti === 'function') {
+                        confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, zIndex: 9999 });
+                    }
                 }
             } else {
                 mensagem.textContent = "Combinação inválida ou já usada!";
                 tabuleiro[key] = [];
-                imageHistory.pop();
-                imageHistory.pop();
                 setTimeout(desenharTabuleiroCompleto, 800);
                 tocarSom(errorSound);
             }
@@ -133,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function exibirCombinacoes(combinacoes) {
+        if (!listaCombinacoes) return;
         listaCombinacoes.innerHTML = '';
         combinacoes.forEach((comb, index) => {
             const divComb = document.createElement('div');
@@ -146,8 +162,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function verificarEremoverCombinacao(combinacao) {
         for (let i = 0; i < combinacoesGeradas.length; i++) {
             let comb = combinacoesGeradas[i];
-            if ((comb[0] === combinacao[0] && comb[1] === combinacao[1]) ||
-                (comb[0] === combinacao[1] && comb[1] === combinacao[0])) {
+            
+            // --- ALTERAÇÃO: Lógica de verificação de combinação ajustada ---
+            // Removemos a verificação da ordem inversa. Agora, a combinação do jogador
+            // deve corresponder EXATAMENTE à ordem da combinação gerada.
+            // Isso faz com que [A, B] seja diferente de [B, A].
+            if (comb[0] === combinacao[0] && comb[1] === combinacao[1]) {
                 combinacoesGeradas.splice(i, 1);
                 exibirCombinacoes(combinacoesGeradas);
                 return true;
@@ -186,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function carregarImagens(imagens, callback) {
         let carregadas = {};
         let restantes = imagens.length;
+        if (!listaImagens) return;
         listaImagens.innerHTML = '';
         imagens.forEach((imgSrc) => {
             let img = new Image();
@@ -193,12 +214,16 @@ document.addEventListener('DOMContentLoaded', function () {
             img.id = imgSrc;
             img.draggable = true;
             img.addEventListener('dragstart', (e) => {
-                inicializarAudio();
                 e.dataTransfer.setData('text/plain', e.target.id);
             });
             img.onload = () => {
                 listaImagens.appendChild(img);
                 carregadas[imgSrc] = img;
+                restantes--;
+                if (restantes === 0) callback(carregadas);
+            };
+            img.onerror = () => {
+                console.error(`Falha ao carregar a imagem: ${imgSrc}`);
                 restantes--;
                 if (restantes === 0) callback(carregadas);
             };
@@ -225,50 +250,73 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function inicializarAudio() {
         if (!audioInicializado) {
-            errorSound = new Audio('../sons/Erro.mp3');
-            clapSound = new Audio('../sons/Aplausos.mp3');
-            audioInicializado = true;
+            try {
+                errorSound = new Audio('../sons/Erro.mp3');
+                clapSound = new Audio('../sons/Aplausos.mp3');
+                audioInicializado = true;
+            } catch (e) {
+                console.error("Erro ao inicializar o áudio:", e);
+            }
         }
     }
 
     function tocarSom(som) {
-        if (som) {
+        if (som && audioInicializado) {
             som.currentTime = 0;
             som.play().catch(e => console.error("Erro ao tocar áudio:", e));
         }
     }
 
-    // --- 6. REGISTRO DE EVENTOS ---
-    canvas.addEventListener('dragover', (e) => e.preventDefault());
-    canvas.addEventListener('drop', handleDrop);
+    if (canvas) {
+        canvas.addEventListener('dragover', (e) => e.preventDefault());
+        canvas.addEventListener('drop', handleDrop);
+    }
     window.addEventListener('resize', ajustarERedesenharCanvas);
-    reiniciarBtn.addEventListener('click', iniciarJogo);
-    limparBtn.addEventListener('click', limparUltimaJogada);
 
-    exibirCombinacoesBtn.addEventListener('click', () => {
-        if (painelCombinacoes) {
-            const isHidden = painelCombinacoes.style.display === 'none';
-            painelCombinacoes.style.display = isHidden ? 'flex' : 'none'; // Usa flex para consistência
-            exibirCombinacoesBtn.textContent = isHidden ? 'Ocultar Combinações' : 'Exibir Combinações';
-        }
-    });
-    
-    paginaInicialBtn.addEventListener('click', () => {
-        window.open('../index.html', '_self');
-    });
-    
-    sairDoJogoBtn.addEventListener('click', () => {
-        window.open('https://www.google.com.br', '_blank');
-    });
+    if (reiniciarBtn) {
+        reiniciarBtn.addEventListener('click', iniciarJogo);
+    }
+    if (limparBtn) {
+        limparBtn.addEventListener('click', limparUltimaJogada);
+    }
 
-    proximoNivelBtn.addEventListener('click', () => {
-        const proximoTamanho = tamanhoTabuleiro + 1;
-        window.open(`NivelM2.html?tamanhoTabuleiro=${proximoTamanho}`, '_self');
-    });
+    // --- LÓGICA AJUSTADA E CORRETA PARA O SEU HTML ---
+    if (exibirCombinacoesBtn) {
+        exibirCombinacoesBtn.addEventListener('click', () => {
+            // A lógica mira diretamente na lista, como solicitado.
+            if (listaCombinacoes) {
+                const isHidden = listaCombinacoes.style.display === 'none' || listaCombinacoes.style.display === '';
+                
+                // Altera apenas a visibilidade da lista
+                listaCombinacoes.style.display = isHidden ? 'block' : 'none';
+                
+                // Altera o texto do botão
+                exibirCombinacoesBtn.textContent = isHidden ? 'Ocultar Combinações' : 'Exibir Combinações';
+            }
+        });
+    }
 
-    imprimirBtn.addEventListener('click', () => {
-        window.open('imprimir.html', '_blank');
-    });
+    if (paginaInicialBtn) {
+        paginaInicialBtn.addEventListener('click', () => {
+            window.open('../index.html', '_self');
+        });
+    }
+    if (sairDoJogoBtn) {
+        sairDoJogoBtn.addEventListener('click', () => {
+            window.open('https://www.google.com.br', '_blank');
+        });
+    }
+    if (proximoNivelBtn) {
+        proximoNivelBtn.addEventListener('click', () => {
+            const proximoTamanho = tamanhoTabuleiro + 1;
+            window.open(`NivelM2.html?tamanhoTabuleiro=${proximoTamanho}`, '_self');
+        });
+    }
+    if (imprimirBtn) {
+        imprimirBtn.addEventListener('click', () => {
+            window.open('imprimir.html', '_blank');
+        });
+    }
 
     // --- 7. INICIALIZAÇÃO DO JOGO ---
     iniciarJogo();

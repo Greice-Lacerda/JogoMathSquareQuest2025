@@ -2,48 +2,106 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Mono:wght@100..900&display=swap');
 
-body{
-    display: flex;
-    overflow: hidden; /* Remove a barra de rolagem */
-    flex-direction: column;
-    min-height: 100vh;
-    margin-top: 5px;
-    padding: 2px;
-    justify-content: center; 
-    align-items: center;
-    text-align: center;
-    background-image: url('../imagens/MathQuest.gif'); /* Caminho para a imagem */
-    background-size: cover;
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
+/* --- Estrutura Base REM e Box Sizing --- */
+html {
+    /* Define a base para que 1rem = 10px (16px * 62.5% = 10px) */
+    font-size: 62.5%;
+    box-sizing: border-box;
 }
 
-/*Ajuste para zoom de 50%*/
-@media (max-width: 1200px) {
-body { 
-        background-size: 185% 100%;
-    }    
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
 }
-  
-/*Ajuste para zoom de 100%*/
-@media (min-width: 1201px) {    
-body{
-    background-size: 185% 100%;
+
+/* --- Estilos :fullscreen --- */
+body:fullscreen {
+    overflow: auto;
+}
+
+/* --- Aviso de Rotação para Telas Pequenas (Retrato) --- */
+/* ALTERAÇÃO: Limite ajustado para 767px (76.7rem) */
+@media (max-width: 414px) and (orientation: portrait) {
+    body::before {
+        content: 'Para uma melhor experiência, por favor, gire seu dispositivo para a posição paisagem (landscape).';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.6rem;
+        /* 16px */
+        font-family: 'Roboto Mono', sans-serif;
+        padding: 1.0rem;
+        /* 10px */
+        z-index: 10000;
+    }
+
+    /* Esconde o conteúdo principal quando o aviso estiver ativo */
+    main,
+    footer,
+    .controles,
+    #titulo1,
+    #titulo2 {
+        display: none !important;
+    }
+}
+
+
+body {
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('../imagens/MathQuest.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/*Ajuste de background (consolidado) */
+@media (min-width: 0.1rem) {
+
+    /* 1px */
+    body {
+        background-size: 185% 100%;
     }
 }
 
 .controles {
-    top: -20px; /* Ajuste a posição vertical conforme necessário */
+    top: -2.0rem;
+    /* -20px */
     display: flex;
     position: relative;
-    border-radius: 10px;
-    width: 600px;
-    height: 120px;
-    margin: 10px 60px;
-    padding: 10px 25px;
+    border-radius: 1.0rem;
+    /* 10px */
+    width: 60rem;
+    /* 600px */
+    height: 12rem;
+    /* 120px */
+    margin: 1.0rem 6.0rem;
+    /* 10px 60px */
+    padding: 1.0rem 2.5rem;
+    /* 10px 25px */
     border: outset 3px #dfa27c;
+    /* Mantido em px */
     background-color: transparent;
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
+    /* 20px 20px 8px */
 }
 
 .controles:hover {
@@ -56,17 +114,24 @@ body{
 }
 
 .controles button {
-    margin: 15px auto 15px;
-    padding: 30px auto;
-    width: 250px;
-    height: 45px;
-    border-radius: 8px;
-    font-size: 22px;
-    font-weight: bold; /* Ajuste para negrito */
+    margin: 1.5rem auto 1.5rem;
+    /* 15px */
+    padding: 1.0rem 0;
+    /* 10px 0 */
+    width: 25rem;
+    /* 250px */
+    height: 4.5rem;
+    /* 45px */
+    border-radius: 0.8rem;
+    /* 8px */
+    font-size: 2.2rem;
+    /* 22px */
+    font-weight: bold;
     border: outset yellow;
     background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
     color: white;
-    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
+    box-shadow: 1.0rem 1.0rem 0.6rem rgba(0, 0, 0, 0.9);
+    /* 10px 10px 6px */
 }
 
 .controles button:hover {
@@ -79,35 +144,43 @@ body{
 }
 
 #controlesIndex {
-    top: -10px; /* Ajuste a posição vertical conforme necessário */
+    top: -1.0rem;
+    /* -10px */
     display: flex;
     flex-direction: column;
     position: relative;
     width: 100%;
-    border-color: transparent;
-    height: 180px;
+    border: none;
+    height: 18rem;
+    /* 180px */
 }
 
-#titulo1 { 
+#titulo1 {
     display: flex;
     z-index: 1;
     position: relative;
     align-items: center;
     justify-content: center;
-    width: 850px;
-    height: 200px;
-    top: -85px;
-    margin: 60px auto;
-    padding: 0px auto; 
+    width: 105rem;
+    /* 1050px */
+    height: 20rem;
+    /* 200px */
+    top: -8.5rem;
+    /* -85px */
+    margin: 6.0rem auto;
+    /* 60px */
+    padding: 0;
     font-family: "Lobster Two", sans-serif;
-    font-size: 80px; 
+    font-size: 4.0rem;
+    /* 40px */
     color: red;
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+    text-shadow: 1.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.8);
+    /* 15px 8px 1px */
 }
 
 #titulo1:hover {
     transform: scale(1.3);
-    text-shadow: 15px 8px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+    text-shadow: 1.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.8);
     animation: spin 5s linear infinite;
 }
 
@@ -116,110 +189,121 @@ body{
 }
 
 #titulo2 {
-    top: -250px;   
+    top: -25.0rem;
+    /* -250px */
     display: flex;
     z-index: 1;
     position: relative;
-    border-radius: 10px;
-    width: 1000px;
-    height: 120px;  
-    margin: 5px auto;
-    padding: 5px auto; 
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-    font-size: 50px;
+    border-radius: 1.0rem;
+    /* 10px */
+    width: 100rem;
+    /* 1000px */
+    height: 12rem;
+    /* 120px */
+    margin: 0.5rem auto;
+    /* 5px */
+    padding: 0.5rem 0;
+    /* 5px 0 */
+    text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
+    /* 1px 4px 3px */
+    font-size: 5.0rem;
+    /* 50px */
     font-family: "Parisienne", cursive;
     color: yellow;
-    font-style: bold;
+    font-weight: bold;
 }
-    
+
 #titulo2:hover {
     transform: scale(1.3);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+    text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
     animation: spin 5s linear infinite;
 }
 
 #titulo2:active {
     transform: scale(1.1);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+    text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
 }
 
-
-div{
-align-items: center;
-justify-content: center; 
+div {
+    align-items: center;
+    justify-content: center;
 }
 
 main {
     flex: 1;
     align-items: center;
-    justify-content: center; 
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
+    justify-content: center;
 }
 
 #tbem {
-    padding: 5px;
-    font-size: 30px;
+    padding: 0.5rem;
+    /* 5px */
+    font-size: 3.0rem;
+    /* 30px */
     text-align: center;
     color: transparent;
     background-clip: text;
+    -webkit-background-clip: text;
     background-color: hsl(34, 53%, 82%);
-    background-image: repeating-linear-gradient(
-        45deg,
-        #d7dd60 0%,
-        #e4f52a 20%,
-        #f3a322 30%,
-        #f5511b 40%,
-        #e7b8a5 50%,
-        #3e104c 60%,
-        #83096e 70%,
-        #840b2a 80%,
-        #623c59 90%,
-        #ef0a0a 100%
-    );
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-image: repeating-linear-gradient(45deg, #d7dd60 0%, #e4f52a 20%, #f3a322 30%, #f5511b 40%, #e7b8a5 50%, #3e104c 60%, #83096e 70%, #840b2a 80%, #623c59 90%, #ef0a0a 100%);
+    text-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
+    /* 2px 2px 4px */
 }
 
 #tbem:hover {
     transform: scale(1.3);
-    text-shadow: 4px 2px 3px rgb(133, 114, 216);
+    text-shadow: 0.4rem 0.2rem 0.3rem rgb(133, 114, 216);
+    /* 4px 2px 3px */
     animation: spin 5s linear infinite;
 }
 
 #tbem:active {
     transform: scale(1.1);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+    text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
+    /* 1px 4px 3px */
 }
 
-ul, li {
+ul,
+li {
     text-align: justify;
-    font-style: bold;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 2.2rem;
+    /* 22px */
     color: #000;
-    margin-top: 2px;
-    margin-bottom: 5px;
-    margin-left: 55px;
-    padding: 5px; /* Ajuste do padding */
+    margin-top: 0.2rem;
+    /* 2px */
+    margin-bottom: 0.5rem;
+    /* 5px */
+    margin-left: 5.5rem;
+    /* 55px */
+    padding: 0.5rem;
+    /* 5px */
 }
 
 fieldset {
     border-color: #dfa27c;
-    margin-top: 20px;
-    margin-bottom: 5px;
+    margin-top: 2.0rem;
+    /* 20px */
+    margin-bottom: 0.5rem;
+    /* 5px */
 }
 
 legend {
-    color: red;
-    font-size: 25px;
-    text-shadow: 1px 2px 0.1px rgba(133, 8, 85, 1); /* Adiciona sombra ao texto */
+    text-shadow: 0.1rem 0.2rem 0.01rem rgba(133, 8, 85, 1);
+    /* 1px 2px 0.1px */
     color: rgba(255, 255, 255, 0.8);
-    font-size:25px;
+    font-size: 2.5rem;
+    /* 25px */
     font-weight: bold;
     text-align: center;
     margin: auto;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
+    padding-bottom: 1.0rem;
+    /* 10px */
+    border-radius: 1.0rem;
+    /* 10px */
+    filter: drop-shadow(0.2rem 0.2rem 0.1rem rgba(248, 5, 5, 1));
+    /* 2px 2px 1px */
 }
 
 legend:hover {
@@ -227,92 +311,322 @@ legend:hover {
     animation: spin 5s linear infinite;
 }
 
-#tbem:active {
-    transform: scale(1.1);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
-}
-
 footer {
     align-items: center;
-    position: static;
-    justify-content: center; 
+    justify-content: center;
     position: fixed;
-    font-size: 28px;
-    padding: 10px;
-    bottom: 30px;
+    font-size: 2.8rem;
+    /* 28px */
+    padding: 1.0rem;
+    /* 10px */
+    bottom: 3.0rem;
+    /* 30px */
     text-align: center;
     color: aliceblue;
     font-weight: bold;
-    width: 700px;
-    text-shadow: 3px 4px 1px rgba(0, 0, 0, 0.8); /* Adiciona sombra ao texto */
+    width: 70rem;
+    /* 700px */
+    text-shadow: 0.3rem 0.4rem 0.1rem rgba(0, 0, 0, 0.8);
+    /* 3px 4px 1px */
 }
-   
+
 footer:hover {
     transform: scale(1.2);
-    text-shadow: 1px 4px 3px rgba(245, 240, 240, 0.9); /* Adiciona sombra ao texto */
+    text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
+    /* 1px 4px 3px */
     animation: spin 5s linear infinite;
 }
-  
+
 footer:active {
     transform: scale(0.95);
 }
 
 #tela {
-    width: 80vw; /* 80% da largura da janela */
-    height: auto; /* Mantém a proporção */
-    max-width: 80vh; /* Limita a largura ao tamanho da altura da janela */
+    width: 80vw;
+    height: auto;
+    max-width: 80vh;
     border: 1px solid black;
+    /* Mantido em px */
     display: block;
     margin: 0 auto;
 }
 
 @keyframes msnP {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.5);
     }
 }
 
 .msnP {
-    font-size: 40px;
+    font-size: 4.0rem;
+    /* 40px */
     color: green;
     text-align: center;
     animation: msnP 2s infinite;
 }
 
-/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
-@media (min-width: 415px) {
-    #titulo1 { font-size: 10vw; margin: 100px auto;}
-    #titulo2 { font-size: 7vw; }
-    .controles { flex-direction: column; width: 100%; height:auto; margin: 100px auto;}
-    .controles button { font-size: 20px; }
-    legend { font-size: 25px; }
-    ul, li { font-size: 20px; }
-    footer { font-size: 18px; }
-}
 
-/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px a 1015px --- */
-@media (min-width: 781px) {
-    #titulo1 { font-size: 80px; }
-    #titulo2 { font-size: 50px; }
+/* --- Media Queries --- */
+/*===========================================================*/
+/* RESPONSIVIDADE */
+/*===========================================================*/
+
+/* Para telas < 414px (celulares em paisagem)*/
+@media (max-height: 450px) and (orientation: landscape) {
+    #titulo1 {
+        width: 90vw;
+        top: 10rem;
+        }
+
+    #titulo2 {
+        width: 90vw;
+        top: -12rem;
+        margin: 1.0rem auto;
+        /* 10px */
+        height: auto;
+    }
+
     .controles {
-        width: 600px;
-        height: 220px;
-        padding: 10px 25px;
+        width: 90rem;
+        flex-direction: row;
+        height: 80rem;
+        top: -22rem;
+        margin: 0rem auto;
+        /* 10px */
+        padding: 0.2rem;
+        /* 10px */
     }
+
     .controles button {
-        width: 250px;
-        height: 45px;
-        font-size: 22px;
+        width: 80%;
+        font-size: 1.4rem;
+        /* 18px */
     }
-    footer { font-size: 20px; }
+
+    #controlesIndex {
+        height: 80rem;
+    }
+
+    footer {
+        width: 90vw;
+        position: static;
+        font-size: 1.6rem;
+        /* 16px */
+        top: 30.6rem;
+        /* 20px */
+    }
+
+    ul,
+    li {
+        margin-left: 2.0rem;
+        /* 20px */
+        font-size: 1.6rem;
+        /* 16px */
+    }
 }
 
-/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+/* Para telas < 414px (celulares em paisagem)*/
+@media (max-width: 414px) and (orientation: landscape) {
+    #titulo1 {
+        width: 90vw;
+        font-size: 3vw;
+        top: 0;
+        margin: 1.0rem auto;
+        /* 20px */
+        height: auto;
+    }
+
+    #titulo2 {
+        width: 90vw;
+        font-size: 2vw;
+        top: 0;
+        margin: 1.0rem auto;
+        /* 10px */
+        height: auto;
+    }
+
+    .controles {
+        width: 90rem;
+        flex-direction: column;
+        height: 90rem;
+        top: 0;
+        margin: 1.0rem auto;
+        /* 10px */
+        padding: 1.0rem;
+        /* 10px */
+    }
+
+    .controles button {
+        width: 80%;
+        font-size: 1.8rem;
+        /* 18px */
+    }
+
+    #controlesIndex {
+        height: auto;
+    }
+
+    footer {
+        width: 90vw;
+        position: static;
+        font-size: 1.6rem;
+        /* 16px */
+        margin-top: 2.0rem;
+        /* 20px */
+    }
+
+    ul,
+    li {
+        margin-left: 2.0rem;
+        /* 20px */
+        font-size: 1.6rem;
+        /* 16px */
+    }
+}
+
+/* --- Telas Maiores (Tablet Portrait): 415px (41.5rem) a 780px (78.0rem) --- */
+@media (min-width: 415px) and (max-width: 780px){
+
+    body{
+        overflow-y: auto;
+    }
+    #titulo1 {
+        font-size: 3.0rem;
+        top: 2.0rem;
+        margin-bottom: 1rem;
+    }
+
+    #titulo2 {
+        top: -10.0rem;
+        bottom: 0.5rem;
+        font-size: 3.0rem;
+    }
+
+    .controles {
+        top: -15.0rem;
+        flex-direction: row;
+        width: 40rem;
+        height: 12.0rem;
+        margin-bottom: 1.0rem;
+    }
+
+    .controles button {
+        font-size: 1.4rem;
+        width: 15rem;
+            /* 600px */
+        height: 5.0rem;
+        /* 20px */
+    }
+
+    legend {
+        font-size: 1.5rem;
+        /* 25px */
+    }
+
+    ul,
+    li {
+        font-size: 2.0rem;
+        /* 20px */
+    }
+
+    footer {
+        top: 32.0rem;
+        font-size: 1.8rem;
+        /* 18px */
+        width: 90%;
+        position: fixed;
+        margin-bottom: 40rem;
+    }
+}
+
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px (78.1rem) a 1015px (101.5rem) --- */
+@media (min-width: 781px) and (max-width: 1015px){
+    #titulo1 {
+        font-size: 5.0rem;
+        /* 60px */
+    }
+
+    #titulo2 {
+        font-size: 5.0rem;
+        /* 50px */
+    }
+
+    .controles {
+        width: 60rem;
+        /* 600px */
+        height: 15rem;
+        /* 150px */
+        padding: 1.0rem 2.5rem;
+        /* 10px 25px */
+        flex-direction: row;
+    }
+
+    .controles button {
+        width: 25rem;
+        /* 250px */
+        height: 4.5rem;
+        /* 45px */
+        font-size: 2.2rem;
+        /* 22px */
+    }
+
+    footer {
+        font-size: 2.0rem;
+        /* 20px */
+        width: 70rem;
+        /* 700px */
+        position: fixed;
+        /* Retorna ao footer fixo do desktop */
+    }
+}
+
+/* --- Telas Grandes (Desktop): 1016px (101.6rem) e maiores --- */
 @media (min-width: 1016px) {
-    #titulo1 { margin: 120px auto; }
-    #titulo2 { margin-bottom: 20px auto; }
-    .controles { margin: 20px 0; }
+    #titulo1 {
+        margin: 10.0rem auto;
+        /* 60px */
+        top: -8.5rem;
+        /* -85px */
+        width: 105rem;
+        /* 1050px */
+        height: 21rem;
+        /* 200px */
+        font-size: 6.5rem;
+        /* 40px */
+    }
+
+    #titulo2 {
+        margin: 0.5rem auto;
+        /* 5px */
+        top: -25.0rem;
+        /* -250px */
+        width: 100rem;
+        /* 1000px */
+        height: 12rem;
+        /* 120px */
+        font-size: 5.0rem;
+        /* 50px */
+    }
+
+    .controles {
+        margin: 1.0rem 6.0rem;
+        /* 10px 60px */
+        top: -15.0rem;
+        /* -20px */
+        width: 60rem;
+        /* 600px */
+        height: 22rem;
+        /* 220px */
+    }
+
+    footer {
+        font-size: 2.8rem;
+        /* 28px */
+    }
 }
