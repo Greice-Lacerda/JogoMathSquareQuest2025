@@ -1,245 +1,206 @@
+/* ==========================================================================
+    Estilos NivelM.css
+    (Layout Fluido 4 Colunas + Tabuleiro QUADRADO MAIOR + Altura Unificada + Lista Imagens Coluna Única + Div/H1 + Scroll Combinações)
+   ========================================================================== */
 
-/* Estilo para o contêiner principal, que ficará sempre visível */
+/* --- TELA CHEIA --- */
+body.jogo-fullscreen #cabecalho-principal,
+body.jogo-fullscreen #rodape {
+    display: none;
+}
+
+/* --- ESTRUTURA PRINCIPAL (4 COLUNAS) --- */
+#jogo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#paineis-superiores {
+    width: 100%;
+    height: 100%;
+    padding: 1.5vmin;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    /* Alturas iguais */
+    gap: 1.5vmin;
+}
+
+/* --- PAINÉIS DE JOGO (4 COLUNAS) --- */
+/* --- PAINÉIS DE JOGO (4 COLUNAS - Tabuleiro 2x Largura) --- */
 .painel-jogo {
-    display: flex; /* ou block, como preferir */
-    flex-direction: column;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-/* Estilo opcional para a lista, para quando ela estiver visível */
-#lista-combinacoes {
-    padding: 10px auto;
-    background-color: #ffffff00;
-    border: 1px solid #eee;
-    max-height: 150px; /* Para não ocupar muito espaço se a lista for grande */
-    overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
-}
-
-.painel-jogo, .painel-jogo-interno {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 1vmin;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.6);
+    min-width: 0;
+    /* Usa flex-grow/shrink para distribuir espaço */
+    flex-shrink: 1;
+    /* Permite encolher */
+    /* REMOVIDO: flex-basis inicial aqui */
+}
+
+/* 1. Painel Tabuleiro (Quadrado, Crescimento 2x) */
+/* 1. Painel Tabuleiro (Quadrado, Crescimento 2x) */
+#painel-tabuleiro {
+    flex-basis: auto;
+    flex-grow: 2;
+    /* Cresce 2x mais que os outros */
+    flex-shrink: 0;
+    /* Não encolhe para manter aspect-ratio */
+    aspect-ratio: 1 / 1;
+    /* FORÇA QUADRADO */
+    /* REMOVIDO: height: 95% */
+    width: auto;
+    max-height: 90vh;
+    max-width: 90vh;
+    justify-content: center;
+}
+
+/* 2. Painel Imagens (Crescimento 1x) */
+#painel-imagens {
+    flex-basis: 0%;
+    min-width: 140px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+}
+
+/* 3. Painel Mensagens (Crescimento 1x, NÃO Encolhe) */
+#painel-mensagens {
+    flex-basis: 0%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 270px;
+    justify-content: space-between;
+}
+
+/* 4. Painel Combinações (Crescimento 1x) */
+#painelCombinacoes {
+    flex-basis: 0%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 250px;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* --- COMPONENTES INTERNOS --- */
+
+/* Painel Menu Interno */
+.painel-jogo-interno {
+    width: 95%;
+    margin-top: 1.5vmin;
+    height: auto;
+    flex-grow: 1;
+    justify-content: center;
+    gap: 0.5vmin;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vmin;
     border: solid outset 3px #ccc;
     border-radius: 10px;
     background: rgba(248, 191, 191, 0.274);
-    backdrop-filter: blur(5px);
-    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
-    height: 70vmin;
 }
 
-/* Larguras específicas para cada painel principal */
-#painel-tabuleiro { flex-basis: 40%; min-width: 450px; }
-#painel-imagens { flex-basis: 20%; min-width: 200px; max-width: 230px;}
-#painelCombinacoes { flex-basis: 20%; min-width: 1500px; min-height: 50px; top: 100px; flex-direction: row;}
-#painel-mensagens { flex-basis: 20%; min-width: 400px; }
-
-/* Estilo para o painel de Menu ANINHADO */
-.painel-jogo-interno {
-    width: 90%;
-    margin-top: 15px;
-    height: auto; /* Altura se ajusta ao conteúdo */
-    flex-grow: 1; /* Ocupa o espaço restante no painel pai */
+/* Canvas */
+#tabuleiro {
+    width: 98%;
+    height: 98%;
+    margin: 0;
 }
 
-/* ==========================================================================
-   Componentes Internos (Botões, Imagens, etc.)
-   ========================================================================== */
-.painel-jogo-interno button,
-.botoes-mensagem button {
-    width: 60%;
-    max-width: 200px;
-    height: 45px;
-    margin: 8px auto;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    /* Herda o resto do estilo do arquivo comuns.css ou nivel1.css */
+#tela {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #f0f0f0;
+    border-radius: 5px;
 }
 
+/* Legendas (h1.legendas) */
+h1.legendas {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1.6rem, 2vmin, 2.2rem);
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5vmin;
+    border-radius: 10px;
+    filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
+    margin: 0 0 1vmin 0;
+    margin-block-start: 0;
+    margin-block-end: 0.5vmin;
+}
+
+/* Lista Imagens (UMA COLUNA) */
 #lista-imagens {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    width: 60%;
-    height: 60%;
-    overflow-y: none;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow: visible;
+    gap: 1.5vmin;
+    width: 100%;
 }
 
 #lista-imagens img {
-    width: 40%;
+    display: block;
+    margin-top: 2rem;;
+    gap:1rem;
+    width: 70%;
+    max-width: 150px;
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     cursor: pointer;
     filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5));
     border-radius: 15px;
-    transition: transform 0.2s ease;
+    margin-bottom: 1vmin;
 }
 
 #lista-imagens img:hover {
     transform: scale(1.1);
 }
 
-#lista-combinacoes {
-    font-size: 28px;
-    color: rgb(12, 12, 12);
-    overflow-y: auto;
-    width: 65%;
-    padding: 5px;
-}
-
-/* ==========================================================================
-   MODO DE TELA CHEIA IMERSIVA
-   ========================================================================== */
-
-body.jogo-fullscreen {
-    overflow: hidden;
-}
-
-body.jogo-fullscreen #cabecalho-principal,
-body.jogo-fullscreen #rodape {
-    display: none;
-}
-
-body.jogo-fullscreen #jogo {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: clamp(10px, 2vw, 20px);
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(10px, 2vw, 20px);
-}
-
-#tabuleiro {
-    width: 85vmin;
-    height: 85vmin;
-    max-width: none;
-    margin: 0;
-    aspect-ratio: 1 / 1;
-}
-
-#tela {
-    width: 95%;
-    height: 75%;
-    display: block;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-}
-
-/* ==========================================================================
-   AJUSTE DO PAINEL DE MENSAGENS E BOTÕES
-   ========================================================================== */
-
-
-/* Botão "Próximo Nível" em tons de Vermelho */
-#proximo-nivel {
-    background: linear-gradient(135deg, #050505 5%, #fa0404 40%, #f39d91 75%, #f0f0f0 98%);
-    border-color: #f7d258; /* Borda em tom dourado para combinar */
-}
-
-/* 1. Define a animação de pulsar/cintilar (sem alteração aqui) */
-@keyframes cintilar {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 5px rgba(255, 196, 0, 0.4), 0 0 10px rgba(255, 196, 0, 0.3);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(255, 255, 0, 0.8), 0 0 30px rgba(255, 255, 0, 0.6);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 5px rgba(255, 196, 0, 0.4), 0 0 10px rgba(255, 196, 0, 0.3);
-    }
-}
-
-/* 2. Aplica a animação APENAS quando o botão NÃO está escondido */
-/* Este seletor significa: "aplique ao #proximo-nivel que NÃO tenha 'display:none' em seu atributo style" */
-#proximo-nivel:not([style*="display:none"]) {
-    animation: cintilar 1.5s infinite ease-in-out;
-}
-
-/* Botão "Imprimir Jogo" em tons de Verde */
-.BtnImprimir {
-    background: linear-gradient(135deg, #050505 5%, #136f63 40%, #28a745 75%, #f0f0f0 98%);
-    border-color: #9ef01a; /* Borda em tom verde-limão para destaque */
-}
-
-/* Opcional: Melhora o efeito hover para os novos botões */
-#proximo-nivel:hover,
-.BtnImprimir:hover {
-    filter: brightness(1.3); /* Deixa o brilho um pouco mais intenso no hover */
-    border-color: white;
-}
-
-#jogo > .controles1:nth-child(4) {
-    justify-content: space-between;
-}
-
+/* Mensagens */
 #mensagem {
-    flex-grow: 1;
+    width: 100%;
+    min-height: 10vh;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: clamp(1.6rem, 2vmin, 2.2rem);
+    background: rgba(248, 191, 191, 0);
     text-align: center;
-    width: 100%;
     color: yellow;
-    font-size: clamp(1rem, 3vw, 1.8rem);
     line-height: 1.5;
     font-weight: bold;
     filter: drop-shadow(3px 3px rgb(6, 6, 6));
+    padding: 1vmin;
 }
 
-.botoes-mensagem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* ==========================================================================
-   Componentes Internos e Interações
-   ========================================================================== */
-
-.legendas {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    font-weight: bold;
-    text-align: center;
-    padding: 5px 10px;
-    border-radius: 10px;
-    filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
-}
-
-#titulo-nivel {
-    color: white;
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.controlesM12 button {
-    width: 90%;
-    max-width: 200px;
-    height: 50px;
-    margin: 10px 0;
-    padding: 8px 12px;
+/* Botões */
+.painel-jogo-interno button,
+.botoes-mensagem button,
+#exibirCombinacoesBtn {
+    width: 95%;
+    max-width: 250px;
+    height: auto;
+    margin: 0.8vh 0;
+    padding: 1.2vh 1vw;
     border-radius: 8px;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-size: clamp(1.3rem, 1.6vmin, 1.6rem);
     font-weight: bold;
     border: outset yellow;
     background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
@@ -249,87 +210,273 @@ body.jogo-fullscreen #jogo {
     transition: transform 0.1s ease;
 }
 
-.controlesM12 button:hover {
-    transform: scale(1.1);
+.painel-jogo-interno button:hover,
+.botoes-mensagem button:hover,
+#exibirCombinacoesBtn:hover {
+    transform: scale(1.05);
     filter: brightness(1.2);
 }
 
-.controlesM12 button:active {
+.painel-jogo-interno button:active,
+.botoes-mensagem button:active,
+#exibirCombinacoesBtn:active {
     transform: scale(0.95);
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE
-   ========================================================================== */
-
-@media (max-width: 900px) {
-    body.jogo-fullscreen #jogo {
-        flex-direction: column;
-        overflow-y: auto;
-    }
-
-    body.jogo-fullscreen #tabuleiro {
-        width: 90vw;
-        height: 90vw;
-        order: 2;
-    }
-    
-    .controles1 {
-        width: 90vw;
-        height: auto;
-        min-height: 150px;
-        flex: none;
-    }
-
-    #jogo > .controles1:nth-child(1) { order: 1; } /* Menu */
-    #jogo > .controles1:nth-child(3) { order: 3; } /* Imagens */
-    #jogo > .controles1:nth-child(4) { order: 4; } /* Mensagens */
-}
-
-/* ==========================================================================
-   ESTRUTURA PRINCIPAL DO JOGO (ATUALIZADO)
-   ========================================================================== */
-#jogo {
+.botoes-mensagem {
     display: flex;
-    flex-direction: column; /* Empilha a fileira de cima e a de combinações */
-    width: 100%;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: auto;
+    font-weight: bold;
+    border-radius: 1rem;
+    padding: 1vmin;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 1vh auto 0;
+    font-size: clamp(1.6rem, 1.8vmin, 1.8rem);
+    color: #f0f0f0;
 }
 
-/* Novo contêiner para a fileira de cima */
-#paineis-superiores {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
+/* Botão Exibir Combinações (Ajuste Margem) */
+#exibirCombinacoesBtn {
+    margin-bottom: 1rem;
+    /* Espaço abaixo do botão */
+    flex-shrink: 0;
+    /* Não encolher o botão */
 }
 
-/* ==========================================================================
-   PAINEL E LISTA DE COMBINAÇÕES (NOVO ESTILO)
-   ========================================================================== */
-
-/* Estilo para o painel de combinações na fileira de baixo */
-#painel-combinacoes {
-    width: 100%;
-    height: auto;           /* Altura se ajusta ao conteúdo */
-    max-height: 250px;      /* Altura máxima antes de mostrar a barra de rolagem */
-    overflow-y: auto;       /* Barra de rolagem vertical se necessário */
-    
-    /* Reseta estilos de flex que não são mais necessários */
-    flex-basis: auto;
-    min-width: unset;
-}
-
-/* A grade interna de 4 colunas para a lista de combinações */
+/* Lista Combinações (Com Scroll Interno e Menos Espaço Vertical) */
 #lista-combinacoes {
-    display: grid;
-    /* CRIA A GRADE DE 4 COLUNAS com largura igual */
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px 20px; /* 8px de espaço vertical, 20px horizontal */
+    display: none;
+    /* JS controla visibilidade */
+    grid-template-columns: 1fr;
+    /* ALTERADO: Valor menor para menos espaço vertical */
     width: 100%;
-    font-size: 0.8rem;
+    overflow-y: auto;
+    font-size: clamp(1.6rem, 1.8vmin, 2rem);
     color: white;
+    gap: 1.2rem;
     text-shadow: 1px 1px 2px black;
-    text-align: left; /* Melhora a legibilidade da lista */
+    text-align: left;
+    padding: 15px;
+    box-sizing: border-box;
+    /* Adiciona um pequeno padding inferior para não colar no fim */
+    margin: 15px auto;
+}
+
+/* --- SEPARAÇÃO DE RESPONSABILIDADES --- */
+#BtnImprimir,
+#proximo-nivel,
+#lista-combinacoes {
+    display: none;
+}
+
+/* REMOVIDO: #painelCombinacoes daqui, ele não é mais modal */
+
+/* --- REMOVIDO: ARQUITETURA MODAL --- */
+
+/* --- ANIMAÇÕES --- */
+#proximo-nivel {
+    background: linear-gradient(135deg, #050505 5%, #fa0404 40%, #f39d91 75%, #f0f0f0 98%);
+    border-color: #f7d258;
+}
+
+#BtnImprimir {
+    background: linear-gradient(135deg, #050505 5%, #136f63 40%, #28a745 75%, #f0f0f0 98%);
+    border-color: #9ef01a;
+}
+
+@keyframes cintilar {
+    /* ... (sem alterações) ... */
+}
+
+#proximo-nivel:not([style*="display: none"]) {
+    animation: cintilar 1.5s infinite ease-in-out;
+}
+
+#proximo-nivel:hover,
+#BtnImprimir:hover {
+    filter: brightness(1.3);
+    border-color: white;
+}
+
+/* ==========================================================================
+    RESPONSIVIDADE (700x414 - ESCALA 60%)
+   ========================================================================== */
+/* ==========================================================================
+    RESPONSIVIDADE (700x414 - 3 COLUNAS EM CIMA, 1 EMBAIXO)
+   ========================================================================== */
+@media (max-width: 700px) and (max-height: 414px) and (orientation: landscape) {
+
+    /* 1. Define o contêiner como GRID */
+    #paineis-superiores {
+        display: grid;
+        /* Define 3 colunas: Tabuleiro (proporcional), Imagens (fixa?), Combinações (fixa?) */
+        /* Ajuste '120px' conforme necessário para Imagens/Combinações */
+        grid-template-columns: 1fr 100px 120px;
+        /* Define 2 linhas: Superior (altura do conteúdo), Inferior (restante) */
+        grid-template-rows: auto 1fr;
+        padding: 1.5vh 1vw;
+        gap: 1.5vh 1.5vw;
+        /* Remove/reseta propriedades flex que não são mais usadas aqui */
+        flex-wrap: initial;
+        align-items: center;
+        align-content: center;
+        /* Grid controla alinhamento */
+        justify-content: center;
+        /* Grid controla justificação */
+        /* Aplica a escala de 70% */
+            transform: scale(0.85);
+            transform-origin: center center;
+            /* Escala a partir do centro */
+    }
+
+    /* 2. Remove flex sizing dos painéis e garante preenchimento da célula */
+    .painel-jogo {
+        flex-basis: auto;
+        flex-grow: initial;
+        flex-shrink: initial;
+        width: 100%;
+        height: 100%;
+        /* Ocupa a célula do grid */
+        overflow: hidden;
+        /* Esconde overflow por padrão */
+        padding: 1vh;
+        gap: 1vh;
+        /* Padding/Gap menores */
+        /* Remove regras de grid 2x2 anteriores */
+        /* flex-basis: calc(50% - 0.5vw); height: calc(50% - 0.5vh); */
+    }
+
+    /* --- 3. Posicionamento no Grid --- */
+
+    /* Linha Superior */
+    #painel-tabuleiro {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        /* Garante que seja quadrado e centralizado na célula */
+        aspect-ratio: 1 / 1;
+        height: auto;
+        width: auto;
+        max-width: 100%;
+        max-height: 100%;
+        justify-self: center;
+        align-self: center;
+        padding: 0.2vh;
+        /* Padding mínimo dentro */
+    }
+
+    #painel-imagens {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        overflow-y: auto;
+        /* Scroll se necessário */
+    }
+
+    #painelCombinacoes {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+        overflow-y: hidden;
+        /* Scroll será interno na lista */
+        display: flex;
+        flex-direction: column;
+        /* Layout interno para scroll */
+                flex-grow: 0.5;
+                /* ALTERADO: Cresce menos que os outros (era 1) */
+                flex-shrink: 1;
+                /* Permite encolher se necessário */
+                flex-basis: 0%;
+                min-width: 120px;
+                /* Reduzido min-width também */
+                margin-left: 4rem;
+    
+    }
+
+    /* Linha Inferior */
+    #painel-mensagens {
+        grid-column: 1 / 4;
+        /* Ocupa todas as 3 colunas */
+        grid-row: 2 / 4;
+        min-width: 480px;
+            /* Reduzido min-width também */
+        /* Scroll se necessário */
+    }
+
+    /* --- 4. Ajustes Internos --- */
+    #tabuleiro,
+    #tela {
+        width: 100%;
+        height: 100%;
+    }
+
+    h1.legendas {
+        font-size: 1.8vh;
+        margin-bottom: 0.5vh;
+    }
+
+    /* Lista Imagens (Coluna única) */
+    #lista-imagens {
+        gap: 0.1vh;
+    }
+
+    #lista-imagens img {
+        width: 40%;
+        max-width: 50px;
+    }
+
+    /* Ajuste largura */
+
+    /* Mensagens/Menu (Agora na linha inferior) */
+    #mensagem {
+        font-size: 1.6vh;
+        line-height: 1.2;
+        min-height: 4vh;
+        flex-direction: row;
+    }
+
+    /* Menu pode precisar de ajustes se ficar muito espremido */
+    .painel-jogo-interno {
+        padding: 0.5vh;
+        gap: 1vh;
+        width: 98%;
+        margin-top: 0.5vh;
+        flex-direction: row;
+            /* ALTERADO: Botões em linha */
+    }
+
+    .painel-jogo-interno button,
+    .botoes-mensagem button{
+        width: 95%;
+        max-width: 150px;
+        /* Botões menores */
+        font-size: 1.5vh;
+        padding: 0.5vh;
+        margin: 0.1vh auto;
+        /* Centraliza */
+    }
+
+        #exibirCombinacoesBtn {
+            width: 80%;
+            max-width: 100px;
+            /* Botões menores */
+            font-size: 1.5vh;
+            padding: 0.5vh;
+            margin: 0.1vh auto;
+            /* Centraliza */
+        }
+
+    /* Lista Combinações (Scroll interno) */
+    #exibirCombinacoesBtn {
+        margin-bottom: 0.5vh;
+        flex-shrink: 0;
+    }
+
+    #lista-combinacoes {
+        min-height: 0;
+        overflow-y: auto;
+        font-size: 1.3vh;
+        gap: 0.5vh;
+        padding: 0.2vw;
+    }
 }

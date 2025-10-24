@@ -3,29 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>MathSquareQuest: Aventura dos Padrões - Nível Médio (M1): 2X2</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="../estilos/comuns.css">
     <link rel="stylesheet" href="../estilos/NivelM.css">
 </head>
 
 <body class="jogo-fullscreen">
 
-    <div id="aviso-rotacao">
-        <p>Por favor, gire seu dispositivo para o modo paisagem.</p>
-    </div>
-
     <div id="app-container">
-
         <header id="cabecalho-principal">
             <h1 id="titulo1">MathSquareQuest</h1>
             <h2 id="titulo2">Aventura dos Padrões</h2>
@@ -33,55 +24,50 @@
 
         <main>
             <div id="jogo">
-
                 <div id="paineis-superiores">
-                    <fieldset id="painel-tabuleiro" class="painel-jogo">
-                        <legend class="legendas">Tabuleiro do jogo</legend>
+
+                    <div id="painel-tabuleiro" class="painel-jogo">
+                        <h1 class="legendas">Nível M1 (2 x 2) - Tabuleiro</h1>
                         <div id="tabuleiro">
                             <canvas id="tela"></canvas>
                         </div>
-                    </fieldset>
+                    </div>
 
-                    <fieldset id="painel-imagens" class="painel-jogo">
-                        <legend class="legendas">Imagens</legend>
+                    <div id="painel-imagens" class="painel-jogo">
+                        <h1 class="legendas">Imagens</h1>
                         <div id="lista-imagens"></div>
-                    </fieldset>
+                    </div>
 
-                    <fieldset id="painel-mensagens" class="painel-jogo">
-                        <legend class="legendas">Mensagens do jogo</legend>
+                    <div id="painel-mensagens" class="painel-jogo">
+                        <h1 class="legendas">Mensagens</h1>
                         <div id="mensagem"></div>
                         <div class="botoes-mensagem">
                             <button id="BtnImprimir">Imprimir jogo</button>
                         </div>
-
-                        <fieldset id="painel-menu" class="painel-jogo-interno">
-                            <legend class="legendas">Menu</legend>
+                        <div id="painel-menu" class="painel-jogo-interno">
+                            <h1 class="legendas">Menu</h1>
                             <button id="paginaInicial">Página Inicial</button>
                             <button id="limparImagem">Desfazer Jogada</button>
                             <button id="resetarTabuleiro">Reiniciar</button>
                             <button id="sairDoJogo">Sair</button>
-
-                            <h2 id="titulo-nivel">Nível M1 - 2x2</h2>
-
                             <button id="proximo-nivel">Próximo Nível</button>
-                        </fieldset>
-                    </fieldset>
+                        </div>
+                    </div>
+
+                    <div id="painelCombinacoes" class="painel-jogo">
+                        <h1 class="legendas">Combinações</h1>
+                        <button id="exibirCombinacoesBtn">Exibir Combinações</button>
+                        <div id="lista-combinacoes">
+                        </div>
+                    </div>
+
                 </div>
-                <fieldset id="painelCombinacoes" class="painel-jogo">
-                    <legend class="legendas">Combinações Possíveis</legend>
-
-                    <div id="lista-combinacoes"></div>
-
-                    <button id="exibirCombinacoesBtn">Exibir Combinações</button>
-                </fieldset>
-
             </div>
         </main>
 
         <footer id="rodape">
             Criado por Adriana, Greice, Pablo e Paulo em 2025.
         </footer>
-
     </div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script src="../logica/logicaM.js"></script>
