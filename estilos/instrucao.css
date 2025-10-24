@@ -1,107 +1,313 @@
-/*Consfiguração da página Instruções*/
+/*Configuração da página Instruções*/
 
-#controlesInstrucao1{
-    top: -20px; /* Ajuste a posição vertical conforme necessário */
-    display: flex;
-    position: relative;
-    border-radius: 10px;
-    width: 1200px;
-    height: auto;
-    margin: 10px 60px;
-    padding: 10px 25px;
-    border: outset 3px #dfa27c;
-    background-color: transparent;
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
+#mainInstrucao {
     flex-direction: row;
+    width: 100%;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-#controlesInstrucao2{
-    top: -160px; /* Ajuste a posição vertical conforme necessário */
+.controlesInstrucao{  
     display: flex;
-    position: relative;
-    border-radius: 10px;
-    width: 1200px;
-    height: auto;
-    margin: 10px 60px;
-    padding: 10px 25px;
+    border-radius: 1.0rem; /* 10px */
+    width: 50vw; /* Alterado de 1200px fixo para fluido */
+    max-width: 90rem; /* 1200px */
+    height: 40rem;
+    padding: 1.0rem 2.5rem; /* 10px 25px */
     border: outset 3px #dfa27c;
-    background-color: transparent;
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.9);
-    flex-direction: row;
+    background-color: #dfa27c96;
+    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9); /* 20px 20px 8px */
+    flex-direction: column;
+    gap: 5.0rem; /* 20px - CORRIGIDO: Aplicado ao container */
+    justify-content: center; /* Adicionado para centralizar os botões */
+    align-items: center; /* Adicionado para alinhar os botões */
 }
 
-#controlesInstrucao1:hover,
-#controlesInstrucao2:hover{
-    background-color: beige;
-    ul,li{ margin: 20px auto; font-size: 26px; color: rgb(17, 0, 0); text-shadow: 3px 3px 6px rgba(80, 66, 66, 0.9);}
+.controlesInstrucao1 {
+
+    display: flex;
+    border-radius: 1.0rem;
+    /* 10px */
+    width: 20vw;
+    /* Alterado de 1200px fixo para fluido */
+    height: 40rem;
+    padding: 1.0rem 2.5rem;
+    /* 10px 25px */
+    border: outset 3px #dfa27c;
+    background-color: #dfa27c96;
+    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
+    /* 20px 20px 8px */
+    flex-direction: column;
+    gap: 2.0rem;
+    /* 20px - CORRIGIDO: Aplicado ao container */
+    justify-content: center;
+    /* Adicionado para centralizar os botões */
+    align-items: center;
+    /* Adicionado para alinhar os botões */
 }
 
-#Voltar, #jogar, #fechar, #Imprimir {
-    margin: 15px auto;
-    padding: 30px auto;
-    width: 250px;
-    height: 45px;
-    border-radius: 8px;
-    font-size: 22px;
-    font-weight: bold; /* Ajuste para negrito */
+.controlesInstrucao:hover,
+.controlesInstrucao1:hover {
+    background-color: rgba(245, 245, 220, 0.692);
+    transform: scale(1);
+}
+
+ul, li{
+    font-size: 3.2rem;
+    line-height: 1.6;
+    margin-left: 1rem;
+    text-shadow: 0.3rem 0.3rem 0.6rem rgba(80, 66, 66, 0.9);
+        /* 3px 3px 6px */
+}
+
+.controlesInstrucao1 button {
+    margin: 1.0rem auto;
+    /* 15px */
+    padding: 1.0rem;
+    /* 10px 0 */
+    width: 25rem;
+    /* 250px */
+    height: 4.5rem;
+    /* 45px */
+    border-radius: 0.8rem;
+    /* 8px */
+    font-size: 2.2rem;
+    /* 22px */
+    font-weight: bold;
     border: outset yellow;
     background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
-    box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.9);
-    gap: 20px;
+    color: white;
+    box-shadow: 1.0rem 1.0rem 0.6rem rgba(0, 0, 0, 0.9);
+    /* 10px 10px 6px */
 }
 
-/*===================== Responsividade ===========================*/
-
-/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
-@media (max-width: 414px) {
-    
- #controlesInstrucao1 { top: 10px; margin: 40px auto; flex-direction: row; width: 100%; height:auto; transform: scale(0.5);}
-    
- #controlesInstrucao2 { bottom: 2px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.5);}
-    
- ul,li{ font-size: 24px; color: rgb(250, 248, 248);}
-    
- footer{ bottom: 0px; } 
+.controlesInstrucao1 button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
 }
 
+.controlesInstrucao1 button:active {
+    transform: scale(0.9);
+}
 
-/* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
+/* --- Media Queries --- */
+/*===========================================================*/
+/* RESPONSIVIDADE */
+/*===========================================================*/
+
+/* Para telas < 414px (celulares em paisagem)*/
+@media (max-height: 450px) and (orientation: landscape) {
+
+    #titulo1, #titulo2 ,#titulo3, footer{
+        display: none;
+    }
+    
+    .controlesInstrucao1 {
+        width: 90%;
+        flex-direction: column;
+        justify-content: center;
+        max-height: 27rem;
+        font-size: 0.2rem;
+        gap: 1rem;
+    }
+
+    .controlesInstrucao1 button {
+        width: 10.5rem;
+        height: 3.5rem;
+        margin: 1rem auto;
+        font-size: 1.2rem;
+    }
+
+    .controlesInstrucao {
+    width: 95%;
+    margin: 1rem;
+    height: 27rem;
+    }
+    
+    ul,
+    li {
+        font-size: 1.2rem;
+            line-height: 0.8;
+            margin-left: 1rem;
+            text-shadow: 0.3rem 0.3rem 0.6rem rgba(80, 66, 66, 0.9);
+            /* 3px 3px 6px */
+    }
+}
+
+/* Para telas < 414px (celulares em paisagem)*/
+@media (max-width: 414px) and (orientation: landscape) {
+    
+    .controles {
+        width: 90rem;
+        flex-direction: column;
+        height: 90rem;
+        top: 0;
+        margin: 1.0rem auto;
+        /* 10px */
+        padding: 1.0rem;
+        /* 10px */
+    }
+
+         .controlesInstrucao1 {
+             width: 90%;
+             flex-direction: column;
+             justify-content: center;
+             max-height: 27rem;
+             font-size: 0.2rem;
+             gap: 1rem;
+         }
+    
+         .controlesInstrucao1 button {
+             width: 10.5rem;
+             height: 3.5rem;
+             margin: 1rem auto;
+             font-size: 1.2rem;
+         }
+    
+         .controlesInstrucao {
+             width: 95%;
+             margin: 1rem;
+             height: 27rem;
+         }
+
+    footer {
+        width: 90vw;
+        position: static;
+        font-size: 1.6rem;
+        /* 16px */
+        margin-top: 2.0rem;
+        /* 20px */
+    }
+
+    ul,
+    li {
+        margin-left: 2.0rem;
+        /* 20px */
+        font-size: 1.6rem;
+        /* 16px */
+    }
+}
+
+/* --- Telas Maiores (Tablet Portrait): 415px (41.5rem) a 780px (78.0rem) --- */
 @media (min-width: 415px) and (max-width: 780px) {
 
-    #controlesInstrucao1 { bottom: 10px; margin: 60px auto; flex-direction: row; width: 100%; height:auto; transform: scale(0.7);}
+    
+    #titulo1 {
+        font-size: 6.0rem;
+        top: 3.0rem;
+        margin-bottom: 1rem;
+    }
 
-    #controlesInstrucao2 { bottom: 2px; margin: 60px auto; flex-direction: column; width: 100%; height:auto; transform: scale(0.7);}
+    #titulo2 {
+        margin-top: 0.3rem;
+        font-size: 4.0rem;
+    }
 
-    ul,li{ font-size: 24px; color: rgb(250, 248, 248);}
+         .controlesInstrucao1 {
+             width: 90%;
+             flex-direction: column;
+             justify-content: center;
+             max-height: 27rem;
+             font-size: 0.2rem;
+             gap: 1rem;
+         }
+    
+         .controlesInstrucao1 button {
+             width: 10.5rem;
+             height: 3.5rem;
+             margin: 1rem auto;
+             font-size: 1.2rem;
+         }
+    
+         .controlesInstrucao {
+             width: 95%;
+             margin: 1rem;
+             height: 27rem;
+         }
 
-    footer{ bottom: 0px; }   
+    ul,
+    li {
+        font-size: 1.6rem;
+        /* 20px */
+    }
+
+    footer {
+        font-size: 1.8rem;
+        /* 18px */
+        width: 90%;
+        top: 85rem;
+    }
 }
 
-/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px a 1015px --- */
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px (78.1rem) a 1015px (101.5rem) --- */
 @media (min-width: 781px) and (max-width: 1015px) {
+    #titulo1 {
+            font-size: 6.0rem;
+            top: 4.0rem;
+            margin-bottom: 1rem;
+        }
     
-    #controlesInstrucao1 { top: 50px; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
+        #titulo2 {
+            margin-top: 0.5rem;
+            font-size: 4.0rem;
+        }
+         .controlesInstrucao1 {
+             width: 90%;
+             flex-direction: column;
+             justify-content: center;
+             max-height: 27rem;
+             font-size: 0.2rem;
+             gap: 1rem;
+         }
     
-    #controlesInstrucao2 { top: -50px; margin: 20px auto; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
+         .controlesInstrucao1 button {
+             width: 10.5rem;
+             height: 3.5rem;
+             margin: 1rem auto;
+             font-size: 1.2rem;
+         }
+    
+         .controlesInstrucao {
+             width: 95%;
+             margin: 1rem;
+             height: 27rem;
+         }
+    
+         footer {
+        font-size: 2.0rem;
+        /* 20px */
+        width: 70rem;
+        /* 700px */
+        position: fixed;
+        /* Retorna ao footer fixo do desktop */
+    }
 
-    ul,li{ font-size: 28px; color: rgb(250, 248, 248); text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.9); line-height: 1.8;}
-    footer{ bottom: 1px; } 
+    ul,
+    li {
+    font-size: 1.6rem;
+    }
 }
 
-/* --- Telas Grandes (Desktop): 1016px e maiores --- */
+/* --- Telas Grandes (Desktop): 1016px (101.6rem) e maiores --- */
 @media (min-width: 1016px) {
-    
-    #controlesInstrucao1 { top: 50px; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
-    
-    #controlesInstrucao2 { top: -50px; margin: 20px auto; flex-direction: row; width: 100%; height:auto; margin: 80px auto; transform: scale(0.85);}
 
-    ul,li{ font-size: 28px; color: rgb(250, 248, 248); text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.9); line-height: 1.8;}
-    footer{ bottom: 1px; } 
+    .controles {
+        margin: 3.0rem 6.0rem;
+        /* 10px 60px */
+        top: -9.0rem;
+        /* -20px */
+        width: 60rem;
+        /* 600px */
+        height: 22rem;
+        /* 220px */
+    }
+
+    footer {
+        font-size: 2.0rem;
+        /* 28px */
+    }
 }
 
 
-/* --- Telas Grandes (Desktop): 1016px e maiores --- */
-@media (min-width: 1015px) {
-footer{bottom: 1px;}      
-   
-}

@@ -83,30 +83,29 @@ body {
 }
 
 .controles {
-    top: -2.0rem;
-    /* -20px */
     display: flex;
     position: relative;
     border-radius: 1.0rem;
     /* 10px */
     width: 60rem;
     /* 600px */
-    height: 12rem;
+    height: 29.0rem;
     /* 120px */
-    margin: 1.0rem 6.0rem;
+    margin: 1.0rem 10.0rem;
     /* 10px 60px */
-    padding: 1.0rem 2.5rem;
+    padding: 2.0rem;
     /* 10px 25px */
     border: outset 3px #dfa27c;
+    flex-direction: column;
     /* Mantido em px */
-    background-color: transparent;
+    background-color: #dfa27c80;
     box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
     /* 20px 20px 8px */
 }
 
 .controles:hover {
     background-color: lightgoldenrodyellow;
-    transform: scale(0.9);
+    transform: scale(1);
 }
 
 .controles:active {
@@ -114,9 +113,9 @@ body {
 }
 
 .controles button {
-    margin: 1.5rem auto 1.5rem;
+    margin: 1.0rem auto;
     /* 15px */
-    padding: 1.0rem 0;
+    padding: 1.0rem;
     /* 10px 0 */
     width: 25rem;
     /* 250px */
@@ -156,24 +155,11 @@ body {
 }
 
 #titulo1 {
-    display: flex;
-    z-index: 1;
-    position: relative;
-    align-items: center;
+    top: 95.0rem;
     justify-content: center;
-    width: 105rem;
-    /* 1050px */
-    height: 20rem;
-    /* 200px */
-    top: -8.5rem;
-    /* -85px */
-    margin: 6.0rem auto;
-    /* 60px */
-    padding: 0;
     font-family: "Lobster Two", sans-serif;
-    font-size: 4.0rem;
-    /* 40px */
-    color: red;
+    font-size: 10.0rem;
+    color: rgb(243, 13, 13);
     text-shadow: 1.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.8);
     /* 15px 8px 1px */
 }
@@ -181,7 +167,6 @@ body {
 #titulo1:hover {
     transform: scale(1.3);
     text-shadow: 1.5rem 0.8rem 0.1rem rgba(0, 0, 0, 0.8);
-    animation: spin 5s linear infinite;
 }
 
 #titulo1:active {
@@ -189,27 +174,12 @@ body {
 }
 
 #titulo2 {
-    top: -25.0rem;
-    /* -250px */
-    display: flex;
-    z-index: 1;
-    position: relative;
-    border-radius: 1.0rem;
-    /* 10px */
-    width: 100rem;
-    /* 1000px */
-    height: 12rem;
-    /* 120px */
-    margin: 0.5rem auto;
-    /* 5px */
-    padding: 0.5rem 0;
-    /* 5px 0 */
+    margin-top: -10.0rem;
+    justify-content: center;
     text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
-    /* 1px 4px 3px */
-    font-size: 5.0rem;
-    /* 50px */
+    font-size: 7.0rem;
     font-family: "Parisienne", cursive;
-    color: yellow;
+    color: rgb(202, 202, 6);
     font-weight: bold;
 }
 
@@ -222,6 +192,15 @@ body {
 #titulo2:active {
     transform: scale(1.1);
     text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
+}
+
+#titulo3 {
+    justify-content: center;
+    text-shadow: 0.1rem 0.4rem 0.3rem rgba(245, 240, 240, 0.9);
+    font-size: 3.2rem;
+    font-family: "Parisienne", cursive;
+    color: rgb(15, 15, 1);
+    font-weight: bold;
 }
 
 div {
@@ -380,46 +359,43 @@ footer:active {
 /* Para telas < 414px (celulares em paisagem)*/
 @media (max-height: 450px) and (orientation: landscape) {
     #titulo1 {
-        width: 90vw;
-        top: 10rem;
+        margin-top: 10rem;
+        font-size: 2.5rem;
         }
 
     #titulo2 {
-        width: 90vw;
-        top: -12rem;
+        top: 12rem;
+        font-size: 1.5rem;
         margin: 1.0rem auto;
-        /* 10px */
-        height: auto;
+    }
+
+    #titulo3 {
+            font-size: 1.5rem;
+            font-family: "Arial", cursive;
     }
 
     .controles {
-        width: 90rem;
-        flex-direction: row;
-        height: 80rem;
-        top: -22rem;
-        margin: 0rem auto;
-        /* 10px */
-        padding: 0.2rem;
-        /* 10px */
+        flex-direction: column;
+        max-height: 30%;
+        top: -2rem;
+        margin: 16rem 0;
+        gap: 1rem;
     }
 
     .controles button {
-        width: 80%;
+        width: 60%;
+        height: 50%;
         font-size: 1.4rem;
         /* 18px */
     }
 
     #controlesIndex {
-        height: 80rem;
+        height: 40rem;
     }
 
     footer {
-        width: 90vw;
-        position: static;
         font-size: 1.6rem;
-        /* 16px */
-        top: 30.6rem;
-        /* 20px */
+        margin-top: -50.6rem;
     }
 
     ul,
@@ -588,36 +564,11 @@ footer:active {
 
 /* --- Telas Grandes (Desktop): 1016px (101.6rem) e maiores --- */
 @media (min-width: 1016px) {
-    #titulo1 {
-        margin: 10.0rem auto;
-        /* 60px */
-        top: -8.5rem;
-        /* -85px */
-        width: 105rem;
-        /* 1050px */
-        height: 21rem;
-        /* 200px */
-        font-size: 6.5rem;
-        /* 40px */
-    }
-
-    #titulo2 {
-        margin: 0.5rem auto;
-        /* 5px */
-        top: -25.0rem;
-        /* -250px */
-        width: 100rem;
-        /* 1000px */
-        height: 12rem;
-        /* 120px */
-        font-size: 5.0rem;
-        /* 50px */
-    }
-
+    
     .controles {
-        margin: 1.0rem 6.0rem;
+        margin: 3.0rem 6.0rem;
         /* 10px 60px */
-        top: -15.0rem;
+        top: -9.0rem;
         /* -20px */
         width: 60rem;
         /* 600px */

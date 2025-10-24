@@ -1,60 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathQuest: Aventura dos Padrões - Instruções</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Math Square Quest: Aventura dos Padrões - Página Principal</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../estilos/comuns.css">
     <link rel="stylesheet" href="../estilos/instrucao.css">
 </head>
-<fieldset id="controlesIndex">
-    <div id="titulo1">
-        <h1>MathQuest</h1>
-    </div>
-    <div id="titulo2">
-        <h2>Aventura dos Padrões</h2>
-    </div>
-</fieldset>
 
-<body>   
-    
-<main>
-    <section>
-        <div>
-            <fieldset id="controlesInstrucao1">
-                <div>
-                    <ul>
-                        <b>
-                            <li>Escolha o tamanho do tabuleiro na tela inicial.</li>
-                            <li>Arraste e solte as imagens no tabuleiro.</li>
-                            <li>Cada imagem só pode aparecer uma vez por linha e coluna.</li>
-                            <li>Use os botões para limpar, reiniciar ou fechar o jogo.</li>
-                        </b>
-                    </ul>
-            </fieldset>
-                
-            <fieldset id="controlesInstrucao2">
-                        <legend><b>Controles:</b></legend>
-                        
-                        <button id="Voltar" onclick="window.location.href='../index.html'">Voltar</button>
-                        
-                        <button id="jogar"
-                        onclick="window.location.href='Nivel1.html?tamanhoTabuleiro=2'">Jogar</button>
-                        
-                        <button id="Imprimir" onclick="window.open('ImpTab.html', '_blank')">Imprimir jogo</button>
-                            
-                        <button id="fechar" onclick="window.location.href='https:\\www.google.com.br'">Fechar</button>
- 
-            </fieldset>
-        </div>
-    </section>
-</main>
-    
+<body>
+
+    <header>
+        <h1 id="titulo1">Math Square Quest</h1>
+        <h2 id="titulo2">Aventura dos Padrões</h2>
+    </header>
+
+    <main id="mainInstrucao">
+        <section class="coluna-esquerda">
+            <div class="controlesInstrucao">
+                <ul>
+                    <li>Escolha o tamanho do tabuleiro na tela inicial.</li>
+                    <li>Arraste e solte as imagens no tabuleiro.</li>
+                    <li>Cada imagem só pode aparecer uma vez por linha e coluna.</li>
+                    <li>Use os botões para limpar, reiniciar ou fechar o jogo.</li>
+                </ul>
+            </div>
+        </section>
+        <section class="coluna-direita">
+            <div class="controlesInstrucao1">
+                <button id="Voltar" onclick="window.location.href='../index.html'">Voltar</button>
+
+                <button id="jogar" onclick="window.location.href='Nivel1.html?tamanhoTabuleiro=2'">Jogar</button>
+
+                <button id="Imprimir" onclick="window.open('ImpTab.html', '_blank')">Imprimir jogo</button>
+
+                <button id="fechar" onclick="window.location.href='https:\\www.google.com.br'">Fechar</button>
+            </div>
+        </section>
+    </main>
+
     <footer>
         Criado por Adriana, Greice, Pablo e Paulo em 2025.
     </footer>
-    <script src="../logica/logica.js"></script>
-</body>
+
 </html>

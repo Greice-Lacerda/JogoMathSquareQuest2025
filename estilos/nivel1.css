@@ -1,31 +1,5 @@
 /* ==========================================================================
-   Estilos Gerais e Cabeçalho
-   ========================================================================== */
-
-#cabecalho-principal {
-    border: none;
-    text-align: center;
-    padding: 10px 0;
-}
-
-#titulo1 h1 {
-    font-family: 'Lobster Two', cursive;
-    font-size: clamp(2.5em, 5vw, 4em);
-    color: #ffd700;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
-    margin: 0;
-}
-
-#titulo2 h2 {
-    font-family: 'Bree Serif', serif;
-    font-size: clamp(1.2em, 3vw, 2em);
-    color: #f0f0f0;
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.7);
-    margin-top: -10px;
-}
-
-/* ==========================================================================
-   MODO DE TELA CHEIA IMERSIVA
+    Estilos da pagina Nivel F1 - MODO DE TELA CHEIA IMERSIVA
    ========================================================================== */
 
 body.jogo-fullscreen {
@@ -53,19 +27,22 @@ body.jogo-fullscreen #jogo {
     gap: clamp(10px, 2vw, 20px);
 }
 
+#jogo{
+    margin-top: -3rem;
+}
+
 .controles1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 5px;
     border: solid outset 3px #ccc;
     border-radius: 10px;
-    background: rgba(248, 191, 191, 0.274);
+    background: rgba(248, 191, 191, 0.25);
     backdrop-filter: blur(5px);
     box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
-    height: 85vmin;
-    flex: 1;
-    min-width: 380px;
+    height: 80rem;
+    min-width: 36rem;
 }
 
 .controles11 {
@@ -75,13 +52,40 @@ body.jogo-fullscreen #jogo {
     padding: 15px;
     border: solid outset 3px #ccc;
     border-radius: 10px;
-    background: rgba(248, 191, 191, 0.274);
+    background: rgba(248, 191, 191, 0.25);
     backdrop-filter: blur(5px);
     box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
     height: 85vmin;
-    flex: 1;
-    min-width: 180px;
-    max-width: 200px;
+    min-width: 18rem;
+    max-width: 20rem;
+    justify-content: space-between;
+}
+
+#TitImag{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    position: static;
+}
+
+#TitImag2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    position: static;
+}
+
+.controles12 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
+    height: 80rem;
+    min-width: 60rem;
+    justify-content: space-between;
 }
 
 #tabuleiro {
@@ -100,15 +104,85 @@ body.jogo-fullscreen #jogo {
     border-radius: 5px;
 }
 
-/* ==========================================================================
-   AJUSTE DO PAINEL DE MENSAGENS E BOTÕES
-   ========================================================================== */
+#mensagem {
+    margin-top: 2rem;
+    font-size: clamp(0.9rem, 2vw, 1.8rem);
+    height: 15rem;
+    min-width: 60rem;
+    background: rgba(248, 191, 191, 0.25);        
+    text-align: center;
+    color: yellow;
+    line-height: 1.5;
+    font-weight: bold;
+    filter: drop-shadow(3px 3px rgb(6, 6, 6));
+    }
+
+#sairDoJogo,
+#resetarTabuleiro,
+#limparImagem,
+#paginaInicial {
+    margin-top: 4rem;
+    width: 90%;
+        max-width: 200px;
+        height: 50px;
+        margin: 10px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: clamp(0.9rem, 2vw, 1.8rem);
+        font-weight: bold;
+        border: outset yellow;
+        background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
+        color: white;
+        box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+        transition: transform 0.1s ease;
+}
+
+#sairDoJogo:hover,
+#resetarTabuleiro:hover,
+#limparImagem:hover,
+#paginaInicial:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+    
+#sairDoJogo:active,
+#resetarTabuleiro:active,
+#limparImagem:active,
+#paginaInicial:active {
+        transform: scale(0.95);
+    }
+
+
+.botoes-mensagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55%;
+    height: 5rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    padding: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 6rem auto;
+    font-size: clamp(0.9rem, 2vw, 1.8rem);
+    color: #f0f0f0;
+}
+
+.botoes-mensagem:hover {
+    transform: scale(1.1);
+        filter: brightness(1.2);
+}
+
+.botoes-mensagem:active {
+        transform: scale(0.95);
+    }
 
 
 /* Botão "Próximo Nível" em tons de Vermelho */
 #proximo-nivel {
     background: linear-gradient(135deg, #050505 5%, #fa0404 40%, #f39d91 75%, #f0f0f0 98%);
-    border-color: #f7d258; /* Borda em tom dourado para combinar */
+    border-color: #f7d258; /* Borda em tom dourado para combinar */    
 }
 
 /* 1. Define a animação de pulsar/cintilar (sem alteração aqui) */
@@ -127,6 +201,13 @@ body.jogo-fullscreen #jogo {
     }
 }
 
+/* Opcional: Melhora o efeito hover para os novos botões */
+#proximo-nivel:hover,
+#BtnImprimir:hover {
+    filter: brightness(1.3); /* Deixa o brilho um pouco mais intenso no hover */
+    border-color: white;
+}
+
 /* 2. Aplica a animação APENAS quando o botão NÃO está escondido */
 /* Este seletor significa: "aplique ao #proximo-nivel que NÃO tenha 'display:none' em seu atributo style" */
 #proximo-nivel:not([style*="display:none"]) {
@@ -139,86 +220,18 @@ body.jogo-fullscreen #jogo {
     border-color: #9ef01a; /* Borda em tom verde-limão para destaque */
 }
 
-/* Opcional: Melhora o efeito hover para os novos botões */
-#proximo-nivel:hover,
-#BtnImprimir:hover {
-    filter: brightness(1.3); /* Deixa o brilho um pouco mais intenso no hover */
-    border-color: white;
-}
-
-#jogo > .controles1:nth-child(4) {
-    justify-content: space-between;
-}
-
-#mensagem {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    color: yellow;
-    font-size: clamp(1rem, 3vw, 1.8rem);
-    line-height: 1.5;
-    font-weight: bold;
-    filter: drop-shadow(3px 3px rgb(6, 6, 6));
-}
-
-.botoes-mensagem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
 /* ==========================================================================
    Componentes Internos e Interações
    ========================================================================== */
 
 .legendas {
     color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1rem, 2.5vw, 2.5rem);
     font-weight: bold;
     text-align: center;
-    padding: 5px 10px;
+    padding: 2px;
     border-radius: 10px;
     filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
-}
-
-#titulo-nivel {
-    color: white;
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.controles1 button {
-    width: 90%;
-    max-width: 200px;
-    height: 50px;
-    margin: 10px 0;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    font-weight: bold;
-    border: outset yellow;
-    background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
-    color: white;
-    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
-    cursor: pointer;
-    transition: transform 0.1s ease;
-}
-
-.controles1 button:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
-}
-
-.controles1 button:active {
-    transform: scale(0.95);
 }
 
 #lista-imagens {
@@ -226,10 +239,9 @@ body.jogo-fullscreen #jogo {
     flex-wrap: wrap;
     flex-direction: column; /* Muda para o eixo vertical */
     align-items: center;    /* Centraliza as imagens na horizontal */
-    gap: 20px;              /* Espaçamento vertical entre as imagens */
-    overflow: hidden;
-    justify-content: center;
-    gap: 15px;
+    overflow: hidden;  
+    justify-content: space-between;
+    gap: 1.5rem;
     width: 100%;
 }
 
@@ -251,26 +263,275 @@ body.jogo-fullscreen #jogo {
    RESPONSIVIDADE
    ========================================================================== */
 
-@media (max-width: 900px) {
-    body.jogo-fullscreen #jogo {
-        flex-direction: column;
-        overflow-y: auto;
+/* Para telas < 414px (celulares em paisagem)*/
+@media (max-height: 450px) and (orientation: landscape) {
+
+    #jogo{
+        transform: scale(0.6);
     }
 
-    body.jogo-fullscreen #tabuleiro {
-        width: 90vw;
-        height: 90vw;
-        order: 2;
-    }
+
+.controles1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
+    height: 80rem;
+    min-width: 36rem;
+}
+
+.controles11 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
+    height: 85vmin;
+    min-width: 18rem;
+    max-width: 20rem;
+}
+
+#TitImag {
+    margin-top: -50rem;
+    margin-bottom: 5rem;
+}
+
+#TitImag2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    position: static;
+}
+
+.controles12 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 10px 12px 12px rgba(0, 0, 0, 0.7);
+    height: 40rem;
+    min-width: 30rem;
+    justify-content: space-between;
+}
+
+#mensagem {
+    margin-top: 2rem;
+    font-size: clamp(0.9rem, 2vw, 1.8rem);
+    height: 15rem;
+    min-width: 30rem;
+    background: rgba(248, 191, 191, 0.25);
+    text-align: center;
+    color: yellow;
+    line-height: 1.5;
+    font-weight: bold;
+    filter: drop-shadow(3px 3px rgb(6, 6, 6));
+}
+
+}
+
+/* Para telas < 414px (celulares em paisagem)*/
+@media (max-width: 414px) and (orientation: landscape) {
+    #jogo {
+            transform: scale(0.7);
+        }
     
-    .controles1 {
-        width: 90vw;
-        height: auto;
-        min-height: 150px;
-        flex: none;
+        #mensagem5 {
+            margin-top: -4rem;
+            transform: scale(0.7);
+        }
+    
+        .botoes-mensagem {
+            min-height: 20rem;
+            margin-top: -12rem;
+            transform: scale(0.7);
+        }
+    
+        .controles1 {
+            flex-direction: column;
+            height: 40rem;
+            top: -8rem;
+            margin: 6rem 0;
+            gap: 1.8rem;
+        }
+    
+        #proximo-nivel {
+            justify-content: center;
+            height: 5rem;
+            margin: 0 auto;
+        }
+    
+        #BotoesMenu {
+            flex-direction: column;
+            width: 50rem;
+            min-height: 20rem;
+            margin-top: -12rem;
+            gap: 0.5rem;
+            transform: scale(0.7);
+        }
+    
+        .controles11 {
+            flex-direction: column;
+            width: 20rem;
+            height: 40rem;
+            top: -2rem;
+            margin: 6rem 0;
+            gap: 0.5rem;
+    
+        }
+    
+        .controles1 button {
+            width: 50%;
+            height: 30%;
+            font-size: 1.4rem;
+            /* 18px */
+        }
+}
+
+/* --- Telas Maiores (Tablet Portrait): 415px (41.5rem) a 780px (78.0rem) --- */
+@media ((min-width: 415px) and (max-width: 780px) ) and (orientation: landscape) {
+
+    #jogo {
+            transform: scale(0.7);
+        }
+    
+        #mensagem5 {
+            margin-top: -4rem;
+            transform: scale(0.7);
+        }
+    
+        .botoes-mensagem {
+            min-height: 20rem;
+            margin-top: -12rem;
+            transform: scale(0.7);
+        }
+    
+        .controles1 {
+            flex-direction: column;
+            height: 40rem;
+            top: -8rem;
+            margin: 6rem 0;
+            gap: 1.8rem;
+        }
+    
+        #proximo-nivel {
+            justify-content: center;
+            height: 5rem;
+            margin: 0 auto;
+        }
+    
+        #BotoesMenu {
+            flex-direction: column;
+            width: 50rem;
+            min-height: 20rem;
+            margin-top: -12rem;
+            gap: 0.5rem;
+            transform: scale(0.7);
+        }
+    
+        .controles11 {
+            flex-direction: column;
+            width: 20rem;
+            height: 40rem;
+            top: -2rem;
+            margin: 6rem 0;
+            gap: 0.5rem;
+    
+        }
+    
+        .controles1 button {
+            width: 50%;
+            height: 30%;
+            font-size: 1.4rem;
+            /* 18px */
+        }
+}
+
+/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px (78.1rem) a 1000px (101.5rem) --- */
+@media (min-width: 781px) and (max-width: 1000px) {
+     #jogo {
+            transform: scale(0.7);
+        }
+    
+        #mensagem2 {
+            margin-top: -4rem;
+            transform: scale(0.7);
+        }
+    
+        .botoes-mensagem {
+            min-height: 20rem;
+            margin-top: -12rem;
+            transform: scale(0.7);
+        }
+    
+        .controles1 {
+            flex-direction: column;
+            height: 40rem;
+            top: -8rem;
+            margin: 6rem 0;
+            gap: 1.8rem;
+        }
+    
+        #proximo-nivel {
+            justify-content: center;
+            height: 5rem;
+            margin: 0 auto;
+        }
+    
+        #BotoesMenu {
+            flex-direction: column;
+            width: 50rem;
+            min-height: 20rem;
+            margin-top: -12rem;
+            gap: 0.5rem;
+            transform: scale(0.7);
+        }
+    
+        .controles11 {
+            flex-direction: column;
+            width: 20rem;
+            height: 40rem;
+            top: -2rem;
+            margin: 6rem 0;
+            gap: 0.5rem;
+    
+        }
+    
+        .controles1 button {
+            width: 50%;
+            height: 30%;
+            font-size: 1.4rem;
+            /* 18px */
+        }
+}
+
+/* --- Telas Grandes (Desktop): 1016px (101.6rem) e maiores --- */
+@media (min-width: 1001px) {
+
+    .controles122 {
+        margin: 3.0rem 6.0rem;
+        /* 10px 60px */
+        top: -9.0rem;
+        /* -20px */
+        width: 60rem;
+        /* 600px */
+        height: 22rem;
+        /* 220px */
     }
 
-    #jogo > .controles1:nth-child(1) { order: 1; } /* Menu */
-    #jogo > .controles1:nth-child(3) { order: 3; } /* Imagens */
-    #jogo > .controles1:nth-child(4) { order: 4; } /* Mensagens */
+    footer {
+        font-size: 2.8rem;
+        /* 28px */
+    }
 }

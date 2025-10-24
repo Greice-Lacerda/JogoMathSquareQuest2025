@@ -109,12 +109,10 @@ img{
 }
 
 /* Rodapé */
-footer {
-    text-align: center; /* Centraliza o texto */
-    padding: 15px;      /* Adiciona um espaçamento interno */
-    margin-top: auto;   /* Empurra o rodapé para o final (se houver espaço) */
-    /* REMOVIDO: bottom */
-}
+ footer {
+     display: hidden;
+     display: none;
+ }
 }
 
 /* --- Telas Maiores (Tablet Portrait): 415px a 780px --- */
