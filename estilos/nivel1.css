@@ -1,6 +1,6 @@
 /* ==========================================================================
-    Estilos da pagina Nivel F1 - REFATORADO PARA FLUIDO
-   ========================================================================== */
+Estilos da pagina Nivel F1 - REFATORADO PARA FLUIDO
+========================================================================== */
 
 /* --- TELA CHEIA IMERSIVA (Sem Mudança) --- */
 body.jogo-fullscreen {
@@ -126,9 +126,9 @@ body.jogo-fullscreen #jogo {
     height: auto;
     /* Altura baseada no conteúdo */
 
-    font-size: clamp(1.6rem, 2vmin, 2.2rem);
+    font-size: clamp(1.6rem, 2vmin, 2.5rem);
     /* Fonte fluida */
-    background: rgba(248, 191, 191, 0.25);
+    background: rgba(248, 191, 191, 0);
     text-align: center;
     color: yellow;
     line-height: 1.5;
@@ -355,8 +355,8 @@ footer{
         /* Mantém lado a lado */
         justify-content: center;
         align-items: center;
-        gap: 1vw;
-        padding: 1vh 1vw;
+        gap: 0.5vw;
+        padding: 0.5vh 0.5vw;
     }
 
     /* Painel de Imagens (Esquerda) */
@@ -368,7 +368,7 @@ footer{
         height: 98vh;
         /* Altura total */
         min-width: 0;
-        padding: 1vh;
+        padding: 0.5vh;
         overflow-y: auto;
         /* Permite rolar a lista de imagens */
     }
@@ -413,7 +413,7 @@ footer{
         /* Ocupa 25% da largura */
         height: 98vh;
         min-width: 0;
-        padding: 1vh;
+        padding: 0.5vh;
         margin: 0 auto;
         overflow: hidden;
     }
@@ -436,7 +436,7 @@ footer{
     .botoes-mensagem,
     #proximo-nivel {
         width: 100%;
-        margin: 1vh auto;
+        margin: 0.5vh auto;
         font-size: 1.8vh;
     }
 
