@@ -3,72 +3,85 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathSquareQuest: Aventura dos Padrões - Nível F4: 5x5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Math Square Quest: Aventura dos Padrões - Nível F4: 5 x 5</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../estilos/nivel1.css">
+    <link rel="stylesheet" href="../estilos/Nivel2.css">
     <link rel="stylesheet" href="../estilos/comuns.css">
 </head>
 
 <body class="jogo-fullscreen">
 
-    <header id="cabecalho-principal">
-        <div id="titulo1">
-            <h1>MathSquareQuest</h1>
-        </div>
-        <div id="titulo2">
-            <h2>Aventura dos Padrões</h2>
-        </div>
+    <header>
+        <h1 id="titulo1">Math Square Quest</h1>
+        <h2 id="titulo2">Aventura dos Padrões</h2>
     </header>
 
     <main>
         <section>
+
             <div id="jogo">
 
-                <fieldset class="controles1">
+                <div class="controles1">
                     <legend class="legendas">Tabuleiro do jogo</legend>
                     <div id="tabuleiro">
                         <canvas id="tela"></canvas>
                     </div>
-                </fieldset>
+                </div>
 
-                <fieldset class="controles11">
-                    <legend class="legendas">Imagens</legend>
+                <div class="controles11">
+                    <div id="TitImag">
+                        <h1 class="legendas">Imagens</h1>
+                    </div>
                     <div id="lista-imagens"></div>
-                </fieldset>
+                </div>
 
-                <fieldset class="controles1">
-                    <legend class="legendas">Mensagens do jogo</legend>
+                <div class="controles12">
 
-                    <div id="mensagem"></div>
+                    <h2 id="TitImag2" class="legendas">Nível F4 (5 x 5) - Mensagens do jogo:</h2>
 
-                    <div class="botoes-mensagem">
-                        <button id="BtnImprimir" style="display:none;">Imprimir jogo</button>
+                    <div id="mensagem">
+
                     </div>
 
-                    <fieldset class="controles1">
-                        <legend class="legendas">Menu</legend>
+                    <button id="BtnImprimir" class="botoes-mensagem" style="display:none;">Imprimir jogo</button>
+
+
+                    <div id="BotoesMenu" class="controles13">
+
+
+                        <h1 id="TitImag3" class="legendas">Menu</h1>
+
+                        <br><br>
                         <button id="paginaInicial">Página Inicial</button>
+
                         <button id="limparImagem">Desfazer Jogada</button>
+
                         <button id="resetarTabuleiro">Reiniciar</button>
+
                         <button id="sairDoJogo">Sair</button>
 
-                        <h2 id="titulo-nivel"><br>Nível F4 - 5x5<br><br></h2>
+                        <br><br>
 
-                        <button id="proximo-nivel" style="display:none;">Próximo Nível</button>
-                    </fieldset>
+                        <button id="proximo-nivel" class="botoes-mensagem" style="display:none;">Próximo Nível</button>
 
-                </fieldset>
+                    </div>
+
+                </div>
+
             </div>
+
         </section>
     </main>
-    <footer id="rodape">
+
+    <footer>
         Criado por Adriana, Greice, Pablo e Paulo em 2025.
     </footer>
+
     <script src="../logica/logicaF4.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </body>

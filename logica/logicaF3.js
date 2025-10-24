@@ -1,5 +1,5 @@
 // Aguarda o carregamento completo do DOM para garantir que todos os elementos HTML existam
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     // --- 1. SELEÇÃO DOS ELEMENTOS DO JOGO ---
     const listaImagens = document.getElementById('lista-imagens');
@@ -13,20 +13,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabuleiroContainer = document.getElementById('tabuleiro');
     const paginaInicialBtn = document.getElementById('paginaInicial');
     const sairDoJogoBtn = document.getElementById('sairDoJogo');
-    
+
     // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
     const tamanho = 4; // Nível 3: Tabuleiro 4x4
     let usedImages = [];
     let imageHistory = [];
     let cellSize = 0; // Será calculado dinamicamente
 
-    // ALTERAÇÃO: Apenas declaramos os sons aqui, sem criar o objeto Audio ainda.
     let errorSound;
     let clapSound;
-    let audioInicializado = false; // Flag para garantir que o áudio seja inicializado apenas uma vez
+    let audioInicializado = false;
 
-    // Lista de todas as imagens disponíveis
+    // --- REATORAÇÃO: Variáveis de estado para o arraste manual ---
+    let isDragging = false; // Flag para saber se estamos arrastando
+    let draggedItemSrc = null; // A 'src' da imagem que estamos arrastando
+    let ghostImage = null; // A imagem "fantasma" que segue o mouse/dedo
+    // --- FIM REATORAÇÃO ---
+
     const imagens = [
+        // ... (sua lista de imagens permanece a mesma) ...
         "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
         "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
         "../imagens/balao.png", "../imagens/bispo1.png", "../imagens/bola.jpeg", "../imagens/boliche.png",
@@ -46,19 +51,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- 3. FUNÇÕES DE RENDERIZAÇÃO E LÓGICA ---
 
-    // ALTERAÇÃO: Nova função para inicializar o áudio na primeira interação do usuário
     function inicializarAudio() {
         if (!audioInicializado) {
             errorSound = new Audio('../sons/Erro.mp3');
             clapSound = new Audio('../sons/Aplausos.mp3');
-            errorSound.load(); // Pré-carrega o áudio
+            errorSound.load();
             clapSound.load();
             audioInicializado = true;
             console.log("Áudio inicializado pelo usuário.");
         }
     }
 
-    // ALTERAÇÃO: Função helper para tocar sons, garantindo que reiniciem
     function tocarSom(som) {
         if (som) {
             som.currentTime = 0;
@@ -67,6 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function ajustarERedesenharCanvas() {
+        // Garantir que o container tenha um tamanho antes de ler
+        if (tabuleiroContainer.clientWidth === 0) {
+            // Se o container não tiver largura, espera um ciclo de renderização
+            requestAnimationFrame(ajustarERedesenharCanvas);
+            return;
+        }
+
         const containerSize = tabuleiroContainer.clientWidth;
         canvas.width = containerSize;
         canvas.height = containerSize;
@@ -94,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
-        img.onload = function() {
+        img.onload = function () {
             const padding = cellSize * 0.15;
             const imgSize = cellSize - (2 * padding);
             const x = col * cellSize + padding;
@@ -105,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         img.src = imgSrc;
     }
-    
+
     function redesenharTodasImagens() {
         desenharTabuleiro();
         for (let row = 0; row < tamanho; row++) {
@@ -124,7 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
         mensagem.innerHTML = "Arraste as imagens para o tabuleiro!<br>Não pode repetir na mesma linha ou coluna.";
         proximoNivelBtn.style.display = 'none';
         imprimirBtn.style.display = 'none';
-        
+
+        // --- REATORAÇÃO: Garante que botões sejam reativados ---
+        resetarBtn.disabled = false;
+        limparBtn.disabled = false;
+        // --- FIM REATORAÇÃO ---
+
         ajustarERedesenharCanvas();
         embaralhar(imagens);
 
@@ -132,29 +147,41 @@ document.addEventListener('DOMContentLoaded', function() {
             const imgElement = document.createElement('img');
             imgElement.src = imagens[i];
             imgElement.alt = imagens[i].split('/').pop();
-            imgElement.draggable = true;
-            imgElement.addEventListener('dragstart', (event) => {
-                inicializarAudio(); // ALTERAÇÃO: O áudio é desbloqueado aqui!
-            event.dataTransfer.setData('text/plain', event.target.src);
-            });
+
+            // --- REATORAÇÃO: Substituído 'draggable' e 'dragstart' por 'mousedown' e 'touchstart' ---
+            // imgElement.draggable = true; // REMOVIDO
+            // imgElement.addEventListener('dragstart', ...); // REMOVIDO
+            imgElement.addEventListener('mousedown', onDragStart);
+            imgElement.addEventListener('touchstart', onDragStart);
+            // --- FIM REATORAÇÃO ---
+
             listaImagens.appendChild(imgElement);
         }
     }
 
-    function handleDrop(event) {
-        event.preventDefault();
-        const src = event.dataTransfer.getData('text/plain');
+    // --- REATORAÇÃO: Lógica de "soltar" extraída da função de evento original ---
+    // Esta função agora processa a lógica do jogo, recebendo as coordenadas e a 'src'.
+    function processarDrop(clientX, clientY, src) {
         const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        // Verifica se o drop foi dentro dos limites do canvas
+        if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+            return; // Sai se o drop foi fora do canvas
+        }
+
         const col = Math.floor(x / cellSize);
         const row = Math.floor(y / cellSize);
 
+        // Verifica se a célula é válida (caso de cálculo impreciso)
+        if (row >= tamanho || col >= tamanho) return;
+
         if (usedImages[row][col] !== null) {
-            tocarSom(errorSound); // ALTERAÇÃO: Usa a nova função para tocar
+            tocarSom(errorSound);
             mensagem.textContent = "Célula já ocupada. Tente outra.";
         } else if (usedImages[row].includes(src) || usedImages.map(r => r[col]).includes(src)) {
-            tocarSom(errorSound); // ALTERAÇÃO: Usa a nova função para tocar
+            tocarSom(errorSound);
             mensagem.textContent = "Imagem repetida na linha ou coluna.";
         } else {
             usedImages[row][col] = src;
@@ -168,20 +195,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 imprimirBtn.style.display = 'block';
                 resetarBtn.disabled = true;
                 limparBtn.disabled = true;
-
-                tocarSom(clapSound); // ALTERAÇÃO: Usa a nova função para tocar
-
-                // ✅ A MÁGICA ACONTECE AQUI
+                tocarSom(clapSound);
                 confetti({
                     particleCount: 500,
                     spread: 1000,
                     origin: { y: 0.3 },
-                    zIndex: 9999 
-                // Força os confetes a aparecerem na camada mais alta
+                    zIndex: 9999
                 });
             }
         }
     }
+    // --- FIM REATORAÇÃO ---
+
 
     function limparUltimaJogada() {
         if (imageHistory.length > 0) {
@@ -191,38 +216,144 @@ document.addEventListener('DOMContentLoaded', function() {
             mensagem.textContent = "Última jogada desfeita.";
             proximoNivelBtn.style.display = 'none';
             imprimirBtn.style.display = 'none';
+
+            // --- REATORAÇÃO: Garante que botões sejam reativados ---
+            resetarBtn.disabled = false;
+            limparBtn.disabled = false;
+            // --- FIM REATORAÇÃO ---
         } else {
             mensagem.textContent = "Nenhuma jogada para limpar.";
         }
     }
 
-    // --- 4. REGISTRO DOS EVENT LISTENERS ---
-    
-    canvas.addEventListener('dragover', (event) => event.preventDefault());
-    canvas.addEventListener('drop', handleDrop);
-    
+    // --- 4. NOVOS EVENT LISTENERS (Mouse e Toque unificados) ---
+
+    // --- REATORAÇÃO: Função 'onDragStart' (Início do arraste) ---
+    function onDragStart(event) {
+        // Previne o comportamento padrão (como 'drag' nativo do browser em imagens)
+        event.preventDefault();
+
+        // Verifica se o alvo é uma imagem
+        if (event.target.tagName !== 'IMG') return;
+
+        inicializarAudio(); // Garante que o áudio seja inicializado
+
+        isDragging = true;
+        draggedItemSrc = event.target.src;
+
+        // Cria a imagem "fantasma" (ghost)
+        ghostImage = event.target.cloneNode();
+        ghostImage.style.position = 'fixed';
+        ghostImage.style.pointerEvents = 'none'; // Impede a imagem de bloquear outros eventos
+        ghostImage.style.opacity = '0.7';
+        ghostImage.style.zIndex = '1000';
+        ghostImage.style.width = `${event.target.clientWidth}px`; // Mantém o tamanho
+        ghostImage.style.height = `${event.target.clientHeight}px`;
+        document.body.appendChild(ghostImage);
+
+        // Posiciona a imagem fantasma
+        onDragMove(event);
+
+        // Adiciona os listeners GLOBAIS para movimento e soltura
+        window.addEventListener('mousemove', onDragMove);
+        window.addEventListener('mouseup', onDragEnd);
+
+        // { passive: false } é CRÍTICO para o touchmove permitir o preventDefault()
+        window.addEventListener('touchmove', onDragMove, { passive: false });
+        window.addEventListener('touchend', onDragEnd);
+    }
+
+    // --- REATORAÇÃO: Função 'onDragMove' (Movimento do arraste) ---
+    function onDragMove(event) {
+        if (!isDragging) return;
+
+        // CRÍTICO para mobile: Impede a página de rolar enquanto arrasta
+        if (event.type === 'touchmove') {
+            event.preventDefault();
+        }
+
+        // Normaliza o evento para obter coordenadas (funciona para mouse e toque)
+        let clientX, clientY;
+        if (event.touches) {
+            // Se for 'touchmove' ou 'touchstart'
+            clientX = event.touches[0].clientX;
+            clientY = event.touches[0].clientY;
+        } else {
+            // Se for 'mousemove' ou 'mousedown'
+            clientX = event.clientX;
+            clientY = event.clientY;
+        }
+
+        // Move a imagem fantasma, centralizando-a no ponteiro/dedo
+        if (ghostImage) {
+            ghostImage.style.left = `${clientX - ghostImage.width / 2}px`;
+            ghostImage.style.top = `${clientY - ghostImage.height / 2}px`;
+        }
+    }
+
+    // --- REATORAÇÃO: Função 'onDragEnd' (Fim do arraste / "Drop") ---
+    function onDragEnd(event) {
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        // Limpa os listeners GLOBAIS
+        window.removeEventListener('mousemove', onDragMove);
+        window.removeEventListener('mouseup', onDragEnd);
+        window.removeEventListener('touchmove', onDragMove);
+        window.removeEventListener('touchend', onDragEnd);
+
+        // Remove a imagem fantasma
+        if (ghostImage && document.body.contains(ghostImage)) {
+            document.body.removeChild(ghostImage);
+        }
+
+        // Normaliza o evento para obter as coordenadas de *soltura*
+        let clientX, clientY;
+        if (event.changedTouches) {
+            // Se for 'touchend', usa 'changedTouches'
+            clientX = event.changedTouches[0].clientX;
+            clientY = event.changedTouches[0].clientY;
+        } else {
+            // Se for 'mouseup', usa 'clientX/Y'
+            clientX = event.clientX;
+            clientY = event.clientY;
+        }
+
+        // Processa a lógica de soltar
+        processarDrop(clientX, clientY, draggedItemSrc);
+
+        // Limpa as variáveis de estado
+        ghostImage = null;
+        draggedItemSrc = null;
+    }
+
+
+    // --- 5. REGISTRO DE EVENTOS (Restante) ---
+
+
     window.addEventListener('resize', ajustarERedesenharCanvas);
 
     resetarBtn.addEventListener('click', iniciarJogo);
     limparBtn.addEventListener('click', limparUltimaJogada);
-    
+
     paginaInicialBtn.addEventListener('click', () => {
         window.location.href = '../index.html';
     });
-    
+
     sairDoJogoBtn.addEventListener('click', () => {
         window.location.href = 'https://www.google.com.br';
     });
 
     proximoNivelBtn.addEventListener('click', () => {
+        // Link para a F4 (Nível 4)
         window.location.href = 'Nivel4.html?tamanhoTabuleiro=5';
     });
 
     imprimirBtn.addEventListener('click', () => {
-    // Abre 'Imprimir.html' em uma nova guia
-    window.open('ImpTab.html', '_blank');
+        window.open('ImpTab.html', '_blank');
     });
 
-    // --- 5. INICIALIZAÇÃO DO JOGO ---
+    // --- 6. INICIALIZAÇÃO DO JOGO ---
     iniciarJogo();
 });

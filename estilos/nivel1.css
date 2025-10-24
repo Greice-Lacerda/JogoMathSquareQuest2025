@@ -273,8 +273,8 @@ footer{
 }
 
 /* ==========================================================================
-   Componentes Internos e Interações
-   ========================================================================== */
+Componentes Internos e Interações
+========================================================================== */
 
 .legendas {
     color: rgba(255, 255, 255, 0.9);
@@ -368,7 +368,7 @@ footer{
         height: 98vh;
         /* Altura total */
         min-width: 0;
-        padding: 0.5vh;
+        padding: 1vh;
         overflow-y: auto;
         /* Permite rolar a lista de imagens */
     }
@@ -383,7 +383,7 @@ footer{
     #lista-imagens {
         flex-direction: column;
         flex-wrap: wrap;
-        gap: 0.5vw;
+        gap: 1vw;
     }
 
     /* Imagens individuais */
