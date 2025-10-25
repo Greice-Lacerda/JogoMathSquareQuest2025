@@ -1,57 +1,72 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo Nivel Difícil - Fase 4</title>
-    <link rel="stylesheet" href="styles2.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>    
-    <script src="logicaD.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Math Square Quest: Aventura dos Padrões - Nível Difícil (D5)</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Parisienne&family=Playwrite+HR+Lijeva:wght@100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/NivelD.css">
 </head>
-<body>
-<div id="inicial">Quebra-cabeça</div><br>
-    <div id="jogo">
-        <fieldset id="campos">
-            <legend>Menu</legend>
-            <button id="voltar" onclick="window.location.href='NivelDD3.html'">Voltar</button>
-            <button id="limpar-tabuleiro">Limpar</button>
-            <button id="reiniciar" onclick="window.location.href='index.html'">Reiniciar</button>
-            <button id="fechar_jogo" onclick="window.location.href='https://www.google.com.br/#spf=1603558156590'">Fechar</button>
-            <button id="Exibir-combinacoes">Exibir/Ocultar combinações</button> 
-            <div>
-                <h1 id="titulo-nivel"><br>Nível D4<br>5x5</h1><br>
-                <button id="proximo-nivel" style="display:none;" onclick="window.location.href='NivelDD5.html?tamanhoTabuleiro=6'">Próximo página</button>
+
+<body class="jogo-fullscreen">
+
+    <div id="app-container">
+        <header id="cabecalho-principal">
+            <h1 id="titulo1">Math Square Quest</h1>
+            <h2 id="titulo2">Aventura dos Padrões</h2>
+        </header>
+
+        <main>
+            <div id="jogo">
+                <div id="paineis-superiores">
+
+                    <div id="painel-tabuleiro" class="painel-jogo">
+                        <h1 class="legendas">Nível D5 - Tábua de Cayley</h1>
+                        <div id="tabuleiro">
+                            <canvas id="tela"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="painel-imagens" class="painel-jogo">
+                        <h1 class="legendas">Resultados</h1>
+                        <div id="lista-imagens"></div>
+
+                        <div id="painel-mensagens" class="painel-jogo">
+                            <h1 class="legendas">Mensagens</h1>
+                            <div id="mensagem"> </div>
+                            <div id="lista-resultados"> </div>
+                        </div>
+                    </div>
+
                 </div>
-        </fieldset>
-        <fieldset id="campos">
-            <legend>Tabuleiro do jogo</legend>
-            <div id="tabuleiro">
-                <canvas id="tela" width="620" height="400"></canvas>
+
+                <div id="painel-menu" class="painel-jogo">
+                    <h1 class="legendas">Menu</h1>
+                    <button id="limparImagem">Desfazer Jogada</button>
+                    <button id="resetarTabuleiro">Reiniciar Nível</button> <button
+                        id="paginaInicial">Instruções</button>
+                    <button id="proximo-nivel">Próximo Nível</button>
+
+                </div>
+
             </div>
-        </fieldset>
-        <fieldset id="campos">
-            <legend>Imagens</legend>
-            <div id="lista-imagens"></div>
-        </fieldset>
-        <fieldset id='fieldset-combinacao'>            
-                <legend>Combinações</legend>
-                <div id="lista-combinacoes">
-                    <div>Combinação 1</div>
-                    <div>Combinação 2</div>
-                    <div>Combinação 3</div>
-                    <div>Combinação 4</div>
-                    <div>Combinação 5</div>
-                    <div>Combinação 6</div>
-                    <!-- Adicione mais combinações conforme necessário -->
-                </div>                      
-        </fieldset>
-        <fieldset id="campos" style="grid-column: span 4;">
-            <legend>Mensagens do jogo</legend>
-            <div id="mensagens">
-                <div id="mensagem"> </div>
-            </div>
-        </fieldset>
     </div>
+    </main>
+
+    <footer id="rodape">
+        Criado por Adriana, Greice, Pablo e Paulo em 2025.
+    </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script src="../logica/logicaD.js"></script>
 </body>
+
 </html>

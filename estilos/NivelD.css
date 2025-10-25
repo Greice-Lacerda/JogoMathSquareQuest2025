@@ -1,85 +1,35 @@
 /* ==========================================================================
-   Estilos NivelD.css
-   Refatorado por "Senior Dev" com foco em 100% de fluidez, 
-   sem barras de rolagem e aviso de rotação.
+ESTILOS MATH SQUARE QUEST - NÍVEL D
+(Layout Principal: GRID 2:1 Largura e Altura Unificada)
 ========================================================================== */
 
-/* --- 1. CONFIGURAÇÃO DE TELA CHEIA (SEM SCROLL) --- */
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    /* Usa 100dvh (Dynamic Viewport Height) para preencher a tela visível 
-      em vez de 100vh, que ignora barras de UI do navegador mobile.
-    */
-    height: 100dvh;
-    overflow: hidden;
-    /* REQUISITO: Sem barras de rolagem */
-    font-family: 'Roboto Mono', sans-serif;
-    background-color: #333;
-    /* Fundo para o app */
-}
-
-/* Oculta header/footer do 'comuns.css' */
+/* --- TELA CHEIA (Remove Cabeçalho e Rodapé) --- */
 body.jogo-fullscreen #cabecalho-principal,
 body.jogo-fullscreen #rodape {
     display: none;
 }
 
-#app-container {
-    width: 100%;
-    height: 100dvh;
-    display: flex;
-    /* Mantém flex para centralizar o #jogo */
-    overflow: hidden;
-    /* REQUISITO: Sem barras de rolagem */
-}
-
-/* --- 2. AVISO DE ROTAÇÃO (REQUISITO) --- */
-/* Este elemento (do HTML refatorado) é exibido apenas 
-  em telas pequenas no modo Retrato.
-*/
-#aviso-rotacao {
-    display: none;
-    /* Oculto por padrão */
-    position: fixed;
-    inset: 0;
-    background: #111;
-    color: white;
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    font-size: 1.2rem;
-}
-
-
-/* --- 3. ESTRUTURA PRINCIPAL (3 COLUNAS FLUIDAS) --- */
+/* -----------------------------------------------------------
+1. ESTRUTURA PRINCIPAL (2 COLUNAS GRID: Jogo (2fr) | Menu (1fr))
+----------------------------------------------------------- */
 #jogo {
     display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
     width: 100%;
     height: 100%;
-    flex-grow: 1;
-    /* Ocupa todo o #app-container */
-}
-
-#paineis-superiores {
-    width: 100%;
-    height: 100%;
-    /* vmin é ótimo para padding fluido */
-    padding: 1.5vmin;
+    padding: 1vmin;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    /* Sempre em linha */
-    justify-content: center;
-    align-items: stretch;
+    /* Define as 2 Colunas Principais (Largura): 2fr (Jogo) | 1fr (Menu) */
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    /* Garante que todos os painéis tenham a mesma altura */
     gap: 1.5vmin;
 }
 
-/* --- 4. PAINÉIS DE JOGO (FLUIDOS) --- */
+/* -----------------------------------------------------------
+2. ESTILO BASE DO PAINEL
+----------------------------------------------------------- */
 .painel-jogo {
     display: flex;
     flex-direction: column;
@@ -91,58 +41,47 @@ body.jogo-fullscreen #rodape {
     backdrop-filter: blur(5px);
     box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.6);
     min-width: 0;
-    /* Correção de Flexbox para permitir encolhimento */
-    overflow: hidden;
-    /* REQUISITO: Sem barras de rolagem */
 }
 
-/* 1. Painel Tabuleiro (O Quadrado Central) */
-#painel-tabuleiro {
-    flex-grow: 0;
-    /* Não cresce/encolhe com flex */
-    flex-shrink: 0;
-    aspect-ratio: 1 / 1;
-    /* Força o quadrado */
-
-    /* Altura é 100% do container pai (que é 100dvh - padding).
-      A largura será definida pelo aspect-ratio.
-      max-width garante que ele não saia da tela em viewports muito largas.
-    */
-    height: 100%;
-    max-height: calc(100dvh - 3vmin);
-    /* Altura do viewport - padding */
-    max-width: calc(100dvh - 3vmin);
-    /* Garante que o quadrado caiba */
-    justify-content: center;
-}
-
-/* 2. Painel Imagens (Fluido, sem scroll) */
-#painel-imagens {
-    flex-basis: 20%;
-    /* Base de 20% da largura */
-    flex-grow: 1;
-    /* Cresce para preencher */
-    min-width: 150px;
-    /* CUIDADO: Isso pode causar overflow. Veremos. */
-    justify-content: flex-start;
-}
-
-/* 3. Painel Mensagens (Fluido, sem scroll) */
-#painel-mensagens {
-    flex-basis: 20%;
-    flex-grow: 1;
-    min-width: 180px;
-    justify-content: space-between;
-}
-
-
-/* --- 5. COMPONENTES INTERNOS (FLUIDOS) --- */
-
-/* Canvas (Preenche o painel quadrado) */
-#tabuleiro {
+/* -----------------------------------------------------------
+3. PAINÉIS SUPERIORES (Área de Jogo - Ocupa a coluna 2fr)
+----------------------------------------------------------- */
+#paineis-superiores {
+    /* Ocupa a primeira coluna grande (2fr) */
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    /* Divide o espaço INTERNO entre Tabuleiro (2fr) e Imagens (1fr) */
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    /* Garante que Tabuleiro e Imagens tenham a mesma altura */
+    gap: 1.5vmin;
+    padding: 0;
     width: 100%;
     height: 100%;
+}
+
+/* -----------------------------------------------------------
+4. PAINEL TABULEIRO (interno ao #paineis-superiores)
+----------------------------------------------------------- */
+#painel-tabuleiro {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-width: 45vw;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Canvas */
+#tabuleiro {
+    width: 98%;
+    height: 98%;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #tela {
@@ -153,230 +92,334 @@ body.jogo-fullscreen #rodape {
     border-radius: 5px;
 }
 
-/* Legendas (h2, h3 - Atualizado do HTML) */
-.legendas {
-    width: 95%;
-    text-align: center;
-    color: #1a2b1a;
-    background: linear-gradient(to right, #ffffff, #c0c0c0, #ffffff);
-    padding: 0.5vmin;
-    margin: 0.5vmin 0 1vmin 0;
-    border-radius: 5px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    /* REQUISITO: Fonte fluida com clamp() */
-    font-size: clamp(1rem, 2.5vmin, 1.8rem);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    border: 1px solid #aaa;
+/* -----------------------------------------------------------
+5. PAINEL RESULTADOS (interno ao #paineis-superiores) - D&D AJUSTADO
+----------------------------------------------------------- */
+#painel-imagens {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 60rem;
+    max-width: 65rem;
+    height: stretch;
 }
 
-/* Lista Imagens (SEM SCROLL) */
+/* Lista Imagens (Scrollable) - AJUSTADA PARA FLEX/WRAP D&D */
 #lista-imagens {
     display: flex;
-    /* MUDADO: 'row' e 'wrap' é a única forma de garantir 
-      que não haja barra de rolagem, cumprindo o requisito.
-    */
     flex-direction: row;
+    /* Altera para linha para caber mais itens horizontalmente */
     flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-    /* Alinha itens no topo */
-    gap: 1vmin;
-    width: 100%;
+    /* Permite quebra para uma ou duas colunas */
+    align-items: flex-start;
+    /* Alinha itens ao topo */
+    /*justify-content: space-evenly;
+    /* Distribui itens uniformemente */
+    /*overflow-y: auto;*/
     flex-grow: 1;
-    /* Ocupa o espaço restante no painel */
-    overflow: hidden;
-    /* REQUISITO: Sem barras de rolagem */
+    padding: 0.5vmin;
+    gap: 0.5vmin;
+    /* Espaçamento menor entre os itens */
+    width: 100%;
 }
 
 #lista-imagens img {
-    /* REQUISITO: Imagens fluidas */
-    width: clamp(40px, 12vmin, 100px);
+    /* Diminui o tamanho e remove margens grandes */
+    display: block;
+    margin: 0;
+    width: 40%;
+    /* Permite 2 itens por linha (2 x 40% = 80%) */
+    max-width: 80px;
+    /* Limite máximo para imagens */
     height: auto;
-    aspect-ratio: 1/1;
-    object-fit: contain;
-    border: 2px solid #555;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     cursor: grab;
-    transition: transform 0.2s, box-shadow 0.2s;
+    /* Indica que o elemento é arrastável */
+    filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.4));
+    border-radius: 5px;
+    /* Borda menos arredondada */
+    transition: transform 0.1s ease;
 }
 
 #lista-imagens img:hover {
-    transform: scale(1.1);
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+    transform: scale(1.05);
 }
 
-/* Mensagens (Ocupa espaço, sem scroll) */
-#mensagem {
-    width: 95%;
-    flex-grow: 1;
-    /* Ocupa espaço entre legenda e menu */
-    min-height: 0;
-    /* Correção Flexbox */
-    padding: 1vmin;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-    overflow: hidden;
-    /* REQUISITO: Sem barras de rolagem */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* REQUISITO: Fonte fluida */
-    font-size: clamp(0.9rem, 2vmin, 1.3rem);
-    line-height: 1.4;
+.arrastavel:active {
+    cursor: grabbing;
+    opacity: 0.8;
 }
 
-/* Painel Menu Interno (Agora <nav>) */
-#painel-menu {
+/* --- ESTILOS PARA O PAINEL LATERAL --- */
+#painel-lateral {
+    /* ... (Mantenha estilos existentes, mas garanta que seja um container Flex ou Grid Vertical) */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-top: 1vmin;
-    gap: 1vmin;
+    gap: 1.5vmin;
+    /* Espaço entre a lista de imagens e o painel de mensagens */
 }
 
-.botoes-mensagem {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 1vmin 0;
-}
-
-/* Botões (Fluidos) */
-#painel-menu button,
-.botoes-mensagem button {
-    width: 95%;
-    max-width: 250px;
-    /* Limite em telas grandes */
-    height: auto;
-    margin: 0;
-    /* Gap do container flex cuida do espaçamento */
-    padding: 1.2vh 1vw;
+/* 1. POSICIONAMENTO: Painel de Mensagens 2rem abaixo da lista de imagens */
+#painel-mensagens {
+    /* Mantenha suas regras de estilo de fundo, etc. */
+    padding: 1rem;
+    background-color: #22222294;
     border-radius: 8px;
-    /* REQUISITO: Fonte fluida */
-    font-size: clamp(0.9rem, 2.2vmin, 1.4rem);
+    color: #f9fd05;
+    min-width: 60rem;
+    /* Adicione estas regras para que o conteúdo interno seja gerenciado */
+    flex-grow: 1;
+    /* Permite que ele cresça e preencha o espaço restante */
+    display: flex;
+    flex-direction: column;
+    margin-bottom:0.5rem;
+    height: 68rem;
+    /* A distância de 2rem será gerenciada pelo GAP ou margem, mas o GAP no #painel-lateral é melhor */
+}
+
+/* 2. ESTILO DA MENSAGEM PRINCIPAL */
+#mensagem {
+    margin-bottom: 0.5rem;
+    /* Espaço entre a mensagem e a lista */
+    font-size: 2.2vmin;
+    font-weight: bold;
+    min-height: 2.5vmin;
+    /* Evita que o layout pule quando a mensagem muda */
+}
+
+/* 3. LISTA DE RESULTADOS (Novo Container e Estilos de Coluna) */
+#lista-resultados {
+    flex-grow: 1;
+    /* Permite que a lista use o espaço restante do painel */
+    align-items: flex-start;
+    /* Alinha itens ao topo */
+    margin: 0.5rem;
+    overflow-y: auto;
+    /* Permite rolagem se houver muitos itens */
+    text-align: left;
+        /* Garante que o texto dentro do grid container alinhe à esquerda */
+        /* Você também pode adicionar: */
+        justify-items: start;
+        /* Garante que cada item comece na borda esquerda da sua célula grid */
+    /* Configuração de Layout em Duas Colunas */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Duas colunas de largura igual */
+    gap: 8px 12px;
+    /* Espaçamento vertical e horizontal */
+
+    list-style: none;
+    /* Remove a lista padrão */
+    padding: 0;
+}
+
+/* 4. ESTILO DOS ITENS DA LISTA */
+#lista-resultados .resultado-item {
+    font-size: 1.8vmin;
+    line-height: 1.2;
+    color: #ccc;
+    /* Cor padrão para ocultos */
+    /* Use as classes .resolvido ou style no JS para mostrar */
+}
+
+#lista-resultados .resolvido {
+    color: #ffcc00;
+    /* Cor de destaque (Amarelo/Ouro) */
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000000;
+    left: 5px;
+}
+
+/* -----------------------------------------------------------
+6. PAINEL MENU (Coluna 1fr - Vertical)
+----------------------------------------------------------- */
+#painel-menu {
+    /* Ocupa a segunda coluna pequena (1fr) */
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    /* Organiza o conteúdo (botões) em COLUNA (verticalmente) */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 30rem;
+    padding: 1.5vmin;
+    min-width: 29rem;
+    height: stretch;
+    gap:2rem;
+    /* Estilos de painel já aplicados por .painel-jogo */
+}
+
+/* Botões (Estilizado para Menu Vertical) */
+#painel-menu button {
+    width: 90%;
+    max-width: 25rem;
+    height: auto;
+    margin: 0.8vh 0;
+    padding: 1.5vh 1vw;
+    border-radius: 8px;
+    font-size: 1.6rem;
     font-weight: bold;
     border: outset yellow;
     background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
     color: white;
     box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
     cursor: pointer;
-    transition: transform 0.1s ease, filter 0.1s ease;
+    transition: transform 0.1s ease;
 }
 
-#painel-menu button:hover,
-.botoes-mensagem button:hover {
+#painel-menu button:hover {
     transform: scale(1.05);
     filter: brightness(1.2);
 }
 
-#painel-menu button:active,
-.botoes-mensagem button:active {
+#painel-menu button:active {
     transform: scale(0.95);
 }
 
-/* --- 6. ESTADOS INICIAIS --- */
+/* -----------------------------------------------------------
+7. ESTILOS GERAIS E ANIMAÇÕES
+----------------------------------------------------------- */
+
+/* Legendas (h1.legendas) */
+h1.legendas {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1.6rem, 2vmin, 2.2rem);
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5vmin;
+    border-radius: 10px;
+    filter: drop-shadow(2px 2px 1px rgba(248, 5, 5, 1));
+    margin: 0 0 1vmin 0;
+    margin-block-start: 0;
+    margin-block-end: 0.5vmin;
+}
+
+/* SEPARAÇÃO DE RESPONSABILIDADES (Itens não presentes no HTML) */
 #BtnImprimir,
-#proximo-nivel {
+#lista-combinacoes {
     display: none;
 }
 
-/* --- 7. ANIMAÇÕES (Mantidas) --- */
-@keyframes cintilar {
+/* ANIMAÇÕES */
+#proximo-nivel {
+    background: linear-gradient(135deg, #050505 5%, #fa0404 40%, #f39d91 75%, #f0f0f0 98%);
+    border-color: #f7d258;
+}
 
-    0%,
-    100% {
-        box-shadow: 0 0 10px 5px #ffeb3b, 4px 8px 6px rgba(0, 0, 0, 0.9);
+@keyframes cintilar {
+    0% {
+        box-shadow: 0 0 5px #f7d258, 0 0 10px #f7d258;
     }
 
     50% {
-        box-shadow: 0 0 20px 10px #fbc02d, 4px 8px 6px rgba(0, 0, 0, 0.9);
+        box-shadow: 0 0 20px #f7d258, 0 0 30px #f7d258;
+    }
+
+    100% {
+        box-shadow: 0 0 5px #f7d258, 0 0 10px #f7d258;
     }
 }
 
 #proximo-nivel:not([style*="display: none"]) {
-    animation: cintilar 2s infinite;
+    animation: cintilar 1.5s infinite ease-in-out;
 }
 
-#BtnImprimir:not([style*="display: none"]) {
-    background: linear-gradient(45deg, #4CAF50, #8BC34A);
-    border-color: #FFF;
+#proximo-nivel:hover,
+#BtnImprimir:hover {
+    filter: brightness(1.3);
+    border-color: white;
 }
 
 /* ==========================================================================
-   8. RESPONSIVIDADE (REGRAS ESTRITAS)
-   ========================================================================== */
+8. MEDIA QUERY (DISPOSITIVOS MÓVEIS - EMPILHAMENTO VERTICAL)
+========================================================================== */
+@media screen and (max-width: 768px) {
 
-/* REQUISITO 1: Aviso de Rotação para Telas Pequenas (Retrato)
-  (ex: Celulares em pé)
-*/
-@media (max-width: 768px) and (orientation: portrait) {
-    #aviso-rotacao {
-        display: flex;
-        /* MOSTRA AVISO */
+    /* 1. ESTRUTURA PRINCIPAL: Empilha verticalmente (1 coluna) */
+    #jogo {
+        grid-template-columns: 1fr;
+        /* Apenas uma coluna de largura total */
+        grid-template-rows: auto auto auto;
+        /* 3 linhas auto */
+        height: auto;
+        /* Permite que o conteúdo defina a altura total */
     }
 
-    #app-container {
-        display: none;
-        /* ESCONDE JOGO */
-    }
-}
-
-/* REQUISITO 2: Ajuste para Telas Pequenas (Paisagem)
-  (ex: max-height: 414px)
-  Layout de 3 colunas mantido, mas todo o conteúdo encolhe.
-  NÃO quebra para 'column' para evitar barras de rolagem.
-*/
-@media (max-height: 450px) and (orientation: landscape) {
+    /* 2. PAINÉIS SUPERIORES (Tabuleiro + Resultados) */
     #paineis-superiores {
-        padding: 1vmin;
+        grid-column: 1 / 2;
+        /* Ocupa a 1ª coluna */
+        grid-row: 1 / 2;
+        /* Fica no topo */
+
+        /* Ajusta o layout interno para empilhar horizontalmente de forma mais compacta */
+        grid-template-columns: 1fr 1fr;
+        /* Tenta manter duas colunas internas */
         gap: 1vmin;
     }
 
-    /* Painéis laterais ficam mais finos */
-    #painel-imagens,
-    #painel-mensagens {
-        flex-basis: 15%;
-        /* Base menor */
-        min-width: 0;
-        /* Remove min-width para permitir encolhimento total */
+    /* 3. PAINEL TABULEIRO: Prioridade total */
+    #painel-tabuleiro {
+        grid-column: 1 / 3;
+        /* Ocupa as 2 colunas internas do #paineis-superiores */
+        grid-row: 1 / 2;
     }
 
-    /* Fontes menores */
-    .legendas {
-        font-size: clamp(0.8rem, 2.2vmin, 1.1rem);
-        padding: 0.2vmin;
-        margin-bottom: 0.5vmin;
+    /* 4. PAINEL RESULTADOS (Imagens/Mensagens) */
+    #painel-imagens {
+        grid-column: 1 / 3;
+        /* Ocupa as 2 colunas internas do #paineis-superiores */
+        grid-row: 2 / 3;
+        /* Fica abaixo do Tabuleiro */
+        flex-direction: row;
+        /* Coloca Imagens e Mensagens lado a lado em telas menores */
+        min-height: 100px;
     }
 
-    /* Imagens menores */
+    /* Ajusta layout interno de Imagens e Mensagens para ficarem lado a lado */
     #lista-imagens {
+        flex-grow: 1;
+        flex-shrink: 1;
+        height: auto;
+        justify-content: space-around;
         gap: 0.5vmin;
     }
 
     #lista-imagens img {
-        width: clamp(30px, 10vmin, 60px);
+        width: 30%;
+        /* Três itens por linha */
+        max-width: 60px;
     }
 
-    /* Mensagem e botões menores */
-    #mensagem {
-        font-size: clamp(0.8rem, 2vmin, 1rem);
-        padding: 0.5vmin;
+    #painel-mensagens {
+        margin-top: 0;
+        margin-left: 1vmin;
+        flex-grow: 1;
+        flex-shrink: 0;
+        min-height: 50px;
     }
 
+    /* 5. PAINEL MENU */
     #painel-menu {
-        gap: 0.5vmin;
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        /* Fica por último */
+        flex-direction: row;
+        /* Coloca botões em linha para economizar espaço vertical */
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 1vmin;
     }
 
-    #painel-menu button,
-    .botoes-mensagem button {
-        font-size: clamp(0.8rem, 2vmin, 1rem);
-        padding: 0.5vmin;
+    #painel-menu button {
+        width: 45%;
+        /* 2 botões por linha */
+        margin: 0.5vh 0;
+        padding: 1vh;
+        font-size: clamp(1rem, 3vw, 1.4rem);
     }
 }

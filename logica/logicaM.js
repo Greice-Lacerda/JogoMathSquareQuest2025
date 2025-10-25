@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const proximoTamanho = tamanhoTabuleiro + 1;
 
             if (proximoNivelNum > 5) { // Supondo M5 como último
-                window.open('../nivelD.html', '_self');
+                window.open('../NivelD.html', '_self');
             } else {
                 const proximoNivelHtml = `NivelM${proximoNivelNum}.html`;
                 window.open(`${proximoNivelHtml}?tamanhoTabuleiro=${proximoTamanho}`, '_self');
