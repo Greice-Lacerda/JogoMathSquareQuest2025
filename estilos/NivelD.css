@@ -1,0 +1,382 @@
+/* ==========================================================================
+   Estilos NivelD.css
+   Refatorado por "Senior Dev" com foco em 100% de fluidez, 
+   sem barras de rolagem e aviso de rotação.
+========================================================================== */
+
+/* --- 1. CONFIGURAÇÃO DE TELA CHEIA (SEM SCROLL) --- */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* Usa 100dvh (Dynamic Viewport Height) para preencher a tela visível 
+      em vez de 100vh, que ignora barras de UI do navegador mobile.
+    */
+    height: 100dvh;
+    overflow: hidden;
+    /* REQUISITO: Sem barras de rolagem */
+    font-family: 'Roboto Mono', sans-serif;
+    background-color: #333;
+    /* Fundo para o app */
+}
+
+/* Oculta header/footer do 'comuns.css' */
+body.jogo-fullscreen #cabecalho-principal,
+body.jogo-fullscreen #rodape {
+    display: none;
+}
+
+#app-container {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    /* Mantém flex para centralizar o #jogo */
+    overflow: hidden;
+    /* REQUISITO: Sem barras de rolagem */
+}
+
+/* --- 2. AVISO DE ROTAÇÃO (REQUISITO) --- */
+/* Este elemento (do HTML refatorado) é exibido apenas 
+  em telas pequenas no modo Retrato.
+*/
+#aviso-rotacao {
+    display: none;
+    /* Oculto por padrão */
+    position: fixed;
+    inset: 0;
+    background: #111;
+    color: white;
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+
+/* --- 3. ESTRUTURA PRINCIPAL (3 COLUNAS FLUIDAS) --- */
+#jogo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    /* Ocupa todo o #app-container */
+}
+
+#paineis-superiores {
+    width: 100%;
+    height: 100%;
+    /* vmin é ótimo para padding fluido */
+    padding: 1.5vmin;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    /* Sempre em linha */
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.5vmin;
+}
+
+/* --- 4. PAINÉIS DE JOGO (FLUIDOS) --- */
+.painel-jogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vmin;
+    border: solid outset 3px #ccc;
+    border-radius: 10px;
+    background: rgba(248, 191, 191, 0.25);
+    backdrop-filter: blur(5px);
+    box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.6);
+    min-width: 0;
+    /* Correção de Flexbox para permitir encolhimento */
+    overflow: hidden;
+    /* REQUISITO: Sem barras de rolagem */
+}
+
+/* 1. Painel Tabuleiro (O Quadrado Central) */
+#painel-tabuleiro {
+    flex-grow: 0;
+    /* Não cresce/encolhe com flex */
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    /* Força o quadrado */
+
+    /* Altura é 100% do container pai (que é 100dvh - padding).
+      A largura será definida pelo aspect-ratio.
+      max-width garante que ele não saia da tela em viewports muito largas.
+    */
+    height: 100%;
+    max-height: calc(100dvh - 3vmin);
+    /* Altura do viewport - padding */
+    max-width: calc(100dvh - 3vmin);
+    /* Garante que o quadrado caiba */
+    justify-content: center;
+}
+
+/* 2. Painel Imagens (Fluido, sem scroll) */
+#painel-imagens {
+    flex-basis: 20%;
+    /* Base de 20% da largura */
+    flex-grow: 1;
+    /* Cresce para preencher */
+    min-width: 150px;
+    /* CUIDADO: Isso pode causar overflow. Veremos. */
+    justify-content: flex-start;
+}
+
+/* 3. Painel Mensagens (Fluido, sem scroll) */
+#painel-mensagens {
+    flex-basis: 20%;
+    flex-grow: 1;
+    min-width: 180px;
+    justify-content: space-between;
+}
+
+
+/* --- 5. COMPONENTES INTERNOS (FLUIDOS) --- */
+
+/* Canvas (Preenche o painel quadrado) */
+#tabuleiro {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#tela {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Legendas (h2, h3 - Atualizado do HTML) */
+.legendas {
+    width: 95%;
+    text-align: center;
+    color: #1a2b1a;
+    background: linear-gradient(to right, #ffffff, #c0c0c0, #ffffff);
+    padding: 0.5vmin;
+    margin: 0.5vmin 0 1vmin 0;
+    border-radius: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    /* REQUISITO: Fonte fluida com clamp() */
+    font-size: clamp(1rem, 2.5vmin, 1.8rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border: 1px solid #aaa;
+}
+
+/* Lista Imagens (SEM SCROLL) */
+#lista-imagens {
+    display: flex;
+    /* MUDADO: 'row' e 'wrap' é a única forma de garantir 
+      que não haja barra de rolagem, cumprindo o requisito.
+    */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    /* Alinha itens no topo */
+    gap: 1vmin;
+    width: 100%;
+    flex-grow: 1;
+    /* Ocupa o espaço restante no painel */
+    overflow: hidden;
+    /* REQUISITO: Sem barras de rolagem */
+}
+
+#lista-imagens img {
+    /* REQUISITO: Imagens fluidas */
+    width: clamp(40px, 12vmin, 100px);
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#lista-imagens img:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Mensagens (Ocupa espaço, sem scroll) */
+#mensagem {
+    width: 95%;
+    flex-grow: 1;
+    /* Ocupa espaço entre legenda e menu */
+    min-height: 0;
+    /* Correção Flexbox */
+    padding: 1vmin;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    overflow: hidden;
+    /* REQUISITO: Sem barras de rolagem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* REQUISITO: Fonte fluida */
+    font-size: clamp(0.9rem, 2vmin, 1.3rem);
+    line-height: 1.4;
+}
+
+/* Painel Menu Interno (Agora <nav>) */
+#painel-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 1vmin;
+    gap: 1vmin;
+}
+
+.botoes-mensagem {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1vmin 0;
+}
+
+/* Botões (Fluidos) */
+#painel-menu button,
+.botoes-mensagem button {
+    width: 95%;
+    max-width: 250px;
+    /* Limite em telas grandes */
+    height: auto;
+    margin: 0;
+    /* Gap do container flex cuida do espaçamento */
+    padding: 1.2vh 1vw;
+    border-radius: 8px;
+    /* REQUISITO: Fonte fluida */
+    font-size: clamp(0.9rem, 2.2vmin, 1.4rem);
+    font-weight: bold;
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+#painel-menu button:hover,
+.botoes-mensagem button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+#painel-menu button:active,
+.botoes-mensagem button:active {
+    transform: scale(0.95);
+}
+
+/* --- 6. ESTADOS INICIAIS --- */
+#BtnImprimir,
+#proximo-nivel {
+    display: none;
+}
+
+/* --- 7. ANIMAÇÕES (Mantidas) --- */
+@keyframes cintilar {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px 5px #ffeb3b, 4px 8px 6px rgba(0, 0, 0, 0.9);
+    }
+
+    50% {
+        box-shadow: 0 0 20px 10px #fbc02d, 4px 8px 6px rgba(0, 0, 0, 0.9);
+    }
+}
+
+#proximo-nivel:not([style*="display: none"]) {
+    animation: cintilar 2s infinite;
+}
+
+#BtnImprimir:not([style*="display: none"]) {
+    background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    border-color: #FFF;
+}
+
+/* ==========================================================================
+   8. RESPONSIVIDADE (REGRAS ESTRITAS)
+   ========================================================================== */
+
+/* REQUISITO 1: Aviso de Rotação para Telas Pequenas (Retrato)
+  (ex: Celulares em pé)
+*/
+@media (max-width: 768px) and (orientation: portrait) {
+    #aviso-rotacao {
+        display: flex;
+        /* MOSTRA AVISO */
+    }
+
+    #app-container {
+        display: none;
+        /* ESCONDE JOGO */
+    }
+}
+
+/* REQUISITO 2: Ajuste para Telas Pequenas (Paisagem)
+  (ex: max-height: 414px)
+  Layout de 3 colunas mantido, mas todo o conteúdo encolhe.
+  NÃO quebra para 'column' para evitar barras de rolagem.
+*/
+@media (max-height: 450px) and (orientation: landscape) {
+    #paineis-superiores {
+        padding: 1vmin;
+        gap: 1vmin;
+    }
+
+    /* Painéis laterais ficam mais finos */
+    #painel-imagens,
+    #painel-mensagens {
+        flex-basis: 15%;
+        /* Base menor */
+        min-width: 0;
+        /* Remove min-width para permitir encolhimento total */
+    }
+
+    /* Fontes menores */
+    .legendas {
+        font-size: clamp(0.8rem, 2.2vmin, 1.1rem);
+        padding: 0.2vmin;
+        margin-bottom: 0.5vmin;
+    }
+
+    /* Imagens menores */
+    #lista-imagens {
+        gap: 0.5vmin;
+    }
+
+    #lista-imagens img {
+        width: clamp(30px, 10vmin, 60px);
+    }
+
+    /* Mensagem e botões menores */
+    #mensagem {
+        font-size: clamp(0.8rem, 2vmin, 1rem);
+        padding: 0.5vmin;
+    }
+
+    #painel-menu {
+        gap: 0.5vmin;
+    }
+
+    #painel-menu button,
+    .botoes-mensagem button {
+        font-size: clamp(0.8rem, 2vmin, 1rem);
+        padding: 0.5vmin;
+    }
+}
