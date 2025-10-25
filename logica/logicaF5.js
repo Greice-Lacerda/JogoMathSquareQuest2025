@@ -5,14 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const listaImagens = document.getElementById('lista-imagens');
     const mensagem = document.getElementById('mensagem');
     const proximoNivelBtn = document.getElementById('proximo-nivel');
-    const imprimirBtn = document.getElementById('BtnImprimir');
     const limparBtn = document.getElementById('limparImagem');
     const resetarBtn = document.getElementById('resetarTabuleiro');
     const canvas = document.getElementById('tela');
     const ctx = canvas.getContext('2d');
     const tabuleiroContainer = document.getElementById('tabuleiro');
     const paginaInicialBtn = document.getElementById('paginaInicial');
-    const sairDoJogoBtn = document.getElementById('sairDoJogo');
 
     // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
 
@@ -137,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
         listaImagens.innerHTML = '';
         mensagem.innerHTML = "Arraste as imagens para o tabuleiro!<br>Não pode repetir na mesma linha ou coluna.";
         proximoNivelBtn.style.display = 'none';
-        imprimirBtn.style.display = 'none';
 
         // --- REATORAÇÃO: Garante que botões sejam reativados ---
         resetarBtn.disabled = false;
@@ -196,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (usedImages.flat().every(cell => cell !== null)) {
                 mensagem.innerHTML = "<h2>Parabéns! Você completou o desafio!</h2>";
                 proximoNivelBtn.style.display = 'block';
-                imprimirBtn.style.display = 'block';
                 resetarBtn.disabled = true;
                 limparBtn.disabled = true;
                 tocarSom(clapSound);
@@ -219,7 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
             redesenharTodasImagens();
             mensagem.textContent = "Última jogada desfeita.";
             proximoNivelBtn.style.display = 'none';
-            imprimirBtn.style.display = 'none';
 
             // --- REATORAÇÃO: Garante que botões sejam reativados ---
             resetarBtn.disabled = false;
@@ -341,22 +336,14 @@ document.addEventListener('DOMContentLoaded', function () {
     limparBtn.addEventListener('click', limparUltimaJogada);
 
     paginaInicialBtn.addEventListener('click', () => {
-        window.location.href = '../index.html';
+        window.location.href = '../instrucao1.html';
     });
-
-    sairDoJogoBtn.addEventListener('click', () => {
-        window.location.href = 'https://www.google.com.br';
-    });
-
+    
     proximoNivelBtn.addEventListener('click', () => {
         // Link para a M1
         window.location.href = 'NivelM1.html?tamanhoTabuleiro=2';
     });
-
-    imprimirBtn.addEventListener('click', () => {
-        window.open('ImpTab.html', '_blank');
-    });
-
+    
     // --- 6. INICIALIZAÇÃO DO JOGO ---
     iniciarJogo();
 });

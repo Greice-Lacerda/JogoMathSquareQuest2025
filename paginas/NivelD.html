@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathSquareQuest: Aventura dos Padrões - Nível D1 - Tábua de Cayley</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MathSquareQuest: Aventura dos Padrões - Nível Difícil (D1): Grupo 6x6</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +18,11 @@
 
 <body class="jogo-fullscreen">
 
-    <div id="app-container">
+    <div id="aviso-rotacao">
+        <p>Por favor, gire seu dispositivo para o modo paisagem.</p>
+    </div>
 
+    <div id="app-container">
         <header id="cabecalho-principal">
             <h1 id="titulo1">MathSquareQuest</h1>
             <h2 id="titulo2">Aventura dos Padrões</h2>
@@ -29,37 +32,29 @@
             <div id="jogo">
                 <div id="paineis-superiores">
 
-                    <section id="painel-tabuleiro" class="painel-jogo" aria-labelledby="legenda-tabuleiro">
-                        <h2 id="legenda-tabuleiro" class="legendas">Nível Desafio 1 (D1) - Tábua de Cayley</h2>
+                    <div id="painel-tabuleiro" class="painel-jogo">
+                        <h1 class="legendas">Nível D1 (Grupo 6x6) - Tábua de Cayley</h1>
                         <div id="tabuleiro">
-                            <canvas id="tela">Seu navegador não suporta o elemento canvas. O jogo não pode ser
-                                exibido.</canvas>
+                            <canvas id="tela"></canvas>
                         </div>
-                    </section>
+                    </div>
 
-                    <section id="painel-imagens" class="painel-jogo" aria-labelledby="legenda-imagens">
-                        <h3 id="legenda-imagens" class="legendas">Elementos (Resultados)</h3>
-                        <div id="lista-imagens">
-                        </div>
-                    </section>
+                    <div id="painel-imagens" class="painel-jogo">
+                        <h1 class="legendas">Elementos (Resultados)</h1>
+                        <div id="lista-imagens"></div>
+                    </div>
 
-                    <section id="painel-mensagens" class="painel-jogo" aria-labelledby="legenda-mensagens">
-                        <h3 id="legenda-mensagens" class="legendas">Mensagens</h3>
-                        <div id="mensagem">
-                        </div>
-                        <div class="botoes-mensagem">
-                            <button id="BtnImprimir">Imprimir Tabela</button>
-                        </div>
-
-                        <nav id="painel-menu" class="painel-jogo-interno" aria-labelledby="legenda-menu">
-                            <h3 id="legenda-menu" class="legendas">Menu</h3>
-                            <button id="paginaInicial">Página Inicial</button>
+                    <div id="painel-mensagens" class="painel-jogo">
+                        <h1 class="legendas">Mensagens</h1>
+                        <div id="mensagem"></div>
+                        <div id="painel-menu" class="painel-jogo-interno">
+                            <h1 class="legendas">Menu</h1>
+                            <button id="paginaInicial">Instruções</button>
                             <button id="limparImagem">Desfazer Jogada</button>
                             <button id="resetarTabuleiro">Reiniciar Nível</button>
-                            <button id="sairDoJogo">Sair</button>
                             <button id="proximo-nivel">Próximo Nível</button>
-                        </nav>
-                    </section>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -69,7 +64,6 @@
             Criado por Adriana, Greice, Pablo e Paulo em 2025.
         </footer>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script src="../logica/logicaD.js"></script>
 </body>

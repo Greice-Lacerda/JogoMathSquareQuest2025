@@ -4,16 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 1. SELEÇÃO DOS ELEMENTOS DO JOGO ---
     const listaImagens = document.getElementById('lista-imagens');
     const mensagem = document.getElementById('mensagem');
-    const proximoNivelBtn = document.getElementById('proximo-nivel');
-    const imprimirBtn = document.getElementById('BtnImprimir');
+    const proximoNivelBtn = document.getElementById('proximo-nivel');    
     const limparBtn = document.getElementById('limparImagem');
     const resetarBtn = document.getElementById('resetarTabuleiro');
     const canvas = document.getElementById('tela');
     const ctx = canvas.getContext('2d');
     const tabuleiroContainer = document.getElementById('tabuleiro');
     const paginaInicialBtn = document.getElementById('paginaInicial');
-    const sairDoJogoBtn = document.getElementById('sairDoJogo');
-
+    
     // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
     const tamanho = 2; // Nível 1: Tabuleiro 2x2
     let usedImages = [];
@@ -133,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
         listaImagens.innerHTML = '';
         mensagem.innerHTML = "Arraste as imagens para o tabuleiro!<br>Não pode repetir na mesma linha ou coluna.";
         proximoNivelBtn.style.display = 'none';
-        imprimirBtn.style.display = 'none';
         resetarBtn.disabled = false;
         limparBtn.disabled = false;
 
@@ -187,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (usedImages.flat().every(cell => cell !== null)) {
                 mensagem.innerHTML = "<h2>Parabéns! Você completou o desafio!</h2>";
                 proximoNivelBtn.style.display = 'block';
-                imprimirBtn.style.display = 'block';
                 resetarBtn.disabled = true;
                 limparBtn.disabled = true;
                 tocarSom(clapSound);
@@ -210,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
             redesenharTodasImagens();
             mensagem.textContent = "Última jogada desfeita.";
             proximoNivelBtn.style.display = 'none';
-            imprimirBtn.style.display = 'none';
             resetarBtn.disabled = false;
             limparBtn.disabled = false;
         } else {
@@ -317,30 +312,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- 5. REGISTRO DE EVENTOS (Restante) ---
 
-    // --- REATORAÇÃO: Removemos os listeners de 'dragover' e 'drop' do canvas ---
-    // canvas.addEventListener('dragover', (event) => event.preventDefault()); // REMOVIDO
-    // canvas.addEventListener('drop', handleDrop); // REMOVIDO
-    // --- FIM REATORAÇÃO ---
-
     window.addEventListener('resize', ajustarERedesenharCanvas);
 
     resetarBtn.addEventListener('click', iniciarJogo);
     limparBtn.addEventListener('click', limparUltimaJogada);
 
     paginaInicialBtn.addEventListener('click', () => {
-        window.location.href = '../index.html';
-    });
-
-    sairDoJogoBtn.addEventListener('click', () => {
-        window.location.href = 'https://www.google.com.br';
+        window.location.href = '../instrucao1.html';
     });
 
     proximoNivelBtn.addEventListener('click', () => {
         window.location.href = 'Nivel2.html?tamanhoTabuleiro=3';
-    });
-
-    imprimirBtn.addEventListener('click', () => {
-        window.open('ImpTab.html', '_blank');
     });
 
     // --- 6. INICIALIZAÇÃO DO JOGO ---

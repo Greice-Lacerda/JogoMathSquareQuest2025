@@ -20,10 +20,7 @@ body.jogo-fullscreen #jogo {
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  /* Fundo removido, presumindo que o 'body' já o tenha */
-  /* background-color: rgba(0, 0, 0, 0.5); */
   padding: 2vmin;
-  /* Padding fluido */
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -32,32 +29,16 @@ body.jogo-fullscreen #jogo {
   /* Espaço fluido */
 }
 
-/* * Removido #jogo { margin-top: -3rem; } 
- * pois o layout flex 'center' cuida disso.
- */
-
-/* * Removido .controles1 (altura 80rem fixa)
- */
-
 /* .controles11 (Ex: Painel de Imagens) */
 .controles11 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* Alinha ao topo */
-
-  /* REATORAÇÃO: Tamanhos Fluidos */
   height: 85vh;
-  /* 85% da altura da tela */
-  width: 20vw;
-  /* 20% da largura da tela */
   min-width: 180px;
-  /* Largura mínima para não sumir */
   overflow-y: auto;
-  /* Permite rolagem SÓ neste painel se as imagens estourarem */
   overflow-x: hidden;
-
   padding: 1.5vmin;
   border: solid outset 3px #ccc;
   border-radius: 10px;
@@ -79,15 +60,9 @@ body.jogo-fullscreen #jogo {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* Empurra botões para baixo */
-
-  /* REATORAÇÃO: Tamanhos Fluidos */
   height: 85vh;
-  /* 85% da altura da tela */
   width: 25vw;
-  /* 25% da largura da tela */
   min-width: 200px;
-  /* Largura mínima */
 
   padding: 1.5vmin;
   border: solid outset 3px #ccc;
@@ -98,14 +73,10 @@ body.jogo-fullscreen #jogo {
 }
 
 #tabuleiro {
-  /* REATORAÇÃO: Tamanho Fluido 1:1 */
-  /* Ocupa 85% da altura da tela, mantendo proporção 1:1 */
   height: 85vh;
   width: 85vh;
-  /* Garante que não ultrapasse a largura da tela */
   max-width: 60vw;
   max-height: 85vw;
-
   margin: 0;
   aspect-ratio: 1 / 1;
 }
@@ -119,15 +90,10 @@ body.jogo-fullscreen #jogo {
 }
 
 #mensagem {
-  /* REATORAÇÃO: Tamanho Fluido */
   width: 100%;
   min-height: 10vh;
-  /* Altura mínima */
   height: auto;
-  /* Altura baseada no conteúdo */
-
-  font-size: clamp(1.6rem, 2vmin, 2.5rem);
-  /* Fonte fluida */
+  font-size: 2.5rem;
   background: rgba(248, 191, 191, 0);
   text-align: center;
   color: yellow;
@@ -137,24 +103,17 @@ body.jogo-fullscreen #jogo {
   padding: 1vmin;
 }
 
-#sairDoJogo,
 #resetarTabuleiro,
 #limparImagem,
 #paginaInicial,
-#proximo-nivel,
-#BtnImprimir {
-  /* REATORAÇÃO: Tamanho Fluido */
-  width: 90%;
-  max-width: 200px;
+#proximo-nivel{
+  width: 95%;
+  max-width: 250px;
   height: auto;
-  /* Altura baseada no padding */
   margin: 0.5vh 0;
-  /* Margem fluida */
   padding: 1.5vh 1vw;
-  /* Padding fluido */
   border-radius: 8px;
-  font-size: clamp(1.4rem, 1.8vmin, 1.8rem);
-  /* Fonte fluida */
+  font-size: 2rem;
   font-weight: bold;
   border: outset yellow;
   background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
@@ -166,22 +125,18 @@ body.jogo-fullscreen #jogo {
 }
 
 /* Hovers e Animações (Sem grandes mudanças) */
-#sairDoJogo:hover,
 #resetarTabuleiro:hover,
 #limparImagem:hover,
 #paginaInicial:hover,
-#proximo-nivel:hover,
-#BtnImprimir:hover {
+#proximo-nivel:hover{
   transform: scale(1.05);
   filter: brightness(1.2);
 }
 
-#sairDoJogo:active,
 #resetarTabuleiro:active,
 #limparImagem:active,
 #paginaInicial:active,
-#proximo-nivel:active,
-#BtnImprimir:active {
+#proximo-nivel:active{
   transform: scale(0.95);
 }
 
@@ -190,16 +145,13 @@ body.jogo-fullscreen #jogo {
   flex-direction: column;
   align-items: center;
   width: 90%;
-  /* Ajustado de 55% */
   height: auto;
-  /* Altura automática */
   font-weight: bold;
   border-radius: 1rem;
   padding: 1vmin;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   margin: 2vh auto;
-  /* Margem fluida */
-  font-size: clamp(1.6rem, 1.8vmin, 1.8rem);
+  font-size:2rem;
   color: #f0f0f0;
 }
 
@@ -266,10 +218,6 @@ body.jogo-fullscreen #jogo {
 
   animation: cintilar 1.5s infinite ease-in-out;
 
-}
-
-footer {
-  margin-bottom: -2rem;
 }
 
 /* ==========================================================================
@@ -441,11 +389,9 @@ Componentes Internos e Interações
   }
 
   /* Botões de controle */
-  #sairDoJogo,
   #resetarTabuleiro,
   #limparImagem,
   #paginaInicial,
-  #BtnImprimir,
   #proximo-nivel {
     width: 100%;
     font-size: 1.8vh;

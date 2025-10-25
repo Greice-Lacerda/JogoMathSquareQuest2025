@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Botões adicionais
     const paginaInicialBtn = document.getElementById('paginaInicial');
-    const sairDoJogoBtn = document.getElementById('sairDoJogo');
-    const imprimirBtn = document.getElementById('BtnImprimir');
 
     // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
     let tamanhoTabuleiro = 2;
@@ -65,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         mensagemEl.textContent = 'Arraste duas imagens para cada célula para formar uma combinação.';
         if (proximoNivelBtn) proximoNivelBtn.style.display = 'none';
-        if (imprimirBtn) imprimirBtn.style.display = 'none';
 
         if (modalCombinacoes) modalCombinacoes.classList.remove('modal-ativo');
         if (listaCombinacoesEl) listaCombinacoesEl.style.display = 'none';
@@ -143,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (combinacoesGeradas.length === 0) {
                     mensagemEl.innerHTML = "<h2>Parabéns!<br>Você completou o desafio!</h2>";
                     if (proximoNivelBtn) proximoNivelBtn.style.display = 'block';
-                    if (imprimirBtn) imprimirBtn.style.display = 'block';
                     if (reiniciarBtn) reiniciarBtn.disabled = true;
                     if (limparBtn) limparBtn.disabled = true;
                     tocarSom(clapSound);
@@ -326,7 +322,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (reiniciarBtn) reiniciarBtn.disabled = false;
             if (limparBtn) limparBtn.disabled = false;
             if (proximoNivelBtn) proximoNivelBtn.style.display = 'none';
-            if (imprimirBtn) imprimirBtn.style.display = 'none';
         } else {
             mensagemEl.textContent = "Nenhuma jogada para limpar.";
         }
@@ -436,8 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Botões de Navegação
-    if (paginaInicialBtn) paginaInicialBtn.addEventListener('click', () => window.open('../index.html', '_self'));
-    if (sairDoJogoBtn) sairDoJogoBtn.addEventListener('click', () => window.open('https://www.google.com.br', '_blank'));
+    if (paginaInicialBtn) paginaInicialBtn.addEventListener('click', () => window.open('../instrucao2.html', '_self'));
     if (proximoNivelBtn) {
         proximoNivelBtn.addEventListener('click', () => {
             const nivelAtualMatch = document.location.pathname.match(/NivelM(\d+)/);
@@ -453,8 +447,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    if (imprimirBtn) imprimirBtn.addEventListener('click', () => window.open('ImpTab.html', '_blank'));
-
+    
     // --- 8. INICIALIZAÇÃO DO JOGO ---
     iniciarJogo();
 });

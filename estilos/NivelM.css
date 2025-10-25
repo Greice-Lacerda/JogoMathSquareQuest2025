@@ -1,7 +1,6 @@
 /* ==========================================================================
-    Estilos NivelM.css
-    (Layout Fluido 4 Colunas + Tabuleiro QUADRADO MAIOR + Altura Unificada + Lista Imagens Coluna Única + Div/H1 + Scroll Combinações)
-   ========================================================================== */
+Estilos NivelM.css (Layout Fluido 4 Colunas + Tabuleiro QUADRADO MAIOR + Altura Unificada + Lista Imagens Coluna Única + Div/H1 + Scroll Combinações)
+========================================================================== */
 
 /* --- TELA CHEIA --- */
 body.jogo-fullscreen #cabecalho-principal,
@@ -24,7 +23,6 @@ body.jogo-fullscreen #rodape {
     display: flex;
     justify-content: center;
     align-items: stretch;
-    /* Alturas iguais */
     gap: 1.5vmin;
 }
 
@@ -41,10 +39,7 @@ body.jogo-fullscreen #rodape {
     backdrop-filter: blur(5px);
     box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.6);
     min-width: 0;
-    /* Usa flex-grow/shrink para distribuir espaço */
-    flex-shrink: 1;
-    /* Permite encolher */
-    /* REMOVIDO: flex-basis inicial aqui */
+
 }
 
 /* 1. Painel Tabuleiro (Quadrado, Crescimento 2x) */
@@ -52,12 +47,7 @@ body.jogo-fullscreen #rodape {
 #painel-tabuleiro {
     flex-basis: auto;
     flex-grow: 2;
-    /* Cresce 2x mais que os outros */
-    flex-shrink: 0;
-    /* Não encolhe para manter aspect-ratio */
     aspect-ratio: 1 / 1;
-    /* FORÇA QUADRADO */
-    /* REMOVIDO: height: 95% */
     width: auto;
     max-height: 90vh;
     max-width: 90vh;
@@ -76,18 +66,16 @@ body.jogo-fullscreen #rodape {
 /* 3. Painel Mensagens (Crescimento 1x, NÃO Encolhe) */
 #painel-mensagens {
     flex-basis: 0%;
-    flex-grow: 1;
     flex-shrink: 0;
-    min-width: 270px;
+    min-width: 300px;
     justify-content: space-between;
 }
 
 /* 4. Painel Combinações (Crescimento 1x) */
 #painelCombinacoes {
     flex-basis: 0%;
-    flex-grow: 1;
     flex-shrink: 0;
-    min-width: 250px;
+    min-width: 350px;
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
@@ -101,7 +89,6 @@ body.jogo-fullscreen #rodape {
     width: 95%;
     margin-top: 1.5vmin;
     height: auto;
-    flex-grow: 1;
     justify-content: center;
     gap: 0.5vmin;
     display: flex;
@@ -192,7 +179,6 @@ h1.legendas {
 
 /* Botões */
 .painel-jogo-interno button,
-.botoes-mensagem button,
 #exibirCombinacoesBtn {
     width: 95%;
     max-width: 250px;
@@ -223,21 +209,6 @@ h1.legendas {
     transform: scale(0.95);
 }
 
-.botoes-mensagem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    height: auto;
-    font-weight: bold;
-    border-radius: 1rem;
-    padding: 1vmin;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin: 1vh auto 0;
-    font-size: clamp(1.6rem, 1.8vmin, 1.8rem);
-    color: #f0f0f0;
-}
-
 /* Botão Exibir Combinações (Ajuste Margem) */
 #exibirCombinacoesBtn {
     margin-bottom: 1rem;
@@ -249,19 +220,19 @@ h1.legendas {
 /* Lista Combinações (Com Scroll Interno e Menos Espaço Vertical) */
 #lista-combinacoes {
     display: none;
-    /* JS controla visibilidade */
-    grid-template-columns: 1fr;
-    /* ALTERADO: Valor menor para menos espaço vertical */
+    /* Mantido - JS controla a visibilidade */
+    /* ALTERADO: Define 2 colunas de largura igual */
+    grid-template-columns: repeat(2, 1fr);
     width: 100%;
     overflow-y: auto;
-    font-size: clamp(1.6rem, 1.8vmin, 2rem);
+    font-size: 2rem;
     color: white;
-    gap: 1.2rem;
+    gap: 1.5rem;
+    /* Agora aplica espaçamento vertical E horizontal */
     text-shadow: 1px 1px 2px black;
     text-align: left;
-    padding: 15px;
+    padding: 25px;
     box-sizing: border-box;
-    /* Adiciona um pequeno padding inferior para não colar no fim */
     margin: 15px auto;
 }
 

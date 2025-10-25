@@ -124,10 +124,7 @@ body.jogo-fullscreen #jogo {
   min-height: 10vh;
   /* Altura mínima */
   height: auto;
-  /* Altura baseada no conteúdo */
-
-  font-size: clamp(1.6rem, 2vmin, 2.5rem);
-  /* Fonte fluida */
+    font-size: 2.5rem;
   background: rgba(248, 191, 191, 0);
   text-align: center;
   color: yellow;
@@ -137,15 +134,13 @@ body.jogo-fullscreen #jogo {
   padding: 1vmin;
 }
 
-#sairDoJogo,
 #resetarTabuleiro,
 #limparImagem,
 #paginaInicial,
-#proximo-nivel,
-#BtnImprimir {
+#proximo-nivel{
   /* REATORAÇÃO: Tamanho Fluido */
-  width: 90%;
-  max-width: 200px;
+  width: 95%;
+  max-width: 250px;
   height: auto;
   /* Altura baseada no padding */
   margin: 0.5vh 0;
@@ -166,22 +161,19 @@ body.jogo-fullscreen #jogo {
 }
 
 /* Hovers e Animações (Sem grandes mudanças) */
-#sairDoJogo:hover,
 #resetarTabuleiro:hover,
 #limparImagem:hover,
 #paginaInicial:hover,
-#proximo-nivel:hover,
-#BtnImprimir:hover {
+#proximo-nivel:hover{
   transform: scale(1.05);
   filter: brightness(1.2);
 }
 
-#sairDoJogo:active,
+
 #resetarTabuleiro:active,
 #limparImagem:active,
 #paginaInicial:active,
-#proximo-nivel:active,
-#BtnImprimir:active {
+#proximo-nivel:active{
   transform: scale(0.95);
 }
 
@@ -441,11 +433,9 @@ Componentes Internos e Interações
   }
 
   /* Botões de controle */
-  #sairDoJogo,
   #resetarTabuleiro,
   #limparImagem,
   #paginaInicial,
-  #BtnImprimir,
   #proximo-nivel {
     width: 100%;
     font-size: 1.8vh;
