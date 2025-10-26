@@ -14,8 +14,10 @@ body.jogo-fullscreen #rodape {
 ----------------------------------------------------------- */
 #jogo {
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center;     /* Centraliza verticalmente */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
     width: 100%;
     height: 100%;
     padding: 1vmin;
@@ -88,7 +90,7 @@ body.jogo-fullscreen #rodape {
     width: 100%;
     height: 100%;
     display: block;
-    background-color: #f0f0f0;
+    background-color: #e7f0ef;
     border-radius: 5px;
 }
 
@@ -175,7 +177,7 @@ body.jogo-fullscreen #rodape {
     /* Permite que ele cresça e preencha o espaço restante */
     display: flex;
     flex-direction: column;
-    margin-bottom:0.5rem;
+    margin-bottom: 0.5rem;
     height: 68rem;
     /* A distância de 2rem será gerenciada pelo GAP ou margem, mas o GAP no #painel-lateral é melhor */
 }
@@ -200,15 +202,15 @@ body.jogo-fullscreen #rodape {
     overflow-y: auto;
     /* Permite rolagem se houver muitos itens */
     text-align: left;
-        /* Garante que o texto dentro do grid container alinhe à esquerda */
-        /* Você também pode adicionar: */
-        justify-items: start;
-        /* Garante que cada item comece na borda esquerda da sua célula grid */
+    /* Garante que o texto dentro do grid container alinhe à esquerda */
+    /* Você também pode adicionar: */
+    justify-items: start;
+    /* Garante que cada item comece na borda esquerda da sua célula grid */
     /* Configuração de Layout em Duas Colunas */
     display: grid;
     grid-template-columns: 1fr 1fr;
     /* Duas colunas de largura igual */
-    gap: 8px 12px;
+    gap: 8px 18px;
     /* Espaçamento vertical e horizontal */
 
     list-style: none;
@@ -249,7 +251,7 @@ body.jogo-fullscreen #rodape {
     padding: 1.5vmin;
     min-width: 29rem;
     height: stretch;
-    gap:2rem;
+    gap: 2rem;
     /* Estilos de painel já aplicados por .painel-jogo */
 }
 
@@ -299,127 +301,273 @@ h1.legendas {
 }
 
 /* SEPARAÇÃO DE RESPONSABILIDADES (Itens não presentes no HTML) */
-#BtnImprimir,
 #lista-combinacoes {
     display: none;
 }
 
 /* ANIMAÇÕES */
+/* ... Estilos dos botões #proximo-nivel */
 #proximo-nivel {
-    background: linear-gradient(135deg, #050505 5%, #fa0404 40%, #f39d91 75%, #f0f0f0 98%);
+    background: linear-gradient(135deg, #f8f4f4 5%, #fa0404 40%, #f39d91 75%, #080000 98%);
     border-color: #f7d258;
 }
 
 @keyframes cintilar {
+    /* 1. Define a animação de pulsar/cintilar (sem alteração aqui) */
+
     0% {
-        box-shadow: 0 0 5px #f7d258, 0 0 10px #f7d258;
+
+        transform: scale(1);
+
+        box-shadow: 0 0 5px rgba(255, 196, 0, 0.4), 0 0 10px rgba(255, 196, 0, 0.3);
+
     }
 
     50% {
-        box-shadow: 0 0 20px #f7d258, 0 0 30px #f7d258;
+
+        transform: scale(1.05);
+
+        box-shadow: 0 0 20px rgba(255, 255, 0, 0.8), 0 0 30px rgba(255, 255, 0, 0.6);
+
     }
 
     100% {
-        box-shadow: 0 0 5px #f7d258, 0 0 10px #f7d258;
+
+        transform: scale(1);
+
+        box-shadow: 0 0 5px rgba(255, 196, 0, 0.4), 0 0 10px rgba(255, 196, 0, 0.3);
+
     }
+
 }
 
-#proximo-nivel:not([style*="display: none"]) {
-    animation: cintilar 1.5s infinite ease-in-out;
-}
+/* Opcional: Melhora o efeito hover para os novos botões */
 
-#proximo-nivel:hover,
-#BtnImprimir:hover {
+#proximo-nivel:hover{
+
     filter: brightness(1.3);
+    /* Deixa o brilho um pouco mais intenso no hover */
+
     border-color: white;
+
+}
+
+
+/* 2. Aplica a animação APENAS quando o botão NÃO está escondido */
+
+/* Este seletor significa: "aplique ao #proximo-nivel que NÃO tenha 'display:none' em seu atributo style" */
+
+#proximo-nivel:not([style*="display:none"]) {
+
+    animation: cintilar 1.5s infinite ease-in-out;
+
+}
+
+/* ==========================================================================
+// FEEDBACK VISUAL PARA NÍVEL D (CAÇA AO ELEMENTO)
+// ========================================================================== */
+
+/* Imagem no banco (#lista-imagens) que é o ALVO ATUAL */
+#lista-imagens img.alvo-ativo {
+    border: 4px solid #FFD700;
+    /* Borda dourada de destaque */
+    box-shadow: 0 0 15px #FFD700;
+    transform: scale(1.1);
+    border-radius: 8px;
+}
+
+/* Imagem no banco que já foi COMPLETADA */
+#lista-imagens img.alvo-completo {
+    opacity: 0.4;
+    filter: grayscale(80%);
+    transform: scale(0.9);
+    border: 2px dashed #999;
+}
+
+/* Animação de 'erro' se tentar arrastar a imagem errada */
+.shake-animation {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
 }
 
 /* ==========================================================================
 8. MEDIA QUERY (DISPOSITIVOS MÓVEIS - EMPILHAMENTO VERTICAL)
 ========================================================================== */
-@media screen and (max-width: 768px) {
+/* --- REQUISITO: Aviso de Rotação (Telas Pequenas - Retrato) --- */
+/* (Ex: telefones em pé, max-width 700px) */
+/* (MANTIDO - Esta regra esconde o jogo em modo retrato) */
+@media (max-width: 700px) and (orientation: portrait) {
 
-    /* 1. ESTRUTURA PRINCIPAL: Empilha verticalmente (1 coluna) */
+    /* Esconde o jogo */
+    body.jogo-fullscreen #jogo {
+        display: none;
+    }
+
+}
+
+
+/* --- REQUISITO: Layout Específico (Telas Pequenas - Paisagem) --- */
+/* ==========================================================================
+// 1. ESTRUTURA PRINCIPAL DO JOGO (DESKTOP/TABLET GRANDE)
+// (MANTIDA: Layout Grid Padrão: 2 Colunas)
+// ========================================================================== */
+
+#jogo {
+    /* Importante para a escala: garante que a origem da transformação seja o centro */
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    /* Transição suave para a escala */
+}
+
+/* ==========================================================================
+// 1.1 MEDIA QUERY: Adaptação para Telas Menores (Máx. 1200px)
+// Mantém a estrutura, apenas diminui a escala.
+// ========================================================================== */
+
+/* Dispositivos menores que 1200px (Ex: Tablet em paisagem) */
+@media (max-width: 1200px) {
     #jogo {
-        grid-template-columns: 1fr;
-        /* Apenas uma coluna de largura total */
-        grid-template-rows: auto auto auto;
-        /* 3 linhas auto */
-        height: auto;
-        /* Permite que o conteúdo defina a altura total */
+        /* Diminui a escala do jogo em 10% */
+        transform: scale(0.9);
+    }
+}
+
+
+/* --- AJUSTE: (Tablets em MODO RETRATO) --- */
+/* Dispositivos menores que 900px, mas em modo RETRATO (Ex: iPad 768px) */
+@media (max-width: 900px) and (orientation: portrait) {
+    #jogo {
+        /* Escala suave, pois há altura suficiente */
+        transform: scale(0.8);
     }
 
-    /* 2. PAINÉIS SUPERIORES (Tabuleiro + Resultados) */
-    #paineis-superiores {
-        grid-column: 1 / 2;
-        /* Ocupa a 1ª coluna */
-        grid-row: 1 / 2;
-        /* Fica no topo */
-
-        /* Ajusta o layout interno para empilhar horizontalmente de forma mais compacta */
-        grid-template-columns: 1fr 1fr;
-        /* Tenta manter duas colunas internas */
-        gap: 1vmin;
+    /* Mantém as regras de layout para esta largura */
+    #painel-imagens,
+        #painel-mensagens {
+        max-height: 32rem;
+        max-width: 18rem;
     }
 
-    /* 3. PAINEL TABULEIRO: Prioridade total */
-    #painel-tabuleiro {
-        grid-column: 1 / 3;
-        /* Ocupa as 2 colunas internas do #paineis-superiores */
-        grid-row: 1 / 2;
+    #painel-menu,
+    #painel-menu button {
+        max-width: 15rem;
     }
 
-    /* 4. PAINEL RESULTADOS (Imagens/Mensagens) */
+    #lista-resultados {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    body.jogo-fullscreen {
+        padding: 5px;
+    }
+}
+
+
+/* --- AJUSTE: (Celulares em MODO PAISAGEM) --- */
+/* Alvo: Telas com POUCA ALTURA, como celulares em paisagem */
+@media (orientation: landscape) and (max-height: 550px) {
+    #jogo {
+        /* Escala agressiva (0.6) que estava antes em 900px, 
+           aplicada apenas em telas "curtas" */
+        transform: scale(0.6);
+    }
+
+    /* Aplica as regras de layout que estavam em 900px */
     #painel-imagens {
-        grid-column: 1 / 3;
-        /* Ocupa as 2 colunas internas do #paineis-superiores */
-        grid-row: 2 / 3;
-        /* Fica abaixo do Tabuleiro */
-        flex-direction: row;
-        /* Coloca Imagens e Mensagens lado a lado em telas menores */
-        min-height: 100px;
+        max-height: 30rem;
+        max-width: 16rem;
     }
 
-    /* Ajusta layout interno de Imagens e Mensagens para ficarem lado a lado */
+    #painel-menu,
+    #painel-menu button {
+        max-width: 15rem;
+    }
+
+    #lista-resultados {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    body.jogo-fullscreen {
+        padding: 5px;
+    }
+}
+
+
+/* --- AJUSTE: (Celulares em MODO PAISAGEM - MUITO PEQUENOS) --- */
+/* Dispositivos menores que 600px (Ex: Celular paisagem BEM pequeno) */
+/* Adicionado (orientation: landscape) para ser explícito */
+@media (max-width: 600px) and (orientation: landscape) {
+
+    #jogo {
+        /* Escala ainda mais agressiva para caber */
+        transform: scale(0.55);
+    }
+
+    #painel-imagens {
+        max-height: 28rem;
+        max-width: 15rem;
+    }
+
+    #painel-menu {
+        min-width: 15rem;
+    }
+
+    #lista-resultados {
+        display: grid;
+        /* Sua regra de 6 colunas mantida */
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        min-height: 4rem;
+        /* (havia um min-height duplicado, removi 1) */
+        overflow-y: auto;
+    }
+
+    /* Ajusta o padding do body para evitar corte nas laterais */
+    body.jogo-fullscreen {
+        padding: 2px;
+    }
+
     #lista-imagens {
-        flex-grow: 1;
-        flex-shrink: 1;
-        height: auto;
-        justify-content: space-around;
-        gap: 0.5vmin;
+        width: 90%;
     }
 
     #lista-imagens img {
-        width: 30%;
-        /* Três itens por linha */
+        width: 25%;
+        /* Permite 2 itens por linha (2 x 40% = 80%) */
         max-width: 60px;
+        /* Limite máximo para imagens */
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
     }
 
-    #painel-mensagens {
-        margin-top: 0;
-        margin-left: 1vmin;
-        flex-grow: 1;
-        flex-shrink: 0;
-        min-height: 50px;
+    .legendas, h1, h2{
+        font-size: 1rem;
     }
 
-    /* 5. PAINEL MENU */
-    #painel-menu {
-        grid-column: 1 / 2;
-        grid-row: 3 / 4;
-        /* Fica por último */
-        flex-direction: row;
-        /* Coloca botões em linha para economizar espaço vertical */
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 1vmin;
-    }
-
-    #painel-menu button {
-        width: 45%;
-        /* 2 botões por linha */
-        margin: 0.5vh 0;
-        padding: 1vh;
-        font-size: clamp(1rem, 3vw, 1.4rem);
-    }
+        /* Canvas */
+        #tabuleiro {
+            width: 28rem;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 }

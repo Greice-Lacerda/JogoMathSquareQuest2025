@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mensagemEl = document.getElementById('mensagem');
     const listaImagensEl = document.getElementById('lista-imagens');
     const containerTabuleiro = document.getElementById('tabuleiro');
-    const listaResultadosEl = document.getElementById('lista-resultados'); // Elemento para a lista dinâmica
+    const listaResultadosEl = document.getElementById('lista-resultados');
 
     const reiniciarBtn = document.getElementById('resetarTabuleiro');
     const limparBtn = document.getElementById('limparImagem');
@@ -17,23 +17,66 @@ document.addEventListener('DOMContentLoaded', function () {
     const paginaInicialBtn = document.getElementById('paginaInicial');
 
     // Lista completa de imagens
-    let todasImagensBase = [
-        "../imagens/abelha.png", "../imagens/abelha0.png", "../imagens/abelha1.png", "../imagens/aguia.png",
-        "../imagens/antena.png", "../imagens/aranha.jpeg", "../imagens/atomo.png", "../imagens/BALA.png",
-        "../imagens/balao.png", "../imagens/bispo1.png", "../imagens/bola.jpeg", "../imagens/boliche.png",
-        "../imagens/bolo.png", "../imagens/boneca.png", "../imagens/borboleta.png", "../imagens/carro.jpeg",
-        "../imagens/carro.png", "../imagens/carro0.png", "../imagens/casa.png", "../imagens/cavalo.jpeg",
-        "../imagens/cavalo1.jpeg", "../imagens/chapeu1.png", "../imagens/chapeu2.png", "../imagens/chapeu3.png",
-        "../imagens/chinelo.png", "../imagens/circulo.png", "../imagens/coração.png", "../imagens/coroa.png",
-        "../imagens/dado.png", "../imagens/esfera.png", "../imagens/estrela.jpeg", "../imagens/estrela1.jpeg",
-        "../imagens/fantasma.png", "../imagens/flor.jpeg", "../imagens/flor1.PNG", "../imagens/florLis.png",
-        "../imagens/florLis3.png", "../imagens/mais.png", "../imagens/nuvem.png", "../imagens/PEAO.png",
-        "../imagens/pentagono.png", "../imagens/pentagono1.png", "../imagens/pinguim.png", "../imagens/piramide.jpg",
-        "../imagens/piramide2.png", "../imagens/prisma.png", "../imagens/quadrado.png", "../imagens/Rainha5.png",
-        "../imagens/rainha6.png", "../imagens/Rei.jpg", "../imagens/rosa.png", "../imagens/saco.png",
-        "../imagens/solido.png", "../imagens/solido1.png", "../imagens/terra.png", "../imagens/torre.jpeg",
-        "../imagens/triangulo.png", "../imagens/tv.png", "../imagens/varrer.png"
+    let todasImagensBase = ['../imagens/abelha.png',
+        '../imagens/aguia.png',
+        '../imagens/antena.png',
+        '../imagens/aranha.jpeg',
+        '../imagens/atomo.png',
+        '../imagens/bala.png',
+        '../imagens/balao.png',
+        '../imagens/bispo.png',
+        '../imagens/bola.jpeg',
+        '../imagens/boliche.png',
+        '../imagens/bolo.png',
+        '../imagens/bone.png',
+        '../imagens/boneca.png',
+        '../imagens/borboleta.png',
+        '../imagens/capelo.png',
+        '../imagens/carro.jpeg',
+        '../imagens/carroIcone.png',
+        '../imagens/cartola.png',
+        '../imagens/casa.png',
+        '../imagens/cavalo.jpeg',
+        '../imagens/chinelo.png',
+        '../imagens/circulo.png',
+        '../imagens/coracao.png',
+        '../imagens/corcel.jpeg',
+        '../imagens/coroa.png',
+        '../imagens/coroaBranca.png',
+        '../imagens/dado.png',
+        '../imagens/esfera.png',
+        '../imagens/estrela.jpeg',
+        '../imagens/fantasma.png',
+        '../imagens/flor.jpeg',
+        '../imagens/florIcone.png',
+        '../imagens/icone.jpeg',
+        '../imagens/lisBranca.png',
+        '../imagens/lisPreta.png',
+        '../imagens/mais.png',
+        '../imagens/mosca.png',
+        '../imagens/nuvem.png',
+        '../imagens/peao.png',
+        '../imagens/pentagonoIcone.png',
+        '../imagens/pentagonos.png',
+        '../imagens/pinguim.png',
+        '../imagens/piramidePentonal.png',
+        '../imagens/piramideQuadragular.jpg',
+        '../imagens/presentes.png',
+        '../imagens/prisma.png',
+        '../imagens/quadrado.png',
+        '../imagens/rainhaIcone.png',
+        '../imagens/reiIcone.jpg',
+        '../imagens/rosa.png',
+        '../imagens/solidoColorido.png',
+        '../imagens/solidoIcone.png',
+        '../imagens/terra.png',
+        '../imagens/torre.jpeg',
+        '../imagens/triangulo.png',
+        '../imagens/tv.png',
+        '../imagens/vassourinha.png',
+        '../imagens/zangao.png'
     ];
+    
     let todasImagens = [];
 
     let tamanhoGrupo = 6;
@@ -50,11 +93,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let listaResultadosSolucao = [];
     let resultadosAcertados = {};
 
-    // Variáveis de Áudio (Ajuste os caminhos)
+    // --- NOVO: Variáveis de estado para "Caça ao Elemento" ---
+    let elementoAlvoAtual = null;
+    let indiceAlvoAtual = 0;
+    let contagemRestanteAlvo = 0;
+    let elementosCompletos = new Set();
+    let celulasPreenchidas = new Set();
+    // ---------------------------------------------------------
+
     const clapSound = new Audio('audio/clap.mp3');
     const errorSound = new Audio('audio/error.mp3');
 
-    // Variáveis Globais de D&D
     let dragging = false;
     let draggedImgSrc = null;
 
@@ -63,20 +112,26 @@ document.addEventListener('DOMContentLoaded', function () {
     // ==========================================================================
 
     function iniciarJogo() {
-        // Zera o estado do jogo
         tabuleiro = {};
         history = [];
         celulasCorretas = 0;
         tamanhoGrupo = 6;
         resultadosAcertados = {};
 
-        if (proximoNivelBtn) proximoNivelBtn.style.display = 'none';
+        elementoAlvoAtual = null;
+        indiceAlvoAtual = 0;
+        contagemRestanteAlvo = 0;
+        elementosCompletos.clear();
+        celulasPreenchidas.clear();
+
+        if (proximoNivelBtn) {
+            proximoNivelBtn.style.display = 'none';
+            proximoNivelBtn.style.backgroundColor = ''; // Reseta a cor
+        }
         if (reiniciarBtn) { reiniciarBtn.disabled = false; }
-        if (limparBtn) limparBtn.disabled = false;
+        if (limparBtn) { limparBtn.disabled = false; }
 
-        mensagemEl.textContent = 'Arraste a imagem resultado para a célula correta da Tábua de Cayley.';
-
-        // 2.1 Seleção e Preparação das Imagens (Embaralhamento Dinâmico)
+        // 1. Seleção e Preparação das Imagens
         todasImagens = [...todasImagensBase];
         embaralharArray(todasImagens);
 
@@ -89,21 +144,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
         imagensGrupo = [...imagensSelecionadasOriginal];
         imagensParaArrastar = [...imagensGrupo];
-        embaralharArray(imagensParaArrastar);
 
-        // 2.2 Geração da Solução e da Lista de Resultados
+        // 2. Geração da Solução
         tabelaCayleyCorreta = gerarTabelaCayley(imagensGrupo);
         listaResultadosSolucao = gerarListaResultadosSolucao(imagensGrupo);
 
-        // 2.3 Carregamento e Renderização
+        // 3. Carregamento e Renderização
         const todasImagensNecessarias = [...new Set([...imagensParaArrastar, ...imagensGrupo])];
+
         carregarImagens(todasImagensNecessarias, (loadedImgs) => {
             imagensCarregadas = loadedImgs;
             ajustarERedesenharCanvas();
             renderizarImagensParaArrastar();
-            renderizarListaResultados(); // Renderiza a lista inicial (oculta)
+            renderizarListaResultados();
+            iniciarProximoAlvo();
         });
     }
+
+    // --- NOVO: Função para gerenciar a "Caçada" ---
+    function iniciarProximoAlvo() {
+        if (indiceAlvoAtual >= tamanhoGrupo) {
+            return;
+        }
+
+        elementoAlvoAtual = imagensGrupo[indiceAlvoAtual];
+
+        document.querySelectorAll('#lista-imagens img').forEach(img => {
+            img.classList.remove('alvo-ativo');
+            if (!elementosCompletos.has(img.getAttribute('src'))) {
+                img.draggable = true;
+            }
+        });
+
+        const imgAlvoEl = document.querySelector(`#lista-imagens img[src="${elementoAlvoAtual}"]`);
+        if (imgAlvoEl) {
+            imgAlvoEl.classList.add('alvo-ativo');
+        }
+
+        let contagem = 0;
+        tabelaCayleyCorreta.forEach((linha, i) => {
+            linha.forEach((celulaSolucao, j) => {
+                const key = `${i},${j}`;
+                if (celulaSolucao === elementoAlvoAtual && !celulasPreenchidas.has(key)) {
+                    contagem++;
+                }
+            });
+        });
+        contagemRestanteAlvo = contagem;
+
+        // Atualiza a mensagem
+        mensagemEl.textContent = `Encontre ${contagemRestanteAlvo} células para: ${getNomeCurto(elementoAlvoAtual)}`;
+    }
+
 
     /**
      * Gera a Tábua de Cayley (Adição de índices mod n).
@@ -114,7 +206,11 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < n; i++) {
             tabela[i] = [];
             for (let j = 0; j < n; j++) {
-                const resultadoIndex = (i + j) % n;
+
+                // --- AJUSTE (D1): Lógica mudada para (i * j) % n (Abeliana) ---
+                const resultadoIndex = (i * j) % n;
+                // -----------------------------------------------------------
+
                 tabela[i][j] = elementos[resultadoIndex];
             }
         }
@@ -128,9 +224,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const n = elementos.length;
         const lista = [];
         let indexContador = 0;
-
-        // Função auxiliar para obter o nome curto do arquivo
-        const getNomeCurto = (src) => src.split('/').pop().split('.')[0] || `Elem[${elementos.indexOf(src)}]`;
 
         for (let i = 0; i < n; i++) {
             for (let j = 0; j < n; j++) {
@@ -191,7 +284,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // ==========================================================================
 
     function processarDrop(clientX, clientY, imgSrcDropped) {
-        // ... (Lógica de coordenadas e verificação)
         inicializarAudio();
         if (!canvas) return;
 
@@ -209,62 +301,71 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (row >= tamanhoGrupo || col >= tamanhoGrupo) return;
 
-        const expectedImgSrc = tabelaCayleyCorreta[row][col];
-        const jaEstavaCorreto = tabuleiro[key] === expectedImgSrc;
-
-        const itemLista = listaResultadosSolucao.find(item => item.row === row && item.col === col);
-        const itemListaIndex = listaResultadosSolucao.indexOf(itemLista);
-
-
-        if (jaEstavaCorreto) {
+        if (celulasPreenchidas.has(key)) {
             mensagemEl.textContent = "Célula já preenchida corretamente.";
             tocarSom(errorSound);
             return;
         }
 
-        // --- VERIFICAÇÃO ---
-        if (imgSrcDropped === expectedImgSrc) {
-            tabuleiro[key] = imgSrcDropped;
+        const expectedImgSrc = tabelaCayleyCorreta[row][col];
 
-            if (!history.some(move => move.key === key)) {
-                celulasCorretas++;
-            }
-            history = history.filter(move => move.key !== key);
+        if (imgSrcDropped === expectedImgSrc) {
+            // SUCESSO!
+            tabuleiro[key] = imgSrcDropped;
+            celulasPreenchidas.add(key);
+            celulasCorretas++;
+            contagemRestanteAlvo--;
+
             history.push({ key: key, imgSrc: imgSrcDropped });
 
-            // NOVO: Marca o resultado na lista como acertado
+            const itemLista = listaResultadosSolucao.find(item => item.row === row && item.col === col);
             if (itemLista) {
-                resultadosAcertados[itemListaIndex] = true;
+                resultadosAcertados[itemLista.id] = true;
             }
 
             tocarSom(clapSound);
+            mensagemEl.textContent = `Correto! Faltam ${contagemRestanteAlvo} para ${getNomeCurto(elementoAlvoAtual)}`;
+            renderizarListaResultados();
 
-            // GERA MENSAGEM DE FEEDBACK DETALHADA
-            const nomeLinha = itemLista ? itemLista.linha : `Elem[${row}]`;
-            const nomeColuna = itemLista ? itemLista.coluna : `Elem[${col}]`;
-            const nomeResultado = itemLista ? itemLista.resultadoEsperado : `Elem[${(row + col) % tamanhoGrupo}]`;
+            if (contagemRestanteAlvo === 0) {
+                elementosCompletos.add(elementoAlvoAtual);
 
-            mensagemEl.textContent = `Correto! ${nomeLinha} + ${nomeColuna} = ${nomeResultado}`;
+                const imgBanco = document.querySelector(`#lista-imagens img[src="${elementoAlvoAtual}"]`);
+                if (imgBanco) {
+                    imgBanco.classList.remove('alvo-ativo');
+                    imgBanco.classList.add('alvo-completo');
+                    imgBanco.draggable = false;
+                }
 
-            renderizarListaResultados(); // Atualiza a lista após o acerto
-
-            if (celulasCorretas === tamanhoGrupo * tamanhoGrupo) {
-                mensagemEl.innerHTML = `<h2>Parabéns! Tábua completa.</h2>`;
-                if (proximoNivelBtn) proximoNivelBtn.style.display = 'block';
-                if (reiniciarBtn) reiniciarBtn.disabled = true;
-                if (limparBtn) limparBtn.disabled = true;
-                if (typeof confetti === 'function') confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, zIndex: 9999 });
+                if (elementosCompletos.size === tamanhoGrupo) {
+                    // NÍVEL COMPLETO
+                    mensagemEl.innerHTML = `<h2>Parabéns! Tábua completa.</h2>`;
+                    if (proximoNivelBtn) {
+                        proximoNivelBtn.style.display = 'block';
+                        // --- AJUSTE (1): Mudar cor do botão ---
+                        proximoNivelBtn.style.backgroundColor = '#4CAF50';
+                        // ------------------------------------
+                    }
+                    if (reiniciarBtn) reiniciarBtn.disabled = true;
+                    if (limparBtn) limparBtn.disabled = true;
+                    if (typeof confetti === 'function') confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, zIndex: 9999 });
+                } else {
+                    indiceAlvoAtual++;
+                    iniciarProximoAlvo();
+                }
             }
+
         } else { // <<< INCORRETO >>>
-            mensagemEl.textContent = `Incorreto! O resultado não é essa imagem.`;
+            mensagemEl.textContent = `Incorreto! Esta célula não é ${getNomeCurto(elementoAlvoAtual)}.`;
             tocarSom(errorSound);
-            delete tabuleiro[key];
         }
+
         desenharTabuleiroCompleto();
     }
 
+
     /**
-     * Lógica de Limpar Última Jogada.
+     * Lógica de Limpar Última Jogada (Undo).
      */
     function limparUltimaJogada() {
         if (history.length === 0) {
@@ -273,120 +374,115 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const lastMove = history.pop();
-        delete tabuleiro[lastMove.key];
-        celulasCorretas--;
+        const imgSrcDesfeito = lastMove.imgSrc;
+        const key = lastMove.key;
 
-        // NOVO: Remove o acerto da lista de resultados
-        const [row, col] = lastMove.key.split(',').map(Number);
+        delete tabuleiro[key];
+        celulasCorretas--;
+        celulasPreenchidas.delete(key);
+
+        const [row, col] = key.split(',').map(Number);
         const itemLista = listaResultadosSolucao.find(item => item.row === row && item.col === col);
-        const itemListaIndex = listaResultadosSolucao.indexOf(itemLista);
-        if (itemListaIndex !== -1) {
-            delete resultadosAcertados[itemListaIndex];
+        if (itemLista) {
+            delete resultadosAcertados[itemLista.id];
         }
 
-        mensagemEl.textContent = `Última jogada desfeita: ${lastMove.key}`;
+        if (imgSrcDesfeito === elementoAlvoAtual) {
+            contagemRestanteAlvo++;
+            mensagemEl.textContent = `Jogada desfeita. Faltam ${contagemRestanteAlvo} para ${getNomeCurto(elementoAlvoAtual)}`;
+        }
+        else if (elementosCompletos.has(imgSrcDesfeito)) {
+            elementosCompletos.delete(imgSrcDesfeito);
+
+            const imgBanco = document.querySelector(`#lista-imagens img[src="${imgSrcDesfeito}"]`);
+            if (imgBanco) {
+                imgBanco.classList.remove('alvo-completo');
+                imgBanco.draggable = true;
+            }
+
+            indiceAlvoAtual = imagensGrupo.indexOf(imgSrcDesfeito);
+            iniciarProximoAlvo();
+            mensagemEl.textContent = `Caçada anterior reaberta. Encontre ${contagemRestanteAlvo} para ${getNomeCurto(elementoAlvoAtual)}`;
+        }
+
         desenharTabuleiroCompleto();
         renderizarListaResultados();
 
-        if (proximoNivelBtn) proximoNivelBtn.style.display = 'none';
+        if (proximoNivelBtn) {
+            proximoNivelBtn.style.display = 'none';
+            proximoNivelBtn.style.backgroundColor = ''; // Reseta a cor
+        }
         if (reiniciarBtn) reiniciarBtn.disabled = false;
         if (limparBtn) limparBtn.disabled = false;
     }
 
     /**
-     * NOVO: Renderiza a lista dinâmica de resultados (apenas acertados) em 2 colunas.
+     * Renderiza a lista dinâmica de resultados (apenas acertados).
      */
     function renderizarListaResultados() {
         if (!listaResultadosEl) return;
-
         let html = '';
-
         listaResultadosSolucao.forEach((item, index) => {
-            const resolvido = resultadosAcertados[index];
-
+            const resolvido = resultadosAcertados[item.id];
             const linha = item.linha;
             const coluna = item.coluna;
             const resultado = item.resultadoEsperado;
-
             let classe = resolvido ? 'resultado-item resolvido' : 'resultado-item oculta';
 
-            const textoCombinacao = `${index + 1}: ${linha} + ${coluna} = ${resultado}`;
+            // --- AJUSTE (3): Símbolo de operação na lista ---
+            const textoCombinacao = `${index + 1}: ${linha} * ${coluna} = ${resultado}`;
+            // ------------------------------------------------
 
-            // Adiciona o item ao HTML. O CSS cuidará da exibição em colunas e da ocultação.
             html += `<div class="${classe}">${textoCombinacao}</div>`;
         });
-
         listaResultadosEl.innerHTML = html;
-
-        // Garante que os itens ocultos não ocupem espaço no layout grid.
         const itensOcultos = listaResultadosEl.querySelectorAll('.oculta');
         itensOcultos.forEach(el => el.style.display = 'none');
     }
-
 
     // ==========================================================================
     // 4. FUNÇÕES AUXILIARES DE DESENHO E CARREGAMENTO
     // ==========================================================================
 
-    /**
-     * Desenha uma imagem mantendo a proporção de aspecto, centralizada na célula.
-     * @param {CanvasRenderingContext2D} ctx Contexto de desenho do Canvas.
-     * @param {HTMLImageElement} img Objeto imagem a ser desenhado.
-     * @param {number} x Coordenada X inicial da célula.
-     * @param {number} y Coordenada Y inicial da célula.
-     * @param {number} w Largura da célula.
-     * @param {number} h Altura da célula.
-     */
-
     function drawImageMaintainAspect(ctx, img, x, y, w, h) {
         const aspectRatio = img.width / img.height;
-        const paddingFactor = 0.9;
-
+        const paddingFactor = 0.95;
         const maxW = w * paddingFactor;
         const maxH = h * paddingFactor;
-
         let drawW = maxW;
         let drawH = maxH;
-
         if (maxW / maxH > aspectRatio) {
             drawW = maxH * aspectRatio;
         } else {
             drawH = maxW / aspectRatio;
         }
-
-        // Cálculo da posição para centralizar
         const drawX = x + (w - drawW) / 2;
         const drawY = y + (h - drawH) / 2;
-
-        // Desenha a imagem usando Math.floor para evitar problemas de sub-pixel, 
-        // garantindo o alinhamento e a nitidez.
         ctx.drawImage(
-            img, 
-            Math.floor(drawX), 
-            Math.floor(drawY), 
-            Math.floor(drawW), 
+            img,
+            Math.floor(drawX),
+            Math.floor(drawY),
+            Math.floor(drawW),
             Math.floor(drawH)
         );
     }
-    /**
-     * Desenha o tabuleiro completo (Cabeçalhos e Acertos).
-     */
+
     function desenharTabuleiroCompleto() {
         if (!canvas || !ctx) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.strokeStyle = '#b370f1c5'; ctx.lineWidth = 1;
+        ctx.strokeStyle = '#eee8f1'; ctx.lineWidth = 3;
         ctx.font = `${Math.max(10, headerPixelSize * 0.3)}px Arial`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
 
-        // 1. Desenha Cabeçalhos (Linha e Coluna 0)
+        // 1. Desenha Cabeçalhos
         for (let i = 0; i < tamanhoGrupo + 1; i++) {
             for (let j = 0; j < tamanhoGrupo + 1; j++) {
                 const cellX = (j === 0) ? 0 : headerPixelSize + (j - 1) * cellPixelSize;
                 const cellY = (i === 0) ? 0 : headerPixelSize + (i - 1) * cellPixelSize;
                 const size = (i === 0 || j === 0) ? headerPixelSize : cellPixelSize;
 
-                ctx.fillStyle = (i === 0 || j === 0) ? '#e1e5e6ff' : '#dfe6e5ff';
+                ctx.fillStyle = (i === 0 || j === 0) ? '#e1e5e60a' : '#dfe6e50e';
                 ctx.fillRect(cellX, cellY, size, size);
                 ctx.strokeRect(cellX, cellY, size, size);
 
@@ -401,22 +497,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Célula 0,0 (Operação)
-        ctx.fillStyle = '#960af36c'; ctx.fillRect(0, 0, headerPixelSize, headerPixelSize);
+        ctx.fillStyle = '#5b0a914d'; ctx.fillRect(0, 0, headerPixelSize, headerPixelSize);
         ctx.strokeRect(0, 0, headerPixelSize, headerPixelSize);
-        ctx.fillStyle = 'white'; ctx.fillText('+', headerPixelSize / 2, headerPixelSize / 2);
+        ctx.fillStyle = 'white';
+
+        // --- AJUSTE (3): Mudar símbolo da operação ---
+        ctx.fillText('*', headerPixelSize / 2, headerPixelSize / 2);
+        // --------------------------------------------
 
         // 2. Desenha o Grid Principal e os Acertos
-        ctx.strokeStyle = '#75cdf07a'; ctx.lineWidth = 2;
+        ctx.strokeStyle = '#07b5fad0'; ctx.lineWidth = 2;
         for (let row = 0; row < tamanhoGrupo; row++) {
             for (let col = 0; col < tamanhoGrupo; col++) {
                 const cellX = headerPixelSize + col * cellPixelSize;
                 const cellY = headerPixelSize + row * cellPixelSize;
-
                 ctx.strokeRect(cellX, cellY, cellPixelSize, cellPixelSize);
-
                 const key = `${row},${col}`;
                 const imgSrcInCell = tabuleiro[key];
-
                 if (imgSrcInCell) {
                     const img = imagensCarregadas[imgSrcInCell];
                     if (img) {
@@ -427,29 +524,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    /**
-     * Carrega todas as imagens e chama o callback ao finalizar.
-     */
     function carregarImagens(imagens, callback) {
         let loadedCount = 0;
         const total = imagens.length;
         const loadedImgs = {};
-
         if (total === 0) {
             callback(loadedImgs);
             return;
         }
-
         imagens.forEach(src => {
             if (loadedImgs[src]) {
                 loadedCount++;
                 if (loadedCount === total) callback(loadedImgs);
                 return;
             }
-
             const img = new Image();
             img.crossOrigin = "anonymous";
-
             img.onload = () => {
                 loadedImgs[src] = img;
                 loadedCount++;
@@ -468,7 +558,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // 5. EVENT LISTENERS E CONTROLES
     // ==========================================================================
 
-    // Funções Auxiliares
+    /**
+     * Função auxiliar para obter o nome curto do arquivo
+     */
+    function getNomeCurto(src) {
+        if (!src) return "N/A";
+
+        // --- AJUSTE (2): Remover (E{i}) ---
+        const nomeArquivo = src.split('/').pop().split('.')[0];
+        return nomeArquivo;
+        // -----------------------------------
+    }
+
     function inicializarAudio() { }
     function tocarSom(som) {
         som.currentTime = 0;
@@ -481,9 +582,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // --- D&D LISTENERS ---
+    // --- D&D LISTENERS (AJUSTADOS) ---
     function onDragStart(event) {
         draggedImgSrc = event.target.getAttribute('src');
+
+        if (draggedImgSrc !== elementoAlvoAtual) {
+            event.preventDefault();
+            tocarSom(errorSound);
+            mensagemEl.textContent = `Alvo errado! Você deve encontrar: ${getNomeCurto(elementoAlvoAtual)}`;
+
+            const imgAlvoEl = document.querySelector(`#lista-imagens img.alvo-ativo`);
+            if (imgAlvoEl) {
+                imgAlvoEl.classList.add('shake-animation');
+                setTimeout(() => imgAlvoEl.classList.remove('shake-animation'), 500);
+            }
+            dragging = false;
+            return;
+        }
+
         event.dataTransfer.setData('text/plain', draggedImgSrc);
         event.dataTransfer.effectAllowed = 'copy';
         dragging = true;
@@ -494,11 +610,14 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.addEventListener('dragover', (e) => { e.preventDefault(); });
         canvas.addEventListener('drop', (e) => {
             e.preventDefault();
-            const imgSrcDropped = e.dataTransfer.getData('text/plain');
-            if (imgSrcDropped && dragging) {
-                processarDrop(e.clientX, e.clientY, imgSrcDropped);
+            if (dragging) {
+                const imgSrcDropped = e.dataTransfer.getData('text/plain');
+                if (imgSrcDropped) {
+                    processarDrop(e.clientX, e.clientY, imgSrcDropped);
+                }
             }
             dragging = false;
+            draggedImgSrc = null;
         });
     }
 
@@ -509,7 +628,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (proximoNivelBtn) {
         proximoNivelBtn.addEventListener('click', () => {
-            window.open('../NivelD1.html', '_self');
+            const nivelAtualMatch = document.location.pathname.match(/NivelD(\d+)/);
+            const nivelAtual = nivelAtualMatch ? parseInt(nivelAtualMatch[1]) : 1;
+            const proximoNivelNum = nivelAtual + 1;
+
+            // LINHA REMOVIDA - O tamanho é sempre 6
+            // const proximoTamanho = tamanhoTabuleiro + 1; 
+
+            if (proximoNivelNum > 4) { // Supondo D4 como último nível
+                window.open('../Finalizou.html', '_self');
+            } else {
+                const proximoNivelHtml = `NivelD${proximoNivelNum}.html`;
+
+                // AJUSTE: O parâmetro de tamanho foi removido da URL
+                window.open(proximoNivelHtml, '_self');
+            }
         });
     }
     if (paginaInicialBtn) paginaInicialBtn.addEventListener('click', () => window.open('../instrucao3.html', '_self'));
