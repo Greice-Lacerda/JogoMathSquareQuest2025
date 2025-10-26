@@ -1,31 +1,23 @@
-/**Estilo para as paginas de instruçoes do nivel D**/
-body {
-    overflow: hidden;
-}
+/*Estilos da página de instruções do Nível D1*/
 
-.instrucoes-container {
-    margin-top:-15rem;
-    display: grid;
-    /* Usando Grid para o layout do tabuleiro e lista de imagens */
-    grid-template-areas:
-        "cabecalho-instrucao"
-        "mcorpo-instrucao";
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    max-width: 1600px;
-    /* Largura máxima do tabuleiro */
-    height: 55vh;
-    /* Altura do tabuleiro relativa à altura da viewport */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #ffffffa1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
+#D1-coluna1,
+#D1-coluna2 {
+    display: flexbox;
+    width: 48%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgba(240, 248, 255, 0.63);
+    height: 50rem;
+    border-radius: 2rem;
+    margin: 1rem auto;
+    margin-top: -10rem;
+    box-shadow: 12px 14px 3px rgba(0, 0, 0, 0.6);
+    padding: 2rem 5rem;
 }
 
 .cabecalho-instrucao {
-    justify-items: center;
+    text-align: center;
+    /* AJUSTE: 'justify-items' é para containers grid, 'text-align' para alinhar texto */
     padding: 5px;
     border-bottom: 2px solid #eee8f1;
     line-height: 1.6;
@@ -41,7 +33,8 @@ body {
 
 .cabecalho-instrucao p {
     margin: 10px auto;
-    font-size: 2.5em;
+    font-size: 2.5rem;
+    /* AJUSTE: 'rem' para consistência */
     color: #555;
 }
 
@@ -49,406 +42,31 @@ body {
     padding: 25px;
 }
 
-.regra-bloco {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 15px auto;
-    margin: 20px auto;
-}
-
-.simbolo-regra {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #fff;
-    background-color: #5b0a91;
-    /* Cor do símbolo no jogo */
-    padding: 8px 12px;
-    border-radius: 5px;
-    min-width: 50px;
-    text-align: center;
-}
-
-.regra-bloco p {
-    margin: 0;
-    font-size: 1.8rem;
-    font-weight: 500;
-}
-
-ol {
-    padding-left: 25px;
-}
-
-li {
-    margin-bottom: 12px;
-    font-size: 2rem;
-    padding: 15px;
-    color: #333;
-}
-
-li strong {
-    color: #000;
-}
-
-.objetivo-final {
-    justify-items: justify;
-    margin: 25px;
-    padding-top: 20px auto;
-    border-top: 2px solid #eee8f1;
-    font-size: 1.1em;
-}
-
-.objetivo-final strong {
-    color: #5b0a91;
-    font-weight: 600;
-}
-
-.botao-iniciar {
-    display: block;
+#botao-iniciar {
     width: 95%;
     max-width: 250px;
-    height: 4rem;
-    /* Altura baseada no padding */
-    margin: 0.5rem auto;
-    /* Margem fluida */
-    padding: 0.5rem;
-    /* Padding fluido */
-    border-radius: 8px;
-    font-size: 1.8rem;
-    /* Fonte fluida */
+    margin: 15rem auto;
+    display: flex;
+    height: auto;
+    padding: 1.2vh 1vw;
+    border-radius: 10px;
+    font-size: 2.4rem;
     font-weight: bold;
-    border: outset yellow;
-    background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
-    color: white;
+    border: outset rgb(233, 203, 247);
+    background: linear-gradient(45deg, #390258 5%, #ba58e7 45%, #e8d5f1 85%, #f1eff1 94%);
+    text-shadow: 4px 4px 6px rgba(238, 245, 176, 0.7);
+    color: rgb(10, 9, 10);
     box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
     cursor: pointer;
     transition: transform 0.1s ease;
-    margin: 1rem auto;
 }
 
-.botao-iniciar:hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
+#botao-iniciar:hover {
+    transform: scale(1.1);
+    filter: brightness(1.5);
 }
 
-.botao-iniciar:active {
-    transform: scale(0.95);
-}
-
-
-/*Configuração da página Instruções*/
-
-#mainInstrucao {
-    flex-direction: row;
-    width: 100%;
-    gap: 4rem;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.controlesInstrucao{  
-    display: flex;
-    border-radius: 1.0rem; /* 10px */
-    width: 50vw; /* Alterado de 1200px fixo para fluido */
-    max-width: 90rem; /* 1200px */
-    height: 40rem;
-    padding: 1.0rem 2.5rem; /* 10px 25px */
-    border: outset 3px #dfa27c;
-    background-color: #dfa27c96;
-    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9); /* 20px 20px 8px */
-    flex-direction: column;
-    gap: 5.0rem; /* 20px - CORRIGIDO: Aplicado ao container */
-    justify-content: center; /* Adicionado para centralizar os botões */
-    align-items: center; /* Adicionado para alinhar os botões */
-}
-
-.controlesInstrucao1 {
-
-    display: flex;
-    border-radius: 1.0rem;
-    /* 10px */
-    width: 20vw;
-    /* Alterado de 1200px fixo para fluido */
-    height: 40rem;
-    padding: 1.0rem 2.5rem;
-    /* 10px 25px */
-    border: outset 3px #dfa27c;
-    background-color: #dfa27c96;
-    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
-    /* 20px 20px 8px */
-    flex-direction: column;
-    gap: 2.0rem;
-    /* 20px - CORRIGIDO: Aplicado ao container */
-    justify-content: center;
-    /* Adicionado para centralizar os botões */
-    align-items: center;
-    /* Adicionado para alinhar os botões */
-}
-
-.controlesInstrucao:hover,
-.controlesInstrucao1:hover {
-    background-color: rgba(245, 245, 220, 0.692);
-    transform: scale(1);
-}
-
-ul, li{
-    font-size: 3.2rem;
-    line-height: 1.6;
-    margin-left: 1rem;
-    text-shadow: 0.3rem 0.3rem 0.6rem rgba(80, 66, 66, 0.9);
-        /* 3px 3px 6px */
-}
-
-.controlesInstrucao1 button {
-    margin: 1.0rem auto;
-    /* 15px */
-    padding: 1.0rem;
-    /* 10px 0 */
-    width: 25rem;
-    /* 250px */
-    height: 4.5rem;
-    /* 45px */
-    border-radius: 0.8rem;
-    /* 8px */
-    font-size: 2.2rem;
-    /* 22px */
-    font-weight: bold;
-    border: outset yellow;
-    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
-    color: white;
-    box-shadow: 1.0rem 1.0rem 0.6rem rgba(0, 0, 0, 0.9);
-    /* 10px 10px 6px */
-}
-
-.controlesInstrucao1 button:hover {
-    background-color: lightgoldenrodyellow;
+#botao-iniciar:active {
     transform: scale(1.1);
 }
-
-.controlesInstrucao1 button:active {
-    transform: scale(0.9);
-}
-
-/* --- Media Queries --- */
-/*===========================================================*/
-/* RESPONSIVIDADE */
-/*===========================================================*/
-
-/* Para telas < 414px (celulares em paisagem)*/
-@media (max-height: 450px) and (orientation: landscape) {
-
-    #titulo1, #titulo2 ,#titulo3, footer{
-        display: none;
-    }
     
-    .controlesInstrucao1 {
-        width: 90%;
-        flex-direction: column;
-        justify-content: center;
-        max-height: 27rem;
-        font-size: 0.2rem;
-        gap: 1rem;
-    }
-
-    .controlesInstrucao1 button {
-        width: 10.5rem;
-        height: 3.5rem;
-        margin: 1rem auto;
-        font-size: 1.2rem;
-    }
-
-    .controlesInstrucao {
-    width: 95%;
-    margin: 1rem;
-    height: 27rem;
-    }
-    
-    ul,
-    li {
-        font-size: 1.2rem;
-            line-height: 0.8;
-            margin-left: 1rem;
-            text-shadow: 0.3rem 0.3rem 0.6rem rgba(80, 66, 66, 0.9);
-            /* 3px 3px 6px */
-    }
-}
-
-/* Para telas < 414px (celulares em paisagem)*/
-@media (max-width: 414px) and (orientation: landscape) {
-    
-    .controles {
-        width: 90rem;
-        flex-direction: column;
-        height: 90rem;
-        top: 0;
-        margin: 1.0rem auto;
-        /* 10px */
-        padding: 1.0rem;
-        /* 10px */
-    }
-
-         .controlesInstrucao1 {
-             width: 90%;
-             flex-direction: column;
-             justify-content: center;
-             max-height: 27rem;
-             font-size: 0.2rem;
-             gap: 1rem;
-         }
-    
-         .controlesInstrucao1 button {
-             width: 10.5rem;
-             height: 3.5rem;
-             margin: 1rem auto;
-             font-size: 1.2rem;
-         }
-    
-         .controlesInstrucao {
-             width: 95%;
-             margin: 1rem;
-             height: 27rem;
-         }
-
-    footer {
-        width: 90vw;
-        position: static;
-        font-size: 1.6rem;
-        /* 16px */
-        margin-top: 2.0rem;
-        /* 20px */
-    }
-
-    ul,
-    li {
-        margin-left: 2.0rem;
-        /* 20px */
-        font-size: 1.6rem;
-        /* 16px */
-    }
-}
-
-/* --- Telas Maiores (Tablet Portrait): 415px (41.5rem) a 780px (78.0rem) --- */
-@media (min-width: 415px) and (max-width: 780px) {
-
-    
-    #titulo1 {
-        font-size: 6.0rem;
-        top: 3.0rem;
-        margin-bottom: 1rem;
-    }
-
-    #titulo2 {
-        margin-top: 0.3rem;
-        font-size: 4.0rem;
-    }
-
-         .controlesInstrucao1 {
-             width: 90%;
-             flex-direction: column;
-             justify-content: center;
-             max-height: 27rem;
-             font-size: 0.2rem;
-             gap: 1rem;
-         }
-    
-         .controlesInstrucao1 button {
-             width: 10.5rem;
-             height: 3.5rem;
-             margin: 1rem auto;
-             font-size: 1.2rem;
-         }
-    
-         .controlesInstrucao {
-             width: 95%;
-             margin: 1rem;
-             height: 27rem;
-         }
-
-    ul,
-    li {
-        font-size: 1.6rem;
-        /* 20px */
-    }
-
-    footer {
-        font-size: 1.8rem;
-        /* 18px */
-        width: 90%;
-        top: 85rem;
-    }
-}
-
-/* --- Telas Médias (Tablet Landscape / Laptop Pequeno): 781px (78.1rem) a 1015px (101.5rem) --- */
-@media (min-width: 781px) and (max-width: 1015px) {
-    #titulo1 {
-            font-size: 6.0rem;
-            top: 4.0rem;
-            margin-bottom: 1rem;
-        }
-    
-        #titulo2 {
-            margin-top: 0.5rem;
-            font-size: 4.0rem;
-        }
-         .controlesInstrucao1 {
-             width: 90%;
-             flex-direction: column;
-             justify-content: center;
-             max-height: 27rem;
-             font-size: 0.2rem;
-             gap: 1rem;
-         }
-    
-         .controlesInstrucao1 button {
-             width: 10.5rem;
-             height: 3.5rem;
-             margin: 1rem auto;
-             font-size: 1.2rem;
-         }
-    
-         .controlesInstrucao {
-             width: 95%;
-             margin: 1rem;
-             height: 27rem;
-         }
-    
-         footer {
-        font-size: 2.0rem;
-        /* 20px */
-        width: 70rem;
-        /* 700px */
-        position: fixed;
-        /* Retorna ao footer fixo do desktop */
-    }
-
-    ul,
-    li {
-    font-size: 1.6rem;
-    }
-}
-
-/* --- Telas Grandes (Desktop): 1016px (101.6rem) e maiores --- */
-@media (min-width: 1016px) {
-
-    .controles {
-        margin: 3.0rem 6.0rem;
-        /* 10px 60px */
-        top: -9.0rem;
-        /* -20px */
-        width: 60rem;
-        /* 600px */
-        height: 22rem;
-        /* 220px */
-    }
-
-    footer {
-        font-size: 2.0rem;
-        /* 28px */
-    }
-}
-
-
