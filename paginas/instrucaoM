@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Instruções do Nível D1 - Math Square Quest: Aventura dos Padrões</title>
+    <title>Instruções dos Niveis M - Math Square Quest: Aventura dos Padrões</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,13 +23,13 @@
     <main id="mainInstrucao">
         <section class="colunaD1">
             <div class="controlesD1">
-                <h2>Nível D1: Tabela de Cayley</h2>
+                <h2>Nível M: Tabela de Cayley</h2>
 
                 <div class="objetivos-container">
 
                     <div class="objetivo-item">
 
-                        <p>O Nível D1 é uma Tabela de Cayley que demonstra a operação matemática de adição modular.</p>
+                        <p>O Nível M é uma Tabela de Cayley que demonstra a operação matemática de adição modular.</p>
 
                         <p>Neste nível, para preencher qualquer célula, você deve somar os valores (ou posições) da
                             linha (i) e da coluna (j) e, em seguida, encontrar o resto da divisão (módulo) dessa soma

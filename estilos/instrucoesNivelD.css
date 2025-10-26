@@ -1,72 +1,61 @@
-/*Estilos da página de instruções do Nível D1*/
-
-#D1-coluna1,
-#D1-coluna2 {
-    display: flexbox;
-    width: 48%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgba(240, 248, 255, 0.63);
-    height: 50rem;
-    border-radius: 2rem;
-    margin: 1rem auto;
-    margin-top: -10rem;
-    box-shadow: 12px 14px 3px rgba(0, 0, 0, 0.6);
-    padding: 2rem 5rem;
+.colunaD1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 1.4em;
+    margin-top: -8rem;
+    width: 70%;
+    height: 55rem;
+    box-shadow: 12px 14px 12px rgba(0, 0, 0, 0.7);
+    background-color: rgba(240, 248, 255, 0.568);
+    border-radius: 20px;
+    padding: 15px auto;
+    gap: 4rem;
 }
 
-.cabecalho-instrucao {
-    text-align: center;
-    /* AJUSTE: 'justify-items' é para containers grid, 'text-align' para alinhar texto */
-    padding: 5px;
-    border-bottom: 2px solid #eee8f1;
-    line-height: 1.6;
+.controlesD1{
+    margin-left: 4rem;
+    margin-top: 4rem;
+    font-size: 2rem;
 }
 
-.cabecalho-instrucao h2,
-.corpo-instrucao h2 {
-    margin: 0;
-    color: #5b0a91;
-    /* Cor principal do jogo */
-    font-size: 4rem;
-}
-
-.cabecalho-instrucao p {
-    margin: 10px auto;
-    font-size: 2.5rem;
-    /* AJUSTE: 'rem' para consistência */
-    color: #555;
-}
-
-.corpo-instrucao {
-    padding: 25px;
-}
-
-#botao-iniciar {
+#fechar{
     width: 95%;
-    max-width: 250px;
-    margin: 15rem auto;
-    display: flex;
-    height: auto;
-    padding: 1.2vh 1vw;
-    border-radius: 10px;
-    font-size: 2.4rem;
-    font-weight: bold;
-    border: outset rgb(233, 203, 247);
-    background: linear-gradient(45deg, #390258 5%, #ba58e7 45%, #e8d5f1 85%, #f1eff1 94%);
-    text-shadow: 4px 4px 6px rgba(238, 245, 176, 0.7);
-    color: rgb(10, 9, 10);
-    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
-    cursor: pointer;
-    transition: transform 0.1s ease;
-}
-
-#botao-iniciar:hover {
-    transform: scale(1.1);
-    filter: brightness(1.5);
-}
-
-#botao-iniciar:active {
-    transform: scale(1.1);
-}
+        max-width: 250px;
+        height: auto;
+        margin: 4vh;
+        padding: 1.5vh 1vw;
+        border-radius: 8px;
+        font-size: 2rem;
+        font-weight: bold;
+        border: outset rgb(232, 194, 247);
+        background: linear-gradient(45deg, #d4eeec 15%, #210850 45%, #540faf 85%, #8e04a0 24%, #670270 14%);
+        color: white;
+        box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+        transition: transform 0.1s ease;
+        margin: 1rem auto;
+    }
     
+    /* Hovers e Animações (Sem grandes mudanças) */
+        #fechar:hover {
+        transform: scale(1.1);
+        filter: brightness(1.3);
+    }
+    
+        #fechar:active {
+        transform: scale(0.95);
+    }
+
+    .contD11 {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-size: 1.8rem;
+}
+
+.objetivo-item{
+    margin-bottom: 1rem auto;
+    padding: 0.5rem;
+    align-items: justify;
+    text-align: justify;
+    padding: 0 6rem;
+}
