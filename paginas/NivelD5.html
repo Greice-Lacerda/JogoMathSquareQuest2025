@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Math Square Quest: Aventura dos Padrões - Nível Difícil (D5)</title>
+    <title>Nível Difícil (D5) - Math Square Quest: Aventura dos Padrões</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,7 @@
                 <div id="paineis-superiores">
 
                     <div id="painel-tabuleiro" class="painel-jogo">
-                        <h1 class="legendas">Nível D5 - Tábua de Cayley</h1>
+                        <h1 class="legendas">Nível D5 - Desafio Final</h1>
                         <div id="tabuleiro">
                             <canvas id="tela"></canvas>
                         </div>
@@ -49,11 +49,18 @@
                 </div>
 
                 <div id="painel-menu" class="painel-jogo">
+                    
                     <h1 class="legendas">Menu</h1>
+                    
+                    <button id="informacao" onclick="window.open('instrucaoD5.html', '_blank')">Instruções</button>
+
                     <button id="limparImagem">Desfazer Jogada</button>
-                    <button id="resetarTabuleiro">Reiniciar Nível</button> <button
-                        id="paginaInicial">Instruções</button>
-                    <button id="proximo-nivel">Próximo Nível</button>
+
+                    <button id="resetarTabuleiro">Reiniciar Nível</button>
+
+                    <button id="paginaInicial">Voltar</button>
+
+                    <button id="proximo-nivel">Prosseguir</button>
 
                 </div>
 
@@ -66,7 +73,7 @@
     </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-    <script src="../logica/logicaD.js"></script>
+    <script src="../logica/logicaD5.js"></script>
 </body>
 
 </html>

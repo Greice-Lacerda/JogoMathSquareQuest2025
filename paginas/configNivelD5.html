@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configurações do Nível D5 - Math Square Quest</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/instrucao.css">
+    <link rel="stylesheet" href="../estilos/instrucoesNivelD.css">
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <header>
+            <h1 id="titulo1">Math Square Quest</h1>
+            <h2 id="titulo2">Aventura dos Padrões</h2>
+        </header>
+
+        <main id="mainInstrucao">
+            <section id="config-section">
+            
+                <div class="config-item">
+            
+            
+                    <p class="operator-list">
+                        <label for="moduloInput">Configure o Desafio do Nível D5:</label>
+                    <ul class="operator-list">
+                        <li class="operator-list"><u>Valores</u>: <code>a</code> e <code>b</code> são números de 1 a 5.</li>
+                        <li class="operator-list"><u>Operadores</u>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>,
+                            <code>%</code>
+                            (resto), <code>**</code> (potência), <code>===</code> (igual), <code>!==</code> (diferente),
+                            <code> &gt; </code> , <code> &lt; </code>etc.</li>
+                        <li class="operator-list"><u>Funções</u>: <code>Math.min(a, b)</code>, <code>Math.max(a, b)</code>,
+                            <code>Math.sqrt(b,a)</code>, <code>Math.log(b,a)</code>, etc.</li>
+                        <li class="operator-list"><u>Exemplos</u>: <code>(a + b)</code>, <code>(a * b) % 3</code>,
+                            <code>(a ** b)</code>, etc.</li>
+            
+                    </ul>
+                    </p>
+            
+                    <p class="operator-list" style="text-align: justify;">A operação que você definir será aplicada a cada par de
+                        coordenadas (linha <code>a</code> e coluna <code>b</code>) do tabuleiro.
+                    </p>
+            
+                </div>
+            
+                <div class="config-item">
+            
+                    <label for="userLogicInput">1. Defina a Operação (use 'a' e 'b'):</label>
+                    <p> </p>
+            
+                    <input type="text" id="userLogicInput" placeholder="Ex: (a * b) + 1" autocorrect="off" autocapitalize="off"
+                        spellcheck="false">
+            
+                    <p></p>
+            
+                    <button type="button" id="clearLogicBtn" class="button-group">Limpar Lógica</button>
+            
+                    <p class="operator-list">
+                        <br>----------------------------------------------------------------------<br>
+                    </p>
+            
+                    <p> </p>
+            
+                    <label for="moduloInput">2. Escolha o Módulo (2 a 6):</label>
+            
+                    <p> </p>
+            
+                    <input type="number" id="moduloInput" min="2" max="6" value="5" style="text-align: center">
+            
+                    <p> </p>
+            
+                    <button type="button" id="clearModuloBtn" class="button-group">Limpar Módulo</button>
+                </div>
+            
+                <div class="config-item button-group">
+            
+                    <label for="userLogicInput">Iniciando o jogo:</label>
+            
+                    <p></p>
+                    <p class="operator-list" style="text-align: justify;">O resultado final da sua operação será calculado como:</p>
+            
+                    <p> <code>(Resultado_Da_Sua_Logica % Modulo_Escolhido)</code>.</p>
+            
+                    <p></p>
+                    <p class="operator-list" style="text-align: justify;">Por exemplo, se sua lógica for <code>(a * b) + 1</code> e
+                        o módulo for <code>5</code>, para a célula na linha <code>3</code> e coluna <code>4</code>: (3 * 4) + 1 =
+                        13, e então 13 % 5 = 3 (resto).</p>
+            
+                    <p></p>
+                    <p class="operator-list" style="text-align: justify;">Isso significa que a célula na linha <code>3</code> e
+                        coluna <code>4</code> deve ser preenchida com o elemento na <strong>Posição 3</strong>.
+            
+                    </p>
+                    <p class="operator-list" style="text-align: justify;">Após definir a lógica e o módulo, clique em "Iniciar Jogo"
+                        para ir ao tabuleiro <strong>NxN</strong> e começar a caçar os elementos!
+                    </p>
+                    <button type="button" id="startGameBtn">Iniciar Jogo</button>
+                    <p id="errorMessage"></p>
+                </div>
+            
+            </section>
+            
+        </main>
+
+        <footer>
+        <div id="rodapé">
+            Criado por Adriana, Greice, Pablo e Paulo em 2025.
+        </div>
+        </footer>
+
+        <script src="../logica/logicaConfigNivelD5.js"></script>
+
+</body>
+
+</html>

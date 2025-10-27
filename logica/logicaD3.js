@@ -79,13 +79,14 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let todasImagens = [];
 
-    let tamanhoGrupo = 6;
+    // --- LÓGICA D3: Módulo 5 ---
+    let tamanhoGrupo = 5; 
     let cellPixelSize = 0;
     let headerPixelSize = 0;
     let tabuleiro = {};
     let tabelaCayleyCorreta = [];
     let imagensCarregadas = {};
-    let imagensGrupo = [];
+    let imagensGrupo = []; // --- AJUSTE 1-BASED ---: [null, img1...img5]
     let imagensParaArrastar = [];
     let celulasCorretas = 0;
     let history = [];
@@ -93,30 +94,44 @@ document.addEventListener('DOMContentLoaded', function () {
     let listaResultadosSolucao = [];
     let resultadosAcertados = {};
 
-    // --- NOVO: Variáveis de estado para "Caça ao Elemento" ---
+    // --- Variáveis de estado "Caça ao Elemento" ---
     let elementoAlvoAtual = null;
-    let indiceAlvoAtual = 0;
+    let indiceAlvoAtual = 0; // (0 a 4)
     let contagemRestanteAlvo = 0;
     let elementosCompletos = new Set();
     let celulasPreenchidas = new Set();
-    // ---------------------------------------------------------
+    // ---------------------------------------------
+
+    // --- VARIÁVEIS DE ESTADO (NOVO) ---
+    let celulaAtiva = null; // Armazena a célula clicada: {row, col, key}
+    let dragging = false;
+    let draggedImgSrc = null;
 
     const clapSound = new Audio('audio/clap.mp3');
     const errorSound = new Audio('audio/error.mp3');
-
-    let dragging = false;
-    let draggedImgSrc = null;
 
     // ==========================================================================
     // 2. FUNÇÕES PRINCIPAIS E LÓGICA DO JOGO
     // ==========================================================================
 
+    /**
+     * Função auxiliar para obter o nome curto do arquivo (Base 1)
+     */
+    function getNomeCurto(src) {
+        if (!src) return "N/A";
+        const nomeArquivo = src.split('/').pop().split('.')[0];
+        // 'imagensGrupo' é 1-based, indexOf retornará 1-5
+        return nomeArquivo || `Elem[${imagensGrupo.indexOf(src)}]`;
+    }
+
     function iniciarJogo() {
         tabuleiro = {};
         history = [];
         celulasCorretas = 0;
-        tamanhoGrupo = 6;
+        // --- LÓGICA D3: Módulo 5 ---
+        tamanhoGrupo = 5; 
         resultadosAcertados = {};
+        celulaAtiva = null; // --- NOVO ---
 
         elementoAlvoAtual = null;
         indiceAlvoAtual = 0;
@@ -131,6 +146,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (reiniciarBtn) { reiniciarBtn.disabled = false; }
         if (limparBtn) { limparBtn.disabled = false; }
 
+        // --- MENSAGEM ATUALIZADA ---
+        mensagemEl.textContent = 'Arraste a imagem ou clique na célula e depois na imagem.';
+
         // 1. Seleção e Preparação das Imagens
         todasImagens = [...todasImagensBase];
         embaralharArray(todasImagens);
@@ -142,37 +160,46 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        imagensGrupo = [...imagensSelecionadasOriginal];
-        imagensParaArrastar = [...imagensGrupo];
+        // --- AJUSTE 1-BASED ---
+        imagensGrupo = [null, ...imagensSelecionadasOriginal];
+        imagensParaArrastar = [...imagensSelecionadasOriginal]; // (Não embaralhar)
 
-        // 2. Geração da Solução
+        // 2. Geração da Solução (Base 1)
         tabelaCayleyCorreta = gerarTabelaCayley(imagensGrupo);
         listaResultadosSolucao = gerarListaResultadosSolucao(imagensGrupo);
 
         // 3. Carregamento e Renderização
-        const todasImagensNecessarias = [...new Set([...imagensParaArrastar, ...imagensGrupo])];
+        const todasImagensNecessarias = [...new Set([...imagensParaArrastar, ...imagensSelecionadasOriginal])];
 
         carregarImagens(todasImagensNecessarias, (loadedImgs) => {
             imagensCarregadas = loadedImgs;
             ajustarERedesenharCanvas();
             renderizarImagensParaArrastar();
             renderizarListaResultados();
-            iniciarProximoAlvo();
+            iniciarProximoAlvo(); // Inicia a "Caçada"
         });
     }
 
-    // --- NOVO: Função para gerenciar a "Caçada" ---
+    // --- Função "Caçada" (AJUSTADA para 1-based) ---
     function iniciarProximoAlvo() {
-        if (indiceAlvoAtual >= tamanhoGrupo) {
+        if (indiceAlvoAtual >= tamanhoGrupo) { // (indiceAlvoAtual vai de 0 a 4)
             return;
         }
 
-        elementoAlvoAtual = imagensGrupo[indiceAlvoAtual];
+        // --- AJUSTE 1-BASED --- (Acessa [1] a [5])
+        elementoAlvoAtual = imagensGrupo[indiceAlvoAtual + 1]; 
 
         document.querySelectorAll('#lista-imagens img').forEach(img => {
             img.classList.remove('alvo-ativo');
-            if (!elementosCompletos.has(img.getAttribute('src'))) {
-                img.draggable = true;
+            // --- ATUALIZADO (Adiciona lógica de clique) ---
+            const isAlvo = img.getAttribute('src') === elementoAlvoAtual;
+            const isCompleto = elementosCompletos.has(img.getAttribute('src'));
+
+            img.draggable = isAlvo; // Só pode arrastar o alvo
+            img.style.cursor = isAlvo ? 'grab' : (isCompleto ? 'not-allowed' : 'pointer');
+            
+            if (isCompleto) {
+                img.classList.add('alvo-completo');
             }
         });
 
@@ -181,9 +208,10 @@ document.addEventListener('DOMContentLoaded', function () {
             imgAlvoEl.classList.add('alvo-ativo');
         }
 
+        // Calcula contagem restante (lógica interna 0-based está OK)
         let contagem = 0;
-        tabelaCayleyCorreta.forEach((linha, i) => {
-            linha.forEach((celulaSolucao, j) => {
+        tabelaCayleyCorreta.forEach((linha, i) => { // i = 0 a 4
+            linha.forEach((celulaSolucao, j) => { // j = 0 a 4
                 const key = `${i},${j}`;
                 if (celulaSolucao === elementoAlvoAtual && !celulasPreenchidas.has(key)) {
                     contagem++;
@@ -198,37 +226,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     * Gera a Tábua de Cayley (Adição de índices mod n).
+     * Gera a Tábua de Cayley (SOMA MODULAR Módulo 5 - Base 1).
+     * --- AJUSTE 1-BASED ---: 'elementos' é [null, img1, ..., img5]
      */
     function gerarTabelaCayley(elementos) {
-        const n = elementos.length;
+        const n = tamanhoGrupo; // n = 5
         const tabela = [];
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) { // i de 0 a 4
             tabela[i] = [];
-            for (let j = 0; j < n; j++) {
+            for (let j = 0; j < n; j++) { // j de 0 a 4
+                
+                // Mapeia i e j (0-4) para posições 1-5
+                const posI = i + 1;
+                const posJ = j + 1;
 
-                // --- AJUSTE (D1): Lógica mudada para (i * j) % n (Abeliana) ---
-                const resultadoIndex = (i * j) % n;
-                // -----------------------------------------------------------
-
-                tabela[i][j] = elementos[resultadoIndex];
+                // --- LÓGICA D3: SOMA MODULAR (Base 1) ---
+                const resultadoPos = ( (posI + posJ) - 1 ) % n + 1;
+                
+                tabela[i][j] = elementos[resultadoPos];
             }
         }
         return tabela;
     }
 
     /**
-     * Gera a lista completa dos 36 resultados no formato A + B = C.
+     * Gera a lista completa dos resultados no formato A + B = C.
+     * --- AJUSTE 1-BASED ---: 'elementos' é [null, img1, ..., img5]
      */
     function gerarListaResultadosSolucao(elementos) {
-        const n = elementos.length;
+        const n = tamanhoGrupo; // n = 5
         const lista = [];
         let indexContador = 0;
 
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n; j++) {
-                const linhaSrc = elementos[i];
-                const colunaSrc = elementos[j];
+        for (let i = 0; i < n; i++) { // i de 0 a 4
+            for (let j = 0; j < n; j++) { // j de 0 a 4
+                
+                // --- AJUSTE 1-BASED --- (Acessa o array 1-indexado)
+                const linhaSrc = elementos[i + 1];
+                const colunaSrc = elementos[j + 1];
+                
                 const resultadoSrc = tabelaCayleyCorreta[i][j];
 
                 lista.push({
@@ -249,15 +285,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /**
      * Ajusta o tamanho do Canvas e redesenha o tabuleiro.
+     * --- ATUALIZADO (Layout mais robusto) ---
      */
     function ajustarERedesenharCanvas() {
         if (!canvas || !containerTabuleiro) return;
 
-        const size = Math.min(containerTabuleiro.clientWidth, containerTabuleiro.clientHeight);
+        const containerRect = containerTabuleiro.getBoundingClientRect();
+        const size = Math.min(containerRect.width, containerRect.height);
+        
+        if (size <= 0) return;
+
         canvas.width = size;
         canvas.height = size;
 
-        const totalCells = tamanhoGrupo + 1;
+        const totalCells = tamanhoGrupo + 1; // 5 + 1 = 6
         headerPixelSize = size * 0.1;
         cellPixelSize = (size - headerPixelSize) / tamanhoGrupo;
 
@@ -265,50 +306,52 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Renderiza as imagens na lista para serem arrastáveis.
+     * Renderiza as imagens na lista (arrastáveis E clicáveis).
+     * --- ATUALIZADO (Adiciona clique) ---
      */
     function renderizarImagensParaArrastar() {
         listaImagensEl.innerHTML = '';
         imagensParaArrastar.forEach(src => {
             const img = document.createElement('img');
             img.src = src;
-            img.draggable = true;
+            img.draggable = true; // (Será controlado pelo 'iniciarProximoAlvo')
             img.classList.add('arrastavel');
+            
             img.addEventListener('dragstart', onDragStart);
+            
+            // --- NOVO (Evento de Clique) ---
+            img.addEventListener('click', onImageBankClick);
+            
             listaImagensEl.appendChild(img);
         });
     }
 
     // ==========================================================================
-    // 3. LÓGICA DE VERIFICAÇÃO E FEEDBACK
+    // 3. LÓGICA DE VERIFICAÇÃO E FEEDBACK (REFATORADO)
     // ==========================================================================
 
-    function processarDrop(clientX, clientY, imgSrcDropped) {
+    /**
+     * --- REFATORADO ---
+     * Função central que processa a jogada (seja por clique ou D&D).
+     */
+    function processarJogada(row, col, imgSrcDropped) {
         inicializarAudio();
         if (!canvas) return;
 
-        const rect = canvas.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-
-        if (x < headerPixelSize || x > canvas.width || y < headerPixelSize || y > canvas.height) return;
-
-        const gridX = x - headerPixelSize;
-        const gridY = y - headerPixelSize;
-        const col = Math.floor(gridX / cellPixelSize);
-        const row = Math.floor(gridY / cellPixelSize);
         const key = `${row},${col}`;
 
-        if (row >= tamanhoGrupo || col >= tamanhoGrupo) return;
-
+        // Verifica se já foi preenchida
         if (celulasPreenchidas.has(key)) {
             mensagemEl.textContent = "Célula já preenchida corretamente.";
             tocarSom(errorSound);
+            celulaAtiva = null; // Limpa seleção
+            desenharTabuleiroCompleto(); // Remove destaque
             return;
         }
 
         const expectedImgSrc = tabelaCayleyCorreta[row][col];
 
+        // Verifica se a imagem (que é o 'alvo') é a esperada para esta célula
         if (imgSrcDropped === expectedImgSrc) {
             // SUCESSO!
             tabuleiro[key] = imgSrcDropped;
@@ -327,6 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mensagemEl.textContent = `Correto! Faltam ${contagemRestanteAlvo} para ${getNomeCurto(elementoAlvoAtual)}`;
             renderizarListaResultados();
 
+            // Verifica se completou o alvo atual
             if (contagemRestanteAlvo === 0) {
                 elementosCompletos.add(elementoAlvoAtual);
 
@@ -335,43 +379,48 @@ document.addEventListener('DOMContentLoaded', function () {
                     imgBanco.classList.remove('alvo-ativo');
                     imgBanco.classList.add('alvo-completo');
                     imgBanco.draggable = false;
+                    imgBanco.style.cursor = 'not-allowed';
                 }
 
+                // Verifica se completou o nível
                 if (elementosCompletos.size === tamanhoGrupo) {
-                    // NÍVEL COMPLETO
                     mensagemEl.innerHTML = `<h2>Parabéns! Tábua completa.</h2>`;
                     if (proximoNivelBtn) {
                         proximoNivelBtn.style.display = 'block';
-                        // --- AJUSTE (1): Mudar cor do botão ---
-                        proximoNivelBtn.style.backgroundColor = '#4CAF50';
-                        // ------------------------------------
+                        proximoNivelBtn.style.backgroundColor = '#4CAF50'; // Cor verde
                     }
                     if (reiniciarBtn) reiniciarBtn.disabled = true;
                     if (limparBtn) limparBtn.disabled = true;
                     if (typeof confetti === 'function') confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, zIndex: 9999 });
+                
                 } else {
+                    // Próximo alvo
                     indiceAlvoAtual++;
                     iniciarProximoAlvo();
                 }
             }
 
         } else { // <<< INCORRETO >>>
+            // O usuário clicou/arrastou o 'elementoAlvoAtual' para a célula errada
             mensagemEl.textContent = `Incorreto! Esta célula não é ${getNomeCurto(elementoAlvoAtual)}.`;
             tocarSom(errorSound);
         }
 
+        celulaAtiva = null; // Limpa seleção
         desenharTabuleiroCompleto();
     }
 
 
     /**
      * Lógica de Limpar Última Jogada (Undo).
+     * --- AJUSTADO (Base 1 e 'celulaAtiva') ---
      */
     function limparUltimaJogada() {
         if (history.length === 0) {
             mensagemEl.textContent = "Nenhuma jogada correta para desfazer.";
             return;
         }
+        celulaAtiva = null; // --- NOVO ---
 
         const lastMove = history.pop();
         const imgSrcDesfeito = lastMove.imgSrc;
@@ -387,21 +436,20 @@ document.addEventListener('DOMContentLoaded', function () {
             delete resultadosAcertados[itemLista.id];
         }
 
+        // Se a imagem desfeita é a que estávamos caçando
         if (imgSrcDesfeito === elementoAlvoAtual) {
             contagemRestanteAlvo++;
             mensagemEl.textContent = `Jogada desfeita. Faltam ${contagemRestanteAlvo} para ${getNomeCurto(elementoAlvoAtual)}`;
         }
+        // Se a imagem desfeita era de uma caçada já completa
         else if (elementosCompletos.has(imgSrcDesfeito)) {
             elementosCompletos.delete(imgSrcDesfeito);
 
-            const imgBanco = document.querySelector(`#lista-imagens img[src="${imgSrcDesfeito}"]`);
-            if (imgBanco) {
-                imgBanco.classList.remove('alvo-completo');
-                imgBanco.draggable = true;
-            }
-
-            indiceAlvoAtual = imagensGrupo.indexOf(imgSrcDesfeito);
-            iniciarProximoAlvo();
+            // --- AJUSTE 1-BASED --- (indexOf retorna 1-5, subtrai 1 para 0-4)
+            indiceAlvoAtual = imagensGrupo.indexOf(imgSrcDesfeito) - 1;
+            
+            // Reinicia a caçada para esse item (recalcula contagem)
+            iniciarProximoAlvo(); 
             mensagemEl.textContent = `Caçada anterior reaberta. Encontre ${contagemRestanteAlvo} para ${getNomeCurto(elementoAlvoAtual)}`;
         }
 
@@ -417,7 +465,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Renderiza a lista dinâmica de resultados (apenas acertados).
+     * Renderiza a lista dinâmica de resultados.
+     * --- AJUSTADO (Símbolo '+') ---
      */
     function renderizarListaResultados() {
         if (!listaResultadosEl) return;
@@ -429,9 +478,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const resultado = item.resultadoEsperado;
             let classe = resolvido ? 'resultado-item resolvido' : 'resultado-item oculta';
 
-            // --- AJUSTE (3): Símbolo de operação na lista ---
-            const textoCombinacao = `${index + 1}: ${linha} * ${coluna} = ${resultado}`;
-            // ------------------------------------------------
+            // --- LÓGICA D3: SOMA (Símbolo '+') ---
+            const textoCombinacao = `${index + 1}: ${linha} + ${coluna} = ${resultado}`;
 
             html += `<div class="${classe}">${textoCombinacao}</div>`;
         });
@@ -446,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function drawImageMaintainAspect(ctx, img, x, y, w, h) {
         const aspectRatio = img.width / img.height;
-        const paddingFactor = 0.95;
+        const paddingFactor = 0.9; // (Era 0.95, 0.9 é mais seguro)
         const maxW = w * paddingFactor;
         const maxH = h * paddingFactor;
         let drawW = maxW;
@@ -467,6 +515,10 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     }
 
+    /**
+     * Desenha o tabuleiro completo.
+     * --- ATUALIZADO (Base 1, Destaque, Correção W/H, Símbolo '+') ---
+     */
     function desenharTabuleiroCompleto() {
         if (!canvas || !ctx) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -476,22 +528,27 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
 
         // 1. Desenha Cabeçalhos
-        for (let i = 0; i < tamanhoGrupo + 1; i++) {
-            for (let j = 0; j < tamanhoGrupo + 1; j++) {
+        for (let i = 0; i < tamanhoGrupo + 1; i++) { // i de 0 a 5
+            for (let j = 0; j < tamanhoGrupo + 1; j++) { // j de 0 a 5
                 const cellX = (j === 0) ? 0 : headerPixelSize + (j - 1) * cellPixelSize;
                 const cellY = (i === 0) ? 0 : headerPixelSize + (i - 1) * cellPixelSize;
-                const size = (i === 0 || j === 0) ? headerPixelSize : cellPixelSize;
+                
+                // --- CORREÇÃO W/H ---
+                let sizeW = (j === 0) ? headerPixelSize : cellPixelSize;
+                let sizeH = (i === 0) ? headerPixelSize : cellPixelSize;
+                if (i === 0 && j === 0) { sizeW = headerPixelSize; sizeH = headerPixelSize; }
 
                 ctx.fillStyle = (i === 0 || j === 0) ? '#e1e5e60a' : '#dfe6e50e';
-                ctx.fillRect(cellX, cellY, size, size);
-                ctx.strokeRect(cellX, cellY, size, size);
+                ctx.fillRect(cellX, cellY, sizeW, sizeH);
+                ctx.strokeRect(cellX, cellY, sizeW, sizeH);
 
-                if (i === 0 && j > 0) {
-                    const img = imagensCarregadas[imagensGrupo[j - 1]];
-                    if (img) drawImageMaintainAspect(ctx, img, cellX, cellY, size, size);
-                } else if (j === 0 && i > 0) {
-                    const img = imagensCarregadas[imagensGrupo[i - 1]];
-                    if (img) drawImageMaintainAspect(ctx, img, cellX, cellY, size, size);
+                // --- AJUSTE 1-BASED ---
+                if (i === 0 && j > 0) { // j vai de 1 a 5
+                    const img = imagensCarregadas[imagensGrupo[j]];
+                    if (img) drawImageMaintainAspect(ctx, img, cellX, cellY, sizeW, sizeH);
+                } else if (j === 0 && i > 0) { // i vai de 1 a 5
+                    const img = imagensCarregadas[imagensGrupo[i]];
+                    if (img) drawImageMaintainAspect(ctx, img, cellX, cellY, sizeW, sizeH);
                 }
             }
         }
@@ -500,18 +557,29 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.fillStyle = '#5b0a914d'; ctx.fillRect(0, 0, headerPixelSize, headerPixelSize);
         ctx.strokeRect(0, 0, headerPixelSize, headerPixelSize);
         ctx.fillStyle = 'white';
-
-        // --- AJUSTE (3): Mudar símbolo da operação ---
-        ctx.fillText('*', headerPixelSize / 2, headerPixelSize / 2);
-        // --------------------------------------------
+        // --- LÓGICA D3: SOMA (Símbolo '+') ---
+        ctx.fillText('+', headerPixelSize / 2, headerPixelSize / 2);
 
         // 2. Desenha o Grid Principal e os Acertos
         ctx.strokeStyle = '#07b5fad0'; ctx.lineWidth = 2;
-        for (let row = 0; row < tamanhoGrupo; row++) {
-            for (let col = 0; col < tamanhoGrupo; col++) {
+        for (let row = 0; row < tamanhoGrupo; row++) { // row de 0 a 4
+            for (let col = 0; col < tamanhoGrupo; col++) { // col de 0 a 4
                 const cellX = headerPixelSize + col * cellPixelSize;
                 const cellY = headerPixelSize + row * cellPixelSize;
                 ctx.strokeRect(cellX, cellY, cellPixelSize, cellPixelSize);
+
+                // --- LÓGICA DE DESTAQUE (NOVO) ---
+                if (celulaAtiva && celulaAtiva.row === row && celulaAtiva.col === col) {
+                    ctx.fillStyle = 'rgba(255, 255, 100, 0.4)';
+                    ctx.fillRect(cellX, cellY, cellPixelSize, cellPixelSize);
+                    ctx.strokeStyle = '#FFD700';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(cellX, cellY, cellPixelSize, cellPixelSize);
+                    ctx.strokeStyle = '#07b5fad0';
+                    ctx.lineWidth = 2;
+                }
+                // --- FIM DESTAQUE ---
+
                 const key = `${row},${col}`;
                 const imgSrcInCell = tabuleiro[key];
                 if (imgSrcInCell) {
@@ -524,20 +592,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Carrega imagens (Robusto, 1-based safe)
+     */
     function carregarImagens(imagens, callback) {
         let loadedCount = 0;
-        const total = imagens.length;
+        const imagensUnicas = [...new Set(imagens)].filter(Boolean); // Filtra null
+        const total = imagensUnicas.length;
         const loadedImgs = {};
         if (total === 0) {
             callback(loadedImgs);
             return;
         }
-        imagens.forEach(src => {
-            if (loadedImgs[src]) {
-                loadedCount++;
-                if (loadedCount === total) callback(loadedImgs);
-                return;
-            }
+        imagensUnicas.forEach(src => {
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.onload = () => {
@@ -546,7 +613,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (loadedCount === total) callback(loadedImgs);
             };
             img.onerror = () => {
-                console.error(`Falha ao carregar imagem: ${src}. Verifique o caminho!`);
+                console.error(`Falha ao carregar imagem: ${src}.`);
                 loadedCount++;
                 if (loadedCount === total) callback(loadedImgs);
             };
@@ -555,20 +622,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ==========================================================================
-    // 5. EVENT LISTENERS E CONTROLES
+    // 5. EVENT LISTENERS E CONTROLES (ATUALIZADOS)
     // ==========================================================================
-
-    /**
-     * Função auxiliar para obter o nome curto do arquivo
-     */
-    function getNomeCurto(src) {
-        if (!src) return "N/A";
-
-        // --- AJUSTE (2): Remover (E{i}) ---
-        const nomeArquivo = src.split('/').pop().split('.')[0];
-        return nomeArquivo;
-        // -----------------------------------
-    }
 
     function inicializarAudio() { }
     function tocarSom(som) {
@@ -582,10 +637,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // --- D&D LISTENERS (AJUSTADOS) ---
+    /**
+     * D&D Listener (Caçada)
+     */
     function onDragStart(event) {
         draggedImgSrc = event.target.getAttribute('src');
 
+        // Lógica da Caçada: Só permite arrastar o alvo ativo
         if (draggedImgSrc !== elementoAlvoAtual) {
             event.preventDefault();
             tocarSom(errorSound);
@@ -605,23 +663,115 @@ document.addEventListener('DOMContentLoaded', function () {
         dragging = true;
     }
 
-    // Canvas Listeners
+    // --- LISTENERS DE CLIQUE (NOVOS) ---
+
+    /**
+     * Lida com cliques no banco de imagens (Caçada)
+     */
+    function onImageBankClick(event) {
+        const imgSrcClicked = event.target.getAttribute('src');
+
+        // Lógica da Caçada: Só permite interagir com o alvo
+        if (imgSrcClicked !== elementoAlvoAtual) {
+            if (elementosCompletos.has(imgSrcClicked)) {
+                mensagemEl.textContent = "Você já completou esse elemento.";
+            } else {
+                mensagemEl.textContent = `Alvo errado! Você deve encontrar: ${getNomeCurto(elementoAlvoAtual)}`;
+                const imgAlvoEl = document.querySelector(`#lista-imagens img.alvo-ativo`);
+                if (imgAlvoEl) {
+                    imgAlvoEl.classList.add('shake-animation');
+                    setTimeout(() => imgAlvoEl.classList.remove('shake-animation'), 500);
+                }
+            }
+            tocarSom(errorSound);
+            return;
+        }
+
+        // Se clicou no alvo correto, mas não selecionou célula
+        if (!celulaAtiva) {
+            mensagemEl.textContent = "Por favor, clique em uma célula do tabuleiro primeiro.";
+            return;
+        }
+        
+        // Clicou no alvo correto E tem uma célula ativa
+        processarJogada(celulaAtiva.row, celulaAtiva.col, imgSrcClicked);
+    }
+
+    /**
+     * Lida com cliques no canvas (para selecionar a célula).
+     */
+    function onCanvasClick(event) {
+        if (!canvas) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        if (x < headerPixelSize || x > canvas.width || y < headerPixelSize || y > canvas.height) {
+            celulaAtiva = null;
+            desenharTabuleiroCompleto();
+            return;
+        }
+
+        const gridX = x - headerPixelSize;
+        const gridY = y - headerPixelSize;
+        const col = Math.floor(gridX / cellPixelSize);
+        const row = Math.floor(gridY / cellPixelSize);
+
+        if (row < tamanhoGrupo && col < tamanhoGrupo) {
+            // Se a célula já estiver preenchida, não faz nada
+            if (celulasPreenchidas.has(`${row},${col}`)) {
+                mensagemEl.textContent = "Célula já preenchida corretamente.";
+                celulaAtiva = null;
+                desenharTabuleiroCompleto();
+                return;
+            }
+            
+            // Célula válida e vazia
+            celulaAtiva = { row, col, key: `${row},${col}` };
+            mensagemEl.textContent = `Célula [${row+1}, ${col+1}] selecionada. Agora clique na imagem alvo.`;
+            desenharTabuleiroCompleto(); // Redesenha com destaque
+        }
+    }
+
+    // --- REGISTRO DOS EVENT LISTENERS (ATUALIZADO) ---
     if (canvas) {
         canvas.addEventListener('dragover', (e) => { e.preventDefault(); });
+        
+        // Listener de Drop (REFATORADO)
         canvas.addEventListener('drop', (e) => {
             e.preventDefault();
             if (dragging) {
                 const imgSrcDropped = e.dataTransfer.getData('text/plain');
                 if (imgSrcDropped) {
-                    processarDrop(e.clientX, e.clientY, imgSrcDropped);
+                    
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    if (x < headerPixelSize || x > canvas.width || y < headerPixelSize || y > canvas.height) {
+                        dragging = false;
+                        return;
+                    }
+
+                    const gridX = x - headerPixelSize;
+                    const gridY = y - headerPixelSize;
+                    const col = Math.floor(gridX / cellPixelSize);
+                    const row = Math.floor(gridY / cellPixelSize);
+
+                    if (row < tamanhoGrupo && col < tamanhoGrupo) {
+                        processarJogada(row, col, imgSrcDropped);
+                    }
                 }
             }
             dragging = false;
             draggedImgSrc = null;
         });
+
+        // --- NOVO (Adiciona o listener de clique no canvas) ---
+        canvas.addEventListener('click', onCanvasClick);
     }
 
-    // --- REGISTRO DOS EVENT LISTENERS ---
+    // Botões
     window.addEventListener('resize', ajustarERedesenharCanvas);
     if (reiniciarBtn) reiniciarBtn.addEventListener('click', iniciarJogo);
     if (limparBtn) limparBtn.addEventListener('click', limparUltimaJogada);
@@ -629,23 +779,19 @@ document.addEventListener('DOMContentLoaded', function () {
     if (proximoNivelBtn) {
         proximoNivelBtn.addEventListener('click', () => {
             const nivelAtualMatch = document.location.pathname.match(/NivelD(\d+)/);
-            const nivelAtual = nivelAtualMatch ? parseInt(nivelAtualMatch[1]) : 1;
+            const nivelAtual = nivelAtualMatch ? parseInt(nivelAtualMatch[1]) : 3; // Default para 3
             const proximoNivelNum = nivelAtual + 1;
 
-            // LINHA REMOVIDA - O tamanho é sempre 6
-            // const proximoTamanho = tamanhoTabuleiro + 1;
-
-            if (proximoNivelNum > 4) { // Supondo D4 como último nível
+            if (proximoNivelNum > 5) { // Supondo D5 como último nível
                 window.open('../Finalizou.html', '_self');
             } else {
                 const proximoNivelHtml = `NivelD${proximoNivelNum}.html`;
-
-                // AJUSTE: O parâmetro de tamanho foi removido da URL
                 window.open(proximoNivelHtml, '_self');
             }
         });
     }
-    if (paginaInicialBtn) paginaInicialBtn.addEventListener('click', () => window.open('instrucaoD3.html', '_blanck'));
+    // (Corrigido de _blanck para _blank)
+    if (paginaInicialBtn) paginaInicialBtn.addEventListener('click', () => window.open('instrucaoD3.html', '_blank'));
 
     // --- INICIALIZAÇÃO DO JOGO ---
     iniciarJogo();

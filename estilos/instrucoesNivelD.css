@@ -1,4 +1,6 @@
-.colunaD1{
+
+
+.colunaD1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 1.4em;
@@ -12,50 +14,263 @@
     gap: 4rem;
 }
 
-.controlesD1{
+.controlesD1 {
     margin-left: 4rem;
     margin-top: 4rem;
     font-size: 2rem;
 }
 
-#fechar{
+#fechar {
     width: 95%;
-        max-width: 250px;
-        height: auto;
-        margin: 4vh;
-        padding: 1.5vh 1vw;
-        border-radius: 8px;
-        font-size: 2rem;
-        font-weight: bold;
-        border: outset rgb(232, 194, 247);
-        background: linear-gradient(45deg, #d4eeec 15%, #210850 45%, #540faf 85%, #8e04a0 24%, #670270 14%);
-        color: white;
-        box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
-        cursor: pointer;
-        transition: transform 0.1s ease;
-        margin: 1rem auto;
-    }
-    
-    /* Hovers e Animações (Sem grandes mudanças) */
-        #fechar:hover {
-        transform: scale(1.1);
-        filter: brightness(1.3);
-    }
-    
-        #fechar:active {
-        transform: scale(0.95);
-    }
+    max-width: 250px;
+    height: auto;
+    margin: 4vh;
+    padding: 1.5vh 1vw;
+    border-radius: 8px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: outset rgb(232, 194, 247);
+    background: linear-gradient(45deg, #d4eeec 15%, #210850 45%, #540faf 85%, #8e04a0 24%, #670270 14%);
+    color: white;
+    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    margin: 1rem auto;
+}
 
-    .contD11 {
+/* Hovers e Animações (Sem grandes mudanças) */
+#fechar:hover {
+    transform: scale(1.1);
+    filter: brightness(1.3);
+}
+
+#fechar:active {
+    transform: scale(0.95);
+}
+
+.contD11 {
     margin-bottom: 1.5rem;
     text-align: left;
     font-size: 1.8rem;
 }
 
-.objetivo-item{
+.objetivo-item {
     margin-bottom: 1rem auto;
     padding: 0.5rem;
     align-items: justify;
     text-align: justify;
     padding: 0 6rem;
+}
+
+/**==================================================================================== Estilos da pagina de Nivel D5 ==============================================================================**/
+
+#setupD5 {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#setupD5 h2 {
+    color: #FFD700;
+    /* Dourado */
+    margin-bottom: 15px;
+}
+
+#setupD5 p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+#userLogicInput {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#startGameButtonD5 {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    /* Verde */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#startGameButtonD5:hover {
+    background-color: #45a049;
+}
+
+#errorMessageD5 {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/**==================================================================================== Estilos da pagina de configurações do nivel D5 ==============================================================================**/
+#mainInstrucao,
+body {
+    margin-bottom: 20rem;
+    overflow: hidden;
+}
+
+#config-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 2rem;
+    border: 1px solid #ccc;
+    width: 1600px;
+    max-height: 60vh;
+    /* Centraliza */
+}
+
+.config-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #555;
+    font-size: 1.8rem;
+}
+
+.config-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.config-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #FFD700;
+    font-size: 2.6rem;
+    /* Dourado */
+}
+
+.config-item input[type="text"],
+.config-item input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 100%;
+    /* Ajuste */
+    max-width: 400px;
+    font-family: 'Roboto Mono', monospace;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#userLogicInput:hover {
+    border: #050505 1px solid;
+    transition: transform 0.1s ease;
+    transform: scale(1);
+}
+
+.config-item input[type="number"] {
+    width: 100%;
+    margin: 0 auto;
+    /* Menor para o módulo */
+}
+
+.config-item code {
+    background-color: #333;
+    color: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 1.6rem;
+}
+
+.button-group button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+#clearLogicBtn,
+#clearModuloBtn {
+    width: 150px;
+    height: 50px;
+    font-weight: bold;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #050505 5%, #fa0404 40%, #f39d91 75%, #f0f0f0 98%);
+    border: outset yellow;
+    /* Vermelho */
+    color: white;
+    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    font-size: 1.8rem;
+
+}
+
+#startGameBtn {
+    font-weight: bold;
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #050505 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+    box-shadow: 4px 8px 6px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    /* Verde */
+    color: white;
+    font-size: 1.8rem;
+    padding: 10px 20px;
+    margin-top: 15px;
+}
+
+#clearLogicBtn:hover,
+#clearModuloBtn:hover,
+#startGameBtn:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+#clearLogicBtn:active,
+#clearModuloBtn:active,
+#startGameBtn:active {
+    transform: scale(1.2);
+}
+
+#errorMessage {
+    color: #f44336;
+    /* Vermelho */
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 1.2em;
+    font-size: 1.8rem;
+    /* Reserva espaço */
+}
+
+.operator-list {
+    font-size: 1.8rem;
+    color: #ddd;
+    margin-top: 15px;
+}
+
+.operator-list code {
+    font-size: 1.8rem;
+    /* Garante que o code dentro da lista tenha tamanho normal */
+}
+
+#rodapé {
+    background-color: #45a04900;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 2.2rem;
+    color: white;
+    justify-content: center;
+    display: flex;
+    margin-left: 400px;
 }

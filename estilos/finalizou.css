@@ -1,0 +1,86 @@
+/**Estilos da pagina Finalizou.html**/
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Geist+Mono:wght@100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+body{
+    overflow: hidden;
+}
+
+.mensagem-final{
+    font-family: 'Bree Serif', serif;
+    font-size: 2.5rem;
+    color: #01172e;
+    text-align: center;
+    margin-bottom: 10px;
+    border: outset 3px #dfa27c;
+    background-color: #dfa27c3d;
+    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
+    width: 90%;
+    height: 58vh;
+    margin-top: -12rem;
+    padding: 0 10rem;
+    border-radius: 20px;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(240, 238, 238, 0.795);
+}
+
+#imagem-jogo {
+    font-size: 3rem;
+    color: #f1c40f;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 12%;
+    height: auto;
+}
+
+.controlesIFinal {
+    display: flex;
+    border-radius: 1.5rem;
+    /* 10px */
+    width: 60vw;
+    /* Alterado de 1200px fixo para fluido */
+    height: auto;
+    padding: 1.0rem 2.5rem;
+    /* 10px 25px */
+    /*border: outset 3px #dfa27c7a;
+    background-color: #dfa27c00;
+    box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
+    /* 20px 20px 8px */
+    flex-direction: row;
+    gap: 2.0rem;
+    /* 20px - CORRIGIDO: Aplicado ao container */
+    justify-content: center;
+    /* Adicionado para centralizar os botões */
+    align-items: center;
+    /* Adicionado para alinhar os botões */
+    margin-top: 6.0rem;
+}
+
+.controlesIFinal button {
+    margin: 1.0rem auto;
+    /* 15px */
+    padding: 1.0rem;
+    /* 10px 0 */
+    width: 25rem;
+    /* 250px */
+    height: 4.5rem;
+    /* 45px */
+    border-radius: 0.8rem;
+    /* 8px */
+    font-size: 2.2rem;
+    /* 22px */
+    font-weight: bold;
+    border: outset yellow;
+    background: linear-gradient(45deg, #b3b7a5 15%, #c9f054 35%, #30382b 75%, #c05d20 4%);
+    color: white;
+    box-shadow: 1.0rem 1.0rem 0.6rem rgba(0, 0, 0, 0.9);
+    /* 10px 10px 6px */
+}
+
+.controlesIFinal button:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.1);
+}
+
+.controlesIFinal button:active {
+    transform: scale(0.9);
+}

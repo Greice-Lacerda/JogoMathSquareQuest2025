@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Instruções do Nível D5 - Math Square Quest: Aventura dos Padrões</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/instrucao.css">
+    <link rel="stylesheet" href="../estilos/instrucoesNivelD.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 id="titulo1">Math Square Quest</h1>
+        <h2 id="titulo2">Aventura dos Padrões</h2>
+    </header>
+
+    <main id="mainInstrucao">
+        <section class="colunaD1">
+
+            <div class="controlesD1">
+                <p><br></p>
+                <h2>Instruções: Nível D5 - O Desafio Dinâmico</h2>
+
+                <div class="objetivos-container">
+                    <div class="objetivo-item">
+
+                        <p>Bem-vindo ao Nível D5! Este é um nível especial onde <strong>você define as
+                                regras</strong>. A dificuldade e os padrões dependem da lógica que você inseriu na
+                            página de configuração.</p>
+
+                        <p><strong>Objetivo:</strong> Preencher completamente a Tabela de Cayley (o tabuleiro
+                            N &times; N) usando a lógica que você criou.</p>
+
+                        <p><strong>&bullet; O Tabuleiro:</strong> Você verá um tabuleiro N &times; N, onde N é o
+                            <strong>Módulo</strong> que você escolheu (de 2 a 6).
+                        </p>
+
+                        <p><strong>&bullet; Os Elementos:</strong> As N imagens nos cabeçalhos (linha e coluna) são seus
+                            elementos, numerados de <strong>1</strong> até <strong>N</strong>.</p>
+
+                            <p><strong>&bullet; Valores negativos:</strong> Quando sua lógica (ex: a - b) resulta em um número negativo, o sistema o trata como <span style="color:rgb(47, 0, 255);"> "andar para trás"</span> em um relógio circular (o módulo). </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controlesD1">
+                <p><br><br></p>
+                <div class="objetivo-item">
+                    <h3>Como Jogar:</h3>
+
+                    <p><strong>1. <u>Calcule o Resultado:</u></strong> Para cada célula, o jogo aplica a sua função
+                        <code>f(a, b)</code>:
+                    </p>
+
+                    <p><strong>2. <u>Aplique o Módulo:</u></strong> O resultado da sua função é então calculado
+                        usando o Módulo N para encontrar a imagem-resposta final (mapeada para uma posição de 1 a
+                        N).</p>
+
+                    <p><strong>3. <u>Como Interagir:</u></strong> Você pode preencher o tabuleiro de duas formas:
+                        <strong>Arrastar e Soltar:</strong> Arraste uma imagem do banco para a
+                        célula.<strong> Clicar-Clicar:</strong> Clique na célula vazia (ela ficará amarela) e depois
+                        clique na
+                        imagem correta no banco.
+                    </p>
+                </div>
+
+                <button id="fechar" onclick="window.close();">Fechar Instruções</button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        Criado por Adriana, Greice, Pablo e Paulo em 2025.
+    </footer>
+
+</html>

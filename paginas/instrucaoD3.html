@@ -23,24 +23,23 @@
     <main id="mainInstrucao">
         <section class="colunaD1">
             <div class="controlesD1">
-                <h2>Nível D3: Tabela de Cayley</h2>
+                <h2>Bem-vindo ao Nível D3!</h2>
 
                 <div class="objetivos-container">
 
                     <div class="objetivo-item">
 
-                        <p>O Nível D3 é uma Tabela de Cayley que demonstra a operação matemática de adição modular.</p>
+                        <p>Este nível introduz uma nova mecânica: a <b>Caça ao Elemento</b>. O tabuleiro ainda é uma
+                            Tabela de Cayley de <b>Adição Modular (módulo 5)</b>; o conjunto de elementos deste tabuleiro é {1, 2, 3, 4, 5}. Mas, você não pode preenchê-lo em qualquer ordem.</p>
+                        
+                        <p><b><u>Nova Regra:</u></b> Neste nível, você deve preencher o tabuleiro em uma ordem específica, elemento por elemento:</p>
+                        
+                        <p><b>&bullet; Elemento Alvo:</b> O jogo destacará uma imagem no banco, começando pela Posição 1.</p>
+                    
+                        <p><p><b>&bullet; Objetivo:</b> Encontrar todas as células no tabuleiro cujo resultado da soma seja esse Elemento Alvo.
+                            
+                        <p><b>&bullet; Uma imagem por vez!</b> Você só pode arrastar ou clicar no Elemento Alvo que está destacado. Tentar usar outra imagem não funcionará.</p>
 
-                        <p>Neste nível, para preencher qualquer célula, você deve somar os valores (ou posições) da
-                            linha (i) e da coluna (j) e, em seguida, encontrar o resto da divisão (módulo) dessa soma
-                            pelo número total de elementos (n).</p>
-
-                        <p>Este nível testa a compreensão de aritmética modular, que é um conceito fundamental em
-                            <b>teoria dos números</b> e <b>álgebra abstrata</b>.
-                        </p>
-
-                        <p><b><u>Objetivo 2:</u></b> Arraste a imagem correta do banco para cada uma das 36 células
-                            do tabuleiro.</p>
                     </div>
                 </div>
             </div>
@@ -51,18 +50,13 @@
 
                     <h3>Como Jogar:</h3>
 
-                    1. <b><u>Identifique os Valores:</u></b> Os cabeçalhos no topo e à esquerda mostram os 6 elementos,
-                    que representam os valores de 0 a 5.
+                    <p><b>1. <u>Soma Módulo 5:</b></u> Para encontrar o resultado de uma célula (Linha + Coluna), some as posições da linha e da coluna.</p>
 
-                    <p>2. <b><u>Some os Valores:</u></b> Para qualquer célula vazia, pegue o valor da sua linha i e o
-                        valor da sua coluna j. Some: i + j.
-                    </p>
+                    <p><b>2. <u>Resto da divisão (%5):</u></b> Divida essa soma por 5 e encontre o resto. O resultado é a Posição da imagem a ser inserida.</p>
 
-                    <p>3. <b><u>Encontre o Resto (% 6):</u></b> O resultado que você deve arrastar para a célula é o
-                        resto da divisão dessa soma por 6.</p>
-
-                    <p>4. <b><u>Banco Infinito:</u></b> O seu banco de imagens à direita tem todos os 6 elementos (0 a
-                        5). Você pode arrastá-los quantas vezes precisar.</p>
+                    <p><b>3. <u>Regra Especial:</u></b> Se a soma for um múltiplo de 5 (como 2 + 3 = 5 ou 5 + 5 = 10), o resto da divisão seria 0. Nesses casos, o resultado é o último elemento na <b>Posição 5.</b></p>
+                    
+                    <p><b>4. <u>Como Interagir:</u></b> Para preencher uma célula com o Elemento Alvo atual arraste o elemento  destacado do banco para a célula correta. Ou ainda, clique em uma célula vazia no tabuleiro e, em seguida, clique no Elemento Alvo.</p>
 
                 </div>
 

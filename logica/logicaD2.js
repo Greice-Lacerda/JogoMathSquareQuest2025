@@ -669,7 +669,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const nivelAtual = nivelAtualMatch ? parseInt(nivelAtualMatch[1]) : 2; // Default para 2 (NivelD2)
             const proximoNivelNum = nivelAtual + 1;
 
-            if (proximoNivelNum > 4) { // Supondo D4 como último nível
+            if (proximoNivelNum > 5) { // Supondo D4 como último nível
                 window.open('../Finalizou.html', '_self');
             } else {
                 const proximoNivelHtml = `NivelD${proximoNivelNum}.html`;

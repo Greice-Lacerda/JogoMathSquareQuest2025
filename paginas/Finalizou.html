@@ -1,48 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conclusão do Jogo</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        #instrucoes {
-            display: flex; /* Usando Flexbox para layout */
-            align-items: center; /* Alinhando verticalmente ao centro */
-            justify-content: space-between; /* Espaçamento entre os elementos */
-            padding: 20px; /* Espaçamento interno */
-        }
-        #imagem-jogo {
-            max-width: 200px; /* Limita a largura da imagem */
-            margin-right: 20px; /* Espaço entre a imagem e o texto */
-        }
-        ul {
-            list-style-type: square; /* Remove marcadores da lista */
-            padding: 0; /* Remove padding padrão */
-        }
-        h1 {
-            margin-bottom: 10px; /* Espaço abaixo do título */
-        }
-    </style>
-</head>
-<body>
-    <div id="instrucoes">
-        <img src="imagens/Rainha.jpeg" alt="Imagem do Jogo" id="imagem-jogo"> <!-- Insira sua imagem aqui -->
-        <div>
-        <div id="final">Parabéns! </div>
-            <h1>Você completou todas as fases do jogo.</h1>
-            <button id="ogar" onclick="window.location.href='index.html'">Jogar novamente</button>
-            <button id="fechar">Fechar</button>
-            <button id="Imprimir" onclick="window.location.href='imprimir.html'">Imprimir jogo</button>
-        </div>
-    </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Instruções do Nível D5 - Math Square Quest: Aventura dos Padrões</title>
 
-    <script>        
-        // Botão de fechar que redireciona para o Google na mesma aba
-        document.getElementById('fechar').addEventListener('click', function() {
-            window.location.href = 'https://www.google.com.br/#spf=1603558156590'; // Redireciona na mesma aba
-        });
-    </script>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/finalizou.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 id="titulo1">Math Square Quest</h1>
+        <h2 id="titulo2">Aventura dos Padrões</h2>
+    </header>
+
+<main id="mainFinalizacao">
+    <section class="mensagem-final">
+        <img src="../imagens/corBranca.png" alt="Rainha da Matemática, símbolo de vitória" id="imagem-jogo">
+        <h3 id="final-heading">A Rainha da Matemática o saúda!</h3>
+        <h1>Parabéns! Você completou sua jornada no Math Square Quest.</h1>
+
+        <div class="controlesIFinal">
+            
+            <button id="jogar" onclick="window.location.href='../index.html'">Jogar Novamente</button>
+        
+            <button id="Imprimir" onclick="window.open('ImpTab.html', '_blank')">Imprimir jogo</button>
+        
+            <button id="fechar" onclick="window.location.href='https:\\www.google.com.br'">Fechar</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    Criado por Adriana, Greice, Pablo e Paulo em 2025.
+</footer>
+
+</div> <audio id="victorySound" src="../sons/Aplausos.mp3" preload="auto"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Explode confetes ao carregar a página
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 1000,
+                spread: 520,
+                origin: { y: 0.9 },
+                zIndex: 9999
+            });
+        } else {
+            console.error("Biblioteca 'confetti' não foi carregada.");
+        }
+
+        // Toca um som de vitória
+        const victorySound = document.getElementById('victorySound');
+        if (victorySound) {
+            // A interação do usuário (clique) é geralmente necessária para o áudio
+            // Mas tentamos tocar automaticamente.
+            victorySound.play().catch(e => {
+                console.warn("Não foi possível tocar o áudio automaticamente. O navegador pode exigir um clique do usuário.");
+            });
+        }
+    });
+</script>
 </body>
+
 </html>

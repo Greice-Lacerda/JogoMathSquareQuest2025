@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Instruções do Nível D4 - Math Square Quest: Aventura dos Padrões</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../estilos/comuns.css">
+    <link rel="stylesheet" href="../estilos/instrucao.css">
+    <link rel="stylesheet" href="../estilos/instrucoesNivelD.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 id="titulo1">Math Square Quest</h1>
+        <h2 id="titulo2">Aventura dos Padrões</h2>
+    </header>
+
+    <main id="mainInstrucao">
+        <section class="colunaD1">
+            <div class="controlesD1">
+                <h2>Nível D4: A Tabela de Multiplicação Híbrida</h2>
+
+                <div class="objetivos-container">
+
+                    <div class="objetivo-item">
+
+                        
+                        <p>Parabéns por chegar ao Nível D4! Este nível combina a "Caça ao Elemento" com uma operação matemática única em um tabuleiro <b>6x6</b>.</p>
+                        
+                        <p><b><u>O Tabuleiro e os Valores Secretos:</u></b> Embora o tabuleiro tenha 6 posições (P1 a P6), a lógica principal é baseada no <b>Módulo 5</b>. Funciona assim:</p>
+                        
+                        <p><b>1. </b>Cada uma das 6 posições está secretamente ligada a um <b>"Valor Matemático"</b> diferente, sorteado aleatoriamente entre {0, 1, 2, 3, 4, 5}.
+                            
+                        <p><b>2. </b>A posição ligada ao <b>Valor 0</b> age como um <b>"Zero (Elemento neutro da adição)"</b>.</p>
+
+                        <p><b>3. </b>A posição ligada ao <b>Valor 1</b> age como o <b>"Elemento neutro da multiplicação"</b>.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="controlesD1">
+
+                <div class="objetivo-item">
+
+                    <p><b><u>Regra Principal:</u></b> Como no nível anterior, você deve preencher o tabuleiro caçando um elemento por vez. Para encontrar o resultado de <code>Linha * Coluna</code>:</p>
+                    
+                    <p><b>1. </b> Pegue o "Valor Matemático" secreto da Linha (L) e da Coluna (C) e calcule o valor do <code>Resultado = L * C</code>.</p>
+                        
+                    <p><b>2. </b> Aplique as Regras Especiais:</p>
+
+                    <p><b>&bullet; <u>Regra 1</u>:</b> Se resultado for exatamente 5, o valor final é 5.</p>
+
+                    <p><b>&bullet; <u>Regra 2</u>:</b> Se o resultado não for 5, o valor final" é o resto da divisão de resultado por 5.</p>
+                            
+                    <p>O resultado que você deve colocar na célula é a <b>imagem</b> correspondente à <b>Posição</b> ligada ao valor final". Seu objetivo final é completar toda a tabela 6x6!</p>
+
+                </div>
+
+                <button id="fechar" onclick="window.close();">Fechar Instruções</button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        Criado por Adriana, Greice, Pablo e Paulo em 2025.
+    </footer>
+
+</html>
