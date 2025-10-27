@@ -16,8 +16,8 @@
     max-width: 90rem; /* 1200px */
     height: 40rem;
     padding: 1.0rem 2.5rem; /* 10px 25px */
-    border: outset 3px #dfa27c;
-    background-color: #dfa27c96;
+    border: outset 3px #dfa27c9d;
+    background-color: #dfa27c54;
     box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9); /* 20px 20px 8px */
     flex-direction: column;
     gap: 5.0rem; /* 20px - CORRIGIDO: Aplicado ao container */
@@ -35,8 +35,8 @@
     height: 40rem;
     padding: 1.0rem 2.5rem;
     /* 10px 25px */
-    border: outset 3px #dfa27c;
-    background-color: #dfa27c96;
+    border: outset 3px #dfa27c75;
+    background-color: #dfa27c44;
     box-shadow: 2.0rem 2.0rem 0.8rem rgba(0, 0, 0, 0.9);
     /* 20px 20px 8px */
     flex-direction: column;

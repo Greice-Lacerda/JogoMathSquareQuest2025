@@ -1,4 +1,4 @@
-// Aguarda o carregamento completo do DOM para garantir que todos os elementos HTML existam
+// Aguarda o carregamento completo do DOM
 document.addEventListener('DOMContentLoaded', function () {
 
     // --- 1. SELEÇÃO DOS ELEMENTOS DO JOGO ---
@@ -13,91 +13,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const paginaInicialBtn = document.getElementById('paginaInicial');
 
     // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
-
-    // --- REATORAÇÃO (BUG FIX): Corrigido 'tamanho' de 2 para 6 ---
-    const tamanho = 6; // Nível 5: Tabuleiro 6x6
-    // --- FIM REATORAÇÃO ---
-
+    const tamanho = 6; // Nível F4: Tabuleiro 6 x 6
     let usedImages = [];
     let imageHistory = [];
-    let cellSize = 0; // Será calculado dinamicamente
+    let cellSize = 0;
 
     let errorSound;
     let clapSound;
     let audioInicializado = false;
 
-    // --- REATORAÇÃO: Variáveis de estado para o arraste manual ---
-    let isDragging = false; // Flag para saber se estamos arrastando
-    let draggedItemSrc = null; // A 'src' da imagem que estamos arrastando
-    let ghostImage = null; // A imagem "fantasma" que segue o mouse/dedo
-    // --- FIM REATORAÇÃO ---
+    // [REMOVIDO] Variáveis de estado do arraste manual
 
-    const imagens = ['../imagens/abelha.png',
-        '../imagens/aguia.png',
-        '../imagens/antena.png',
-        '../imagens/aranha.jpeg',
-        '../imagens/atomo.png',
-        '../imagens/bala.png',
-        '../imagens/balao.png',
-        '../imagens/bispo.png',
-        '../imagens/bola.jpeg',
-        '../imagens/boliche.png',
-        '../imagens/bolo.png',
-        '../imagens/bone.png',
-        '../imagens/boneca.png',
-        '../imagens/borboleta.png',
-        '../imagens/capelo.png',
-        '../imagens/carro.jpeg',
-        '../imagens/carroIcone.png',
-        '../imagens/cartola.png',
-        '../imagens/casa.png',
-        '../imagens/cavalo.jpeg',
-        '../imagens/chinelo.png',
-        '../imagens/circulo.png',
-        '../imagens/coracao.png',
-        '../imagens/corcel.jpeg',
-        '../imagens/coroa.png',
-        '../imagens/corBranca.png',
-        '../imagens/dado.png',
-        '../imagens/esfera.png',
-        '../imagens/estrela.jpeg',
-        '../imagens/fantasma.png',
-        '../imagens/flor.jpeg',
-        '../imagens/florIcone.png',
-        '../imagens/icone.jpeg',
-        '../imagens/lisBranca.png',
-        '../imagens/lisPreta.png',
-        '../imagens/mais.png',
-        '../imagens/mosca.png',
-        '../imagens/nuvem.png',
-        '../imagens/peao.png',
-        '../imagens/pentIcone.png',
-        '../imagens/pentagonos.png',
-        '../imagens/pinguim.png',
-        '../imagens/pentagonal.png',
-        '../imagens/quadragular.jpg',
-        '../imagens/presentes.png',
-        '../imagens/prisma.png',
-        '../imagens/quadrado.png',
-        '../imagens/rainhaIcone.png',
-        '../imagens/reiIcone.jpg',
-        '../imagens/rosa.png',
-        '../imagens/colorido.png',
-        '../imagens/solidoIcone.png',
-        '../imagens/terra.png',
-        '../imagens/torre.jpeg',
-        '../imagens/triangulo.png',
-        '../imagens/tv.png',
-        '../imagens/vassourinha.png',
-        '../imagens/zangao.png'
-    ];
+    // Variável de estado para a lógica "Célula-Primeiro" (mantida)
+    let celulaAtiva = null; // Armazena {row, col} da célula clicada
 
-    // --- 3. FUNÇÕES DE RENDERIZAÇÃO E LÓGICA ---
+    const imagens = ['../imagens/abelha.png', '../imagens/aguia.png', '../imagens/antena.png', '../imagens/aranha.jpeg', '../imagens/atomo.png', '../imagens/bala.png', '../imagens/balao.png', '../imagens/bispo.png', '../imagens/bola.jpeg', '../imagens/boliche.png', '../imagens/bolo.png', '../imagens/bone.png', '../imagens/boneca.png', '../imagens/borboleta.png', '../imagens/capelo.png', '../imagens/carro.jpeg', '../imagens/carroIcone.png', '../imagens/cartola.png', '../imagens/casa.png', '../imagens/cavalo.jpeg', '../imagens/chinelo.png', '../imagens/circulo.png', '../imagens/coracao.png', '../imagens/corcel.jpeg', '../imagens/coroa.png', '../imagens/corBranca.png', '../imagens/dado.png', '../imagens/esfera.png', '../imagens/estrela.jpeg', '../imagens/fantasma.png', '../imagens/flor.jpeg', '../imagens/florIcone.png', '../imagens/icone.jpeg', '../imagens/lisBranca.png', '../imagens/lisPreta.png', '../imagens/mais.png', '../imagens/mosca.png', '../imagens/nuvem.png', '../imagens/peao.png', '../imagens/pentIcone.png', '../imagens/pentagonos.png', '../imagens/pinguim.png', '../imagens/pentagonal.png', '../imagens/quadragular.jpg', '../imagens/presentes.png', '../imagens/prisma.png', '../imagens/quadrado.png', '../imagens/rainhaIcone.png', '../imagens/reiIcone.jpg', '../imagens/rosa.png', '../imagens/colorido.png', '../imagens/solidoIcone.png', '../imagens/terra.png', '../imagens/torre.jpeg', '../imagens/triangulo.png', '../imagens/tv.png', '../imagens/vassourinha.png', '../imagens/zangao.png'];
+
+   // --- 3. FUNÇÕES DE RENDERIZAÇÃO E LÓGICA ---
 
     function inicializarAudio() {
         if (!audioInicializado) {
-            errorSound = new Audio('../sons/Erro.mp3');
-            clapSound = new Audio('../sons/Aplausos.mp3');
+            errorSound = new Audio('../sons/Erro.mp3'); // Caminho corrigido
+            clapSound = new Audio('../sons/Aplausos.mp3');   // Caminho corrigido
             errorSound.load();
             clapSound.load();
             audioInicializado = true;
@@ -113,13 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function ajustarERedesenharCanvas() {
-        // Garantir que o container tenha um tamanho antes de ler
-        if (tabuleiroContainer.clientWidth === 0) {
-            // Se o container não tiver largura, espera um ciclo de renderização
+        if (!tabuleiroContainer || tabuleiroContainer.clientWidth === 0) {
             requestAnimationFrame(ajustarERedesenharCanvas);
             return;
         }
-
         const containerSize = tabuleiroContainer.clientWidth;
         canvas.width = containerSize;
         canvas.height = containerSize;
@@ -145,6 +79,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function desenharHighlight() {
+        if (!celulaAtiva) return;
+        const x = celulaAtiva.col * cellSize;
+        const y = celulaAtiva.row * cellSize;
+        ctx.fillStyle = 'rgba(255, 255, 100, 0.4)';
+        ctx.fillRect(x, y, cellSize, cellSize);
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(x, y, cellSize, cellSize);
+        ctx.strokeStyle = '#333'; // Reset style
+        ctx.lineWidth = 2;       // Reset style
+    }
+
     function drawImageInCell(imgSrc, col, row) {
         const img = new Image();
         img.onload = function () {
@@ -156,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
             ctx.drawImage(img, x, y, imgSize, imgSize);
             ctx.filter = 'none';
         };
+        img.onerror = function () {
+            console.error("Erro ao carregar a imagem:", imgSrc);
+        }
         img.src = imgSrc;
     }
 
@@ -168,56 +118,46 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
+        desenharHighlight();
     }
 
     function iniciarJogo() {
         usedImages = Array.from({ length: tamanho }, () => Array(tamanho).fill(null));
         imageHistory = [];
         listaImagens.innerHTML = '';
-        mensagem.innerHTML = "Arraste as imagens para o tabuleiro!<br>Não pode repetir na mesma linha ou coluna.";
+        mensagem.innerHTML = "Clique em uma célula e depois na imagem, ou arraste a imagem.<br>Não pode repetir na linha/coluna.";
         proximoNivelBtn.style.display = 'none';
-
-        // --- REATORAÇÃO: Garante que botões sejam reativados ---
         resetarBtn.disabled = false;
         limparBtn.disabled = false;
-        // --- FIM REATORAÇÃO ---
+        celulaAtiva = null;
 
         ajustarERedesenharCanvas();
         embaralhar(imagens);
 
+        // Nível F4 usa 'tamanho' imagens (5 imagens)
         for (let i = 0; i < tamanho; i++) {
             const imgElement = document.createElement('img');
             imgElement.src = imagens[i];
             imgElement.alt = imagens[i].split('/').pop();
 
-            // --- REATORAÇÃO: Substituído 'draggable' e 'dragstart' por 'mousedown' e 'touchstart' ---
-            // imgElement.draggable = true; // REMOVIDO
-            // imgElement.addEventListener('dragstart', ...); // REMOVIDO
-            imgElement.addEventListener('mousedown', onDragStart);
-            imgElement.addEventListener('touchstart', onDragStart);
-            // --- FIM REATORAÇÃO ---
+            // [NOVA LÓGICA DE INTERAÇÃO F4] Adiciona listeners NATIVOS de drag e o listener de CLICK
+            imgElement.draggable = true;
+            imgElement.addEventListener('dragstart', onNativeDragStart);
+            imgElement.addEventListener('click', onImageBankClick_CellFirst);
 
             listaImagens.appendChild(imgElement);
         }
     }
 
-    // --- REATORAÇÃO: Lógica de "soltar" extraída da função de evento original ---
-    // Esta função agora processa a lógica do jogo, recebendo as coordenadas e a 'src'.
-    function processarDrop(clientX, clientY, src) {
-        const rect = canvas.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-
-        // Verifica se o drop foi dentro dos limites do canvas
-        if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
-            return; // Sai se o drop foi fora do canvas
+    function processarJogada(row, col, src) {
+        // ... (Lógica F4 mantida)
+        if (row === undefined || col === undefined || row < 0 || col < 0 || row >= tamanho || col >= tamanho) {
+            mensagem.textContent = "Posição inválida.";
+            tocarSom(errorSound);
+            celulaAtiva = null;
+            redesenharTodasImagens();
+            return;
         }
-
-        const col = Math.floor(x / cellSize);
-        const row = Math.floor(y / cellSize);
-
-        // Verifica se a célula é válida (caso de cálculo impreciso)
-        if (row >= tamanho || col >= tamanho) return;
 
         if (usedImages[row][col] !== null) {
             tocarSom(errorSound);
@@ -226,10 +166,10 @@ document.addEventListener('DOMContentLoaded', function () {
             tocarSom(errorSound);
             mensagem.textContent = "Imagem repetida na linha ou coluna.";
         } else {
+            // Sucesso!
             usedImages[row][col] = src;
             imageHistory.push({ src, col, row });
-            drawImageInCell(src, col, row);
-            mensagem.textContent = "";
+            mensagem.textContent = "Correto!";
 
             if (usedImages.flat().every(cell => cell !== null)) {
                 mensagem.innerHTML = "<h2>Parabéns! Você completou o desafio!</h2>";
@@ -237,154 +177,148 @@ document.addEventListener('DOMContentLoaded', function () {
                 resetarBtn.disabled = true;
                 limparBtn.disabled = true;
                 tocarSom(clapSound);
-                confetti({
-                    particleCount: 500,
-                    spread: 1000,
-                    origin: { y: 0.3 },
-                    zIndex: 9999
-                });
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 500, spread: 1000, origin: { y: 0.3 }, zIndex: 9999 });
+                }
             }
         }
+        celulaAtiva = null;
+        redesenharTodasImagens();
     }
-    // --- FIM REATORAÇÃO ---
-
 
     function limparUltimaJogada() {
+        // ... (Lógica F4 mantida)
         if (imageHistory.length > 0) {
             const lastMove = imageHistory.pop();
             usedImages[lastMove.row][lastMove.col] = null;
+            celulaAtiva = null;
             redesenharTodasImagens();
             mensagem.textContent = "Última jogada desfeita.";
             proximoNivelBtn.style.display = 'none';
-
-            // --- REATORAÇÃO: Garante que botões sejam reativados ---
             resetarBtn.disabled = false;
             limparBtn.disabled = false;
-            // --- FIM REATORAÇÃO ---
         } else {
             mensagem.textContent = "Nenhuma jogada para limpar.";
         }
     }
 
-    // --- 4. NOVOS EVENT LISTENERS (Mouse e Toque unificados) ---
+    // --- 4. [NOVA LÓGICA DE INTERAÇÃO F4] Event Listeners (Drag Nativo e Clique Célula-Primeiro) ---
 
-    // --- REATORAÇÃO: Função 'onDragStart' (Início do arraste) ---
-    function onDragStart(event) {
-        // Previne o comportamento padrão (como 'drag' nativo do browser em imagens)
+    /**
+     * Início do arraste NATIVO (dragstart)
+     */
+    function onNativeDragStart(event) {
+        if (event.target.tagName !== 'IMG') {
+            event.preventDefault(); return;
+        }
+        inicializarAudio();
+        if (celulaAtiva) {
+            celulaAtiva = null;
+            redesenharTodasImagens();
+        }
+        event.dataTransfer.setData('text/plain', event.target.src);
+        event.dataTransfer.effectAllowed = 'copy';
+    }
+
+    /**
+     * Permite que um item seja solto sobre o canvas (dragover)
+     */
+    function onCanvasDragOver(event) {
         event.preventDefault();
-
-        // Verifica se o alvo é uma imagem
-        if (event.target.tagName !== 'IMG') return;
-
-        inicializarAudio(); // Garante que o áudio seja inicializado
-
-        isDragging = true;
-        draggedItemSrc = event.target.src;
-
-        // Cria a imagem "fantasma" (ghost)
-        ghostImage = event.target.cloneNode();
-        ghostImage.style.position = 'fixed';
-        ghostImage.style.pointerEvents = 'none'; // Impede a imagem de bloquear outros eventos
-        ghostImage.style.opacity = '0.7';
-        ghostImage.style.zIndex = '1000';
-        ghostImage.style.width = `${event.target.clientWidth}px`; // Mantém o tamanho
-        ghostImage.style.height = `${event.target.clientHeight}px`;
-        document.body.appendChild(ghostImage);
-
-        // Posiciona a imagem fantasma
-        onDragMove(event);
-
-        // Adiciona os listeners GLOBAIS para movimento e soltura
-        window.addEventListener('mousemove', onDragMove);
-        window.addEventListener('mouseup', onDragEnd);
-
-        // { passive: false } é CRÍTICO para o touchmove permitir o preventDefault()
-        window.addEventListener('touchmove', onDragMove, { passive: false });
-        window.addEventListener('touchend', onDragEnd);
+        event.dataTransfer.dropEffect = 'copy';
     }
 
-    // --- REATORAÇÃO: Função 'onDragMove' (Movimento do arraste) ---
-    function onDragMove(event) {
-        if (!isDragging) return;
+    /**
+     * Lida com a soltura NATIVA no canvas (drop)
+     */
+    function onCanvasDrop(event) {
+        event.preventDefault();
+        const imgSrcDropped = event.dataTransfer.getData('text/plain');
+        if (!imgSrcDropped) return;
 
-        // CRÍTICO para mobile: Impede a página de rolar enquanto arrasta
-        if (event.type === 'touchmove') {
-            event.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const col = Math.floor(x / cellSize);
+        const row = Math.floor(y / cellSize);
+        processarJogada(row, col, imgSrcDropped);
+    }
+
+
+    /**
+     * Lida com o primeiro clique (no canvas) - Lógica Célula-Primeiro
+     */
+    function onCanvasClick_CellFirst(event) {
+        inicializarAudio();
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+            celulaAtiva = null;
+            redesenharTodasImagens(); return;
         }
 
-        // Normaliza o evento para obter coordenadas (funciona para mouse e toque)
-        let clientX, clientY;
-        if (event.touches) {
-            // Se for 'touchmove' ou 'touchstart'
-            clientX = event.touches[0].clientX;
-            clientY = event.touches[0].clientY;
+        const col = Math.floor(x / cellSize);
+        const row = Math.floor(y / cellSize);
+
+        if (row < tamanho && col < tamanho) {
+            celulaAtiva = { row, col };
+            mensagem.textContent = "Célula selecionada! Agora clique na imagem correta no banco.";
+            redesenharTodasImagens();
         } else {
-            // Se for 'mousemove' ou 'mousedown'
-            clientX = event.clientX;
-            clientY = event.clientY;
-        }
-
-        // Move a imagem fantasma, centralizando-a no ponteiro/dedo
-        if (ghostImage) {
-            ghostImage.style.left = `${clientX - ghostImage.width / 2}px`;
-            ghostImage.style.top = `${clientY - ghostImage.height / 2}px`;
+            celulaAtiva = null;
+            redesenharTodasImagens();
         }
     }
 
-    // --- REATORAÇÃO: Função 'onDragEnd' (Fim do arraste / "Drop") ---
-    function onDragEnd(event) {
-        if (!isDragging) return;
-
-        isDragging = false;
-
-        // Limpa os listeners GLOBAIS
-        window.removeEventListener('mousemove', onDragMove);
-        window.removeEventListener('mouseup', onDragEnd);
-        window.removeEventListener('touchmove', onDragMove);
-        window.removeEventListener('touchend', onDragEnd);
-
-        // Remove a imagem fantasma
-        if (ghostImage && document.body.contains(ghostImage)) {
-            document.body.removeChild(ghostImage);
+    /**
+     * Lida com o segundo clique (no banco de imagens) - Lógica Célula-Primeiro
+     */
+    function onImageBankClick_CellFirst(event) {
+        event.preventDefault();
+        if (!celulaAtiva) {
+            tocarSom(errorSound);
+            mensagem.textContent = "Por favor, clique em uma célula do tabuleiro primeiro.";
+            return;
         }
-
-        // Normaliza o evento para obter as coordenadas de *soltura*
-        let clientX, clientY;
-        if (event.changedTouches) {
-            // Se for 'touchend', usa 'changedTouches'
-            clientX = event.changedTouches[0].clientX;
-            clientY = event.changedTouches[0].clientY;
-        } else {
-            // Se for 'mouseup', usa 'clientX/Y'
-            clientX = event.clientX;
-            clientY = event.clientY;
-        }
-
-        // Processa a lógica de soltar
-        processarDrop(clientX, clientY, draggedItemSrc);
-
-        // Limpa as variáveis de estado
-        ghostImage = null;
-        draggedItemSrc = null;
+        const clickedSrc = event.target.src;
+        processarJogada(celulaAtiva.row, celulaAtiva.col, clickedSrc);
     }
+    // --- FIM DA NOVA LÓGICA ---
 
 
-    // --- 5. REGISTRO DE EVENTOS (Restante) ---
+    // --- 5. REGISTRO DE EVENTOS ---
 
     window.addEventListener('resize', ajustarERedesenharCanvas);
 
-    resetarBtn.addEventListener('click', iniciarJogo);
-    limparBtn.addEventListener('click', limparUltimaJogada);
+    // [NOVA LÓGICA DE INTERAÇÃO F4] Adiciona listeners NATIVOS de drag no canvas e o clique
+    if (canvas) {
+        canvas.addEventListener('dragover', onCanvasDragOver);
+        canvas.addEventListener('drop', onCanvasDrop);
+        canvas.addEventListener('click', onCanvasClick_CellFirst);
+    } else {
+        console.error("Elemento canvas não encontrado!");
+    }
 
-    paginaInicialBtn.addEventListener('click', () => {
-        window.location.href = '../instrucao1.html';
-    });
-    
-    proximoNivelBtn.addEventListener('click', () => {
-        // Link para a M1
-        window.location.href = 'NivelM1.html?tamanhoTabuleiro=2';
-    });
-    
+    // Botões
+    if (resetarBtn) resetarBtn.addEventListener('click', iniciarJogo);
+    if (limparBtn) limparBtn.addEventListener('click', limparUltimaJogada);
+
+    if (paginaInicialBtn) {
+        paginaInicialBtn.addEventListener('click', () => {
+            // Assumindo que instrucao1.html está na pasta pai
+            window.open('instrucao1.html', '_blank');
+        });
+    }
+
+    if (proximoNivelBtn) {
+        proximoNivelBtn.addEventListener('click', () => {
+            // Link para Nivel F5 (Nível 5), tabuleiro 6x6
+            window.location.href = 'NivelM1.html?tamanhoTabuleiro=6';
+        });
+    }
+
     // --- 6. INICIALIZAÇÃO DO JOGO ---
     iniciarJogo();
 });
