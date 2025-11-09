@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const paginaInicialBtn = document.getElementById('paginaInicial');
 
     // --- 2. CONFIGURAÇÕES E VARIÁVEIS DE ESTADO ---
-    const tamanho = 6; // Nível F4: Tabuleiro 6 x 6
+    const tamanho = 6; // Nível F5: Tabuleiro 6 x 6
     let usedImages = [];
     let imageHistory = [];
     let cellSize = 0;

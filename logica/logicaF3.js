@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ctx.drawImage(img, x, y, imgSize, imgSize);
             ctx.filter = 'none';
         };
-        img.onerror = function() {
+        img.onerror = function () {
             console.error("Erro ao carregar a imagem:", imgSrc);
         }
         img.src = imgSrc;
@@ -134,13 +134,13 @@ document.addEventListener('DOMContentLoaded', function () {
         ajustarERedesenharCanvas();
         embaralhar(imagens);
 
-        // Nível F3 usa 'tamanho' imagens (4 imagens)
+        // Nível F2 usa 'tamanho' imagens (3 imagens)
         for (let i = 0; i < tamanho; i++) {
             const imgElement = document.createElement('img');
             imgElement.src = imagens[i];
             imgElement.alt = imagens[i].split('/').pop();
 
-            // [NOVA LÓGICA DE INTERAÇÃO F3] Adiciona listeners NATIVOS de drag e o listener de CLICK
+            // [NOVA LÓGICA DE INTERAÇÃO F2] Adiciona listeners NATIVOS de drag e o listener de CLICK
             imgElement.draggable = true;
             imgElement.addEventListener('dragstart', onNativeDragStart);
             imgElement.addEventListener('click', onImageBankClick_CellFirst);
@@ -150,13 +150,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function processarJogada(row, col, src) {
-        // ... (Lógica F3 mantida)
+        // ... (Lógica F2 mantida)
         if (row === undefined || col === undefined || row < 0 || col < 0 || row >= tamanho || col >= tamanho) {
-             mensagem.textContent = "Posição inválida.";
-             tocarSom(errorSound);
-             celulaAtiva = null;
-             redesenharTodasImagens();
-             return;
+            mensagem.textContent = "Posição inválida.";
+            tocarSom(errorSound);
+            celulaAtiva = null;
+            redesenharTodasImagens();
+            return;
         }
 
         if (usedImages[row][col] !== null) {
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function limparUltimaJogada() {
-        // ... (Lógica F3 mantida)
+        // ... (Lógica F2 mantida)
         if (imageHistory.length > 0) {
             const lastMove = imageHistory.pop();
             usedImages[lastMove.row][lastMove.col] = null;
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // --- 4. [NOVA LÓGICA DE INTERAÇÃO F3] Event Listeners (Drag Nativo e Clique Célula-Primeiro) ---
+    // --- 4. [NOVA LÓGICA DE INTERAÇÃO F2] Event Listeners (Drag Nativo e Clique Célula-Primeiro) ---
 
     /**
      * Início do arraste NATIVO (dragstart)
@@ -267,8 +267,8 @@ document.addEventListener('DOMContentLoaded', function () {
             mensagem.textContent = "Célula selecionada! Agora clique na imagem correta no banco.";
             redesenharTodasImagens();
         } else {
-             celulaAtiva = null;
-             redesenharTodasImagens();
+            celulaAtiva = null;
+            redesenharTodasImagens();
         }
     }
 
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('resize', ajustarERedesenharCanvas);
 
-    // [NOVA LÓGICA DE INTERAÇÃO F3] Adiciona listeners NATIVOS de drag no canvas e o clique
+    // [NOVA LÓGICA DE INTERAÇÃO F2] Adiciona listeners NATIVOS de drag no canvas e o clique
     if (canvas) {
         canvas.addEventListener('dragover', onCanvasDragOver);
         canvas.addEventListener('drop', onCanvasDrop);
@@ -302,8 +302,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Botões
-    if(resetarBtn) resetarBtn.addEventListener('click', iniciarJogo);
-    if(limparBtn) limparBtn.addEventListener('click', limparUltimaJogada);
+    if (resetarBtn) resetarBtn.addEventListener('click', iniciarJogo);
+    if (limparBtn) limparBtn.addEventListener('click', limparUltimaJogada);
 
     if (paginaInicialBtn) {
         paginaInicialBtn.addEventListener('click', () => {
@@ -312,10 +312,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if(proximoNivelBtn) {
+    if (proximoNivelBtn) {
         proximoNivelBtn.addEventListener('click', () => {
-             // Link para Nivel F4 (Nível 4), tabuleiro 5x5
-            window.location.href = 'Nivel4.html?tamanhoTabuleiro=5';
+            // Link para Nivel F3 (Nível 3), tabuleiro 4x4
+            window.location.href = 'Nivel4.html?tamanhoTabuleiro=4';
         });
     }
 
